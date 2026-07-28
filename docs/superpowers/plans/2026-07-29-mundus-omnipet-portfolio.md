@@ -406,8 +406,10 @@ The rendered structure must include:
 - `<section class="mundus-exhibit" aria-labelledby="mundus-platform-title">`;
 - a text-first list of the shared layers: globe, mode registry, state, data registry, validation;
 - a CSS/SVG orbit graphic marked `aria-hidden="true"`;
+- a localized heading referenced by the mode gallery through `aria-labelledby`;
 - three `<figure>` mode cards with localized `alt`, captions, and `loading="lazy"`;
-- algorithm cards for antipodes, geographic lookup, development comparison, solar model, terminator, and vector pipeline;
+- algorithm cards for antipodes, geographic lookup, development comparison, solar model, the shader-rendered solar-altitude field with `0°`/`-6°` twilight thresholds, and vector pipeline;
+- an independent semantic data flow: source manifest → hash verification → deterministic transformation → schema/quality gates → versioned public asset;
 - a final extension flow: register mode → declare state/data → reuse globe → validate/share.
 
 All key information must exist as HTML text outside decorative SVG.

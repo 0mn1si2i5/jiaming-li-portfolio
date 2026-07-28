@@ -53,10 +53,10 @@ The algorithm section explains:
 
 - spherical coordinate transforms and the antipodal mapping `(-latitude, longitude +/- 180 degrees)`;
 - point-in-polygon and land/ocean classification on geographic boundaries;
-- nearest eligible settlement search and why dataset resolution affects the answer;
+- nearest eligible major-city record search and why the filtered dataset scope affects the answer;
 - HDI component derivation, normalization context, year completeness, and deterministic structural comparison selection;
 - NOAA/Meeus solar-position approximation, subsolar point, solar altitude, sunrise/sunset, and polar-day or polar-night handling;
-- sampled day-night terminator geometry and its visual approximation boundaries;
+- the fragment-shader solar-altitude field: surface-normal and sun-direction dot product, `asin` altitude, and the `0°` to `-6°` civil-twilight blend before full night opacity;
 - TopoJSON or source-vector conversion, spherical mesh construction, compression, geometry-quality thresholds, and GPU or download budgets.
 
 The writing remains accessible: formulas and implementation constraints are explained through inputs, transformations, outputs, and caveats rather than paper-style derivations. It must not claim legal-boundary authority, navigation-grade solar accuracy, or globally optimal precision.

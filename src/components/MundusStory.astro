@@ -141,6 +141,49 @@ const extensionSteps = [
   { en: 'Validate, link, and share', zh: '验证、生成链接并分享' },
 ];
 
+const dataStages = [
+  {
+    index: '01',
+    title: { en: 'Source manifest', zh: '来源清单' },
+    copy: {
+      en: 'Pin the source, version, license, retrieval date, transformations, and boundary policy.',
+      zh: '固定来源、版本、许可、获取日期、转换过程与边界策略。',
+    },
+  },
+  {
+    index: '02',
+    title: { en: 'Hash verification', zh: '哈希校验' },
+    copy: {
+      en: 'Accept a downloaded source only when its SHA-256 matches the manifest.',
+      zh: '只有下载来源的 SHA-256 与清单一致时才接受输入。',
+    },
+  },
+  {
+    index: '03',
+    title: { en: 'Deterministic transform', zh: '确定性转换' },
+    copy: {
+      en: 'Build compact city, development, or spherical geometry assets with recorded rules.',
+      zh: '按已记录规则生成紧凑的城市、发展指标或球面几何资产。',
+    },
+  },
+  {
+    index: '04',
+    title: { en: 'Schema and quality gates', zh: '结构与质量关卡' },
+    copy: {
+      en: 'Check schemas, missing-value policy, geometry integrity, hashes, and resource budgets.',
+      zh: '检查结构、缺失值策略、几何完整性、哈希与资源预算。',
+    },
+  },
+  {
+    index: '05',
+    title: { en: 'Versioned public asset', zh: '版本化公开资产' },
+    copy: {
+      en: 'Commit the verified derivative with provenance and caveats; keep raw downloads outside the repository.',
+      zh: '提交带来源与限制说明的已验证派生资产，原始下载不进入仓库。',
+    },
+  },
+];
+
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
@@ -175,18 +218,24 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
     </div>
   </div>
 
-  <div class="mode-gallery" aria-label="Mundus observation modes">
-    {modes.map((mode) => (
-      <figure>
-        <img src={asset(mode.image)} alt={mode.alt.en} data-alt-en={mode.alt.en} data-alt-zh={mode.alt.zh} loading="lazy" />
-        <figcaption>
-          <span>{mode.index}</span>
-          <strong><Localized {...mode.title} /></strong>
-          <small><Localized {...mode.detail} /></small>
-        </figcaption>
-      </figure>
-    ))}
-  </div>
+  <section class="mode-section" aria-labelledby="mundus-modes-title">
+    <header>
+      <p class="eyebrow"><Localized en="Current extensions" zh="当前扩展" /></p>
+      <h2 id="mundus-modes-title"><Localized en="Three modes built on the shared core." zh="建立在共享内核上的三种模式。" /></h2>
+    </header>
+    <div class="mode-gallery" aria-labelledby="mundus-modes-title">
+      {modes.map((mode) => (
+        <figure>
+          <img src={asset(mode.image)} alt={mode.alt.en} data-alt-en={mode.alt.en} data-alt-zh={mode.alt.zh} loading="lazy" />
+          <figcaption>
+            <span>{mode.index}</span>
+            <strong><Localized {...mode.title} /></strong>
+            <small><Localized {...mode.detail} /></small>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
 
   <section class="algorithm-section" aria-labelledby="mundus-algorithm-title">
     <header>
@@ -203,6 +252,25 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
         </article>
       ))}
     </div>
+  </section>
+
+  <section class="data-section" aria-labelledby="mundus-data-title">
+    <header>
+      <p class="eyebrow"><Localized en="Reproducible data flow" zh="可复现数据流" /></p>
+      <h2 id="mundus-data-title"><Localized en="Every public asset carries its source and its limits forward." zh="每项公开资产都保留来源与限制。" /></h2>
+      <p><Localized en="The pipeline makes provenance, transformation, validation, and publication separate reviewable stages." zh="这条管线将来源、转换、验证与发布拆成可独立审查的阶段。" /></p>
+    </header>
+    <ol class="data-flow">
+      {dataStages.map((stage) => (
+        <li>
+          <span>{stage.index}</span>
+          <div>
+            <h3><Localized {...stage.title} /></h3>
+            <p><Localized {...stage.copy} /></p>
+          </div>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <section class="extension-section" aria-labelledby="mundus-extension-title">
@@ -230,7 +298,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   }
   .eyebrow { margin: 0; color: var(--exhibit-muted); font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
   .exhibit-intro { max-width: 780px; }
-  .exhibit-intro h2, .algorithm-section > header h2, .extension-section h2 { margin: 1rem 0 1.5rem; color: var(--exhibit-ink); font-size: clamp(2.4rem, 5vw, 4.9rem); font-weight: 400; line-height: .96; letter-spacing: -.045em; }
+  .exhibit-intro h2, .mode-section h2, .algorithm-section > header h2, .data-section h2, .extension-section h2 { margin: 1rem 0 1.5rem; color: var(--exhibit-ink); font-size: clamp(2.4rem, 5vw, 4.9rem); font-weight: 400; line-height: .96; letter-spacing: -.045em; }
   .exhibit-intro > p:last-child { max-width: 660px; margin: 0; color: var(--exhibit-muted); font-size: 1.05rem; line-height: 1.65; }
   .platform-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr); gap: clamp(3rem, 8vw, 8rem); align-items: center; margin-top: clamp(4rem, 8vw, 7rem); }
   .layer-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--exhibit-line); }
@@ -246,7 +314,9 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .node { fill: var(--exhibit-paper); stroke: var(--exhibit-signal); stroke-width: 2; }
   .axis { opacity: .55; }
   .orbit-label { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); color: var(--exhibit-ink); font-size: .68rem; font-weight: 650; line-height: 1.5; letter-spacing: .13em; text-align: center; }
-  .mode-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: clamp(5rem, 10vw, 9rem); }
+  .mode-section { margin-top: clamp(5rem, 10vw, 9rem); }
+  .mode-section > header { max-width: 760px; margin-bottom: 3rem; }
+  .mode-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   .mode-gallery figure { min-width: 0; margin: 0; }
   .mode-gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--exhibit-line); border-radius: 3px; background: #090b0a; }
   .mode-gallery figcaption { display: grid; grid-template-columns: 2rem 1fr; gap: .25rem .75rem; padding: 1rem 0; border-bottom: 1px solid var(--exhibit-line); }
@@ -260,6 +330,15 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .algorithm-grid h3 { min-height: 2.5em; margin: 1.2rem 0 .8rem; color: var(--exhibit-ink); font-size: 1.25rem; font-weight: 500; line-height: 1.15; }
   .algorithm-grid p { min-height: 11.5em; margin: 0 0 1.5rem; color: var(--exhibit-muted); font-size: .88rem; line-height: 1.58; }
   .algorithm-grid code { display: block; overflow-wrap: anywhere; color: var(--exhibit-signal); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; line-height: 1.5; }
+  .data-section { margin-top: clamp(6rem, 12vw, 11rem); }
+  .data-section > header { max-width: 860px; }
+  .data-section > header > p:last-child { max-width: 650px; margin: 0; color: var(--exhibit-muted); line-height: 1.6; }
+  .data-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 3.5rem 0 0; padding: 0; list-style: none; border-top: 1px solid var(--exhibit-line); }
+  .data-flow li { position: relative; min-width: 0; padding: 1.2rem 1.2rem 1.5rem 0; border-bottom: 1px solid var(--exhibit-line); }
+  .data-flow li:not(:last-child)::after { content: '→'; position: absolute; top: 1.05rem; right: .7rem; color: var(--exhibit-muted); }
+  .data-flow li > span { display: block; margin-bottom: 2rem; color: var(--exhibit-signal); font-size: .7rem; letter-spacing: .1em; }
+  .data-flow h3 { min-height: 2.4em; margin: 0 0 .7rem; color: var(--exhibit-ink); font-size: 1rem; font-weight: 500; line-height: 1.2; }
+  .data-flow p { margin: 0; color: var(--exhibit-muted); font-size: .8rem; line-height: 1.5; }
   .extension-section { margin-top: clamp(6rem, 12vw, 11rem); }
   .extension-section > h2 { max-width: 840px; }
   .extension-section ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 3.5rem 0 0; padding: 0; list-style: none; border-top: 1px solid var(--exhibit-line); }
@@ -274,12 +353,16 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   }
   @media (max-width: 760px) {
     .mundus-exhibit { margin-top: 4rem; margin-bottom: 4rem; }
-    .platform-grid, .mode-gallery, .algorithm-grid, .extension-section ol { grid-template-columns: 1fr; }
+    .platform-grid, .mode-gallery, .algorithm-grid, .data-flow, .extension-section ol { grid-template-columns: 1fr; }
     .orbit { width: min(82vw, 380px); }
     .mode-gallery { gap: 2.5rem; }
     .algorithm-grid { border-left: 0; }
     .algorithm-grid article { padding-right: 0; padding-left: 0; border-right: 0; }
     .algorithm-grid h3 { min-height: 0; }
+    .data-flow li { padding: 1.2rem 0; }
+    .data-flow li > span { margin-bottom: .75rem; }
+    .data-flow li:not(:last-child)::after { content: '↓'; right: 0; }
+    .data-flow h3 { min-height: 0; }
     .extension-section li { min-height: 0; padding: 1.2rem 0; }
     .extension-section li span { margin-bottom: .75rem; }
     .extension-section li:not(:last-child)::after { content: '↓'; right: 0; }
