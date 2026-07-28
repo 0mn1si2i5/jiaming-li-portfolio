@@ -424,14 +424,20 @@ Use a dark tokenized band:
   --exhibit-ink: #f1eee6;
   --exhibit-muted: #a8b0aa;
   --exhibit-line: #414843;
-  margin: 5rem calc(50% - 50vw);
-  padding: clamp(4rem, 8vw, 8rem) max(1.5rem, calc((100vw - 1180px) / 2));
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 5rem 0;
+  padding: clamp(2rem, 6vw, 4rem);
+  overflow: clip;
   color: var(--exhibit-ink);
   background: var(--exhibit-paper);
+  border: 1px solid var(--exhibit-line);
+  border-radius: clamp(1rem, 3vw, 1.75rem);
 }
 ```
 
-Add responsive single-column layouts below 760px and disable decorative orbit motion under `prefers-reduced-motion`.
+Keep the dark exhibition block inside its parent reading container at every viewport. Add responsive single-column layouts below 760px and disable decorative orbit motion under `prefers-reduced-motion`.
 
 - [ ] **Step 5: Build and inspect the route**
 
