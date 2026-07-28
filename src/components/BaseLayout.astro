@@ -94,20 +94,21 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 </html>
 
 <style is:global>
-  :root { --paper: #f7f6f2; --surface: #eeece6; --ink: #1b1b1a; --muted: #716f69; --line: #d8d5cc; --violet: #7659d7; --coral: #d46754; --blue: #477bb7; --font-sans: "Noto Sans Bilingual", "PingFang SC", "Hiragino Sans GB", sans-serif; --font-serif: "Noto Serif Bilingual", Georgia, serif; --font-serif-zh: "Songti SC", "STSong", "Noto Serif Bilingual", serif; }
+  :root { --paper: #f7f6f2; --surface: #eeece6; --ink: #1b1b1a; --muted: #716f69; --line: #d8d5cc; --violet: #7659d7; --coral: #d46754; --blue: #477bb7; --font-body: "Instrument Sans Variable", "Noto Sans Bilingual", "PingFang SC", sans-serif; --font-display: "Cormorant Display", "Newsreader Variable", Georgia, serif; --font-editorial: "Newsreader Variable", Georgia, serif; --font-display-zh: "Noto Serif Bilingual", "Songti SC", serif; }
   :root[data-theme='dark'] { --paper: #171716; --surface: #242320; --ink: #f2f1ed; --muted: #aaa79e; --line: #3a3935; --violet: #af9aff; --coral: #ff9a87; --blue: #8dbdff; }
   [data-locale='en'] [data-locale-content='zh'], [data-locale='zh'] [data-locale-content='en'] { display: none !important; }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; background: var(--paper); }
-  body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--font-sans); font-size: 16px; font-weight: 400; line-height: 1.65; letter-spacing: -0.008em; font-synthesis: none; }
+  body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.65; letter-spacing: -0.008em; font-synthesis: none; }
   :root[data-locale='zh'] body { letter-spacing: .006em; line-height: 1.72; }
-  h1, h2 { font-family: var(--font-serif); font-weight: 600; }
+  h1, .display-title { font-family: var(--font-display); font-weight: 400; }
+  h2, .editorial-title { font-family: var(--font-editorial); font-weight: 500; }
   h1, h2, h3 { text-wrap: balance; }
-  h3 { font-family: var(--font-sans); font-weight: 650; }
-  :root[data-locale='zh'] h1, :root[data-locale='zh'] h2 { font-family: var(--font-serif-zh); font-weight: 400; letter-spacing: -.025em; line-height: 1.2; }
+  h3 { font-family: var(--font-editorial); font-weight: 500; }
+  :root[data-locale='zh'] h1, :root[data-locale='zh'] h2, :root[data-locale='zh'] h3, :root[data-locale='zh'] .display-title { font-family: var(--font-display-zh); font-weight: 400; letter-spacing: -.025em; line-height: 1.2; }
   :root[data-locale='zh'] h3 { letter-spacing: -.02em; line-height: 1.3; }
   strong { font-weight: 650; }
-  em { font-family: var(--font-serif); font-style: normal; font-weight: 500; }
+  em { font-family: var(--font-editorial); font-style: normal; font-weight: 500; }
   ::selection { color: var(--paper); background: var(--ink); }
   a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
   a:hover { text-decoration-thickness: 2px; }
