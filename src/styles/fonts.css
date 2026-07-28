@@ -32,27 +32,11 @@
 }
 
 @font-face {
-  font-family: 'Newsreader Variable';
-  font-style: italic;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url('@fontsource-variable/newsreader/files/newsreader-latin-wght-italic.woff2') format('woff2-variations');
-}
-
-@font-face {
   font-family: 'Cormorant Display';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Cormorant Display';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-italic.woff2') format('woff2');
 }
 
 @font-face {
