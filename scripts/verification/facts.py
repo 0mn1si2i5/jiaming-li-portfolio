@@ -14,6 +14,40 @@ EXPECTED_REVISIONS = {
     "OmniPets": "081b7c6f651183987c79c4321ff46e1b082e03b7",
 }
 
+def extract_mdx_visible_text(text: str) -> str:
+    text = re.sub(r"\A---\n.*?\n---\n", "", text, flags=re.DOTALL)
+    text = re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
+    text = re.sub(r"\{/\*.*?\*/\}", "", text, flags=re.DOTALL)
+    text = re.sub(r"(?m)^\s*(?:import|export)\b.*$", "", text)
+    return text
+
+
+def extract_source_semantics(text: str) -> str:
+    text = re.sub(r"/\*.*?\*/", "", text, flags=re.DOTALL)
+    text = re.sub(r"(?m)//.*$", "", text)
+    # Standalone string variables are not structural evidence.
+    text = re.sub(
+        r"(?m)^\s*(?:const|let|var)\s+\w+\s*=\s*(['\"]).*?\1\s*;?\s*$",
+        "",
+        text,
+    )
+    return text
+
+
+def match_json_rules(document: object, rules: list[dict[str, object]]) -> bool:
+    for rule in rules:
+        if rule.get("type") != "json_path":
+            raise ValueError(f"unsupported JSON rule: {rule.get('type')}")
+        value = document
+        try:
+            for segment in rule.get("path", []):
+                value = value[segment]  # type: ignore[index]
+        except (KeyError, IndexError, TypeError):
+            return False
+        if value != rule.get("equals"):
+            return False
+    return True
+
 
 def load_rules(path: Path) -> list[dict[str, object]]:
     value = json.loads(path.read_text(encoding="utf-8"))
@@ -77,8 +111,19 @@ def verify(
             EXPECTED_REVISIONS[str(evidence["repository"])],
             str(evidence["source"]),
         )
+        claim_text = extract_mdx_visible_text(claim_text)
+        if str(evidence["source"]).endswith(".json"):
+            evidence_matches = match_json_rules(
+                json.loads(evidence_text),
+                evidence["rules"],
+            )
+        else:
+            evidence_matches = match_rules(
+                extract_source_semantics(evidence_text),
+                evidence["rules"],
+            )
         if not match_rules(claim_text, claim["rules"]):
             errors.append(f"{assertion_id}: portfolio claim mismatch")
-        if not match_rules(evidence_text, evidence["rules"]):
+        if not evidence_matches:
             errors.append(f"{assertion_id}: public evidence mismatch")
     return errors

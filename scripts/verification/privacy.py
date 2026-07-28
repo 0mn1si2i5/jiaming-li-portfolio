@@ -44,20 +44,29 @@ def scan_dist(root: Path) -> list[str]:
     for path in sorted(root.rglob("*")):
         if not path.is_file():
             continue
-        try:
-            text = path.read_text(encoding="utf-8")
-        except UnicodeDecodeError:
-            continue
+        data = path.read_bytes()
+        texts = [data.decode("latin-1")]
+        for encoding in ("utf-8", "utf-16-le", "utf-16-be"):
+            try:
+                decoded = data.decode(encoding)
+            except UnicodeDecodeError:
+                continue
+            if decoded not in texts:
+                texts.append(decoded)
         relative = path.relative_to(root).as_posix()
         for name, pattern in PATTERNS.items():
-            if pattern.search(text):
+            if any(pattern.search(text) for text in texts):
                 findings.append(f"{relative}: {name}")
-        for token in TOKEN.findall(text):
-            if (
-                entropy(token) >= 4.3
-                and not re.fullmatch(r"[0-9a-f]{40,64}", token)
-                and not token.startswith(("_astro", "fontsource"))
-            ):
-                findings.append(f"{relative}: high-entropy token")
-                break
+        for text in texts:
+            for token in TOKEN.findall(text):
+                if (
+                    entropy(token) >= 4.3
+                    and not re.fullmatch(r"[0-9a-f]{40,64}", token)
+                    and not token.startswith(("_astro", "fontsource"))
+                ):
+                    findings.append(f"{relative}: high-entropy token")
+                    break
+            else:
+                continue
+            break
     return findings

@@ -22,7 +22,10 @@ npm run verify
 screenshot hashes, and the final `dist/` privacy boundary. For an isolated
 checkout, pass `--mundus-root`, `--omnipet-root`, and `--omnipets-root`; facts
 are read with `git show` from the pinned commits rather than from each source
-working tree.
+working tree. Fact matching excludes comments, imports, frontmatter, and
+unrelated string assignments; JSON evidence is checked structurally. The
+privacy gate scans text and binary bytes, including image metadata and appended
+payloads.
 
 ## Content and media
 

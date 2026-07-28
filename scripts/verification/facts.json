@@ -720,8 +720,13 @@
         "repository": "OmniPets",
         "rules": [
           {
-            "type": "contains",
-            "value": "\"spriteVersionNumber\": 2"
+            "equals": 2,
+            "path": [
+              "pets",
+              0,
+              "spriteVersionNumber"
+            ],
+            "type": "json_path"
           }
         ],
         "source": "catalog/index.json"

@@ -12,6 +12,35 @@ from scripts.verification import browser, facts, privacy
 
 
 class TestStructuredFacts(unittest.TestCase):
+    def test_mdx_visible_text_excludes_comments_and_imports(self) -> None:
+        text = """---
+title: hidden
+---
+import Demo from './Demo.astro'
+<!-- secret claim -->
+{/* another secret claim */}
+Visible claim.
+"""
+        visible = facts.extract_mdx_visible_text(text)
+        self.assertIn("Visible claim", visible)
+        self.assertNotIn("secret claim", visible)
+        self.assertNotIn("import Demo", visible)
+
+    def test_source_semantics_exclude_comments_and_unrelated_strings(self) -> None:
+        source = """
+// category: temporal
+const decoy = "category: temporal";
+const mode = { category: "spatial" };
+"""
+        semantic = facts.extract_source_semantics(source)
+        self.assertNotIn("category: temporal", semantic)
+        self.assertIn('category: "spatial"', semantic)
+
+    def test_json_path_checks_structure_not_unrelated_literal(self) -> None:
+        document = {"note": '"spriteVersionNumber": 2', "spriteVersionNumber": 1}
+        rule = {"type": "json_path", "path": ["spriteVersionNumber"], "equals": 2}
+        self.assertFalse(facts.match_json_rules(document, [rule]))
+
     def test_fact_catalog_keeps_31_bidirectional_rules(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
 
@@ -145,10 +174,48 @@ class TestBrowserEvidence(unittest.TestCase):
                 project / "docs/verification/assets",
             )
 
-        self.assertIn("matrix scenarios", " ".join(errors))
+        self.assertIn("scenario order", " ".join(errors))
+
+    def test_matrix_rejects_reordered_or_unsuccessful_scenario(self) -> None:
+        project = Path(__file__).parents[1]
+        matrix_path = project / "docs/verification/evidence/browser-matrix.json"
+        matrix = json.loads(matrix_path.read_text(encoding="utf-8"))
+        matrix["scenarios"][0], matrix["scenarios"][1] = (
+            matrix["scenarios"][1],
+            matrix["scenarios"][0],
+        )
+        matrix["scenarios"][0]["brokenImageCount"] = 1
+        errors = browser.validate_matrix(matrix)
+        self.assertIn("order", " ".join(errors))
+        self.assertIn("brokenImageCount", " ".join(errors))
+
+    def test_console_requires_structured_levels_and_no_failures(self) -> None:
+        console = {
+            "schemaVersion": 1,
+            "messageCount": 1,
+            "errorCount": 1,
+            "warningCount": 0,
+            "messages": [{"level": "error", "text": "boom"}],
+        }
+        errors = browser.validate_console(console)
+        self.assertIn("console must be empty", " ".join(errors))
 
 
 class TestPrivacyScan(unittest.TestCase):
+    def test_scan_rejects_sensitive_bytes_in_fake_webp(self) -> None:
+        samples = (
+            b"/Users/example/private/file",
+            b"http://127.0.0.1:4321/private",
+            b"Bearer abcdefghijklmnopqrstuvwxyz012345",
+            b"secret=QWxhZGRpbjpvcGVuIHNlc2FtZV9yYW5kb21fMTIzNDU2",
+        )
+        for payload in samples:
+            with self.subTest(payload=payload), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / "fake.webp").write_bytes(
+                    b"RIFF\x20\x00\x00\x00WEBPVP8 " + b"\xff\xfe\x00" + payload
+                )
+                self.assertTrue(privacy.scan_dist(root))
     def test_scan_requires_built_dist_directory(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             missing = Path(directory) / "dist"

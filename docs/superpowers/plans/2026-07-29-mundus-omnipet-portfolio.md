@@ -855,3 +855,24 @@ Deployment CI checks out Mundus, OmniPet, and OmniPets at their fixed revisions,
 passes explicit source roots, and runs the same commands before uploading the
 Pages artifact. Expected: all tests pass, 31/31 facts pass, browser evidence is
 consistent, screenshot hashes match, and the final privacy scan is clean.
+
+- [x] **Step 10: Close semantic and binary evidence bypasses**
+
+Require browser scenarios in canonical order with every success field present,
+zero failed requests, and structured, failure-free console evidence. Match MDX
+claims only against visitor-visible content; remove source comments and
+unrelated standalone string literals; parse JSON evidence structurally.
+
+Scan every final `dist/` file as bytes as well as applicable text encodings so
+paths, internal URLs, credentials, and high-entropy values in image metadata or
+appended binary payloads fail closed.
+
+```bash
+npm test
+npm run build
+npm run verify
+```
+
+Expected: 15 tests pass, including comment-only, unrelated-string,
+wrong-JSON-field, reordered/failed-browser-scenario, console-level, and fake
+WebP leakage variants; the real 31/31 fact, browser, and privacy gates pass.

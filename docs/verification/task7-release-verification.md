@@ -245,7 +245,10 @@ labels, and aggregate values. It excludes browser profile data, request IDs,
 headers, query secrets, filesystem paths, and host-specific user information.
 The unified validator checks schema versions, required scenarios, console and
 network aggregate consistency, reduced-motion/matrix agreement, screenshot
-dimensions, and screenshot hashes.
+dimensions, and screenshot hashes. Scenario order and every required success
+field are mandatory; all requests must be successful, failure lists must be
+empty, and console messages must use structured levels while the retained
+release evidence remains warning- and error-free.
 
 ## Route and Link Acceptance
 
@@ -320,7 +323,9 @@ The 31 rules live in `scripts/verification/facts.json`. Each item contains
 separate claim and evidence sources plus one or more `contains`,
 `contains_all`, or `regex` rules. All rules in both halves must match, so a
 weak phrase that preserves only "three modes" or only an atlas dimension does
-not pass. The latest run returned `31/31`.
+not pass. MDX checks remove frontmatter, imports, HTML/JSX comments; source
+checks remove comments and unrelated standalone string assignments; JSON
+evidence uses structural `json_path` rules. The latest run returned `31/31`.
 
 The facts module pins the following public source revisions. It accepts
 explicit source roots and reads evidence with `git show <SHA>:<path>`, so
@@ -344,7 +349,9 @@ npm test
 After `npm run build`, the same entry point scans final `dist/` text for
 Unix/macOS/Windows paths, `file://`, loopback/private-network URLs, credential
 patterns, private keys, and high-entropy tokens. Known content hashes and
-ordinary Astro asset names are narrowly excluded.
+ordinary Astro asset names are narrowly excluded. Every file is also scanned
+as raw bytes and through applicable UTF-8/UTF-16 decoding, so image metadata or
+payloads appended to binary assets cannot bypass the gate.
 
 ## Screenshot Evidence
 

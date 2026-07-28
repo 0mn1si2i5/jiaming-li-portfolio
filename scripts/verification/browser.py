@@ -8,18 +8,17 @@ from collections import Counter
 from pathlib import Path
 
 
-REQUIRED_SCENARIOS = {
+REQUIRED_SCENARIOS = (
     "home-en-light-desktop",
     "home-zh-dark-tablet",
     "mundus-zh-dark-desktop",
     "mundus-zh-dark-mobile",
     "omnipet-zh-dark-desktop",
     "omnipet-zh-dark-mobile",
-}
-REDUCED_SCENARIOS = REQUIRED_SCENARIOS - {
-    "home-en-light-desktop",
-    "home-zh-dark-tablet",
-}
+)
+REDUCED_SCENARIOS = REQUIRED_SCENARIOS[2:]
+PROJECT_ORDER = ["DialogTree", "Mundus", "OmniPet", "NBTI"]
+OTHER_ORDER = ["Side B", "RSZ Namelist"]
 
 
 def read_json(path: Path) -> dict[str, object]:
@@ -48,6 +47,61 @@ def validate_network(path: Path) -> list[str]:
     for key, expected in checks.items():
         if value.get(key) != expected:
             errors.append(f"network {key} is inconsistent")
+    if failures or any(int(item["status"]) not in range(200, 400) for item in requests):
+        errors.append("network contains failed requests")
+    return errors
+
+
+def validate_matrix(value: dict[str, object]) -> list[str]:
+    items = value.get("scenarios", [])
+    errors: list[str] = []
+    if not isinstance(items, list):
+        return ["browser matrix scenarios must be an array"]
+    names = [item.get("scenario") for item in items]
+    if names != list(REQUIRED_SCENARIOS):
+        errors.append("browser matrix scenario order is invalid")
+    for item in items:
+        name = str(item.get("scenario"))
+        required = ("route", "locale", "theme", "viewport", "overflow", "brokenImageCount", "reducedMotion")
+        for field in required:
+            if field not in item:
+                errors.append(f"{name}: missing {field}")
+        if item.get("overflow") is not False:
+            errors.append(f"{name}: overflow is not false")
+        if item.get("brokenImageCount") != 0:
+            errors.append(f"{name}: brokenImageCount is not zero")
+        if name in REDUCED_SCENARIOS:
+            if item.get("reducedMotion") is not True:
+                errors.append(f"{name}: reducedMotion is not true")
+            if item.get("activeAnimationCount") != 0:
+                errors.append(f"{name}: activeAnimationCount is not zero")
+            if not isinstance(item.get("visibleTextLength"), int) or item["visibleTextLength"] <= 0:
+                errors.append(f"{name}: visibleTextLength is not positive")
+        if name.startswith("home-"):
+            if item.get("selected") != PROJECT_ORDER:
+                errors.append(f"{name}: selected project order is invalid")
+            if item.get("other") != OTHER_ORDER:
+                errors.append(f"{name}: other project order is invalid")
+        if name == "home-zh-dark-tablet":
+            if not isinstance(item.get("decodedImageCount"), int) or item["decodedImageCount"] <= 0:
+                errors.append(f"{name}: decodedImageCount is not positive")
+            if not isinstance(item.get("focusableCount"), int) or item["focusableCount"] <= 0:
+                errors.append(f"{name}: focusableCount is not positive")
+    return errors
+
+
+def validate_console(value: dict[str, object]) -> list[str]:
+    messages = value.get("messages", [])
+    errors: list[str] = []
+    if not isinstance(messages, list):
+        return ["console messages must be an array"]
+    for message in messages:
+        if not isinstance(message, dict) or message.get("level") not in {
+            "debug", "info", "log", "warning", "error"
+        } or not isinstance(message.get("text"), str):
+            errors.append("console message schema is invalid")
+    if messages or value.get("messageCount") != 0 or value.get("errorCount") != 0 or value.get("warningCount") != 0:
+        errors.append("console must be empty and failure-free")
     return errors
 
 
@@ -81,8 +135,9 @@ def validate_screenshots(
     if not isinstance(screenshots, list):
         return ["screenshots must be an array"]
     errors: list[str] = []
-    scenarios = {str(item.get("scenario")) for item in screenshots}
-    if scenarios != REQUIRED_SCENARIOS - {"home-zh-dark-tablet"}:
+    scenarios = [str(item.get("scenario")) for item in screenshots]
+    expected = [name for name in REQUIRED_SCENARIOS if name != "home-zh-dark-tablet"]
+    if scenarios != expected:
         errors.append("screenshot scenarios are incomplete")
     for item in screenshots:
         path = assets_root / str(item["path"])
@@ -104,15 +159,14 @@ def validate_all(evidence_root: Path, assets_root: Path) -> list[str]:
     matrix = read_json(evidence_root / "browser-matrix.json")
     reduced = read_json(evidence_root / "browser-reduced-motion.json")
     console = read_json(evidence_root / "browser-console.json")
+    errors.extend(validate_matrix(matrix))
     scenarios = {
         item.get("scenario"): item for item in matrix.get("scenarios", [])
     }
-    if set(scenarios) != REQUIRED_SCENARIOS:
-        errors.append("browser matrix scenarios are incomplete")
     reduced_items = {
         item.get("scenario"): item for item in reduced.get("scenarios", [])
     }
-    if set(reduced_items) != REDUCED_SCENARIOS:
+    if list(reduced_items) != list(REDUCED_SCENARIOS):
         errors.append("reduced-motion scenarios are incomplete")
     for name, item in reduced_items.items():
         matrix_item = scenarios.get(name, {})
@@ -122,20 +176,7 @@ def validate_all(evidence_root: Path, assets_root: Path) -> list[str]:
                 errors.append(f"{name}: reduced-motion {key} mismatch")
         if item.get("activeAnimationCount") != 0:
             errors.append(f"{name}: active animation remains")
-    messages = console.get("messages", [])
-    if console.get("messageCount") != len(messages):
-        errors.append("console messageCount is inconsistent")
-    error_count = sum(
-        str(message).lower().startswith("error") for message in messages
-    )
-    warning_count = sum(
-        str(message).lower().startswith(("warn", "warning"))
-        for message in messages
-    )
-    if console.get("errorCount") != error_count:
-        errors.append("console errorCount is inconsistent")
-    if console.get("warningCount") != warning_count:
-        errors.append("console warningCount is inconsistent")
+    errors.extend(validate_console(console))
     errors.extend(
         validate_screenshots(
             evidence_root / "browser-screenshots.json",
