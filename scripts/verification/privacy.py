@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import html
 import math
 import re
+from urllib.parse import unquote
 from pathlib import Path
 
 
@@ -37,6 +39,16 @@ def entropy(value: str) -> float:
     )
 
 
+def decoded_variants(text: str, limit: int = 4) -> list[str]:
+    values = [text]
+    for _ in range(limit):
+        decoded = unquote(html.unescape(values[-1]))
+        if decoded == values[-1]:
+            break
+        values.append(decoded)
+    return values
+
+
 def scan_dist(root: Path) -> list[str]:
     if not root.is_dir():
         return ["dist: output directory is missing"]
@@ -53,6 +65,13 @@ def scan_dist(root: Path) -> list[str]:
                 continue
             if decoded not in texts:
                 texts.append(decoded)
+        texts = list(
+            dict.fromkeys(
+                variant
+                for text in texts
+                for variant in decoded_variants(text)
+            )
+        )
         relative = path.relative_to(root).as_posix()
         for name, pattern in PATTERNS.items():
             if any(pattern.search(text) for text in texts):

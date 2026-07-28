@@ -12,6 +12,28 @@ from scripts.verification import browser, facts, privacy
 
 
 class TestStructuredFacts(unittest.TestCase):
+    def test_mdx_visible_text_excludes_hidden_jsx_and_multiline_export(self) -> None:
+        hidden = """
+<div hidden>hidden claim</div>
+<section aria-hidden="true">aria claim</section>
+<aside style={{ display: "none" }}>display claim</aside>
+<p style="visibility: hidden">visibility claim</p>
+export const metadata = {
+  claim: "export claim",
+};
+Visible claim.
+"""
+        visible = facts.extract_mdx_visible_text(hidden)
+        for claim in (
+            "hidden claim",
+            "aria claim",
+            "display claim",
+            "visibility claim",
+            "export claim",
+        ):
+            self.assertNotIn(claim, visible)
+        self.assertIn("Visible claim", visible)
+
     def test_mdx_visible_text_excludes_comments_and_imports(self) -> None:
         text = """---
 title: hidden
@@ -92,6 +114,26 @@ const mode = { category: "spatial" };
 
 
 class TestBrowserEvidence(unittest.TestCase):
+    def test_each_scenario_requires_exact_identity_values(self) -> None:
+        project = Path(__file__).parents[1]
+        matrix = json.loads(
+            (
+                project / "docs/verification/evidence/browser-matrix.json"
+            ).read_text(encoding="utf-8")
+        )
+        mutations = (
+            ("route", "/wrong"),
+            ("locale", "en"),
+            ("theme", "light"),
+            ("viewport", {"width": 1, "height": 1}),
+            ("reducedMotion", False),
+        )
+        for field, value in mutations:
+            with self.subTest(field=field):
+                changed = json.loads(json.dumps(matrix))
+                changed["scenarios"][2][field] = value
+                self.assertIn(field, " ".join(browser.validate_matrix(changed)))
+
     def write_json(self, root: Path, name: str, value: object) -> None:
         (root / name).write_text(json.dumps(value), encoding="utf-8")
 
@@ -150,6 +192,45 @@ class TestBrowserEvidence(unittest.TestCase):
 
         self.assertIn("sha256", " ".join(errors))
 
+    def test_screenshot_manifest_rejects_path_escape_symlink_and_wrong_filename(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            assets = root / "assets"
+            assets.mkdir()
+            outside = root / "outside.webp"
+            outside.write_bytes(b"outside")
+            link = assets / "linked.webp"
+            link.symlink_to(outside)
+            base = {
+                "schemaVersion": 1,
+                "screenshots": [
+                    {
+                        "scenario": "home-en-light-desktop",
+                        "path": "",
+                        "width": 1,
+                        "height": 1,
+                        "sha256": hashlib.sha256(b"outside").hexdigest(),
+                    }
+                ],
+            }
+            cases = {
+                "../outside.webp": "path is unsafe",
+                str(outside): "path is unsafe",
+                "linked.webp": "symlink is forbidden",
+                "wrong.webp": "filename is invalid",
+            }
+            for value, expected_error in cases.items():
+                with self.subTest(path=value):
+                    base["screenshots"][0]["path"] = value
+                    manifest = root / "screenshots.json"
+                    manifest.write_text(json.dumps(base), encoding="utf-8")
+                    errors = browser.validate_screenshots(
+                        manifest,
+                        assets,
+                        check_dimensions=False,
+                    )
+                    self.assertIn(expected_error, " ".join(errors))
+
     def test_real_evidence_is_consistent_and_missing_scenario_fails(self) -> None:
         project = Path(__file__).parents[1]
         source = project / "docs/verification/evidence"
@@ -202,6 +283,16 @@ class TestBrowserEvidence(unittest.TestCase):
 
 
 class TestPrivacyScan(unittest.TestCase):
+    def test_scan_recursively_decodes_html_entities_and_urls(self) -> None:
+        encoded = (
+            "%2526%2523x2F%253BUsers%2526%2523x2F%253Bexample"
+            "%2526%2523x2F%253Bprivate"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "index.html").write_text(encoded, encoding="utf-8")
+            findings = privacy.scan_dist(root)
+        self.assertIn("absolute path", " ".join(findings))
     def test_scan_rejects_sensitive_bytes_in_fake_webp(self) -> None:
         samples = (
             b"/Users/example/private/file",

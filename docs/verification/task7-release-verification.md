@@ -249,6 +249,9 @@ dimensions, and screenshot hashes. Scenario order and every required success
 field are mandatory; all requests must be successful, failure lists must be
 empty, and console messages must use structured levels while the retained
 release evidence remains warning- and error-free.
+Each of the six matrix scenarios is bound to its exact route, locale, theme,
+viewport, and reduced-motion value; changing a valid field to another valid
+value still fails verification.
 
 ## Route and Link Acceptance
 
@@ -326,6 +329,9 @@ weak phrase that preserves only "three modes" or only an atlas dimension does
 not pass. MDX checks remove frontmatter, imports, HTML/JSX comments; source
 checks remove comments and unrelated standalone string assignments; JSON
 evidence uses structural `json_path` rules. The latest run returned `31/31`.
+Elements hidden with `hidden`, `aria-hidden`, `display: none`, or
+`visibility: hidden`, plus multiline exported metadata/functions, are excluded
+from visitor-visible claim text.
 
 The facts module pins the following public source revisions. It accepts
 explicit source roots and reads evidence with `git show <SHA>:<path>`, so
@@ -351,7 +357,12 @@ Unix/macOS/Windows paths, `file://`, loopback/private-network URLs, credential
 patterns, private keys, and high-entropy tokens. Known content hashes and
 ordinary Astro asset names are narrowly excluded. Every file is also scanned
 as raw bytes and through applicable UTF-8/UTF-16 decoding, so image metadata or
-payloads appended to binary assets cannot bypass the gate.
+payloads appended to binary assets cannot bypass the gate. HTML entities and
+URL encoding are recursively decoded to a fixed depth before each scan.
+
+Screenshot paths must match the fixed filename for their scenario, contain no
+directory or traversal component, resolve directly inside the assets root, and
+must not be symlinks.
 
 ## Screenshot Evidence
 

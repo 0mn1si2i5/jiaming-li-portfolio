@@ -17,6 +17,39 @@ REQUIRED_SCENARIOS = (
     "omnipet-zh-dark-mobile",
 )
 REDUCED_SCENARIOS = REQUIRED_SCENARIOS[2:]
+SCENARIO_EXPECTATIONS = {
+    "home-en-light-desktop": {
+        "route": "/", "locale": "en", "theme": "light",
+        "viewport": {"width": 1440, "height": 900}, "reducedMotion": False,
+    },
+    "home-zh-dark-tablet": {
+        "route": "/", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 768, "height": 1024}, "reducedMotion": True,
+    },
+    "mundus-zh-dark-desktop": {
+        "route": "/projects/mundus", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 1440, "height": 900}, "reducedMotion": True,
+    },
+    "mundus-zh-dark-mobile": {
+        "route": "/projects/mundus", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
+    },
+    "omnipet-zh-dark-desktop": {
+        "route": "/projects/omnipet", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 1440, "height": 900}, "reducedMotion": True,
+    },
+    "omnipet-zh-dark-mobile": {
+        "route": "/projects/omnipet", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
+    },
+}
+SCREENSHOT_FILES = {
+    "home-en-light-desktop": "task7-home-en-light-1440x900.webp",
+    "mundus-zh-dark-desktop": "task7-mundus-zh-dark-reduced-1440x900.webp",
+    "mundus-zh-dark-mobile": "task7-mundus-zh-dark-reduced-390x844.webp",
+    "omnipet-zh-dark-desktop": "task7-omnipet-zh-dark-reduced-1440x900.webp",
+    "omnipet-zh-dark-mobile": "task7-omnipet-zh-dark-reduced-390x844.webp",
+}
 PROJECT_ORDER = ["DialogTree", "Mundus", "OmniPet", "NBTI"]
 OTHER_ORDER = ["Side B", "RSZ Namelist"]
 
@@ -66,6 +99,9 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
         for field in required:
             if field not in item:
                 errors.append(f"{name}: missing {field}")
+        for field, expected in SCENARIO_EXPECTATIONS.get(name, {}).items():
+            if item.get(field) != expected:
+                errors.append(f"{name}: {field} does not match expected value")
         if item.get("overflow") is not False:
             errors.append(f"{name}: overflow is not false")
         if item.get("brokenImageCount") != 0:
@@ -140,7 +176,24 @@ def validate_screenshots(
     if scenarios != expected:
         errors.append("screenshot scenarios are incomplete")
     for item in screenshots:
-        path = assets_root / str(item["path"])
+        scenario = str(item.get("scenario"))
+        raw_path = str(item.get("path", ""))
+        if raw_path != SCREENSHOT_FILES.get(scenario):
+            errors.append(f"{scenario}: screenshot filename is invalid")
+        candidate = Path(raw_path)
+        if candidate.is_absolute() or candidate.name != raw_path or ".." in candidate.parts:
+            errors.append(f"{scenario}: screenshot path is unsafe")
+            continue
+        root = assets_root.resolve()
+        path = assets_root / candidate
+        if path.is_symlink():
+            errors.append(f"{scenario}: screenshot symlink is forbidden")
+            continue
+        resolved = path.resolve()
+        if resolved.parent != root:
+            errors.append(f"{scenario}: screenshot path escapes assets")
+            continue
+        path = resolved
         if not path.is_file():
             errors.append(f"{item['path']}: screenshot missing")
             continue

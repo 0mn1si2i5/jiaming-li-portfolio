@@ -23,9 +23,11 @@ screenshot hashes, and the final `dist/` privacy boundary. For an isolated
 checkout, pass `--mundus-root`, `--omnipet-root`, and `--omnipets-root`; facts
 are read with `git show` from the pinned commits rather than from each source
 working tree. Fact matching excludes comments, imports, frontmatter, and
-unrelated string assignments; JSON evidence is checked structurally. The
-privacy gate scans text and binary bytes, including image metadata and appended
-payloads.
+unrelated string assignments, hidden JSX, and exported metadata; JSON evidence
+is checked structurally. The privacy gate recursively decodes HTML entities and
+URL encoding while scanning text and binary bytes, including image metadata and
+appended payloads. Screenshot evidence is restricted to fixed files directly
+inside the assets directory; traversal and symlinks are rejected.
 
 ## Content and media
 

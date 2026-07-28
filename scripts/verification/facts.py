@@ -18,7 +18,33 @@ def extract_mdx_visible_text(text: str) -> str:
     text = re.sub(r"\A---\n.*?\n---\n", "", text, flags=re.DOTALL)
     text = re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
     text = re.sub(r"\{/\*.*?\*/\}", "", text, flags=re.DOTALL)
-    text = re.sub(r"(?m)^\s*(?:import|export)\b.*$", "", text)
+    hidden_attributes = (
+        r"(?:\bhidden(?:\s|>|=)|\baria-hidden\s*=\s*(?:[\"']true[\"']|\{true\})|"
+        r"\bstyle\s*=\s*(?:[\"'][^\"']*(?:display\s*:\s*none|visibility\s*:\s*hidden)"
+        r"[^\"']*[\"']|\{\{.*?(?:display\s*:\s*[\"']none[\"']|"
+        r"visibility\s*:\s*[\"']hidden[\"']).*?\}\}))"
+    )
+    element = re.compile(
+        rf"<(?P<tag>[A-Za-z][\w.-]*)\b(?=[^>]*{hidden_attributes})[^>]*>"
+        rf".*?</(?P=tag)\s*>",
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    previous = None
+    while previous != text:
+        previous = text
+        text = element.sub("", text)
+    text = re.sub(r"(?m)^\s*import\b.*$", "", text)
+    text = re.sub(
+        r"(?ms)^\s*export\s+(?:default\s+)?(?:const|let|var)\b.*?;\s*$",
+        "",
+        text,
+    )
+    text = re.sub(
+        r"(?ms)^\s*export\s+(?:default\s+)?(?:async\s+)?function\b.*?^}\s*;?\s*$",
+        "",
+        text,
+    )
+    text = re.sub(r"(?m)^\s*export\b.*$", "", text)
     return text
 
 

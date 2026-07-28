@@ -876,3 +876,23 @@ npm run verify
 Expected: 15 tests pass, including comment-only, unrelated-string,
 wrong-JSON-field, reordered/failed-browser-scenario, console-level, and fake
 WebP leakage variants; the real 31/31 fact, browser, and privacy gates pass.
+
+- [x] **Step 11: Bind exact scenarios and close encoded/path bypasses**
+
+Bind every browser scenario to its exact route, locale, theme, viewport, and
+reduced-motion values. Exclude hidden/ARIA-hidden/display-none/visibility-hidden
+JSX and multiline exports from visible MDX claims.
+
+Recursively apply HTML entity and URL decoding before privacy scans. Restrict
+each screenshot scenario to its fixed filename directly inside the assets root;
+reject absolute paths, traversal, resolved escapes, and symlinks.
+
+```bash
+npm test
+npm run build
+npm run verify
+```
+
+Expected: 19 tests pass, including exact scenario mutations, hidden JSX,
+multiline export, nested encoding, `../`, absolute screenshot paths, symlink
+escape, and scenario/filename mismatch; all real release gates remain green.
