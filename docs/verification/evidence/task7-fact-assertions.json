@@ -1,0 +1,228 @@
+{
+  "assertions": [
+    {
+      "claim": "Three modes are registered in a stable order.",
+      "id": "mundus-mode-order",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/modes/modeRegistry.ts"
+    },
+    {
+      "claim": "Other Side is a spatial mode.",
+      "id": "mundus-mode-spatial",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/modes/modeRegistry.ts"
+    },
+    {
+      "claim": "Development is a human mode.",
+      "id": "mundus-mode-human",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/modes/modeRegistry.ts"
+    },
+    {
+      "claim": "Sunline is a temporal mode.",
+      "id": "mundus-mode-temporal",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/modes/modeRegistry.ts"
+    },
+    {
+      "claim": "Development declares Natural Earth and UNDP resources.",
+      "id": "mundus-development-resources",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/modes/modeRegistry.ts"
+    },
+    {
+      "claim": "Sunline starts at 2000 UTC.",
+      "id": "mundus-sunline-min-year",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/sunline/solar.ts"
+    },
+    {
+      "claim": "Sunline ends at the final minute of 2099 UTC.",
+      "id": "mundus-sunline-max-year",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/sunline/solar.ts"
+    },
+    {
+      "claim": "Sunrise and sunset use an apparent altitude of -0.833 degrees.",
+      "id": "mundus-sunrise-altitude",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/sunline/solar.ts"
+    },
+    {
+      "claim": "Solar observations expose civil twilight.",
+      "id": "mundus-civil-twilight",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/sunline/solar.ts"
+    },
+    {
+      "claim": "Solar events expose polar day.",
+      "id": "mundus-polar-day",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/sunline/solar.ts"
+    },
+    {
+      "claim": "Solar events expose polar night.",
+      "id": "mundus-polar-night",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "src/features/sunline/solar.ts"
+    },
+    {
+      "claim": "The immutable GeoNames index contains 6,944 records.",
+      "id": "mundus-city-count",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "DATA_SOURCES.md"
+    },
+    {
+      "claim": "The UNDP series covers 1990 through 2023.",
+      "id": "mundus-undp-years",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "DATA_SOURCES.md"
+    },
+    {
+      "claim": "Vector quality uses 110m for low and 50m for medium/high.",
+      "id": "mundus-vector-quality",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "DATA_SOURCES.md"
+    },
+    {
+      "claim": "Sunline uses NOAA/Meeus-style approximations.",
+      "id": "mundus-solar-method",
+      "passed": true,
+      "repository": "Mundus",
+      "source": "DATA_SOURCES.md"
+    },
+    {
+      "claim": "Provider failures are not retried automatically.",
+      "id": "omnipet-no-auto-retry",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/architecture.md"
+    },
+    {
+      "claim": "Repair archives a selected visual job transactionally.",
+      "id": "omnipet-transactional-repair",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/architecture.md"
+    },
+    {
+      "claim": "Public release export uses a closed allowlist.",
+      "id": "omnipet-release-allowlist",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/architecture.md"
+    },
+    {
+      "claim": "Public verification requires neither provider credentials nor a production project.",
+      "id": "omnipet-clean-verification",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/architecture.md"
+    },
+    {
+      "claim": "The atlas contains nine standard action rows.",
+      "id": "omnipet-standard-rows",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/generation-workflow.md"
+    },
+    {
+      "claim": "The final atlas uses an 8 by 11 grid.",
+      "id": "omnipet-atlas-grid",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/generation-workflow.md"
+    },
+    {
+      "claim": "The final atlas is exactly 1536 by 2288 pixels.",
+      "id": "omnipet-atlas-size",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/generation-workflow.md"
+    },
+    {
+      "claim": "The final atlas adds two look rows to nine standard rows.",
+      "id": "omnipet-look-rows",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "docs/generation-workflow.md"
+    },
+    {
+      "claim": "The release contract requires the sprite atlas.",
+      "id": "omnipet-release-atlas",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "src/omnipet/public_release.py"
+    },
+    {
+      "claim": "The release contract requires a preview.",
+      "id": "omnipet-release-preview",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "src/omnipet/public_release.py"
+    },
+    {
+      "claim": "Release file records use SHA-256 hashes.",
+      "id": "omnipet-release-hash",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "src/omnipet/public_release.py"
+    },
+    {
+      "claim": "Verification rejects files outside the declared release set.",
+      "id": "omnipet-release-closed-set",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "src/omnipet/public_release.py"
+    },
+    {
+      "claim": "Verification scans public text for prohibited private material.",
+      "id": "omnipet-release-private-scan",
+      "passed": true,
+      "repository": "OmniPet",
+      "source": "src/omnipet/public_release.py"
+    },
+    {
+      "claim": "The public catalog contains SuShi.",
+      "id": "omnipets-sushi-name",
+      "passed": true,
+      "repository": "OmniPets",
+      "source": "catalog/index.json"
+    },
+    {
+      "claim": "SuShi uses sprite version 2.",
+      "id": "omnipets-sprite-version",
+      "passed": true,
+      "repository": "OmniPets",
+      "source": "catalog/index.json"
+    },
+    {
+      "claim": "The public SuShi release is version 1.0.1.",
+      "id": "omnipets-sushi-version",
+      "passed": true,
+      "repository": "OmniPets",
+      "source": "catalog/index.json"
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "assertionCount": 31,
+    "failedCount": 0,
+    "passedCount": 31,
+    "privateBoundaryHitCount": 0
+  }
+}

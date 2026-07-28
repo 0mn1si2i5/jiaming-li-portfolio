@@ -1,9 +1,9 @@
 # Task 7 Release Verification
 
-Verified on 2026-07-29 against branch `feat/mundus-omnipet-portfolio` at
-baseline commit `21c919b` (`docs(portfolio): document project publishing
-rules`). The verification used Node.js `v22.23.1`, npm `10.9.8`, Astro `7.0.7`,
-and `agent-browser 0.27.0` driving Chrome.
+Verified on 2026-07-29 against branch `feat/mundus-omnipet-portfolio`. The
+publishing-rule baseline is `21c919b`; the first retained-evidence baseline is
+`942dd12`. The verification used Node.js `v22.23.1`, npm `10.9.8`, Astro
+`7.0.7`, and `agent-browser 0.27.0` driving Chrome.
 
 ## Result
 
@@ -99,6 +99,7 @@ to the repository.
 | Viewport | Locale | Theme | Reduced motion | Page | Result |
 | --- | --- | --- | --- | --- | --- |
 | 1440 x 900 | English | Light | Off | Homepage | Selected Work and Other Work order correct; no overflow or broken images |
+| 1440 x 900 | Chinese | Dark | On | Mundus | Complete text and diagrams; no animation, overflow, or broken images |
 | 1440 x 900 | Chinese | Dark | On | OmniPet | Complete content, two approved public links, no animation, overflow, or broken images |
 | 768 x 1024 | Chinese | Dark | On | Homepage | Correct localized order and alternatives; 26 visible focusable controls; all lazy images decode |
 | 390 x 844 | Chinese | Dark | On | Mundus | Complete text and diagrams; no animation, clipped text, overflow, or broken images |
@@ -216,12 +217,30 @@ HOME=/tmp/task7-evidence/browser-home \
 Observed:
 
 - Console output: empty, `0` bytes.
-- Recorded requests: `57`.
-- Status `200`: `35`.
-- Status `304`: `22`.
+- Recorded requests: `72`.
+- Status `200`: `62`.
+- Status `304`: `10`.
 - Other statuses or failed requests: `0`.
 - Documents, CSS, local WOFF2 files, favicon, and project images all loaded
   successfully.
+
+## Machine-Readable Browser Evidence
+
+The following sanitized JSON files retain the direct browser observations used
+by this report:
+
+- [Acceptance matrix](evidence/browser-matrix.json): six page, viewport,
+  locale, theme, image, focus, and overflow scenarios.
+- [Reduced-motion observations](evidence/browser-reduced-motion.json): four
+  Mundus and OmniPet desktop/mobile observations.
+- [Console observations](evidence/browser-console.json): zero messages, errors,
+  or warnings.
+- [Network observations](evidence/browser-network.json): 72 normalized
+  requests, status and resource-type counts, and an empty failure list.
+
+Browser JSON contains only relative routes or resource paths, stable scenario
+labels, and aggregate values. It excludes browser profile data, request IDs,
+headers, query secrets, filesystem paths, and host-specific user information.
 
 ## Route and Link Acceptance
 
@@ -283,23 +302,46 @@ plan.
 | `src/omnipet/public_release.py` | Closed release file set; canonical release record; SHA-256 binding; extra-file and private-material rejection |
 | OmniPets `README.md` and `catalog/index.json` | SuShi v1.0.1; sprite v2; public preview, atlas, manifest, documentation, license, and hashes |
 
-The executable assertion scan checked 31 representative public-source
-statements and found all 31. A separate scan of `mundus.mdx` and `omnipet.mdx`
-found no occurrence of `OmniPet-Production`, `OmniPet-Program`,
-`/Users/bytedance`, or `OPENAI_API_KEY`. No claim needed removal or weakening.
+The executable [fact assertion script](../../scripts/verify-task7-facts.py)
+checks 31 representative public-source statements and the portfolio prose
+boundary:
+
+```bash
+python3 scripts/verify-task7-facts.py
+```
+
+It writes a deterministic [31-item assertion list](evidence/task7-fact-assertions.json)
+and [source revision record](evidence/source-revisions.json). The latest run
+returned `31/31` passed and zero private-boundary hits. No claim needed removal
+or weakening.
+
+The public source revisions used by that run were:
+
+| Repository | Revision | Branch | Dirty |
+| --- | --- | --- | --- |
+| Mundus | `b7b2d0f9e453efd8be83216a43e642f0ee7350ed` | `main` | No |
+| OmniPet | `f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d` | `main` | No |
+| OmniPets | `081b7c6f651183987c79c4321ff46e1b082e03b7` | `main` | No |
+
+The generated JSON stores repository labels, relative source paths, assertion
+results, Git revisions, branches, and dirty flags. It does not serialize any
+resolved local repository path or matched private term.
 
 ## Screenshot Evidence
 
-Only three optimized full-page WebP captures are retained:
+Five optimized full-page WebP captures are retained:
 
 1. [English/light homepage at 1440 x 900](assets/task7-home-en-light-1440x900.webp)
-2. [Chinese/dark Mundus at 390 x 844 with reduced motion](assets/task7-mundus-zh-dark-reduced-390x844.webp)
-3. [Chinese/dark OmniPet at 1440 x 900 with reduced motion](assets/task7-omnipet-zh-dark-reduced-1440x900.webp)
+2. [Chinese/dark Mundus at 1440 x 900 with reduced motion](assets/task7-mundus-zh-dark-reduced-1440x900.webp)
+3. [Chinese/dark Mundus at 390 x 844 with reduced motion](assets/task7-mundus-zh-dark-reduced-390x844.webp)
+4. [Chinese/dark OmniPet at 1440 x 900 with reduced motion](assets/task7-omnipet-zh-dark-reduced-1440x900.webp)
+5. [Chinese/dark OmniPet at 390 x 844 with reduced motion](assets/task7-omnipet-zh-dark-reduced-390x844.webp)
 
 The original PNG captures were stored only under `/tmp/task7-evidence`. The
 retained WebP files use quality `82`; desktop captures were reduced to 1200
-pixels wide and the mobile capture remains 390 pixels wide. Their repository
-sizes are approximately 148 KB, 420 KB, and 336 KB.
+pixels wide and mobile captures remain 390 pixels wide. The two review-gap
+captures add approximately 424 KB for Mundus desktop and 320 KB for OmniPet
+mobile.
 
 Conversion command:
 

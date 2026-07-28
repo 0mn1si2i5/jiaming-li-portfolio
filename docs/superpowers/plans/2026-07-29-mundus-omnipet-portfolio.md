@@ -675,8 +675,17 @@ git commit -m "style(portfolio): apply digital exhibition system"
 - Modify: `docs/superpowers/plans/2026-07-29-mundus-omnipet-portfolio.md`
 - Create: `docs/verification/task7-release-verification.md`
 - Create: `docs/verification/assets/task7-home-en-light-1440x900.webp`
+- Create: `docs/verification/assets/task7-mundus-zh-dark-reduced-1440x900.webp`
 - Create: `docs/verification/assets/task7-mundus-zh-dark-reduced-390x844.webp`
 - Create: `docs/verification/assets/task7-omnipet-zh-dark-reduced-1440x900.webp`
+- Create: `docs/verification/assets/task7-omnipet-zh-dark-reduced-390x844.webp`
+- Create: `docs/verification/evidence/browser-console.json`
+- Create: `docs/verification/evidence/browser-matrix.json`
+- Create: `docs/verification/evidence/browser-network.json`
+- Create: `docs/verification/evidence/browser-reduced-motion.json`
+- Create: `docs/verification/evidence/source-revisions.json`
+- Create: `docs/verification/evidence/task7-fact-assertions.json`
+- Create: `scripts/verify-task7-facts.py`
 
 - [x] **Step 1: Update contributor guidance**
 
@@ -765,7 +774,28 @@ git status --short
 Expected: clean working tree.
 
 Verification evidence is retained in
-`docs/verification/task7-release-verification.md`, with three optimized key
+`docs/verification/task7-release-verification.md`, with five optimized key
 screenshots under `docs/verification/assets/`. The publishing-rule change was
 committed as `21c919b`; the repository evidence and checklist completion are a
 separate documentation follow-up.
+
+- [x] **Step 7: Close review evidence gaps**
+
+Retain sanitized browser JSON for console, network, acceptance matrix, and
+reduced-motion observations. Add the missing Mundus desktop and OmniPet mobile
+captures. Record all 31 public-source assertions and the exact clean revisions
+of Mundus, OmniPet, and OmniPets through an executable script:
+
+```bash
+python3 scripts/verify-task7-facts.py
+python3 -m json.tool docs/verification/evidence/browser-console.json >/dev/null
+python3 -m json.tool docs/verification/evidence/browser-network.json >/dev/null
+python3 -m json.tool docs/verification/evidence/browser-matrix.json >/dev/null
+python3 -m json.tool docs/verification/evidence/browser-reduced-motion.json >/dev/null
+python3 -m json.tool docs/verification/evidence/task7-fact-assertions.json >/dev/null
+python3 -m json.tool docs/verification/evidence/source-revisions.json >/dev/null
+```
+
+Expected: 31 assertions pass, the private-boundary hit count is zero, all JSON
+is valid and contains no resolved local filesystem path, and all five retained
+screenshots are referenced by the verification report.

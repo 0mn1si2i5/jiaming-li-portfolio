@@ -1,0 +1,113 @@
+{
+  "scenarios": [
+    {
+      "brokenImageCount": 0,
+      "locale": "en",
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ],
+      "overflow": false,
+      "reducedMotion": false,
+      "route": "/",
+      "scenario": "home-en-light-desktop",
+      "selected": [
+        "DialogTree",
+        "Mundus",
+        "OmniPet",
+        "NBTI"
+      ],
+      "theme": "light",
+      "viewport": {
+        "height": 900,
+        "width": 1440
+      }
+    },
+    {
+      "brokenImageCount": 0,
+      "decodedImageCount": 5,
+      "focusableCount": 26,
+      "locale": "zh",
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ],
+      "overflow": false,
+      "reducedMotion": true,
+      "route": "/",
+      "scenario": "home-zh-dark-tablet",
+      "selected": [
+        "DialogTree",
+        "Mundus",
+        "OmniPet",
+        "NBTI"
+      ],
+      "theme": "dark",
+      "viewport": {
+        "height": 1024,
+        "width": 768
+      }
+    },
+    {
+      "activeAnimationCount": 0,
+      "brokenImageCount": 0,
+      "locale": "zh",
+      "overflow": false,
+      "reducedMotion": true,
+      "route": "/projects/mundus",
+      "scenario": "mundus-zh-dark-desktop",
+      "theme": "dark",
+      "viewport": {
+        "height": 900,
+        "width": 1440
+      },
+      "visibleTextLength": 3609
+    },
+    {
+      "activeAnimationCount": 0,
+      "brokenImageCount": 0,
+      "locale": "zh",
+      "overflow": false,
+      "reducedMotion": true,
+      "route": "/projects/mundus",
+      "scenario": "mundus-zh-dark-mobile",
+      "theme": "dark",
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleTextLength": 3609
+    },
+    {
+      "activeAnimationCount": 0,
+      "brokenImageCount": 0,
+      "locale": "zh",
+      "overflow": false,
+      "reducedMotion": true,
+      "route": "/projects/omnipet",
+      "scenario": "omnipet-zh-dark-desktop",
+      "theme": "dark",
+      "viewport": {
+        "height": 900,
+        "width": 1440
+      },
+      "visibleTextLength": 2529
+    },
+    {
+      "activeAnimationCount": 0,
+      "brokenImageCount": 0,
+      "locale": "zh",
+      "overflow": false,
+      "reducedMotion": true,
+      "route": "/projects/omnipet",
+      "scenario": "omnipet-zh-dark-mobile",
+      "theme": "dark",
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleTextLength": 2529
+    }
+  ],
+  "schemaVersion": 1
+}
