@@ -237,10 +237,15 @@ by this report:
   or warnings.
 - [Network observations](evidence/browser-network.json): 72 normalized
   requests, status and resource-type counts, and an empty failure list.
+- [Screenshot manifest](evidence/browser-screenshots.json): five retained
+  captures with scenario, dimensions, and SHA-256.
 
 Browser JSON contains only relative routes or resource paths, stable scenario
 labels, and aggregate values. It excludes browser profile data, request IDs,
 headers, query secrets, filesystem paths, and host-specific user information.
+The unified validator checks schema versions, required scenarios, console and
+network aggregate consistency, reduced-motion/matrix agreement, screenshot
+dimensions, and screenshot hashes.
 
 ## Route and Link Acceptance
 
@@ -305,58 +310,41 @@ corresponding evidence must exist in the pinned public source revision.
 | `src/omnipet/public_release.py` | Closed release file set; canonical release record; SHA-256 binding; extra-file and private-material rejection |
 | OmniPets `README.md` and `catalog/index.json` | SuShi v1.0.1; sprite v2; public preview, atlas, manifest, documentation, license, and hashes |
 
-The executable [fact assertion script](../../scripts/verify-task7-facts.py)
-checks 31 representative public-source statements and the portfolio prose
-boundary:
+The unified release verifier checks 31 structured, bidirectional facts:
 
 ```bash
-python3 scripts/verify-task7-facts.py
+npm run verify
 ```
 
-It writes a deterministic [31-item assertion list](evidence/task7-fact-assertions.json)
-and [source revision record](evidence/source-revisions.json). Each assertion
-records a relative portfolio source, a separate claim result, a public
-repository and relative evidence source, a separate evidence result, and the
-combined result. The latest run returned `31/31` claim/evidence pairs passed
-and zero private-boundary hits. No claim needed removal or weakening.
+The 31 rules live in `scripts/verification/facts.json`. Each item contains
+separate claim and evidence sources plus one or more `contains`,
+`contains_all`, or `regex` rules. All rules in both halves must match, so a
+weak phrase that preserves only "three modes" or only an atlas dimension does
+not pass. The latest run returned `31/31`.
 
-The script hard-codes the following expected public source revisions. Before
-reading evidence it requires exact SHA equality, branch `main`, and a clean
-working tree for all three repositories:
+The facts module pins the following public source revisions. It accepts
+explicit source roots and reads evidence with `git show <SHA>:<path>`, so
+uncommitted working-tree content cannot influence verification:
 
-| Repository | Revision | Branch | Dirty |
-| --- | --- | --- | --- |
-| Mundus | `b7b2d0f9e453efd8be83216a43e642f0ee7350ed` | `main` | No |
-| OmniPet | `f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d` | `main` | No |
-| OmniPets | `081b7c6f651183987c79c4321ff46e1b082e03b7` | `main` | No |
+| Repository | Revision |
+| --- | --- |
+| Mundus | `b7b2d0f9e453efd8be83216a43e642f0ee7350ed` |
+| OmniPet | `f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d` |
+| OmniPets | `081b7c6f651183987c79c4321ff46e1b082e03b7` |
 
-The generated revision JSON stores both expected and actual state, per-field
-failure names, and an aggregate `gatePassed`. A failed revision gate exits
-nonzero before assertions or output replacement. Assertion or privacy failure
-also exits nonzero before output replacement. Successful files are installed
-with an atomic temporary-file replacement.
-
-Negative tests cover wrong SHA, non-`main` branch, dirty source, missing
-portfolio claim, and missing public evidence:
+Deployment CI checks out all three repositories at those exact revisions and
+passes their paths explicitly. Negative tests cover weakened semantic facts,
+inconsistent browser aggregates, screenshot hash drift, absolute paths,
+internal URLs, credentials, and high-entropy secrets:
 
 ```bash
-python3 -m unittest tests/test_verify_task7_facts.py -v
+npm test
 ```
 
-Eight unit tests pass. Two additional `/tmp` script variants replace the
-expected Mundus SHA and one portfolio needle respectively. Both return `1`,
-and pre-existing sentinel evidence remains unchanged:
-
-```text
-wrong_sha_exit=1
-missing_claim_exit=1
-negative temporary variants: PASS; prior evidence preserved
-```
-
-The generated JSON stores repository labels, relative source paths, paired
-assertion results, expected and actual Git revisions, branches, and clean
-flags. It does not serialize a resolved local repository path, a private term,
-or temporary-test state.
+After `npm run build`, the same entry point scans final `dist/` text for
+Unix/macOS/Windows paths, `file://`, loopback/private-network URLs, credential
+patterns, private keys, and high-entropy tokens. Known content hashes and
+ordinary Astro asset names are narrowly excluded.
 
 ## Screenshot Evidence
 

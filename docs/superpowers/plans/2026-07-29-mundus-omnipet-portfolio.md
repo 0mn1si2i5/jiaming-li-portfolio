@@ -683,10 +683,17 @@ git commit -m "style(portfolio): apply digital exhibition system"
 - Create: `docs/verification/evidence/browser-matrix.json`
 - Create: `docs/verification/evidence/browser-network.json`
 - Create: `docs/verification/evidence/browser-reduced-motion.json`
+- Create: `docs/verification/evidence/browser-screenshots.json`
 - Create: `docs/verification/evidence/source-revisions.json`
 - Create: `docs/verification/evidence/task7-fact-assertions.json`
-- Create: `scripts/verify-task7-facts.py`
-- Create: `tests/test_verify_task7_facts.py`
+- Create: `scripts/verify-release.py`
+- Create: `scripts/verification/browser.py`
+- Create: `scripts/verification/facts.py`
+- Create: `scripts/verification/facts.json`
+- Create: `scripts/verification/privacy.py`
+- Create: `tests/test_release_verification.py`
+- Modify: `.github/workflows/deploy.yml`
+- Modify: `package.json`
 
 - [x] **Step 1: Update contributor guidance**
 
@@ -788,7 +795,7 @@ captures. Record all 31 public-source assertions and the exact clean revisions
 of Mundus, OmniPet, and OmniPets through an executable script:
 
 ```bash
-python3 scripts/verify-task7-facts.py
+npm run verify
 python3 -m json.tool docs/verification/evidence/browser-console.json >/dev/null
 python3 -m json.tool docs/verification/evidence/browser-network.json >/dev/null
 python3 -m json.tool docs/verification/evidence/browser-matrix.json >/dev/null
@@ -810,8 +817,8 @@ source evidence check. The evidence set must include Mundus
 OmniPets.
 
 ```bash
-python3 -m unittest tests/test_verify_task7_facts.py -v
-python3 scripts/verify-task7-facts.py
+npm test
+npm run verify
 ```
 
 Expected:
@@ -825,3 +832,26 @@ Expected:
 - `source-revisions.json` records matching expected and actual revisions with
   `gatePassed: true`;
 - no JSON contains local absolute paths or private material.
+
+- [x] **Step 9: Unify and deploy the complete release gate**
+
+Replace the standalone fact script with `scripts/verify-release.py` and focused
+standard-library modules under `scripts/verification/`. Keep exactly 31
+bidirectional facts in `scripts/verification/facts.json`; require all
+structured rules on both the portfolio claim and pinned public evidence.
+
+Validate browser schemas, cross-file scenario consistency, aggregate counts,
+the five screenshot dimensions and SHA-256 values, and final `dist/` content
+for paths, internal URLs, credentials, private keys, and high-entropy tokens.
+Read public evidence through `git show <fixed-sha>:<path>`.
+
+```bash
+npm test
+npm run build
+npm run verify
+```
+
+Deployment CI checks out Mundus, OmniPet, and OmniPets at their fixed revisions,
+passes explicit source roots, and runs the same commands before uploading the
+Pages artifact. Expected: all tests pass, 31/31 facts pass, browser evidence is
+consistent, screenshot hashes match, and the final privacy scan is clean.

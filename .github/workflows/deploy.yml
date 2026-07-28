@@ -19,14 +19,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: 0mn1si2i5/Mundus
+          ref: b7b2d0f9e453efd8be83216a43e642f0ee7350ed
+          path: sources/Mundus
+      - uses: actions/checkout@v4
+        with:
+          repository: 0mn1si2i5/OmniPet
+          ref: f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d
+          path: sources/OmniPet
+      - uses: actions/checkout@v4
+        with:
+          repository: 0mn1si2i5/OmniPets
+          ref: 081b7c6f651183987c79c4321ff46e1b082e03b7
+          path: sources/OmniPets
       - uses: actions/setup-node@v4
         with:
           node-version: 24.18.0
           cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - run: npm ci
+      - run: npm test
       - run: npm run build
         env:
           SITE_URL: https://${{ github.repository_owner }}.github.io
+      - run: >-
+          npm run verify --
+          --mundus-root sources/Mundus
+          --omnipet-root sources/OmniPet
+          --omnipets-root sources/OmniPets
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
