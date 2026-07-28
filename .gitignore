@@ -6,6 +6,9 @@ dist/
 # local brainstorming previews
 .superpowers/
 
+# local git worktrees
+.worktrees/
+
 # dependencies
 node_modules/
 
