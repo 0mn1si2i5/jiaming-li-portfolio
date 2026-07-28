@@ -1,0 +1,290 @@
+---
+import Localized from './Localized.astro';
+
+const modes = [
+  {
+    index: '01',
+    image: '/media/mundus/other-side.webp',
+    title: { en: 'Other Side', zh: '地球另一端' },
+    detail: { en: 'Spherical relationships', zh: '球面空间关系' },
+    alt: {
+      en: 'Mundus Other Side mode showing an origin and its antipode on the globe.',
+      zh: 'Mundus 地球另一端模式，在地球上展示起点及其对跖点。',
+    },
+  },
+  {
+    index: '02',
+    image: '/media/mundus/development.webp',
+    title: { en: 'Development, Unpacked', zh: '发展的不同侧面' },
+    detail: { en: 'Human evidence layers', zh: '人类发展证据层' },
+    alt: {
+      en: 'Mundus Development mode mapping human development dimensions on the globe.',
+      zh: 'Mundus 发展模式，在地球上呈现人类发展的不同维度。',
+    },
+  },
+  {
+    index: '03',
+    image: '/media/mundus/sunline.webp',
+    title: { en: 'Sunline', zh: '日照线' },
+    detail: { en: 'Time and solar geometry', zh: '时间与太阳几何' },
+    alt: {
+      en: 'Mundus Sunline mode showing daylight, twilight, and night on the globe.',
+      zh: 'Mundus 日照线模式，在地球上展示白昼、曙暮光与夜晚。',
+    },
+  },
+];
+
+const layers = [
+  {
+    index: '01',
+    title: { en: 'Globe kernel', zh: '地球内核' },
+    copy: {
+      en: 'One WebGL globe, camera, geographic selection model, vector surface, and raster fallback.',
+      zh: '共用一套 WebGL 地球、相机、地理选择模型、矢量表面与栅格回退。',
+    },
+  },
+  {
+    index: '02',
+    title: { en: 'Mode registry', zh: '模式注册表' },
+    copy: {
+      en: 'Each mode declares an ID, version, category, resources, and a validated state schema.',
+      zh: '每个模式声明 ID、版本、类别、所需资源和经过校验的状态结构。',
+    },
+  },
+  {
+    index: '03',
+    title: { en: 'Addressable state', zh: '可寻址状态' },
+    copy: {
+      en: 'Mode, point, indicator, year, and fixed solar time can be serialized into a versioned URL.',
+      zh: '模式、坐标、指标、年份与固定太阳时间可以序列化到带版本的 URL。',
+    },
+  },
+  {
+    index: '04',
+    title: { en: 'Data registry', zh: '数据注册表' },
+    copy: {
+      en: 'Machine-readable manifests retain source, license, version, transformations, hashes, and boundary policies.',
+      zh: '机器可读清单保留来源、许可、版本、转换过程、哈希与边界说明。',
+    },
+  },
+  {
+    index: '05',
+    title: { en: 'Validation', zh: '验证层' },
+    copy: {
+      en: 'Schemas, integrity checks, geometry thresholds, unit tests, and production builds keep extensions within explicit contracts.',
+      zh: '结构校验、完整性检查、几何阈值、单元测试与生产构建共同约束扩展。',
+    },
+  },
+];
+
+const algorithms = [
+  {
+    index: 'A',
+    title: { en: 'Antipodal transform', zh: '对跖点转换' },
+    copy: {
+      en: 'Negate latitude, add 180 degrees to longitude, then normalize it to the globe range. The output is the exact spherical endpoint, not a city label.',
+      zh: '纬度取反，经度加 180 度后归一化到地球经度范围。输出是精确的球面端点，而不是城市标签。',
+    },
+    notation: '(-lat, normalize(lon + 180°))',
+  },
+  {
+    index: 'B',
+    title: { en: 'Geographic lookup', zh: '地理查询' },
+    copy: {
+      en: 'Natural Earth point-in-polygon classifies the endpoint as represented land or ocean. Great-circle distance then finds the nearest eligible entry in a fixed 6,944-record GeoNames major-city index, with population and ID tie-breaks.',
+      zh: 'Natural Earth 点在多边形内判断将端点分类为数据所表达的陆地或海洋；随后以大圆距离在固定的 6,944 条 GeoNames 主要城市索引中查找最近条目，并以人口和 ID 处理并列。',
+    },
+    notation: 'd = 2R · atan2(√a, √(1-a))',
+  },
+  {
+    index: 'C',
+    title: { en: 'Development comparison', zh: '发展结构比较' },
+    copy: {
+      en: 'Reported HDI sits beside health, education, and income indices derived with HDR 2025 goalposts. Missing observations remain null. A contrast requires all four values, stays within 0.02 HDI, then maximizes summed component distance with an ISO-code tie-break.',
+      zh: '报告 HDI 与按 HDR 2025 目标值推导的健康、教育和收入指数并列；缺失观测保持为空。对比对象必须四项完整、HDI 差不超过 0.02，再按三个分项绝对差之和最大化，并以 ISO 代码处理并列。',
+    },
+    notation: 'Σ |componentᵢ - componentⱼ|',
+  },
+  {
+    index: 'D',
+    title: { en: 'Solar model', zh: '太阳模型' },
+    copy: {
+      en: 'A NOAA/Meeus-style approximation derives declination, equation of time, subsolar point, and local solar altitude from UTC. Sunrise and sunset use an apparent altitude of -0.833 degrees and explicitly return polar day or polar night.',
+      zh: 'NOAA/Meeus 风格近似从 UTC 推导太阳赤纬、时间方程、太阳直射点与局地太阳高度。日出日落采用 -0.833 度视高度，并明确返回极昼或极夜。',
+    },
+    notation: 'alt = asin(sin φ sin δ + cos φ cos δ cos H)',
+  },
+  {
+    index: 'E',
+    title: { en: 'Day-night field', zh: '昼夜高度场' },
+    copy: {
+      en: 'The globe evaluates solar altitude across its surface: non-negative values are day, 0 to -6 degrees fades through civil twilight, and lower values become night. The visible boundary is an educational rendering, not a surveyed line.',
+      zh: '地球表面按太阳高度着色：非负值为白昼，0 到 -6 度渐变为民用曙暮光，更低则进入夜晚。可见分界是教育性渲染，不是测绘边界。',
+    },
+    notation: 'day ≥ 0° · twilight 0…-6° · night < -6°',
+  },
+  {
+    index: 'F',
+    title: { en: 'Vector globe pipeline', zh: '矢量地球管线' },
+    copy: {
+      en: 'Natural Earth TopoJSON becomes spherical meshes through ring classification, local projection, triangulation, edge subdivision, and sliver rejection. Quantized positions and mesh compression are checked against download, GPU, edge, and area-loss budgets.',
+      zh: 'Natural Earth TopoJSON 经环分类、局部投影、三角剖分、球面边细分与碎片剔除生成球面网格。量化坐标和网格压缩结果需通过下载体积、GPU 占用、边长与面积损失预算。',
+    },
+    notation: 'TopoJSON → mesh → verify → compress',
+  },
+];
+
+const extensionSteps = [
+  { en: 'Register a versioned mode', zh: '注册带版本的模式' },
+  { en: 'Declare state and data', zh: '声明状态与数据' },
+  { en: 'Reuse globe interaction', zh: '复用地球交互' },
+  { en: 'Validate, link, and share', zh: '验证、生成链接并分享' },
+];
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
+---
+
+<section class="mundus-exhibit" aria-labelledby="mundus-platform-title">
+  <header class="exhibit-intro">
+    <p class="eyebrow"><Localized en="Platform anatomy" zh="平台结构" /></p>
+    <h2 id="mundus-platform-title"><Localized en="Three lenses, one observable world." zh="三种观察方式，共用一个地球系统。" /></h2>
+    <p><Localized en="Mundus treats each experience as an extension of a shared geographic foundation. The layers below are the public contracts that make another mode possible without rebuilding the globe." zh="Mundus 将每种体验视为共享地理基础上的扩展。以下公开契约让新模式无需重建地球即可加入平台。" /></p>
+  </header>
+
+  <div class="platform-grid">
+    <ol class="layer-list">
+      {layers.map((layer) => (
+        <li>
+          <span>{layer.index}</span>
+          <div><h3><Localized {...layer.title} /></h3><p><Localized {...layer.copy} /></p></div>
+        </li>
+      ))}
+    </ol>
+    <div class="orbit" aria-hidden="true">
+      <svg viewBox="0 0 520 520" role="presentation">
+        <circle class="orbit-path orbit-path-one" cx="260" cy="260" r="184" />
+        <circle class="orbit-path orbit-path-two" cx="260" cy="260" r="128" />
+        <circle class="core" cx="260" cy="260" r="68" />
+        <circle class="node node-one" cx="260" cy="76" r="14" />
+        <circle class="node node-two" cx="371" cy="324" r="14" />
+        <circle class="node node-three" cx="149" cy="324" r="14" />
+        <path class="axis" d="M260 192v136M192 260h136" />
+      </svg>
+      <div class="orbit-label">MUNDUS<br />SHARED CORE</div>
+    </div>
+  </div>
+
+  <div class="mode-gallery" aria-label="Mundus observation modes">
+    {modes.map((mode) => (
+      <figure>
+        <img src={asset(mode.image)} alt={mode.alt.en} data-alt-en={mode.alt.en} data-alt-zh={mode.alt.zh} loading="lazy" />
+        <figcaption>
+          <span>{mode.index}</span>
+          <strong><Localized {...mode.title} /></strong>
+          <small><Localized {...mode.detail} /></small>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <section class="algorithm-section" aria-labelledby="mundus-algorithm-title">
+    <header>
+      <p class="eyebrow"><Localized en="Algorithm atlas" zh="算法图谱" /></p>
+      <h2 id="mundus-algorithm-title"><Localized en="Inputs become claims only through explicit transformations and limits." zh="输入经过明确的转换与边界，才成为可解释的结果。" /></h2>
+    </header>
+    <div class="algorithm-grid">
+      {algorithms.map((algorithm) => (
+        <article>
+          <span class="algorithm-index">{algorithm.index}</span>
+          <h3><Localized {...algorithm.title} /></h3>
+          <p><Localized {...algorithm.copy} /></p>
+          <code>{algorithm.notation}</code>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="extension-section" aria-labelledby="mundus-extension-title">
+    <p class="eyebrow"><Localized en="Extension path" zh="扩展路径" /></p>
+    <h2 id="mundus-extension-title"><Localized en="A new lens joins through contracts, not a second globe." zh="新观察方式通过契约加入，而不是再造一个地球。" /></h2>
+    <ol>
+      {extensionSteps.map((step, index) => (
+        <li><span>{String(index + 1).padStart(2, '0')}</span><strong><Localized {...step} /></strong></li>
+      ))}
+    </ol>
+  </section>
+</section>
+
+<style>
+  .mundus-exhibit {
+    --exhibit-paper: #151917;
+    --exhibit-ink: #f1eee6;
+    --exhibit-muted: #a8b0aa;
+    --exhibit-line: #414843;
+    --exhibit-signal: #8ec8d7;
+    margin: 5rem calc(50% - 50vw);
+    padding: clamp(4rem, 8vw, 8rem) max(1.5rem, calc((100vw - 1180px) / 2));
+    color: var(--exhibit-ink);
+    background: var(--exhibit-paper);
+  }
+  .eyebrow { margin: 0; color: var(--exhibit-muted); font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+  .exhibit-intro { max-width: 780px; }
+  .exhibit-intro h2, .algorithm-section > header h2, .extension-section h2 { margin: 1rem 0 1.5rem; color: var(--exhibit-ink); font-size: clamp(2.4rem, 5vw, 4.9rem); font-weight: 400; line-height: .96; letter-spacing: -.045em; }
+  .exhibit-intro > p:last-child { max-width: 660px; margin: 0; color: var(--exhibit-muted); font-size: 1.05rem; line-height: 1.65; }
+  .platform-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr); gap: clamp(3rem, 8vw, 8rem); align-items: center; margin-top: clamp(4rem, 8vw, 7rem); }
+  .layer-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--exhibit-line); }
+  .layer-list li { display: grid; grid-template-columns: 2.3rem 1fr; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--exhibit-line); }
+  .layer-list li > span, .algorithm-index { color: var(--exhibit-signal); font-family: var(--font-body); font-size: .72rem; letter-spacing: .1em; }
+  .layer-list h3 { margin: 0 0 .35rem; color: var(--exhibit-ink); font-size: 1.2rem; font-weight: 500; }
+  .layer-list p { margin: 0; color: var(--exhibit-muted); font-size: .92rem; line-height: 1.55; }
+  .orbit { position: relative; width: min(100%, 460px); justify-self: center; aspect-ratio: 1; }
+  .orbit svg { width: 100%; overflow: visible; animation: orbit-breathe 8s ease-in-out infinite; }
+  .orbit-path, .core, .axis { fill: none; stroke: var(--exhibit-line); stroke-width: 1.4; }
+  .orbit-path-two { stroke-dasharray: 3 9; }
+  .core { fill: color-mix(in srgb, var(--exhibit-signal) 8%, transparent); stroke: var(--exhibit-signal); }
+  .node { fill: var(--exhibit-paper); stroke: var(--exhibit-signal); stroke-width: 2; }
+  .axis { opacity: .55; }
+  .orbit-label { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); color: var(--exhibit-ink); font-size: .68rem; font-weight: 650; line-height: 1.5; letter-spacing: .13em; text-align: center; }
+  .mode-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: clamp(5rem, 10vw, 9rem); }
+  .mode-gallery figure { min-width: 0; margin: 0; }
+  .mode-gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--exhibit-line); border-radius: 3px; background: #090b0a; }
+  .mode-gallery figcaption { display: grid; grid-template-columns: 2rem 1fr; gap: .25rem .75rem; padding: 1rem 0; border-bottom: 1px solid var(--exhibit-line); }
+  .mode-gallery figcaption > span { grid-row: 1 / 3; color: var(--exhibit-signal); font-size: .7rem; letter-spacing: .1em; }
+  .mode-gallery strong { color: var(--exhibit-ink); font-size: .95rem; }
+  .mode-gallery small { color: var(--exhibit-muted); font-size: .76rem; }
+  .algorithm-section { margin-top: clamp(6rem, 12vw, 11rem); }
+  .algorithm-section > header { max-width: 900px; }
+  .algorithm-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 4rem; border-top: 1px solid var(--exhibit-line); border-left: 1px solid var(--exhibit-line); }
+  .algorithm-grid article { min-width: 0; padding: clamp(1.4rem, 3vw, 2.2rem); border-right: 1px solid var(--exhibit-line); border-bottom: 1px solid var(--exhibit-line); }
+  .algorithm-grid h3 { min-height: 2.5em; margin: 1.2rem 0 .8rem; color: var(--exhibit-ink); font-size: 1.25rem; font-weight: 500; line-height: 1.15; }
+  .algorithm-grid p { min-height: 11.5em; margin: 0 0 1.5rem; color: var(--exhibit-muted); font-size: .88rem; line-height: 1.58; }
+  .algorithm-grid code { display: block; overflow-wrap: anywhere; color: var(--exhibit-signal); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; line-height: 1.5; }
+  .extension-section { margin-top: clamp(6rem, 12vw, 11rem); }
+  .extension-section > h2 { max-width: 840px; }
+  .extension-section ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 3.5rem 0 0; padding: 0; list-style: none; border-top: 1px solid var(--exhibit-line); }
+  .extension-section li { position: relative; min-height: 9rem; padding: 1.2rem 1rem 1.2rem 0; border-bottom: 1px solid var(--exhibit-line); }
+  .extension-section li:not(:last-child)::after { content: '→'; position: absolute; top: 1.05rem; right: 1rem; color: var(--exhibit-muted); }
+  .extension-section li span { display: block; margin-bottom: 2.5rem; color: var(--exhibit-signal); font-size: .7rem; letter-spacing: .1em; }
+  .extension-section li strong { display: block; max-width: 11rem; color: var(--exhibit-ink); font-size: .95rem; line-height: 1.35; }
+  @keyframes orbit-breathe { 50% { transform: rotate(2deg) scale(.985); } }
+  @media (max-width: 900px) {
+    .algorithm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .algorithm-grid p { min-height: 0; }
+  }
+  @media (max-width: 760px) {
+    .mundus-exhibit { margin-top: 4rem; margin-bottom: 4rem; }
+    .platform-grid, .mode-gallery, .algorithm-grid, .extension-section ol { grid-template-columns: 1fr; }
+    .orbit { width: min(82vw, 380px); }
+    .mode-gallery { gap: 2.5rem; }
+    .algorithm-grid { border-left: 0; }
+    .algorithm-grid article { padding-right: 0; padding-left: 0; border-right: 0; }
+    .algorithm-grid h3 { min-height: 0; }
+    .extension-section li { min-height: 0; padding: 1.2rem 0; }
+    .extension-section li span { margin-bottom: .75rem; }
+    .extension-section li:not(:last-child)::after { content: '↓'; right: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .orbit svg { animation: none; }
+  }
+</style>
