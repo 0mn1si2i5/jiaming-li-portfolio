@@ -5,7 +5,13 @@ import ProjectMedia from '../components/ProjectMedia.astro';
 import Localized from '../components/Localized.astro';
 import { site } from '../config/site';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const projects = await getCollection('projects');
+const featuredProjects = projects
+  .filter((project) => project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+const otherProjects = projects
+  .filter((project) => !project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
@@ -22,11 +28,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   <section id="work" class="work-section page-width" aria-labelledby="work-title">
     <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Things I have been following closely." zh="持续推进的项目。" /></h2></div>
     <div class="project-list">
-      {projects.map((project) => (
+      {featuredProjects.map((project) => (
         <article class:list={['project-card', `accent-${project.data.accent}`]}>
           <a class="media-link" href={`${base}projects/${project.id}`} aria-label={`Read about ${project.data.title.en}`}><ProjectMedia project={project} compact /></a>
           <div class="project-copy">
-            <div class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.status} /></span></div>
+            <div class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.kind} /></span></div>
             <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
             <p><Localized {...project.data.summary} /></p>
             <a class="project-link" href={`${base}projects/${project.id}`}><Localized en="Read the exploration" zh="查看项目详情" /> <span aria-hidden="true">→</span></a>
@@ -38,7 +44,20 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
   <section class="other-section page-width" aria-labelledby="other-title">
     <p class="eyebrow"><Localized en="Other work" zh="其他作品" /></p>
-    <div class="other-grid"><h2 id="other-title"><Localized en="Small things with a longer life." zh="同样值得记录的项目。" /></h2><article class="other-card"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="为《群星》提供更符合中文语境的舰船、星球与人物默认名称，改善中文玩家的沉浸体验。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></article></div>
+    <div class="other-grid">
+      <h2 id="other-title"><Localized en="Small things with a longer life." zh="同样值得记录的项目。" /></h2>
+      <div class="other-list">
+        {otherProjects.map((project) => (
+          <article class="other-card">
+            <p class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.kind} /></span></p>
+            <h3><Localized {...project.data.title} /></h3>
+            <p><Localized {...project.data.summary} /></p>
+            <a href={`${base}projects/${project.id}`}><Localized en="Read the exploration" zh="查看项目详情" /> <span aria-hidden="true">→</span></a>
+          </article>
+        ))}
+        <article class="other-card"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="为《群星》提供更符合中文语境的舰船、星球与人物默认名称，改善中文玩家的沉浸体验。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></article>
+      </div>
+    </div>
   </section>
 
   <section id="about" class="about-section page-width" aria-labelledby="about-title">
@@ -62,7 +81,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .work-section { padding: 7rem 0; border-top: 1px solid var(--line); }.section-heading { display: flex; justify-content: space-between; margin-bottom: 4rem; }.section-heading h2, .about-section h2, .other-section h2 { margin-bottom: 0; font-size: clamp(2.4rem, 5vw, 4.6rem); }
   .project-list { display: grid; gap: 5rem; }.project-card { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(250px, .8fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }.project-card:nth-child(even) .media-link { order: 2; }.media-link { display: block; }.project-copy .meta, .other-card .meta { display: flex; justify-content: space-between; gap: 1rem; }.project-copy h3 { margin: 1.4rem 0 1rem; font-size: clamp(2.25rem, 4vw, 4.25rem); }.project-copy h3 a { text-decoration: none; }.project-copy p { max-width: 340px; color: var(--muted); }.project-link { display: inline-block; margin-top: .5rem; }.accent-violet .project-link { color: var(--violet); }.accent-coral .project-link { color: var(--coral); }.accent-blue .project-link { color: var(--blue); }
   .about-section { padding: 8rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; border-top: 1px solid var(--line); }.about-copy { max-width: 530px; }.about-copy p { font-size: 1.25rem; line-height: 1.45; }.about-copy p + p { color: var(--muted); }.about-copy .quiet-link { display: inline-block; margin-top: 1.5rem; }
-  .other-section { padding: 7rem 0; border-top: 1px solid var(--line); }.other-section > .eyebrow { margin-bottom: 1.5rem; }.other-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }.other-card { max-width: 440px; padding: 1.8rem; background: var(--surface); border-radius: 14px; }.other-card h3 { margin: 2rem 0 .9rem; font-size: 2rem; }.other-card p { color: var(--muted); }.other-card .outcome { margin: 1.7rem 0 .6rem; color: var(--ink); font-weight: 650; }.other-card a { color: var(--blue); }
+  .other-section { padding: 7rem 0; border-top: 1px solid var(--line); }.other-section > .eyebrow { margin-bottom: 1.5rem; }.other-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }.other-list { display: grid; gap: 1.5rem; }.other-card { max-width: 440px; padding: 1.8rem; background: var(--surface); border-radius: 14px; }.other-card h3 { margin: 2rem 0 .9rem; font-size: 2rem; }.other-card p { color: var(--muted); }.other-card .outcome { margin: 1.7rem 0 .6rem; color: var(--ink); font-weight: 650; }.other-card a { color: var(--blue); }
   :global(:root[data-locale='zh']) .hero h1 { max-width: 15ch; font-size: clamp(2.8rem, 5.8vw, 5.2rem); line-height: 1.16; letter-spacing: -.045em; }
   :global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .about-section h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2.1rem, 4.2vw, 3.75rem); line-height: 1.2; letter-spacing: -.04em; }
   :global(:root[data-locale='zh']) .project-copy h3 { font-size: clamp(2rem, 3.4vw, 3.5rem); line-height: 1.18; letter-spacing: -.04em; }

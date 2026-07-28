@@ -13,6 +13,8 @@ const projects = defineCollection({
     year: localized,
     status: localized,
     order: z.number(),
+    featured: z.boolean(),
+    kind: localized,
     summary: localized,
     role: localized,
     accent: z.enum(['violet', 'coral', 'blue']),
