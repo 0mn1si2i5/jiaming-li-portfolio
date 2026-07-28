@@ -69,8 +69,9 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .project-body { display: grid; grid-template-columns: minmax(120px, .4fr) minmax(0, 1fr); gap: clamp(2.5rem, 7vw, 7rem); padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }
   .body-label { color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
   .prose { max-width: var(--reading-width); counter-reset: section; }
-  .prose :global(section[data-locale-content] > h2) { counter-increment: section; margin: 0 0 1rem; font-family: var(--font-editorial); font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; }
-  .prose :global(section[data-locale-content] > h2)::before { content: counter(section, decimal-leading-zero); display: block; margin-bottom: .75rem; color: var(--muted); font-family: var(--font-body); font-size: .72rem; font-weight: 650; letter-spacing: .12em; line-height: 1; }
+  .prose :global(h2) { counter-increment: section; }
+  .prose :global(h2)::before { content: counter(section, decimal-leading-zero); display: block; margin-bottom: .75rem; color: var(--muted); font-family: var(--font-body); font-size: .72rem; font-weight: 650; letter-spacing: .12em; line-height: 1; }
+  .prose :global(section[data-locale-content] > h2) { margin: 0 0 1rem; font-family: var(--font-editorial); font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; }
   .prose :global(p) { margin: 0 0 3.3rem; font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.55; }
   .prose :global(figure) { margin: -.8rem 0 3.3rem; }
   .prose :global(figure img) { display: block; width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
