@@ -672,8 +672,13 @@ git commit -m "style(portfolio): apply digital exhibition system"
 **Files:**
 
 - Modify: `README.md`
+- Modify: `docs/superpowers/plans/2026-07-29-mundus-omnipet-portfolio.md`
+- Create: `docs/verification/task7-release-verification.md`
+- Create: `docs/verification/assets/task7-home-en-light-1440x900.webp`
+- Create: `docs/verification/assets/task7-mundus-zh-dark-reduced-390x844.webp`
+- Create: `docs/verification/assets/task7-omnipet-zh-dark-reduced-1440x900.webp`
 
-- [ ] **Step 1: Update contributor guidance**
+- [x] **Step 1: Update contributor guidance**
 
 Document:
 
@@ -683,7 +688,7 @@ Document:
 - the rule that all visitor-facing project media must be public and approved;
 - the rule that private production evidence may inform writing but must never be copied into the portfolio.
 
-- [ ] **Step 2: Run repository checks**
+- [x] **Step 2: Run repository checks**
 
 Run:
 
@@ -694,7 +699,7 @@ git diff --check
 
 Expected: both commands succeed.
 
-- [ ] **Step 3: Verify generated content and privacy boundaries**
+- [x] **Step 3: Verify generated content and privacy boundaries**
 
 Run:
 
@@ -710,7 +715,7 @@ Expected:
 - privacy grep prints nothing;
 - remote-font grep prints nothing.
 
-- [ ] **Step 4: Run browser acceptance**
+- [x] **Step 4: Run browser acceptance**
 
 Use browser automation against the local preview:
 
@@ -725,7 +730,7 @@ Use browser automation against the local preview:
 
 Expected: no console errors, broken requests, inaccessible controls, clipped text, or horizontal overflow.
 
-- [ ] **Step 5: Review technical claims**
+- [x] **Step 5: Review technical claims**
 
 Cross-check the final Mundus prose against:
 
@@ -749,7 +754,7 @@ Cross-check OmniPet prose only against public sources:
 
 Remove any claim that is planned, unverifiable, or stronger than these public sources support.
 
-- [ ] **Step 6: Commit documentation and final verification state**
+- [x] **Step 6: Commit documentation and final verification state**
 
 ```bash
 git add README.md
@@ -758,3 +763,9 @@ git status --short
 ```
 
 Expected: clean working tree.
+
+Verification evidence is retained in
+`docs/verification/task7-release-verification.md`, with three optimized key
+screenshots under `docs/verification/assets/`. The publishing-rule change was
+committed as `21c919b`; the repository evidence and checklist completion are a
+separate documentation follow-up.
