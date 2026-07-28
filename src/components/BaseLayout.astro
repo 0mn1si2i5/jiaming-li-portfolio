@@ -95,6 +95,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
 <style is:global>
   :root {
+    color-scheme: light;
     --paper: #f7f6f2;
     --surface: #eeece6;
     --ink: #1b1b1a;
@@ -113,7 +114,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     --display-tracking: -.045em;
     --rule-strong: color-mix(in srgb, var(--ink) 22%, var(--line));
   }
-  :root[data-theme='dark'] { --paper: #171716; --surface: #242320; --ink: #f2f1ed; --muted: #aaa79e; --line: #3a3935; --violet: #af9aff; --coral: #ff9a87; --blue: #8dbdff; }
+  :root[data-theme='dark'] { color-scheme: dark; --paper: #171716; --surface: #242320; --ink: #f2f1ed; --muted: #aaa79e; --line: #3a3935; --violet: #af9aff; --coral: #ff9a87; --blue: #8dbdff; }
   [data-locale='en'] [data-locale-content='zh'], [data-locale='zh'] [data-locale-content='en'] { display: none !important; }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; background: var(--paper); }
@@ -131,6 +132,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
   a:hover { text-decoration-thickness: 2px; }
   :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 2px; }
+  .page-width { width: min(var(--page-width), calc(100% - 3rem)); margin-right: auto; margin-left: auto; }
   .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 5; padding: .5rem .75rem; background: var(--ink); color: var(--paper); }
   .skip-link:focus { top: 1rem; }
   .site-header, .site-footer { width: min(var(--page-width), calc(100% - 3rem)); margin: 0 auto; display: flex; align-items: center; }
@@ -146,6 +148,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .back-to-top { position: fixed; right: max(1rem, calc((100vw - var(--page-width)) / 2)); bottom: 1rem; z-index: 20; padding: .55rem .75rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 88%, transparent); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 4px 18px rgb(0 0 0 / .08); font-size: .7rem; font-weight: 650; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; backdrop-filter: blur(8px); }
   .back-to-top:hover { color: var(--paper); background: var(--ink); border-color: var(--ink); }
   @media (max-width: 560px) {
+    .page-width { width: min(100% - 2rem, var(--page-width)); }
     .site-header, .site-footer { width: min(100% - 2rem, var(--page-width)); }
     .site-header { display: grid; grid-template-columns: 1fr auto auto; min-height: 0; padding: .9rem 0 0; }
     .monogram { align-self: center; }

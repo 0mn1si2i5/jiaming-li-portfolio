@@ -41,7 +41,6 @@ import Localized from '../components/Localized.astro';
 </BaseLayout>
 
 <style>
-  .page-width { width: min(var(--page-width), calc(100% - 3rem)); margin: 0 auto; }
   .notes { padding: var(--space-section) 0; }
   .eyebrow, .meta { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
   .note { max-width: 920px; }
@@ -53,5 +52,5 @@ import Localized from '../components/Localized.astro';
   .prose :global(h2) { margin: clamp(3.5rem, 7vw, 5.5rem) 0 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--font-editorial); font-size: clamp(2rem, 3.3vw, 3.2rem); font-weight: 500; line-height: 1; letter-spacing: -.04em; }
   :global(:root[data-locale='zh']) h1 { max-width: 14ch; font-size: clamp(2.8rem, 5.8vw, 5.1rem); line-height: 1.17; letter-spacing: -.045em; }
   :global(:root[data-locale='zh']) .prose :global(h2) { font-size: clamp(1.9rem, 3.2vw, 3rem); line-height: 1.22; letter-spacing: -.04em; }
-  @media (max-width: 560px) { .page-width { width: min(100% - 2rem, var(--page-width)); } .lead { margin-bottom: 3.5rem; } h1 { font-size: clamp(3.15rem, 14vw, 4.8rem); } :global(:root[data-locale='zh']) h1 { max-width: none; font-size: clamp(2.45rem, 10vw, 3.65rem); } .prose :global(h2) { margin-top: 3rem; } }
+  @media (max-width: 560px) { .lead { margin-bottom: 3.5rem; } h1 { font-size: clamp(3.15rem, 14vw, 4.8rem); } :global(:root[data-locale='zh']) h1 { max-width: none; font-size: clamp(2.45rem, 10vw, 3.65rem); } .prose :global(h2) { margin-top: 3rem; } }
 </style>
