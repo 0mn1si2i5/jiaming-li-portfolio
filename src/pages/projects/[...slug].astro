@@ -11,6 +11,11 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const projects = (await getCollection('projects'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+const projectIndex = projects.findIndex((entry) => entry.id === project.id);
+const displayIndex = projectIndex >= 0 ? String(projectIndex + 1).padStart(2, '0') : 'Archive';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
@@ -18,7 +23,11 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 <BaseLayout title={project.data.title.en} description={project.data.summary.en}>
   <article class:list={['project-page', `accent-${project.data.accent}`]}>
     <header class="project-hero page-width">
-      <p class="eyebrow"><a href={`${base}#work`}><Localized en="Selected work" zh="精选项目" /></a> <span aria-hidden="true">/</span> <Localized {...project.data.year} /></p>
+      <p class="eyebrow"><a href={`${base}#work`}><Localized en={project.data.featured ? 'Selected work' : 'Other work'} zh={project.data.featured ? '精选项目' : '其他作品'} /></a> <span aria-hidden="true">/</span> <Localized {...project.data.year} /></p>
+      <div class="hero-classification">
+        <span class="project-index">{displayIndex}</span>
+        <span><Localized {...project.data.kind} /></span>
+      </div>
       <div class="hero-grid"><div><h1><Localized {...project.data.title} /></h1><p class="summary"><Localized {...project.data.summary} /></p></div><dl><div><dt><Localized en="Status" zh="项目状态" /></dt><dd><Localized {...project.data.status} /></dd></div><div><dt><Localized en="My focus" zh="负责内容" /></dt><dd><Localized {...project.data.role} /></dd></div></dl></div>
     </header>
     <section class="media-section page-width"><ProjectMedia project={project} /></section>
@@ -39,31 +48,35 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 </BaseLayout>
 
 <style>
-  .page-width { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+  .page-width { width: min(var(--page-width), calc(100% - 3rem)); margin: 0 auto; }
   .eyebrow { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
   .eyebrow a { color: inherit; text-decoration: none; }
-  .project-hero { padding: clamp(4rem, 9vw, 8rem) 0 4rem; }
+  .project-hero { padding: clamp(4rem, 9vw, 8rem) 0 clamp(3rem, 6vw, 5rem); }
+  .hero-classification { display: flex; align-items: center; gap: 1rem; margin-top: clamp(3rem, 6vw, 5rem); color: var(--muted); font-size: .72rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+  .hero-classification::after { content: ''; width: min(12vw, 8rem); height: 1px; margin-left: .35rem; background: var(--rule-strong); }
+  .project-index { color: var(--ink); font-size: 1rem; letter-spacing: .14em; }
   .hero-grid { display: grid; grid-template-columns: 1.45fr .55fr; gap: 4rem; align-items: end; }
-  .project-hero h1, h2 { margin: 2.2rem 0 1.25rem; font-size: clamp(3.8rem, 8vw, 8rem); line-height: .9; letter-spacing: -.07em; }
+  .project-hero h1, h2 { margin: 1.25rem 0; font-size: clamp(3.8rem, 8vw, 8rem); line-height: .9; letter-spacing: -.06em; }
   .summary { max-width: 720px; margin-bottom: 0; font-size: clamp(1.3rem, 2.4vw, 2rem); line-height: 1.25; letter-spacing: -.035em; }
   .project-hero dl { margin: 0; }
   .project-hero dl div { padding: 1.1rem 0; border-top: 1px solid var(--line); }
   .project-hero dt { margin-bottom: .4rem; color: var(--muted); font-size: .75rem; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
   .project-hero dd { margin: 0; font-size: .98rem; }
-  .media-section { padding-bottom: 7rem; }
-  .walkthrough-section { padding: 6rem 0; border-top: 1px solid var(--line); }
+  .media-section { padding-bottom: var(--space-section); }
+  .walkthrough-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }
   .walkthrough-section h2 { margin: 1.1rem 0 3rem; font-size: clamp(2.4rem, 5vw, 4.6rem); }
   .walkthrough-section video { display: block; width: 100%; border: 1px solid var(--line); border-radius: 18px; background: #111; }
-  .project-body { display: grid; grid-template-columns: .45fr 1fr; gap: 4rem; padding: 6rem 0; border-top: 1px solid var(--line); }
+  .project-body { display: grid; grid-template-columns: minmax(120px, .4fr) minmax(0, 1fr); gap: clamp(2.5rem, 7vw, 7rem); padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }
   .body-label { color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
-  .prose { max-width: 700px; }
-  .prose :global(h2) { margin: 0 0 1rem; font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; }
+  .prose { max-width: var(--reading-width); counter-reset: section; }
+  .prose :global(section[data-locale-content] > h2) { counter-increment: section; margin: 0 0 1rem; font-family: var(--font-editorial); font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; }
+  .prose :global(section[data-locale-content] > h2)::before { content: counter(section, decimal-leading-zero); display: block; margin-bottom: .75rem; color: var(--muted); font-family: var(--font-body); font-size: .72rem; font-weight: 650; letter-spacing: .12em; line-height: 1; }
   .prose :global(p) { margin: 0 0 3.3rem; font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.55; }
   .prose :global(figure) { margin: -.8rem 0 3.3rem; }
   .prose :global(figure img) { display: block; width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
   .prose :global(figcaption) { margin-top: .8rem; color: var(--muted); font-size: .92rem; line-height: 1.45; }
   .prose :global(a) { color: var(--accent); }
-  .explore-section { padding: 6rem 0 8rem; border-top: 1px solid var(--line); }
+  .explore-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }
   .explore-section h2 { margin-top: 1.1rem; font-size: clamp(2.4rem, 5vw, 4.6rem); }
   .links { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 3rem; }
   .links a { padding: .8rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-weight: 650; text-decoration: none; }
@@ -73,14 +86,14 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .accent-blue { --accent: var(--blue); }
   :global(:root[data-locale='zh']) .project-hero h1 { font-size: clamp(3rem, 6.5vw, 6rem); line-height: 1.15; letter-spacing: -.045em; }
   :global(:root[data-locale='zh']) .walkthrough-section h2, :global(:root[data-locale='zh']) .explore-section h2 { font-size: clamp(2.1rem, 4.2vw, 3.75rem); line-height: 1.2; letter-spacing: -.04em; }
-  :global(:root[data-locale='zh']) .prose :global(h2) { font-size: clamp(1.9rem, 3.2vw, 3rem); line-height: 1.2; letter-spacing: -.04em; }
+  :global(:root[data-locale='zh']) .prose :global(section[data-locale-content] > h2) { font-family: var(--font-display-zh); font-size: clamp(1.9rem, 3.2vw, 3rem); line-height: 1.2; letter-spacing: -.04em; }
   @media (max-width: 760px) {
     .hero-grid, .project-body { grid-template-columns: 1fr; gap: 2.5rem; }
     .media-section { padding-bottom: 5rem; }
     .walkthrough-section, .project-body, .explore-section { padding: 4rem 0; }
   }
   @media (max-width: 560px) {
-    .page-width { width: min(100% - 2rem, 1180px); }
+    .page-width { width: min(100% - 2rem, var(--page-width)); }
     .project-hero h1 { font-size: clamp(3.6rem, 17vw, 5.4rem); }
     :global(:root[data-locale='zh']) .project-hero h1 { font-size: clamp(2.8rem, 12vw, 4rem); }
     :global(:root[data-locale='zh']) .walkthrough-section h2, :global(:root[data-locale='zh']) .explore-section h2 { font-size: clamp(2rem, 8.5vw, 2.9rem); }

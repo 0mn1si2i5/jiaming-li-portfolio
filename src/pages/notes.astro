@@ -41,17 +41,17 @@ import Localized from '../components/Localized.astro';
 </BaseLayout>
 
 <style>
-  .page-width { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
-  .notes { padding: clamp(5rem, 12vw, 10rem) 0; }
+  .page-width { width: min(var(--page-width), calc(100% - 3rem)); margin: 0 auto; }
+  .notes { padding: var(--space-section) 0; }
   .eyebrow, .meta { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
-  .note { max-width: 840px; }
-  .meta { margin-top: 2.5rem; }
-  h1 { max-width: 780px; margin: 1.5rem 0 2rem; font-size: clamp(3.8rem, 7vw, 7rem); line-height: .94; letter-spacing: -.065em; }
-  .lead { max-width: 620px; margin-bottom: 5rem; font-size: clamp(1.2rem, 2.3vw, 1.85rem); line-height: 1.32; letter-spacing: -.03em; }
-  .prose { max-width: 680px; }
+  .note { max-width: 920px; }
+  .meta { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--rule-strong); }
+  h1 { max-width: 840px; margin: 1.5rem 0 2rem; font-size: clamp(3.8rem, 7vw, 7rem); line-height: .94; letter-spacing: -.055em; }
+  .lead { max-width: var(--reading-width); margin-bottom: var(--space-section); color: var(--muted); font-family: var(--font-editorial); font-size: clamp(1.2rem, 2.3vw, 1.85rem); line-height: 1.32; letter-spacing: -.025em; }
+  .prose { max-width: var(--reading-width); }
   .prose :global(p) { margin: 0 0 2rem; font-size: clamp(1.08rem, 1.6vw, 1.28rem); line-height: 1.65; }
-  .prose :global(h2) { margin: 4rem 0 1rem; font-size: clamp(2rem, 3.3vw, 3.2rem); line-height: 1; letter-spacing: -.05em; }
+  .prose :global(h2) { margin: clamp(3.5rem, 7vw, 5.5rem) 0 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--font-editorial); font-size: clamp(2rem, 3.3vw, 3.2rem); font-weight: 500; line-height: 1; letter-spacing: -.04em; }
   :global(:root[data-locale='zh']) h1 { max-width: 14ch; font-size: clamp(2.8rem, 5.8vw, 5.1rem); line-height: 1.17; letter-spacing: -.045em; }
   :global(:root[data-locale='zh']) .prose :global(h2) { font-size: clamp(1.9rem, 3.2vw, 3rem); line-height: 1.22; letter-spacing: -.04em; }
-  @media (max-width: 560px) { .page-width { width: min(100% - 2rem, 1180px); } .lead { margin-bottom: 3.5rem; } h1 { font-size: clamp(3.15rem, 14vw, 4.8rem); } :global(:root[data-locale='zh']) h1 { max-width: none; font-size: clamp(2.45rem, 10vw, 3.65rem); } .prose :global(h2) { margin-top: 3rem; } }
+  @media (max-width: 560px) { .page-width { width: min(100% - 2rem, var(--page-width)); } .lead { margin-bottom: 3.5rem; } h1 { font-size: clamp(3.15rem, 14vw, 4.8rem); } :global(:root[data-locale='zh']) h1 { max-width: none; font-size: clamp(2.45rem, 10vw, 3.65rem); } .prose :global(h2) { margin-top: 3rem; } }
 </style>
