@@ -93,14 +93,15 @@ Retain the current paper-and-ink palette and light/dark theme, but strengthen:
 - more deliberate spacing and bilingual line breaking;
 - responsive hierarchy instead of simply stacking desktop blocks.
 
-Continue using the bundled fonts:
+Use a two-level serif display system:
 
-- Newsreader for English display text;
-- Instrument Sans for English interface and body text;
-- Noto Serif SC for Chinese display text;
-- Noto Sans SC for Chinese interface and body text.
+- Cormorant Garamond for English project names, project heroes, homepage project titles, and the largest exhibition statements;
+- Newsreader for longer English section headings, editorial subheads, and quotations where steadier reading matters;
+- Instrument Sans for English interface, metadata, labels, and body text;
+- Noto Serif SC for Chinese project names, heroes, display text, and section headings;
+- Noto Sans SC for Chinese interface, metadata, labels, and body text.
 
-No remote font dependency is introduced. Improvements come from weight, size, tracking, line height, measure, optical spacing, and language-specific rules.
+Cormorant Garamond is bundled locally with the site rather than loaded from a remote font service. The homepage project names must no longer inherit the sans-serif heading stack. Font roles are explicit design tokens so the hierarchy remains consistent across pages. Weight, optical size, tracking, line height, measure, and language-specific wrapping are tuned independently.
 
 The homepage stays relatively bright and restrained so all projects remain coherent. Project detail pages may use darker exhibition bands. Notes receives the same typography and spacing system but no project-specific decoration.
 
