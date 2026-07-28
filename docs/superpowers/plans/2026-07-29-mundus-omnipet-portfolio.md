@@ -686,6 +686,7 @@ git commit -m "style(portfolio): apply digital exhibition system"
 - Create: `docs/verification/evidence/source-revisions.json`
 - Create: `docs/verification/evidence/task7-fact-assertions.json`
 - Create: `scripts/verify-task7-facts.py`
+- Create: `tests/test_verify_task7_facts.py`
 
 - [x] **Step 1: Update contributor guidance**
 
@@ -799,3 +800,28 @@ python3 -m json.tool docs/verification/evidence/source-revisions.json >/dev/null
 Expected: 31 assertions pass, the private-boundary hit count is zero, all JSON
 is valid and contains no resolved local filesystem path, and all five retained
 screenshots are referenced by the verification report.
+
+- [x] **Step 8: Fail closed on source drift and unbound claims**
+
+Pin Mundus, OmniPet, and OmniPets to the reviewed SHA on clean `main`. Require
+all 31 assertions to bind one visitor-facing portfolio claim to one public
+source evidence check. The evidence set must include Mundus
+`src/data/registry.ts` and the public README files from Mundus, OmniPet, and
+OmniPets.
+
+```bash
+python3 -m unittest tests/test_verify_task7_facts.py -v
+python3 scripts/verify-task7-facts.py
+```
+
+Expected:
+
+- all eight unit tests pass;
+- wrong SHA, non-`main`, dirty source, missing portfolio claim, and missing
+  public evidence are rejected;
+- temporary wrong-SHA and missing-claim script variants return nonzero without
+  replacing prior evidence;
+- the real run reports 31/31 paired assertions and zero private-boundary hits;
+- `source-revisions.json` records matching expected and actual revisions with
+  `gatePassed: true`;
+- no JSON contains local absolute paths or private material.

@@ -280,13 +280,16 @@ All `open` commands exited `0`. The DOI redirected to the expected ACM URL.
 
 ## Technical Claim Review
 
-The check deliberately used only the public files named in the implementation
-plan.
+The check deliberately uses only the portfolio prose and reviewed public files
+named in the implementation plan. Every assertion is bidirectional: the
+visitor-facing claim must exist in `mundus.mdx` or `omnipet.mdx`, and its
+corresponding evidence must exist in the pinned public source revision.
 
 ### Mundus
 
 | Public evidence | Claims checked |
 | --- | --- |
+| `README.md` | Three-mode public scope; 110m/50m vector quality and raster fallback |
 | `src/features/modes/modeRegistry.ts` | Three registered modes; spatial, human, and temporal categories; versioned Zod state; data resources |
 | `src/features/sunline/solar.ts` | 2000-2099 range; minute precision; `-0.833` degree sunrise altitude; daylight, civil twilight, polar day, and polar night |
 | `src/data/registry.ts` | Manifest validation for source, license, SHA-256, transformations, missing-value and boundary policies, geometry metrics |
@@ -311,11 +314,15 @@ python3 scripts/verify-task7-facts.py
 ```
 
 It writes a deterministic [31-item assertion list](evidence/task7-fact-assertions.json)
-and [source revision record](evidence/source-revisions.json). The latest run
-returned `31/31` passed and zero private-boundary hits. No claim needed removal
-or weakening.
+and [source revision record](evidence/source-revisions.json). Each assertion
+records a relative portfolio source, a separate claim result, a public
+repository and relative evidence source, a separate evidence result, and the
+combined result. The latest run returned `31/31` claim/evidence pairs passed
+and zero private-boundary hits. No claim needed removal or weakening.
 
-The public source revisions used by that run were:
+The script hard-codes the following expected public source revisions. Before
+reading evidence it requires exact SHA equality, branch `main`, and a clean
+working tree for all three repositories:
 
 | Repository | Revision | Branch | Dirty |
 | --- | --- | --- | --- |
@@ -323,9 +330,33 @@ The public source revisions used by that run were:
 | OmniPet | `f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d` | `main` | No |
 | OmniPets | `081b7c6f651183987c79c4321ff46e1b082e03b7` | `main` | No |
 
-The generated JSON stores repository labels, relative source paths, assertion
-results, Git revisions, branches, and dirty flags. It does not serialize any
-resolved local repository path or matched private term.
+The generated revision JSON stores both expected and actual state, per-field
+failure names, and an aggregate `gatePassed`. A failed revision gate exits
+nonzero before assertions or output replacement. Assertion or privacy failure
+also exits nonzero before output replacement. Successful files are installed
+with an atomic temporary-file replacement.
+
+Negative tests cover wrong SHA, non-`main` branch, dirty source, missing
+portfolio claim, and missing public evidence:
+
+```bash
+python3 -m unittest tests/test_verify_task7_facts.py -v
+```
+
+Eight unit tests pass. Two additional `/tmp` script variants replace the
+expected Mundus SHA and one portfolio needle respectively. Both return `1`,
+and pre-existing sentinel evidence remains unchanged:
+
+```text
+wrong_sha_exit=1
+missing_claim_exit=1
+negative temporary variants: PASS; prior evidence preserved
+```
+
+The generated JSON stores repository labels, relative source paths, paired
+assertion results, expected and actual Git revisions, branches, and clean
+flags. It does not serialize a resolved local repository path, a private term,
+or temporary-test state.
 
 ## Screenshot Evidence
 

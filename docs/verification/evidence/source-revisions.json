@@ -1,23 +1,39 @@
 {
+  "gatePassed": true,
   "repositories": [
     {
       "branch": "main",
       "dirty": false,
+      "expectedBranch": "main",
+      "expectedClean": true,
+      "expectedSha": "b7b2d0f9e453efd8be83216a43e642f0ee7350ed",
+      "failures": [],
+      "passed": true,
       "repository": "Mundus",
       "sha": "b7b2d0f9e453efd8be83216a43e642f0ee7350ed"
     },
     {
       "branch": "main",
       "dirty": false,
+      "expectedBranch": "main",
+      "expectedClean": true,
+      "expectedSha": "f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d",
+      "failures": [],
+      "passed": true,
       "repository": "OmniPet",
       "sha": "f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d"
     },
     {
       "branch": "main",
       "dirty": false,
+      "expectedBranch": "main",
+      "expectedClean": true,
+      "expectedSha": "081b7c6f651183987c79c4321ff46e1b082e03b7",
+      "failures": [],
+      "passed": true,
       "repository": "OmniPets",
       "sha": "081b7c6f651183987c79c4321ff46e1b082e03b7"
     }
   ],
-  "schemaVersion": 1
+  "schemaVersion": 2
 }
