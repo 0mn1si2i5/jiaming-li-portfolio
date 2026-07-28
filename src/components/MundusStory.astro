@@ -118,10 +118,10 @@ const algorithms = [
     index: 'E',
     title: { en: 'Day-night field', zh: '昼夜高度场' },
     copy: {
-      en: 'The globe evaluates solar altitude across its surface: non-negative values are day, 0 to -6 degrees fades through civil twilight, and lower values become night. The visible boundary is an educational rendering, not a surveyed line.',
-      zh: '地球表面按太阳高度着色：非负值为白昼，0 到 -6 度渐变为民用曙暮光，更低则进入夜晚。可见分界是教育性渲染，不是测绘边界。',
+      en: 'In the fragment shader, the normalized surface normal is dotted with the normalized sun direction, clamped to [-1, 1], and passed through asin to obtain solar altitude. smoothstep(-6°, 0°) then blends civil twilight into daylight; lower values retain the night overlay. This is an educational rendering, not a surveyed boundary.',
+      zh: '在 fragment shader 中，归一化表面法线先与归一化太阳方向点积，再 clamp 到 [-1, 1]，并通过 asin 得到太阳高度；随后 smoothstep(-6°, 0°) 将民用曙暮光平滑混合至白昼，更低的高度保留夜色覆盖。这是教育性渲染，不是测绘边界。',
     },
-    notation: 'day ≥ 0° · twilight 0…-6° · night < -6°',
+    notation: 'dot(normal, sun) → clamp[-1,1] → asin → smoothstep(-6°,0°)',
   },
   {
     index: 'F',
