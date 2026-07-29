@@ -896,3 +896,92 @@ npm run verify
 Expected: 19 tests pass, including exact scenario mutations, hidden JSX,
 multiline export, nested encoding, `../`, absolute screenshot paths, symlink
 escape, and scenario/filename mismatch; all real release gates remain green.
+
+## Task 8: Refocus Mundus and OmniPet as Product Case Studies
+
+**Files:**
+
+- Modify: `src/content/projects/mundus.mdx`
+- Modify: `src/content/projects/omnipet.mdx`
+- Modify: `src/components/MundusStory.astro`
+- Modify: `src/components/OmniPetStory.astro`
+- Modify: `scripts/verification/facts.json`
+- Modify: `tests/test_release_verification.py`
+- Modify: `docs/verification/evidence/task7-fact-assertions.json`
+- Modify: `docs/verification/evidence/browser-matrix.json`
+- Modify: `docs/verification/evidence/browser-console.json`
+- Modify: `docs/verification/evidence/browser-network.json`
+- Modify: `docs/verification/evidence/browser-reduced-motion.json`
+- Modify: `docs/verification/evidence/browser-screenshots.json`
+- Modify: `docs/verification/assets/task7-mundus-zh-dark-reduced-1440x900.webp`
+- Modify: `docs/verification/assets/task7-mundus-zh-dark-reduced-390x844.webp`
+- Modify: `docs/verification/assets/task7-omnipet-zh-dark-reduced-1440x900.webp`
+- Modify: `docs/verification/assets/task7-omnipet-zh-dark-reduced-390x844.webp`
+- Modify: `docs/verification/task7-release-verification.md`
+
+- [ ] **Step 1: Add product-focus regression checks**
+
+Assert that both MDX files retain bilingual product problem, platform or engine
+capability, user value, extensibility, result, public links, and current
+boundary. Assert that the built pages no longer contain `Algorithm atlas`,
+`Reproducible data flow`, `Seven bounded stages`, or `Extension contracts`.
+
+```bash
+npm test
+```
+
+Expected: the new product-focus checks fail against the long-form exhibition.
+
+- [ ] **Step 2: Rewrite the bilingual product narratives**
+
+Keep each language to a compact product problem, a platform/engine capability
+section, and a result/current-boundary section. Use only one or two short
+technical paragraphs per project. Preserve the approved public links and avoid
+private production detail.
+
+- [ ] **Step 3: Reduce each story component to two visual moments**
+
+For Mundus, render a three-mode product overview plus one representative globe
+capture with a compact shared-platform/extension explanation. For OmniPet,
+render a compact engine-to-release overview plus the SuShi public outcome.
+Remove the six algorithm cards, five-stage data flow, seven-stage workflow, and
+six extension-contract cards.
+
+- [ ] **Step 4: Rebind all 31 fact assertions**
+
+Keep exactly 31 bidirectional assertions and all pinned public sources. Replace
+claims removed from visitor prose with concise, visible product-level claims;
+do not restore long implementation passages merely to satisfy verification.
+
+```bash
+npm run verify
+```
+
+Expected: facts report `31/31` after the new claim bindings are generated.
+
+- [ ] **Step 5: Run real-browser acceptance and replace evidence**
+
+At `1440×900` and `390×844`, open Mundus and OmniPet in Chinese dark mode with
+reduced motion. Also check the existing homepage desktop and tablet scenarios.
+Record exact route/locale/theme/viewport values, visible text lengths, image
+decode state, overflow, active animations, console messages, network failures,
+and public links. Replace the four affected optimized WebP screenshots and
+their dimensions/SHA-256 manifest entries.
+
+- [ ] **Step 6: Update the verification report and complete Task 8**
+
+Document the shorter product narrative, retained visual count, 31/31 fact
+boundary, browser matrix, console/network result, and new screenshot hashes.
+
+```bash
+npm test
+npm run build
+npm run verify -- \
+  --mundus-root /path/to/Mundus \
+  --omnipet-root /path/to/OmniPet \
+  --omnipets-root /path/to/OmniPets
+git diff --check
+```
+
+Expected: tests, seven-page build, 31 facts, browser evidence, screenshot
+hashes, privacy scan, and diff check all pass.
