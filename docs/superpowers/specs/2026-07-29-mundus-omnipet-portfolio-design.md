@@ -46,7 +46,7 @@ The case study follows this compact structure:
 2. Platform capability: registered modes share rendering, interaction, addressable state, data provenance, and validation.
 3. Result and extensibility: three public modes demonstrate the platform, while a new mode can join without rebuilding the globe.
 
-The visual story retains a three-mode product overview and one representative globe image. The former six-card algorithm atlas and five-stage data pipeline are removed. One short technical paragraph may cite representative constraints such as versioned mode state, source manifests, deterministic data handling, and educational accuracy boundaries. It must not claim legal-boundary authority, navigation-grade solar accuracy, or globally optimal precision.
+The public hero and one three-mode Story overview are the only two images on the page. The former six-card algorithm atlas, five-stage data pipeline, and second Story image are removed. English and Chinese each use at most two compact technical-support paragraphs. It must not claim legal-boundary authority, navigation-grade solar accuracy, or globally optimal precision.
 
 ### OmniPet
 
@@ -58,7 +58,7 @@ The case study follows this compact structure:
 2. Engine capability and differentiation: resumable state, explicit approvals, repair, packaging, and a separate public release boundary turn uncertain inputs into reviewable output.
 3. Extensibility and result: versioned contracts keep generation, validation, and publication separable; SuShi demonstrates the current public outcome while Alpha limitations remain explicit.
 
-The visual story retains one compact production-to-release overview and the SuShi outcome preview. The former seven-stage workflow and six-card contract exhibition are removed. Atlas dimensions and other implementation facts may remain in fact verification without all appearing in visitor-facing prose; visitor claims stay limited to the facts that support product value and public boundaries.
+The public hero and one SuShi Story outcome are the only two images on the page. The former seven-stage workflow, six-card contract exhibition, and spritesheet image are removed. The case study explicitly names the shipped extension axes and the current one-allowlisted-provider limitation without repeating the publication boundary.
 
 Only the public `OmniPet` engine and public `OmniPets` catalog are linked. Private production and planning repositories may inform accurate high-level writing, but their names, files, paths, prompts, references, provider responses, checkpoints, reviewer evidence, internal URLs, and audit details must not appear in visitor-facing content.
 
@@ -121,19 +121,16 @@ The homepage reads the collection once, separates featured and non-featured entr
 
 ### MundusStory
 
-`MundusStory.astro` owns two Mundus-specific explanatory visuals:
-
-- a concise three-mode product overview;
-- one representative globe image paired with the shared platform and extension contract.
+`MundusStory.astro` owns one concise three-mode product overview. Shared
+platform and extension text supports that image without introducing another
+visual.
 
 Use semantic HTML and inline or component-scoped SVG/CSS. Diagrams require readable text alternatives, meaningful source order, and a static reduced-motion state. They must not require JavaScript to convey core information.
 
 ### OmniPetStory
 
-`OmniPetStory.astro` owns two OmniPet-specific explanatory visuals:
-
-- a compact engine-to-public-release overview with human review and publication boundaries;
-- SuShi as the public outcome.
+`OmniPetStory.astro` owns one SuShi public-outcome visual plus a compact
+text-first engine flow.
 
 The visitor-facing diagram uses only public concepts. It does not expose private filenames, paths, evidence, or repository details.
 
@@ -163,6 +160,11 @@ Use only public assets from the OmniPets catalog and public repository:
 Do not use private production screenshots. If a public screenshot is not useful, use code-drawn workflow visuals rather than a placeholder or fabricated product UI.
 
 All images require localized alternative text. Image crops must remain legible on mobile, and high-resolution assets should be converted to efficient web formats where appropriate.
+
+Each Story uses localized accessible names through `aria-labelledby`; fixed
+English `aria-label` values are not used for bilingual semantic groups.
+Multi-column Story layouts collapse to one column at 1024 px and below, and
+every grid child remains width-safe.
 
 ## Interaction and Motion
 
@@ -203,6 +205,11 @@ Implementation is complete only after:
 - browser console and network checks reveal no new errors;
 - Mundus technical claims are cross-checked against its public code and documentation;
 - OmniPet public claims are cross-checked against the public engine and catalog, with no private material exposed.
+- the fact gate contains fewer atomic product assertions, and every assertion
+  binds visible English MDX, Chinese MDX, Story text, and reviewed public
+  evidence;
+- unshown low-level atlas, row-count, solar-threshold, and city-count facts are
+  not release gates.
 
 ## Out of Scope
 

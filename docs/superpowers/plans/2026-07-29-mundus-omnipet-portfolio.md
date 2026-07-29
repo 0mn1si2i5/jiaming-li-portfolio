@@ -985,3 +985,57 @@ git diff --check
 
 Expected: tests, seven-page build, 31 facts, browser evidence, screenshot
 hashes, privacy scan, and diff check all pass.
+
+## Task 9: Apply Review-Driven Product Boundaries
+
+**Files:**
+
+- Modify: `src/content/projects/mundus.mdx`
+- Modify: `src/content/projects/omnipet.mdx`
+- Modify: `src/components/MundusStory.astro`
+- Modify: `src/components/OmniPetStory.astro`
+- Modify: `scripts/verification/facts.py`
+- Modify: `scripts/verification/facts.json`
+- Modify: `tests/test_release_verification.py`
+- Modify: `docs/superpowers/specs/2026-07-29-mundus-omnipet-portfolio-design.md`
+- Modify: `docs/verification/task7-release-verification.md`
+- Modify: `docs/verification/evidence/*.json`
+- Modify: `docs/verification/assets/task7-{mundus,omnipet}-*.webp`
+
+- [x] **Step 1: Lock the review requirements with regression tests**
+
+Require one Story image and no more than two built-page images including the
+shared public hero. Require localized accessible names, a single-column Story
+layout at 768–1024 px, no duplicated publication-boundary copy, and explicit
+OmniPet shipped extension axes plus the one-allowlisted-provider limitation.
+
+- [x] **Step 2: Tighten the two case studies**
+
+Keep Mundus technical support to at most two compact paragraphs and remove the
+second Story image. Keep OmniPet's compact flow and one SuShi result image,
+state the shipped extension axes and provider limit, and remove duplicate
+publication-boundary explanation.
+
+- [x] **Step 3: Replace low-level facts with atomic product claims**
+
+Use fewer assertions. Every assertion must bind English MDX visible text,
+Chinese MDX visible text, Story visible text, and reviewed public evidence.
+Delete unshown atlas dimensions, row counts, solar thresholds, city counts,
+and other implementation-only facts.
+
+- [x] **Step 4: Revalidate accessibility and responsive behavior**
+
+At desktop, 1024 px, 768 px, and 390 px, verify image counts, one-column Story
+layout where required, Chinese accessible names, locale/theme controls,
+reduced motion, overflow, console, network, and public links.
+
+- [x] **Step 5: Refresh evidence and documentation**
+
+Replace the four affected screenshots and hashes, browser JSON, fact output,
+design, plan, and verification report. Run tests, build, explicit-source
+verification, privacy scan, and `git diff --check`.
+
+- [x] **Step 6: Commit the reviewed product boundary**
+
+Commit one implementation/evidence change after all gates pass and leave the
+worktree clean.

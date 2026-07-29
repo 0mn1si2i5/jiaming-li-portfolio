@@ -41,7 +41,10 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "const dataStages",
         ):
             self.assertNotIn(removed, story)
-        self.assertEqual(story.count("<img"), 2)
+        self.assertEqual(story.count("<img"), 1)
+        self.assertLessEqual(content.count("\n## Platform capability") + content.count("\n## 平台能力"), 2)
+        self.assertNotIn('aria-label="Mundus extension contract"', story)
+        self.assertIn("@media (max-width: 1024px)", story)
 
     def test_omnipet_is_a_concise_product_case_study(self) -> None:
         content = (
@@ -69,7 +72,21 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "const contracts",
         ):
             self.assertNotIn(removed, story)
-        self.assertEqual(story.count("<img"), 2)
+        self.assertEqual(story.count("<img"), 1)
+        self.assertNotIn("sushi-spritesheet.webp", story)
+        self.assertNotIn('aria-label="Public release properties"', story)
+        self.assertIn("@media (max-width: 1024px)", story)
+        for phrase in (
+            "versioned manifests",
+            "action definitions",
+            "bounded engine APIs",
+            "validators",
+            "approval state",
+            "closed release schema",
+            "one allowlisted built-in image provider",
+            "does not expose arbitrary provider or model configuration",
+        ):
+            self.assertIn(phrase, content)
 
 
 class TestStructuredFacts(unittest.TestCase):
@@ -124,12 +141,30 @@ const mode = { category: "spatial" };
         rule = {"type": "json_path", "path": ["spriteVersionNumber"], "equals": 2}
         self.assertFalse(facts.match_json_rules(document, [rule]))
 
-    def test_fact_catalog_keeps_31_bidirectional_rules(self) -> None:
+    def test_fact_catalog_uses_fewer_atomic_product_claims(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
 
-        self.assertEqual(len(rules), 31)
-        self.assertTrue(all(rule["claim"]["rules"] for rule in rules))
+        self.assertGreaterEqual(len(rules), 10)
+        self.assertLessEqual(len(rules), 16)
+        self.assertTrue(all(len(rule["claims"]) == 3 for rule in rules))
+        self.assertTrue(
+            all(
+                {claim["locale"] for claim in rule["claims"]}
+                == {"en", "zh", "story"}
+                for rule in rules
+            )
+        )
         self.assertTrue(all(rule["evidence"]["rules"] for rule in rules))
+        forbidden = {
+            "mundus-sunrise-altitude",
+            "mundus-city-count",
+            "mundus-undp-years",
+            "omnipet-standard-rows",
+            "omnipet-atlas-grid",
+            "omnipet-atlas-size",
+            "omnipet-look-rows",
+        }
+        self.assertTrue(forbidden.isdisjoint({rule["id"] for rule in rules}))
 
     def test_all_semantic_rules_must_match(self) -> None:
         rules = [
@@ -327,9 +362,13 @@ class TestBrowserEvidence(unittest.TestCase):
             matrix["scenarios"][0],
         )
         matrix["scenarios"][0]["brokenImageCount"] = 1
+        matrix["scenarios"][2]["totalImageCount"] = 3
+        matrix["scenarios"][2]["productVisualCount"] = 2
         errors = browser.validate_matrix(matrix)
         self.assertIn("order", " ".join(errors))
         self.assertIn("brokenImageCount", " ".join(errors))
+        self.assertIn("totalImageCount", " ".join(errors))
+        self.assertIn("productVisualCount", " ".join(errors))
 
     def test_console_requires_structured_levels_and_no_failures(self) -> None:
         console = {

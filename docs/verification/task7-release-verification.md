@@ -217,9 +217,9 @@ HOME=/tmp/task7-evidence/browser-home \
 Observed:
 
 - Console output: empty, `0` bytes.
-- Recorded requests: `214`.
-- Status `200`: `165`.
-- Status `304`: `49`.
+- Recorded requests: `117`.
+- Status `200`: `87`.
+- Status `304`: `30`.
 - Other statuses or failed requests: `0`.
 - Documents, CSS, local WOFF2 files, favicon, and project images all loaded
   successfully.
@@ -235,7 +235,7 @@ by this report:
   Mundus and OmniPet desktop/mobile observations.
 - [Console observations](evidence/browser-console.json): zero messages, errors,
   or warnings.
-- [Network observations](evidence/browser-network.json): 214 normalized
+- [Network observations](evidence/browser-network.json): 117 normalized
   requests, status and resource-type counts, and an empty failure list.
 - [Screenshot manifest](evidence/browser-screenshots.json): five retained
   captures with scenario, dimensions, and SHA-256.
@@ -316,21 +316,21 @@ corresponding evidence must exist in the pinned public source revision.
 | `src/omnipet/public_release.py` | Closed release file set; canonical release record; SHA-256 binding; extra-file and private-material rejection |
 | OmniPets `README.md` and `catalog/index.json` | SuShi v1.0.1; sprite v2; public preview, atlas, manifest, documentation, license, and hashes |
 
-The unified release verifier checks 31 structured, bidirectional facts:
+The unified release verifier checks 13 atomic, product-level facts:
 
 ```bash
 npm run verify
 ```
 
-The 31 rules live in `scripts/verification/facts.json`. Each item contains
-separate claim and evidence sources. The product-focused revision keeps all 31
-pinned evidence checks but binds them to concise, visitor-visible claims about
+The 13 rules live in `scripts/verification/facts.json`. Each item contains
+separate claim and evidence sources. The product-focused revision keeps 13
+pinned product-evidence checks but binds them to concise, visitor-visible claims about
 platform contracts, reproducibility, recoverability, release boundaries, and
 public outcomes; low-level source evidence no longer forces an algorithm or
 atlas-dimension exhibition into the page. MDX checks remove frontmatter,
 imports, HTML/JSX comments; source
 checks remove comments and unrelated standalone string assignments; JSON
-evidence uses structural `json_path` rules. The latest run returned `31/31`.
+evidence uses structural `json_path` rules. The latest run returned `13/13`.
 Elements hidden with `hidden`, `aria-hidden`, `display: none`, or
 `visibility: hidden`, plus multiline exported metadata/functions, are excluded
 from visitor-visible claim text.
@@ -384,6 +384,26 @@ values were `3609` and `2529`, respectively. All four scenarios report two
 product visuals, zero active animations, zero broken images, and no horizontal
 overflow. Visual inspection also confirms that the product problem and
 platform/engine capability precede the visual overview in both languages.
+
+## Review-Driven Boundary Revalidation
+
+The final review pass limits each project page to two images total: the shared
+public hero plus one Story image. Browser inspection at 1440 x 900 and 390 x
+844 reported `totalImageCount: 2` and `productVisualCount: 1` for both Mundus
+and OmniPet, with zero broken images or horizontal overflow.
+
+At 1024 px, OmniPet's engine flow and outcome each resolved to one CSS grid
+column. At 768 px, Mundus's mode overview resolved to one column. The Chinese
+semantic group names resolved to `公开发布属性` and `Mundus 扩展契约`; both are
+provided by localized `aria-labelledby` targets rather than fixed English
+labels.
+
+The fact gate now contains 13 atomic product claims. Every claim binds visible
+English MDX, visible Chinese MDX, Story text, and one reviewed public source at
+a pinned revision. Unshown atlas dimensions, action-row counts, solar
+thresholds, city counts, and other implementation-only details were deleted
+from the release gate. OmniPet's remaining claims explicitly cover the shipped
+extension axes and the single allowlisted built-in provider boundary.
 
 ## Screenshot Evidence
 

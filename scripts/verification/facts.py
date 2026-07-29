@@ -78,7 +78,7 @@ def match_json_rules(document: object, rules: list[dict[str, object]]) -> bool:
 def load_rules(path: Path) -> list[dict[str, object]]:
     value = json.loads(path.read_text(encoding="utf-8"))
     rules = value.get("assertions")
-    if value.get("schemaVersion") != 1 or not isinstance(rules, list):
+    if value.get("schemaVersion") != 2 or not isinstance(rules, list):
         raise ValueError("invalid fact assertion catalog")
     return rules
 
@@ -129,15 +129,21 @@ def verify(
 
     for assertion in load_rules(catalog):
         assertion_id = str(assertion["id"])
-        claim = assertion["claim"]
         evidence = assertion["evidence"]
-        claim_text = (portfolio / str(claim["source"])).read_text(encoding="utf-8")
         evidence_text = read_at_revision(
             repositories[str(evidence["repository"])],
             EXPECTED_REVISIONS[str(evidence["repository"])],
             str(evidence["source"]),
         )
-        claim_text = extract_mdx_visible_text(claim_text)
+        for claim in assertion["claims"]:
+            claim_text = (portfolio / str(claim["source"])).read_text(
+                encoding="utf-8"
+            )
+            claim_text = extract_mdx_visible_text(claim_text)
+            if not match_rules(claim_text, claim["rules"]):
+                errors.append(
+                    f"{assertion_id}: {claim['locale']} portfolio claim mismatch"
+                )
         if str(evidence["source"]).endswith(".json"):
             evidence_matches = match_json_rules(
                 json.loads(evidence_text),
@@ -148,8 +154,6 @@ def verify(
                 extract_source_semantics(evidence_text),
                 evidence["rules"],
             )
-        if not match_rules(claim_text, claim["rules"]):
-            errors.append(f"{assertion_id}: portfolio claim mismatch")
         if not evidence_matches:
             errors.append(f"{assertion_id}: public evidence mismatch")
     return errors

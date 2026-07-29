@@ -46,7 +46,13 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print("release verification: facts=31/31 browser=pass privacy=pass")
+    fact_count = len(
+        facts.load_rules(portfolio / "scripts/verification/facts.json")
+    )
+    print(
+        f"release verification: facts={fact_count}/{fact_count} "
+        "browser=pass privacy=pass"
+    )
     return 0
 
 

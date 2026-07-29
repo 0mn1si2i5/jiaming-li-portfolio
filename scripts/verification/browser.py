@@ -113,6 +113,10 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
                 errors.append(f"{name}: activeAnimationCount is not zero")
             if not isinstance(item.get("visibleTextLength"), int) or item["visibleTextLength"] <= 0:
                 errors.append(f"{name}: visibleTextLength is not positive")
+            if item.get("totalImageCount") != 2:
+                errors.append(f"{name}: totalImageCount is not two")
+            if item.get("productVisualCount") != 1:
+                errors.append(f"{name}: productVisualCount is not one")
         if name.startswith("home-"):
             if item.get("selected") != PROJECT_ORDER:
                 errors.append(f"{name}: selected project order is invalid")

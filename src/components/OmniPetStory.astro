@@ -2,7 +2,7 @@
 import Localized from './Localized.astro';
 
 const flow = [
-  { index: '01', title: { en: 'Create and review', zh: '生成与审查' }, copy: { en: 'Resumable work stops at explicit human decisions.', zh: '可恢复流程停在明确的人工决定处。' } },
+  { index: '01', title: { en: 'Create and review', zh: '生成与审查' }, copy: { en: 'The open-source engine resumes at explicit human decisions; failures persist without automatic retry, and repair preserves unaffected work.', zh: '开源引擎可从明确的人工决定处恢复；失败会被记录而不自动重试，修复会保留不受影响的成果。' } },
   { index: '02', title: { en: 'Validate and package', zh: '验证与打包' }, copy: { en: 'Structure and approval gates protect downstream output.', zh: '结构与批准门禁保护下游产物。' } },
   { index: '03', title: { en: 'Export and verify', zh: '导出与验证' }, copy: { en: 'A closed public bundle can be checked without production access.', zh: '闭集公开包无需生产权限即可验证。' } },
 ];
@@ -17,7 +17,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       <span><Localized en="Open-source Alpha" zh="开源 Alpha" /></span>
     </div>
     <h2 id="omnipet-story-title"><Localized en="From uncertain image to bounded release." zh="从不确定图像到有边界的发布。" /></h2>
-    <p><Localized en="OmniPet makes generation reviewable and recoverable, then deliberately separates creator context from the installable result." zh="OmniPet 让生成过程可审查、可恢复，再将创作者上下文与可安装结果明确分离。" /></p>
+    <p><Localized en="The open-source engine makes generation reviewable and recoverable: failures persist without automatic retry, and repair preserves unaffected work." zh="开源引擎让生成可审查、可恢复：失败会被记录而不自动重试，修复会保留不受影响的成果。" /></p>
   </header>
 
   <ol class="engine-flow">
@@ -29,13 +29,15 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       </li>
     ))}
   </ol>
+  <p class="shipped-seams"><Localized en="Shipped extension axes: versioned manifests, action definitions, bounded engine APIs, validators, approval state, and a closed release schema. One allowlisted built-in image provider is supported; arbitrary provider or model configuration is not." zh="已交付扩展轴：带版本的清单、动作定义、有界引擎 API、验证器、批准状态与闭集发布结构。当前支持一个白名单内置图像 provider，不开放任意 provider 或模型配置。" /></p>
 
   <section class="outcome" aria-labelledby="omnipet-outcome-title">
     <div class="outcome-copy">
       <p class="eyebrow"><Localized en="Public result" zh="公开结果" /></p>
       <h3 id="omnipet-outcome-title"><Localized en="SuShi leaves as a pet, not a production archive." zh="SuShi 以桌宠而非生产档案的形式离开流程。" /></h3>
-      <p><Localized en="The public catalog contains the installable release, documentation, license, and verifiable hashes. Production inputs and generation access do not cross that boundary." zh="公共目录包含可安装发布、说明、许可和可验证哈希；生产输入与生成权限不会越过这条边界。" /></p>
-      <div class="release-tags" aria-label="Public release properties">
+      <p><Localized en="The public catalog contains a closed installable release, documentation, license, and verifiable hashes that can be checked without production access." zh="公共目录包含闭集可安装发布、说明、许可与可验证哈希，无需生产权限即可检查。" /></p>
+      <p id="omnipet-release-label" class="sr-only"><Localized en="Public release properties" zh="公开发布属性" /></p>
+      <div class="release-tags" aria-labelledby="omnipet-release-label">
         <span><Localized en="Installable" zh="可安装" /></span>
         <span><Localized en="Licensed" zh="有许可" /></span>
         <span><Localized en="Verifiable" zh="可验证" /></span>
@@ -45,10 +47,6 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       <figure>
         <img src={asset('/media/omnipet/sushi-preview.webp')} alt="SuShi, the public installable desktop pet produced through OmniPet." data-alt-en="SuShi, the public installable desktop pet produced through OmniPet." data-alt-zh="通过 OmniPet 生产并公开发布的可安装桌宠 SuShi。" loading="lazy" />
         <figcaption><strong>SuShi</strong><span><Localized en="Public catalog · v1.0.1" zh="公共目录 · v1.0.1" /></span></figcaption>
-      </figure>
-      <figure>
-        <div class="atlas-frame"><img src={asset('/media/omnipet/sushi-spritesheet.webp')} alt="The public SuShi sprite v2 atlas." data-alt-en="The public SuShi sprite v2 atlas." data-alt-zh="SuShi 的公开 sprite v2 图集。" loading="lazy" /></div>
-        <figcaption><strong><Localized en="Release atlas" zh="发布图集" /></strong><span><Localized en="Public package asset" zh="公开包资产" /></span></figcaption>
       </figure>
     </div>
   </section>
@@ -85,23 +83,25 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .engine-flow li > span { color: var(--signal); font-size: .68rem; letter-spacing: .1em; }
   .engine-flow h3 { margin: 2rem 0 .6rem; font-size: 1.25rem; letter-spacing: -.02em; }
   .engine-flow p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .shipped-seams { max-width: 760px; margin: 1.25rem 0 0; color: var(--muted); font-size: .82rem; line-height: 1.6; }
   .outcome { display: grid; grid-template-columns: minmax(16rem, .72fr) minmax(0, 1.28fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; margin-top: clamp(4rem, 9vw, 8rem); }
   .outcome h3 { margin: .8rem 0 1rem; font-size: clamp(2rem, 4vw, 3.4rem); }
   .release-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
   .release-tags span { padding: .45rem .65rem; color: var(--signal); font-size: .65rem; font-weight: 700; text-transform: uppercase; border: 1px solid var(--line); }
-  .result-visuals { display: grid; grid-template-columns: .72fr 1.28fr; gap: 1.25rem; align-items: end; }
+  .result-visuals { min-width: 0; }
   figure { min-width: 0; margin: 0; }
-  figure img, .atlas-frame { display: block; width: 100%; border: 1px solid var(--line); background: #0c0a09; }
+  figure img { display: block; width: 100%; border: 1px solid var(--line); background: #0c0a09; }
   figure > img { aspect-ratio: 1; object-fit: cover; }
-  .atlas-frame { box-sizing: border-box; padding: 1rem; aspect-ratio: 4 / 3; }
-  .atlas-frame img { height: 100%; object-fit: contain; }
   figcaption { display: grid; gap: .2rem; padding: .8rem 0; border-bottom: 1px solid var(--line); }
   figcaption strong { color: var(--ink); font-size: .82rem; }
   figcaption span { color: var(--muted); font-size: .68rem; }
-  @media (max-width: 760px) {
-    .product-story { margin: 4rem 0; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  @media (max-width: 1024px) {
     .engine-flow, .outcome, .result-visuals { grid-template-columns: 1fr; }
     .engine-flow li:not(:last-child) { margin-right: 0; border-right: 0; }
     .engine-flow li:not(:last-child)::after { content: '↓'; top: auto; right: .2rem; bottom: -.65rem; }
+  }
+  @media (max-width: 760px) {
+    .product-story { margin: 4rem 0; }
   }
 </style>

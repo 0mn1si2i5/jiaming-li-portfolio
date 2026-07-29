@@ -30,7 +30,7 @@ A convincing generated image is not yet a desktop pet. Identity must survive mul
 
 ## Engine capability
 
-OmniPet is an open-source Python engine and CLI for sprite v2 production. Manifest-driven projects and resumable state let work advance one bounded step at a time: the engine persists a failed generation instead of retrying automatically, requires explicit human approval, and can repair a selected job while preserving unaffected upstream work. Structure and approval gates protect downstream output. Versioned manifests, action definitions, bounded APIs, validators, and a release schema keep generation, review, packaging, and publication separable.
+OmniPet is an open-source Python engine and CLI for sprite v2 production. Manifest-driven projects and resumable state let work advance one bounded step at a time: the engine persists a failed generation instead of retrying automatically, requires explicit human approval, and can repair a selected job while preserving unaffected upstream work. The shipped extension axes are versioned manifests, action definitions, bounded engine APIs, validators, approval state, and a closed release schema. The current engine isolates one allowlisted built-in image provider and does not expose arbitrary provider or model configuration.
 
 </section>
 
@@ -42,7 +42,7 @@ OmniPet is an open-source Python engine and CLI for sprite v2 production. Manife
 
 ## 引擎能力
 
-OmniPet 是面向 sprite v2 生产的开源 Python 引擎与 CLI。清单驱动的项目和可恢复状态让工作每次只推进一个有界步骤：引擎会记录失败而不是自动重试，要求显式人工批准，并能修复指定任务而保留不受影响的上游成果。带版本的清单、动作定义、有界 API、验证器和发布结构让生成、审查、打包与发布彼此分离。
+OmniPet 是面向 sprite v2 生产的开源 Python 引擎与 CLI。清单驱动的项目和可恢复状态让工作每次只推进一个有界步骤：引擎会记录失败而不是自动重试，要求显式人工批准，并能修复指定任务而保留不受影响的上游成果。已交付的扩展轴包括带版本的清单、动作定义、有界引擎 API、验证器、批准状态与闭集发布结构。当前引擎仅隔离一个白名单内置图像 provider，不开放任意 provider 或模型配置。
 
 </section>
 
@@ -52,7 +52,7 @@ OmniPet 是面向 sprite v2 生产的开源 Python 引擎与 CLI。清单驱动�
 
 ## User value
 
-Creators can stop, inspect, approve, repair, and resume without treating every failure as a restart. Publication is a separate boundary: export creates a closed, allowlisted bundle whose declared files are bound by SHA-256; independent verification needs no generation credential or production project and rejects extra material.
+Creators can stop, inspect, approve, repair, and resume without treating every failure as a restart. Export then produces a closed, allowlisted bundle whose declared files are bound by SHA-256 and can be verified independently without generation credentials.
 
 ## Public result
 
@@ -64,7 +64,7 @@ SuShi v1.0.1 is the current installable sprite v2 example in the public OmniPets
 
 ## 用户价值
 
-创作者可以暂停、检查、批准、修复和继续，而不必把每次失败都当作从头开始。发布是独立边界：导出流程生成闭集白名单包，每个声明文件均由 SHA-256 绑定；独立验证不需要生成凭据或生产项目，并会拒绝额外材料。
+创作者可以暂停、检查、批准、修复和继续，而不必把每次失败都当作从头开始。导出流程随后生成闭集白名单包，每个声明文件均由 SHA-256 绑定，并可在不使用生成凭据的情况下独立验证。
 
 ## 公开结果
 

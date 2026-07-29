@@ -1,723 +1,639 @@
 {
+  "schemaVersion": 2,
   "assertions": [
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "three public modes—spatial, human, and temporal"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Mundus publicly presents three scientific modes.",
+      "id": "mundus-three-modes",
+      "description": "Three public observation modes share one product.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "three public modes—spatial, human, and temporal"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "空间、人类与时间三种公开模式"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "Three useful ways to look"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "Mundus",
+        "source": "README.md",
         "rules": [
           {
             "type": "contains",
             "value": "three modes:"
           }
-        ],
-        "source": "README.md"
-      },
-      "id": "mundus-three-modes"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "three public modes—spatial, human, and temporal"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "The three modes have a stable registry order.",
+      "id": "mundus-versioned-extensions",
+      "description": "Modes are versioned registered extensions with state and data.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "registered, versioned extension declares its state and data dependencies"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "注册式、带版本的扩展都声明自身状态与数据依赖"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "versioned registered mode brings its own state, data"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "MODE_ORDER = ['antipodes', 'development', 'sunline']"
-          }
-        ],
-        "source": "src/features/modes/modeRegistry.ts"
-      },
-      "id": "mundus-mode-order"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "Each registered, versioned extension declares its state and data dependencies"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Mode definitions are versioned.",
-      "evidence": {
-        "repository": "Mundus",
+        "source": "src/features/modes/modeRegistry.ts",
         "rules": [
           {
             "type": "contains",
             "value": "version: 1;"
+          },
+          {
+            "type": "contains",
+            "value": "stateSchema"
           }
-        ],
-        "source": "src/features/modes/modeRegistry.ts"
-      },
-      "id": "mundus-mode-version"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "three public modes—spatial, human, and temporal"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Mode definitions include scientific categories.",
+      "id": "mundus-provenance-registry",
+      "description": "The platform carries data provenance and boundary policy.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "数据注册表记录来源、许可、转换、哈希、缺失值策略与边界说明"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "provenance, validation"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "category: 'temporal'"
-          }
-        ],
-        "source": "src/features/modes/modeRegistry.ts"
-      },
-      "id": "mundus-mode-categories"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "declares its state and data dependencies"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Development declares its Natural Earth and UNDP resources.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "resources: ['natural-earth-countries-110m', 'undp-hdr-2025-development']"
-          }
-        ],
-        "source": "src/features/modes/modeRegistry.ts"
-      },
-      "id": "mundus-development-resources"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "A data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "The data registry validates provenance and boundary metadata.",
-      "evidence": {
-        "repository": "Mundus",
+        "source": "src/data/registry.ts",
         "rules": [
           {
             "type": "contains",
             "value": "missingValuePolicy: z.string().min(1)"
+          },
+          {
+            "type": "contains",
+            "value": "boundaryPolicy: z.string().min(1)"
           }
-        ],
-        "source": "src/data/registry.ts"
-      },
-      "id": "mundus-data-registry"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Sunline starts at 2000 UTC.",
+      "id": "mundus-shared-fallbacks",
+      "description": "New lenses reuse shared interaction and rendering fallbacks.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "reuses the scene, camera, picking, provenance, validation, quality loading, and raster fallback"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "复用场景、相机、拾取、来源记录、验证、质量加载和栅格回退"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "rendering fallbacks"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "Mundus",
+        "source": "README.md",
         "rules": [
           {
             "type": "contains",
-            "value": "Date.UTC(2000, 0, 1)"
+            "value": "failure fallback"
           }
-        ],
-        "source": "src/features/sunline/solar.ts"
-      },
-      "id": "mundus-sunline-min-year"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Sunline ends at the final minute of 2099 UTC.",
+      "id": "mundus-educational-limits",
+      "description": "Dataset, cartographic, and solar limitations remain explicit.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "dataset scope, cartographic boundaries, and solar approximations are presented as limits"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "数据集范围、制图边界与太阳近似都作为明确限制呈现"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "solar approximations remain visible product limits"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "Date.UTC(2099, 11, 31, 23, 59)"
-          }
-        ],
-        "source": "src/features/sunline/solar.ts"
-      },
-      "id": "mundus-sunline-max-year"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Sunrise and sunset use an apparent altitude of -0.833 degrees.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "SUNRISE_ALTITUDE_DEGREES = -0.833"
-          }
-        ],
-        "source": "src/features/sunline/solar.ts"
-      },
-      "id": "mundus-sunrise-altitude"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "changing daylight and civil twilight explorable through time"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Solar observations expose civil twilight.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "'civil-twilight'"
-          }
-        ],
-        "source": "src/features/sunline/solar.ts"
-      },
-      "id": "mundus-civil-twilight"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Solar events expose polar day.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "'polar-day'"
-          }
-        ],
-        "source": "src/features/sunline/solar.ts"
-      },
-      "id": "mundus-polar-day"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Solar events expose polar night.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "'polar-night'"
-          }
-        ],
-        "source": "src/features/sunline/solar.ts"
-      },
-      "id": "mundus-polar-night"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "dataset scope, cartographic boundaries, and solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "The immutable GeoNames index contains 6,944 records.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "6,944 records"
-          }
-        ],
-        "source": "DATA_SOURCES.md"
-      },
-      "id": "mundus-city-count"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "dataset scope, cartographic boundaries, and solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "The UNDP series covers 1990 through 2023.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "covering 1990–2023"
-          }
-        ],
-        "source": "DATA_SOURCES.md"
-      },
-      "id": "mundus-undp-years"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "quality loading, and raster fallback"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Vector quality uses 110m for low and 50m for medium/high.",
-      "evidence": {
-        "repository": "Mundus",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "low quality\nloads 110m, while medium/high quality loads 50m"
-          }
-        ],
-        "source": "README.md"
-      },
-      "id": "mundus-vector-quality"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "solar approximations are presented as limits"
-          }
-        ],
-        "source": "src/content/projects/mundus.mdx"
-      },
-      "description": "Sunline uses NOAA/Meeus-style approximations.",
-      "evidence": {
-        "repository": "Mundus",
+        "source": "DATA_SOURCES.md",
         "rules": [
           {
             "type": "contains",
             "value": "NOAA/Meeus-style approximations"
           }
-        ],
-        "source": "DATA_SOURCES.md"
-      },
-      "id": "mundus-solar-method"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "open-source Python engine and CLI for sprite v2 production"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "OmniPet is a public sprite v2 production engine.",
+      "id": "omnipet-open-engine",
+      "description": "OmniPet is an open-source sprite v2 production engine.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "open-source Python engine and CLI for sprite v2 production"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "面向 sprite v2 生产的开源 Python 引擎与 CLI"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "open-source engine"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "OmniPet",
+        "source": "README.md",
         "rules": [
           {
             "type": "contains",
             "value": "桌宠 sprite v2 的开源引擎"
           }
-        ],
-        "source": "README.md"
-      },
-      "id": "omnipet-open-engine"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "persists a failed generation instead of retrying automatically"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "Provider failures are not retried automatically.",
+      "id": "omnipet-resumable-review",
+      "description": "The workflow resumes at human decisions and does not auto-retry failures.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "persists a failed generation instead of retrying automatically, requires explicit human approval"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "记录失败而不是自动重试，要求显式人工批准"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "failures persist without automatic retry"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "OmniPet",
+        "source": "docs/architecture.md",
         "rules": [
           {
             "type": "contains",
             "value": "There is no automatic retry"
-          }
-        ],
-        "source": "docs/architecture.md"
-      },
-      "id": "omnipet-no-auto-retry"
-    },
-    {
-      "claim": {
-        "rules": [
+          },
           {
             "type": "contains",
-            "value": "repair a selected job while preserving unaffected upstream work"
+            "value": "approval"
           }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "Repair archives a selected visual job transactionally.",
+        ]
+      }
+    },
+    {
+      "id": "omnipet-transactional-repair",
+      "description": "Repair preserves unaffected upstream work.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "repair a selected job while preserving unaffected upstream work"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "修复指定任务而保留不受影响的上游成果"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "repair preserves unaffected work"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "OmniPet",
+        "source": "docs/architecture.md",
         "rules": [
           {
             "type": "contains",
             "value": "Repair archives the selected completed or failed visual job transactionally"
           }
-        ],
-        "source": "docs/architecture.md"
-      },
-      "id": "omnipet-transactional-repair"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "export creates a closed, allowlisted bundle"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "Public release export uses a closed allowlist.",
+      "id": "omnipet-shipped-extension-axes",
+      "description": "Six shipped seams keep engine stages separable.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "versioned manifests, action definitions, bounded engine APIs, validators, approval state, and a closed release schema"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "带版本的清单、动作定义、有界引擎 API、验证器、批准状态与闭集发布结构"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "versioned manifests, action definitions, bounded engine APIs, validators, approval state, and a closed release schema"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "OmniPet",
+        "source": "docs/architecture.md",
         "rules": [
           {
             "type": "contains",
-            "value": "closed allowlist"
+            "value": "one bounded action at a time"
+          },
+          {
+            "type": "contains",
+            "value": "approval"
+          },
+          {
+            "type": "contains",
+            "value": "public release bundle"
           }
-        ],
-        "source": "docs/architecture.md"
-      },
-      "id": "omnipet-release-allowlist"
+        ]
+      }
     },
     {
-      "claim": {
+      "id": "omnipet-provider-boundary",
+      "description": "The current engine permits one built-in provider and no arbitrary configuration.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "one allowlisted built-in image provider and does not expose arbitrary provider or model configuration"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "一个白名单内置图像 provider，不开放任意 provider 或模型配置"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "One allowlisted built-in image provider is supported; arbitrary provider or model configuration is not"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "docs/architecture.md",
         "rules": [
           {
             "type": "contains",
-            "value": "independent verification needs no generation credential or production project"
+            "value": "allowlisted `gpt-image-2` model"
+          },
+          {
+            "type": "contains",
+            "value": "cannot configure credentials, custom endpoints, or arbitrary models"
           }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "Public verification requires neither credentials nor a production project.",
+        ]
+      }
+    },
+    {
+      "id": "omnipet-closed-release",
+      "description": "Public export is closed, hashed, and independently verifiable.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "closed, allowlisted bundle whose declared files are bound by SHA-256 and can be verified independently without generation credentials"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "闭集白名单包，每个声明文件均由 SHA-256 绑定，并可在不使用生成凭据的情况下独立验证"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "closed installable release"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "OmniPet",
+        "source": "docs/architecture.md",
         "rules": [
+          {
+            "type": "contains",
+            "value": "allowlisted bundle"
+          },
           {
             "type": "contains",
             "value": "requires no provider credentials or production project"
           }
-        ],
-        "source": "docs/architecture.md"
-      },
-      "id": "omnipet-clean-verification"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "Structure and approval gates protect downstream output"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "The atlas contains nine standard action rows.",
+      "id": "omnipet-alpha-boundary",
+      "description": "The public engine remains Alpha and generated output requires review.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "OmniPet remains Alpha software; interfaces may change, generated results still require review"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "OmniPet 仍处于 Alpha 阶段，接口可能变化，生成结果仍需检查"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "Open-source Alpha"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "OmniPet",
+        "source": "README.md",
         "rules": [
           {
             "type": "contains",
-            "value": "nine standard rows"
+            "value": "Alpha（`0.1.0a1`）"
+          },
+          {
+            "type": "contains",
+            "value": "请在正式使用前检查生成结果"
           }
-        ],
-        "source": "docs/generation-workflow.md"
-      },
-      "id": "omnipet-standard-rows"
+        ]
+      }
     },
     {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "Structure and approval gates protect downstream output"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "The final atlas uses an 8 by 11 grid.",
-      "evidence": {
-        "repository": "OmniPet",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "8x11 atlas"
-          }
-        ],
-        "source": "docs/generation-workflow.md"
-      },
-      "id": "omnipet-atlas-grid"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "Structure and approval gates protect downstream output"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "The final atlas is exactly 1536 by 2288 pixels.",
-      "evidence": {
-        "repository": "OmniPet",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "1536x2288"
-          }
-        ],
-        "source": "docs/generation-workflow.md"
-      },
-      "id": "omnipet-atlas-size"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "Structure and approval gates protect downstream output"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "The final atlas adds two directional rows.",
-      "evidence": {
-        "repository": "OmniPet",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "nine standard rows plus two look rows"
-          }
-        ],
-        "source": "docs/generation-workflow.md"
-      },
-      "id": "omnipet-look-rows"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "visitors receive a documented, licensed, verifiable pet release"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "The release contract requires the sprite atlas.",
-      "evidence": {
-        "repository": "OmniPet",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "\"spritesheet.webp\""
-          }
-        ],
-        "source": "src/omnipet/public_release.py"
-      },
-      "id": "omnipet-release-atlas"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "declared files are bound by SHA-256"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "Release file records use SHA-256 hashes.",
-      "evidence": {
-        "repository": "OmniPet",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "_HASH = re.compile"
-          }
-        ],
-        "source": "src/omnipet/public_release.py"
-      },
-      "id": "omnipet-release-hash"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "rejects extra material"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "Verification rejects files outside the declared release set.",
-      "evidence": {
-        "repository": "OmniPet",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "actual != declared | {\"release.json\"}"
-          }
-        ],
-        "source": "src/omnipet/public_release.py"
-      },
-      "id": "omnipet-release-closed-set"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "generation, review, packaging, and publication separable"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "The public engine documents release export and verification.",
-      "evidence": {
-        "repository": "OmniPet",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "omnipet release verify release-work/my-pet"
-          }
-        ],
-        "source": "README.md"
-      },
-      "id": "omnipet-release-commands"
-    },
-    {
-      "claim": {
-        "rules": [
-          {
-            "type": "contains",
-            "value": "SuShi v1.0.1 is the current installable sprite v2 example"
-          }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "The public catalog documents SuShi v1.0.1.",
+      "id": "omnipets-sushi-outcome",
+      "description": "SuShi v1.0.1 is the public installable sprite v2 outcome.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "SuShi v1.0.1 is the current installable sprite v2 example"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "SuShi v1.0.1 是 OmniPets 公共目录中当前可安装的 sprite v2 示例"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "Public catalog · v1.0.1"
+            }
+          ]
+        }
+      ],
       "evidence": {
         "repository": "OmniPets",
+        "source": "README.md",
         "rules": [
           {
             "type": "contains",
             "value": "当前示例：SuShi v1.0.1"
-          }
-        ],
-        "source": "README.md"
-      },
-      "id": "omnipets-sushi-version"
-    },
-    {
-      "claim": {
-        "rules": [
+          },
           {
             "type": "contains",
-            "value": "installable sprite v2 example"
+            "value": "完整 sprite v2 示例"
           }
-        ],
-        "source": "src/content/projects/omnipet.mdx"
-      },
-      "description": "SuShi uses sprite version 2.",
-      "evidence": {
-        "repository": "OmniPets",
-        "rules": [
-          {
-            "equals": 2,
-            "path": [
-              "pets",
-              0,
-              "spriteVersionNumber"
-            ],
-            "type": "json_path"
-          }
-        ],
-        "source": "catalog/index.json"
-      },
-      "id": "omnipets-sprite-version"
+        ]
+      }
     }
-  ],
-  "schemaVersion": 1
+  ]
 }
