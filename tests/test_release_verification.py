@@ -58,6 +58,11 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "Dataset scope, cartographic boundaries, and solar approximations",
         ):
             self.assertNotIn(repeated, story)
+        self.assertNotIn(".platform-moment img", story)
+        self.assertNotIn(
+            ".overview-visual figcaption, .platform-moment",
+            story,
+        )
 
     def test_omnipet_is_a_concise_product_case_study(self) -> None:
         content = (
@@ -91,18 +96,18 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertIn("@media (max-width: 1024px)", story)
         for phrase in (
             "Manifest-driven projects make adding a pet repeatable",
-            "maintainers extend action definitions in the engine",
+            "versioned action contract binds each available next action",
             "pet validate",
             "package --check",
             "release export",
             "release verify",
             "one allowlisted built-in image provider",
-            "does not expose arbitrary provider or model configuration",
+            "does not expose arbitrary provider, endpoint, or model configuration",
         ):
             self.assertIn(phrase, content)
         for phrase in (
             "Describe in the manifest",
-            "Extend actions and validate",
+            "Follow actions and validate",
             "Export, verify, and publish",
             "SuShi",
         ):
@@ -120,6 +125,10 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "closed release schema",
         ):
             self.assertNotIn(obsolete, content)
+        self.assertNotIn(
+            ".engine-flow, .outcome, .result-visuals",
+            story,
+        )
 
 
 class TestStructuredFacts(unittest.TestCase):
@@ -180,11 +189,9 @@ const mode = { category: "spatial" };
         self.assertEqual(len(rules), 13)
         self.assertTrue(
             all(
-                {"en", "zh"}.issubset(
-                    {claim["locale"] for claim in rule["claims"]}
-                )
+                len(rule["claims"]) == 3
                 and {claim["locale"] for claim in rule["claims"]}
-                <= {"en", "zh", "story"}
+                == {"en", "zh", "story"}
                 for rule in rules
             )
         )
@@ -200,8 +207,59 @@ const mode = { category: "spatial" };
         }
         self.assertTrue(forbidden.isdisjoint({rule["id"] for rule in rules}))
         rule_ids = {rule["id"] for rule in rules}
-        self.assertIn("omnipet-manifest-extension-flow", rule_ids)
+        self.assertTrue(
+            {
+                "omnipet-manifest-contract",
+                "omnipet-action-contract",
+                "omnipet-validation-steps",
+                "omnipet-publication-path",
+                "omnipet-provider-boundary",
+            }.issubset(rule_ids)
+        )
         self.assertNotIn("omnipet-shipped-extension-axes", rule_ids)
+        self.assertTrue(
+            {
+                "mundus-provenance-registry",
+                "mundus-shared-fallbacks",
+                "omnipet-transactional-repair",
+                "omnipet-closed-release",
+            }.isdisjoint(rule_ids)
+        )
+
+    def test_fact_catalog_rejects_missing_story_claim(self) -> None:
+        catalog = {
+            "schemaVersion": 2,
+            "assertions": [
+                {
+                    "id": "missing-story",
+                    "claims": [
+                        {"locale": "en", "source": "a", "rules": []},
+                        {"locale": "zh", "source": "a", "rules": []},
+                    ],
+                    "evidence": {
+                        "repository": "OmniPet",
+                        "source": "README.md",
+                        "rules": [{"type": "contains", "value": "evidence"}],
+                    },
+                }
+            ],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "facts.json"
+            path.write_text(json.dumps(catalog), encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "en, zh, and story"):
+                facts.load_rules(path)
+
+            catalog["assertions"][0]["claims"].extend(
+                [
+                    {"locale": "story", "source": "a", "rules": []},
+                    {"locale": "en", "source": "a", "rules": []},
+                ]
+            )
+            path.write_text(json.dumps(catalog), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "en, zh, and story"):
+                facts.load_rules(path)
 
     def test_all_semantic_rules_must_match(self) -> None:
         rules = [
@@ -375,6 +433,7 @@ class TestBrowserEvidence(unittest.TestCase):
                 browser.validate_all(
                     root,
                     project / "docs/verification/assets",
+                    project / "dist",
                 ),
                 [],
             )
@@ -386,9 +445,64 @@ class TestBrowserEvidence(unittest.TestCase):
             errors = browser.validate_all(
                 root,
                 project / "docs/verification/assets",
+                project / "dist",
             )
 
         self.assertIn("scenario order", " ".join(errors))
+
+    def test_old_browser_evidence_fails_for_changed_dist_html(self) -> None:
+        project = Path(__file__).parents[1]
+        evidence = project / "docs/verification/evidence"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            copied_evidence = root / "evidence"
+            copied_dist = root / "dist"
+            copied_evidence.mkdir()
+            shutil.copytree(project / "dist", copied_dist)
+            for path in evidence.glob("browser-*.json"):
+                shutil.copy2(path, copied_evidence / path.name)
+
+            self.assertEqual(
+                browser.validate_all(
+                    copied_evidence,
+                    project / "docs/verification/assets",
+                    copied_dist,
+                ),
+                [],
+            )
+            html = copied_dist / "projects/omnipet/index.html"
+            html.write_text(
+                html.read_text(encoding="utf-8") + "\n<!-- changed build -->\n",
+                encoding="utf-8",
+            )
+
+            errors = browser.validate_all(
+                copied_evidence,
+                project / "docs/verification/assets",
+                copied_dist,
+            )
+
+        self.assertIn("dist HTML digest mismatch", " ".join(errors))
+
+    def test_browser_evidence_without_build_binding_fails_cleanly(self) -> None:
+        project = Path(__file__).parents[1]
+        evidence = project / "docs/verification/evidence"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for path in evidence.glob("browser-*.json"):
+                if path.name != "browser-build.json":
+                    shutil.copy2(path, root / path.name)
+
+            errors = browser.validate_all(
+                root,
+                project / "docs/verification/assets",
+                project / "dist",
+            )
+
+        self.assertIn(
+            "browser-build.json: evidence is missing",
+            errors,
+        )
 
     def test_matrix_rejects_reordered_or_unsuccessful_scenario(self) -> None:
         project = Path(__file__).parents[1]

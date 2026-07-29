@@ -39,6 +39,7 @@ def main() -> int:
         browser.validate_all(
             portfolio / "docs/verification/evidence",
             portfolio / "docs/verification/assets",
+            args.dist_root or portfolio / "dist",
         )
     )
     errors.extend(privacy.scan_dist(args.dist_root or portfolio / "dist"))

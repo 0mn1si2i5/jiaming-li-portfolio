@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "html": [
+    {
+      "path": "index.html",
+      "sha256": "e94fd8d5262be327213c9cbd45682af693d2d56a5acf25a7641b1b49dd10bc1a"
+    },
+    {
+      "path": "projects/mundus/index.html",
+      "sha256": "ee68bf5e9d940a41b039a5a167b043b147ae2068509e456e1db0b59139580016"
+    },
+    {
+      "path": "projects/omnipet/index.html",
+      "sha256": "e0877279f073ba59a3fb494bbf6e06418681a385ad0e79f01598407ba1261d5a"
+    }
+  ]
+}

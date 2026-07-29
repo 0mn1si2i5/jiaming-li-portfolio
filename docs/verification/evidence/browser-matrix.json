@@ -1,125 +1,129 @@
 {
+  "schemaVersion": 1,
   "scenarios": [
     {
-      "brokenImageCount": 0,
-      "locale": "en",
-      "other": [
-        "Side B",
-        "RSZ Namelist"
-      ],
-      "overflow": false,
-      "reducedMotion": false,
-      "route": "/",
       "scenario": "home-en-light-desktop",
-      "selected": [
-        "DialogTree",
-        "Mundus",
-        "OmniPet",
-        "NBTI"
-      ],
+      "route": "/",
+      "locale": "en",
       "theme": "light",
       "viewport": {
-        "height": 900,
-        "width": 1440
-      }
-    },
-    {
-      "brokenImageCount": 0,
-      "decodedImageCount": 5,
-      "focusableCount": 27,
-      "locale": "zh",
-      "other": [
-        "Side B",
-        "RSZ Namelist"
-      ],
+        "width": 1440,
+        "height": 900
+      },
       "overflow": false,
-      "reducedMotion": true,
-      "route": "/",
-      "scenario": "home-zh-dark-tablet",
+      "brokenImageCount": 0,
+      "reducedMotion": false,
       "selected": [
         "DialogTree",
         "Mundus",
         "OmniPet",
         "NBTI"
       ],
-      "theme": "dark",
-      "viewport": {
-        "height": 1024,
-        "width": 768
-      }
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ]
     },
     {
-      "activeAnimationCount": 0,
-      "brokenImageCount": 0,
+      "scenario": "home-zh-dark-tablet",
+      "route": "/",
       "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
       "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 5,
       "reducedMotion": true,
-      "route": "/projects/mundus",
+      "focusableCount": 27,
+      "selected": [
+        "DialogTree",
+        "Mundus",
+        "OmniPet",
+        "NBTI"
+      ],
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ]
+    },
+    {
       "scenario": "mundus-zh-dark-desktop",
-      "theme": "dark",
-      "viewport": {
-        "height": 900,
-        "width": 1440
-      },
-      "visibleTextLength": 959,
-      "decodedImageCount": 2,
-      "productVisualCount": 1,
-      "totalImageCount": 2
-    },
-    {
-      "activeAnimationCount": 0,
-      "brokenImageCount": 0,
-      "locale": "zh",
-      "overflow": false,
-      "reducedMotion": true,
       "route": "/projects/mundus",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 2,
+      "reducedMotion": true,
+      "activeAnimationCount": 0,
+      "visibleTextLength": 916,
+      "totalImageCount": 2,
+      "productVisualCount": 1,
+      "focusableCount": 12
+    },
+    {
       "scenario": "mundus-zh-dark-mobile",
+      "route": "/projects/mundus",
+      "locale": "zh",
       "theme": "dark",
       "viewport": {
-        "height": 844,
-        "width": 390
+        "width": 390,
+        "height": 844
       },
-      "visibleTextLength": 956,
+      "overflow": false,
+      "brokenImageCount": 0,
       "decodedImageCount": 2,
+      "reducedMotion": true,
+      "activeAnimationCount": 0,
+      "visibleTextLength": 913,
+      "totalImageCount": 2,
       "productVisualCount": 1,
-      "totalImageCount": 2
+      "focusableCount": 12
     },
     {
-      "activeAnimationCount": 0,
-      "brokenImageCount": 0,
-      "locale": "zh",
-      "overflow": false,
-      "reducedMotion": true,
-      "route": "/projects/omnipet",
       "scenario": "omnipet-zh-dark-desktop",
+      "route": "/projects/omnipet",
+      "locale": "zh",
       "theme": "dark",
       "viewport": {
-        "height": 900,
-        "width": 1440
+        "width": 1440,
+        "height": 900
       },
-      "visibleTextLength": 1212,
+      "overflow": false,
+      "brokenImageCount": 0,
       "decodedImageCount": 2,
+      "reducedMotion": true,
+      "activeAnimationCount": 0,
+      "visibleTextLength": 1294,
+      "totalImageCount": 2,
       "productVisualCount": 1,
-      "totalImageCount": 2
+      "focusableCount": 12
     },
     {
-      "activeAnimationCount": 0,
-      "brokenImageCount": 0,
-      "locale": "zh",
-      "overflow": false,
-      "reducedMotion": true,
-      "route": "/projects/omnipet",
       "scenario": "omnipet-zh-dark-mobile",
+      "route": "/projects/omnipet",
+      "locale": "zh",
       "theme": "dark",
       "viewport": {
-        "height": 844,
-        "width": 390
+        "width": 390,
+        "height": 844
       },
-      "visibleTextLength": 1209,
+      "overflow": false,
+      "brokenImageCount": 0,
       "decodedImageCount": 2,
+      "reducedMotion": true,
+      "activeAnimationCount": 0,
+      "visibleTextLength": 1291,
+      "totalImageCount": 2,
       "productVisualCount": 1,
-      "totalImageCount": 2
+      "focusableCount": 12
     }
-  ],
-  "schemaVersion": 1
+  ]
 }

@@ -30,8 +30,12 @@
           "source": "src/components/MundusStory.astro",
           "rules": [
             {
-              "type": "contains",
-              "value": "Three useful ways to look"
+              "type": "contains_all",
+              "values": [
+                "Other Side",
+                "Development, Unpacked",
+                "Sunline"
+              ]
             }
           ]
         }
@@ -41,15 +45,70 @@
         "source": "README.md",
         "rules": [
           {
-            "type": "contains",
-            "value": "three modes:"
+            "type": "contains_all",
+            "values": [
+              "The V1 scope is intentionally limited to three modes:",
+              "Other Side",
+              "Development, Unpacked",
+              "Sunline"
+            ]
           }
         ]
       }
     },
     {
-      "id": "mundus-versioned-extensions",
-      "description": "Modes are versioned registered extensions with state and data.",
+      "id": "mundus-shared-globe-platform",
+      "description": "The three lenses share one globe platform.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "modes share one WebGL globe, geographic interaction model, and bilingual interface"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "三种模式共用一套 WebGL 地球、地理交互模型和双语界面"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "extensions of the same platform underneath"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "repository": "Mundus",
+        "source": "README.md",
+        "rules": [
+          {
+            "type": "contains_all",
+            "values": [
+              "interactive three-dimensional globe",
+              "three different scientific lenses",
+              "Globe kernel and domain-oriented modes"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mundus-versioned-mode-contract",
+      "description": "Registered modes declare versioned state and data contracts.",
       "claims": [
         {
           "locale": "en",
@@ -70,6 +129,16 @@
               "value": "注册式、带版本的扩展都声明自身状态与数据依赖"
             }
           ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "Registered modes declare a version, scientific category, state schema, and data resources"
+            }
+          ]
         }
       ],
       "evidence": {
@@ -77,88 +146,13 @@
         "source": "src/features/modes/modeRegistry.ts",
         "rules": [
           {
-            "type": "contains",
-            "value": "version: 1;"
-          },
-          {
-            "type": "contains",
-            "value": "stateSchema"
-          }
-        ]
-      }
-    },
-    {
-      "id": "mundus-provenance-registry",
-      "description": "The platform carries data provenance and boundary policy.",
-      "claims": [
-        {
-          "locale": "en",
-          "source": "src/content/projects/mundus.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats"
-            }
-          ]
-        },
-        {
-          "locale": "zh",
-          "source": "src/content/projects/mundus.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "数据注册表记录来源、许可、转换、哈希、缺失值策略与边界说明"
-            }
-          ]
-        }
-      ],
-      "evidence": {
-        "repository": "Mundus",
-        "source": "src/data/registry.ts",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "missingValuePolicy: z.string().min(1)"
-          },
-          {
-            "type": "contains",
-            "value": "boundaryPolicy: z.string().min(1)"
-          }
-        ]
-      }
-    },
-    {
-      "id": "mundus-shared-fallbacks",
-      "description": "New lenses reuse shared interaction and rendering fallbacks.",
-      "claims": [
-        {
-          "locale": "en",
-          "source": "src/content/projects/mundus.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "reuses the scene, camera, picking, provenance, validation, quality loading, and raster fallback"
-            }
-          ]
-        },
-        {
-          "locale": "zh",
-          "source": "src/content/projects/mundus.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "复用场景、相机、拾取、来源记录、验证、质量加载和栅格回退"
-            }
-          ]
-        }
-      ],
-      "evidence": {
-        "repository": "Mundus",
-        "source": "README.md",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "failure fallback"
+            "type": "contains_all",
+            "values": [
+              "version: 1;",
+              "category: 'spatial' | 'human' | 'temporal'",
+              "resources: readonly string[]",
+              "stateSchema: z.ZodType"
+            ]
           }
         ]
       }
@@ -186,22 +180,40 @@
               "value": "数据集范围、制图边界与太阳近似都作为明确限制呈现"
             }
           ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "Keep limits visible"
+            }
+          ]
         }
       ],
       "evidence": {
         "repository": "Mundus",
-        "source": "DATA_SOURCES.md",
+        "source": "README.md",
         "rules": [
           {
-            "type": "contains",
-            "value": "NOAA/Meeus-style approximations"
+            "type": "contains_all",
+            "values": [
+              "cartographic representation, not a legal",
+              "solar results are educational",
+              "navigational"
+            ]
+          },
+          {
+            "type": "regex",
+            "value": "engineering\\s+advice"
           }
         ]
       }
     },
     {
       "id": "omnipet-open-engine",
-      "description": "OmniPet is an open-source sprite v2 production engine.",
+      "description": "OmniPet is the open-source sprite v2 production engine.",
       "claims": [
         {
           "locale": "en",
@@ -222,22 +234,32 @@
               "value": "面向 sprite v2 生产的开源 Python 引擎与 CLI"
             }
           ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "open-source sprite v2 engine"
+            }
+          ]
         }
       ],
       "evidence": {
         "repository": "OmniPet",
-        "source": "README.md",
+        "source": "README.en.md",
         "rules": [
           {
             "type": "contains",
-            "value": "桌宠 sprite v2 的开源引擎"
+            "value": "OmniPet is the open-source engine for generating, QAing, repairing, packaging, and releasing v2 desktop-pet sprites"
           }
         ]
       }
     },
     {
-      "id": "omnipet-resumable-review",
-      "description": "The workflow resumes at human decisions and does not auto-retry failures.",
+      "id": "omnipet-bounded-review",
+      "description": "Failures remain visible and work advances through bounded reviewed actions.",
       "claims": [
         {
           "locale": "en",
@@ -258,44 +280,14 @@
               "value": "保留失败结果而不自动重试，在关键节点暂停并等待明确审查"
             }
           ]
-        }
-      ],
-      "evidence": {
-        "repository": "OmniPet",
-        "source": "docs/architecture.md",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "There is no automatic retry"
-          },
-          {
-            "type": "contains",
-            "value": "approval"
-          }
-        ]
-      }
-    },
-    {
-      "id": "omnipet-transactional-repair",
-      "description": "Repair preserves unaffected upstream work.",
-      "claims": [
-        {
-          "locale": "en",
-          "source": "src/content/projects/omnipet.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "repair a selected job while preserving unaffected upstream work"
-            }
-          ]
         },
         {
-          "locale": "zh",
-          "source": "src/content/projects/omnipet.mdx",
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
           "rules": [
             {
               "type": "contains",
-              "value": "修复指定任务而保留不受影响的上游成果"
+              "value": "keeps failures visible, pauses for explicit review, and resumes through bounded actions"
             }
           ]
         }
@@ -303,69 +295,220 @@
       "evidence": {
         "repository": "OmniPet",
         "source": "docs/architecture.md",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "Repair archives the selected completed or failed visual job transactionally"
-          }
-        ]
-      }
-    },
-    {
-      "id": "omnipet-manifest-extension-flow",
-      "description": "Manifest-driven projects expose separate validation and release steps.",
-      "claims": [
-        {
-          "locale": "en",
-          "source": "src/content/projects/omnipet.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "Manifest-driven projects make adding a pet repeatable"
-            },
-            {
-              "type": "contains_all",
-              "values": [
-                "pet validate",
-                "package --check",
-                "release export",
-                "release verify"
-              ]
-            }
-          ]
-        },
-        {
-          "locale": "zh",
-          "source": "src/content/projects/omnipet.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "清单驱动让新增桌宠成为可重复流程"
-            },
-            {
-              "type": "contains_all",
-              "values": [
-                "pet validate",
-                "package --check",
-                "release export",
-                "release verify"
-              ]
-            }
-          ]
-        }
-      ],
-      "evidence": {
-        "repository": "OmniPet",
-        "source": "README.en.md",
         "rules": [
           {
             "type": "contains_all",
             "values": [
-              "omnipet pet init",
-              "omnipet pet validate",
-              "omnipet package my-pet --check",
-              "omnipet release export",
-              "omnipet release verify"
+              "There is no automatic retry",
+              "workflow advances one bounded action at a time",
+              "approval pause"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "omnipet-manifest-contract",
+      "description": "The project manifest defines identity, sprite requirements, and release inputs.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "manifest defines identity, sprite requirements, and release inputs"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "清单声明身份、精灵要求与发布输入"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "project manifest defines pet identity, sprite requirements, and release inputs"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "docs/pet-project-format.md",
+        "rules": [
+          {
+            "type": "contains_all",
+            "values": [
+              "`pet.yaml` uses `schema_version: 1`",
+              "hatch_engine.minimum_sprite_version",
+              "`release` manifest block declares"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "omnipet-action-contract",
+      "description": "Available actions are bound to the current run revision.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "versioned action contract binds each available next action to the current run revision"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "带版本的动作契约将每个可用的下一步绑定到当前运行修订"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "versioned action contract binds available next actions to the current run revision"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "src/omnipet/actions.py",
+        "rules": [
+          {
+            "type": "contains_all",
+            "values": [
+              "\"action_contract_version\": 1",
+              "\"run_revision\": revision",
+              "\"actions\": actions",
+              "contract[\"run_revision\"] != run_revision"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "omnipet-validation-steps",
+      "description": "Project and package checks are separate release gates.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains_all",
+              "values": [
+                "`pet validate`",
+                "`package --check`"
+              ]
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains_all",
+              "values": [
+                "`pet validate`",
+                "`package --check`"
+              ]
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "project and package checks run before release"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "src/omnipet/cli.py",
+        "rules": [
+          {
+            "type": "contains_all",
+            "values": [
+              "pet_commands.add_parser(\"validate\")",
+              "commands.add_parser(\"package\")",
+              "package_mode.add_argument(\"--check\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "omnipet-publication-path",
+      "description": "Export and independent verification precede catalog publication.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "use `release verify` independently before publishing to the public catalog"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/omnipet.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "在发布到公共目录前独立使用 `release verify`"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "Export and independently verify the public bundle before publishing it to the catalog"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "repository": "OmniPets",
+        "source": "README.md",
+        "rules": [
+          {
+            "type": "contains_all",
+            "values": [
+              "omnipet release export <pet-id>",
+              "omnipet release verify release-work/<pet-id>",
+              "公开 CI 会在没有 provider key 和私有仓凭据的环境中独立运行"
             ]
           }
         ]
@@ -373,7 +516,7 @@
     },
     {
       "id": "omnipet-provider-boundary",
-      "description": "The current engine permits one built-in provider and no arbitrary configuration.",
+      "description": "The Alpha supports one built-in provider and no arbitrary provider configuration.",
       "claims": [
         {
           "locale": "en",
@@ -381,7 +524,7 @@
           "rules": [
             {
               "type": "contains",
-              "value": "one allowlisted built-in image provider and does not expose arbitrary provider or model configuration"
+              "value": "one allowlisted built-in image provider and does not expose arbitrary provider, endpoint, or model configuration"
             }
           ]
         },
@@ -391,47 +534,17 @@
           "rules": [
             {
               "type": "contains",
-              "value": "一个白名单内置图像 provider，不开放任意 provider 或模型配置"
-            }
-          ]
-        }
-      ],
-      "evidence": {
-        "repository": "OmniPet",
-        "source": "docs/architecture.md",
-        "rules": [
-          {
-            "type": "contains",
-            "value": "allowlisted `gpt-image-2` model"
-          },
-          {
-            "type": "contains",
-            "value": "cannot configure credentials, custom endpoints, or arbitrary models"
-          }
-        ]
-      }
-    },
-    {
-      "id": "omnipet-closed-release",
-      "description": "Public export and verification exclude production access.",
-      "claims": [
-        {
-          "locale": "en",
-          "source": "src/content/projects/omnipet.mdx",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "Export and independent verification keep generation credentials and production context out of the public handoff"
+              "value": "一个白名单内置图像 provider，不开放任意 provider、端点或模型配置"
             }
           ]
         },
         {
-          "locale": "zh",
-          "source": "src/content/projects/omnipet.mdx",
+          "locale": "story",
+          "source": "src/components/OmniPetStory.astro",
           "rules": [
             {
               "type": "contains",
-              "value": "导出与独立验证让生成凭据和生产上下文留在公开交付之外"
+              "value": "one allowlisted built-in image provider; arbitrary provider, endpoint, or model configuration is not exposed"
             }
           ]
         }
@@ -441,12 +554,11 @@
         "source": "docs/architecture.md",
         "rules": [
           {
-            "type": "contains",
-            "value": "allowlisted bundle"
-          },
-          {
-            "type": "contains",
-            "value": "requires no provider credentials or production project"
+            "type": "contains_all",
+            "values": [
+              "allowlisted `gpt-image-2` model",
+              "cannot configure credentials, custom endpoints, or arbitrary models"
+            ]
           }
         ]
       }
@@ -491,12 +603,11 @@
         "source": "README.md",
         "rules": [
           {
-            "type": "contains",
-            "value": "Alpha（`0.1.0a1`）"
-          },
-          {
-            "type": "contains",
-            "value": "请在正式使用前检查生成结果"
+            "type": "contains_all",
+            "values": [
+              "Alpha（`0.1.0a1`）",
+              "请在正式使用前检查生成结果"
+            ]
           }
         ]
       }
@@ -541,12 +652,11 @@
         "source": "README.md",
         "rules": [
           {
-            "type": "contains",
-            "value": "当前示例：SuShi v1.0.1"
-          },
-          {
-            "type": "contains",
-            "value": "完整 sprite v2 示例"
+            "type": "contains_all",
+            "values": [
+              "当前示例：SuShi v1.0.1",
+              "完整 sprite v2 示例"
+            ]
           }
         ]
       }

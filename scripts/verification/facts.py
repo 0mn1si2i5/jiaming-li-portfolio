@@ -80,6 +80,24 @@ def load_rules(path: Path) -> list[dict[str, object]]:
     rules = value.get("assertions")
     if value.get("schemaVersion") != 2 or not isinstance(rules, list):
         raise ValueError("invalid fact assertion catalog")
+    for assertion in rules:
+        claims = assertion.get("claims")
+        evidence = assertion.get("evidence")
+        if (
+            not isinstance(claims, list)
+            or len(claims) != 3
+            or {claim.get("locale") for claim in claims}
+            != {"en", "zh", "story"}
+        ):
+            raise ValueError(
+                "each fact assertion requires en, zh, and story claims"
+            )
+        if (
+            not isinstance(evidence, dict)
+            or not isinstance(evidence.get("rules"), list)
+            or not evidence["rules"]
+        ):
+            raise ValueError("each fact assertion requires public evidence")
     return rules
 
 

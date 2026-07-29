@@ -32,7 +32,7 @@ A convincing generated image is not yet a desktop pet. Identity must survive mul
 
 OmniPet is an open-source Python engine and CLI for sprite v2 production. Its bounded workflow keeps failed work visible instead of retrying automatically, pauses for explicit review, and can repair a selected job while preserving unaffected upstream work.
 
-Manifest-driven projects make adding a pet repeatable: the manifest defines identity, sprite requirements, and release inputs. To add behavior, maintainers extend action definitions in the engine's versioned contract; creators can then run `pet validate`, `package --check`, `release export`, and `release verify` as separate steps. This is code-and-manifest extensibility, not a runtime plug-in system. The current engine supports one allowlisted built-in image provider and does not expose arbitrary provider or model configuration.
+Manifest-driven projects make adding a pet repeatable: the manifest defines identity, sprite requirements, and release inputs. A versioned action contract binds each available next action to the current run revision. Creators can run `pet validate` and `package --check` before `release export`, then use `release verify` independently before publishing to the public catalog. This is code-and-manifest extensibility, not a runtime plug-in system. The current engine supports one allowlisted built-in image provider and does not expose arbitrary provider, endpoint, or model configuration.
 
 </section>
 
@@ -46,7 +46,7 @@ Manifest-driven projects make adding a pet repeatable: the manifest defines iden
 
 OmniPet 是面向 sprite v2 生产的开源 Python 引擎与 CLI。它以有界工作流保留失败结果而不自动重试，在关键节点暂停并等待明确审查，也能修复指定任务而保留不受影响的上游成果。
 
-清单驱动让新增桌宠成为可重复流程：清单声明身份、精灵要求与发布输入。若要增加行为，维护者需要在带版本的引擎契约中扩展动作定义；创作者随后可分别运行 `pet validate`、`package --check`、`release export` 与 `release verify`。这是一种通过代码与清单实现的扩展方式，并非运行时插件系统。当前引擎仅支持一个白名单内置图像 provider，不开放任意 provider 或模型配置。
+清单驱动让新增桌宠成为可重复流程：清单声明身份、精灵要求与发布输入。带版本的动作契约将每个可用的下一步绑定到当前运行修订。创作者可以先运行 `pet validate` 与 `package --check`，再执行 `release export`，并在发布到公共目录前独立使用 `release verify`。这是一种通过代码与清单实现的扩展方式，并非运行时插件系统。当前引擎仅支持一个白名单内置图像 provider，不开放任意 provider、端点或模型配置。
 
 </section>
 

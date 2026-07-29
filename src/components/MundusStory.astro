@@ -1,11 +1,6 @@
 ---
 import Localized from './Localized.astro';
 
-const modes = [
-  { index: '01', title: { en: 'Other Side', zh: '地球另一端' }, detail: { en: 'Spherical relationships', zh: '球面空间关系' } },
-  { index: '02', title: { en: 'Development, Unpacked', zh: '发展的不同侧面' }, detail: { en: 'Human evidence layers', zh: '人类发展证据层' } },
-  { index: '03', title: { en: 'Sunline', zh: '日照线' }, detail: { en: 'Time and sunlight', zh: '时间与日照变化' } },
-];
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
@@ -26,9 +21,9 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       loading="lazy"
     />
     <figcaption>
-      {modes.map((mode) => (
-        <span><small>{mode.index}</small><strong><Localized {...mode.title} /></strong><em><Localized {...mode.detail} /></em></span>
-      ))}
+      <span><small>01</small><strong><Localized en="Other Side" zh="地球另一端" /></strong><em><Localized en="Spherical relationships" zh="球面空间关系" /></em></span>
+      <span><small>02</small><strong><Localized en="Development, Unpacked" zh="发展的不同侧面" /></strong><em><Localized en="Human evidence layers" zh="人类发展证据层" /></em></span>
+      <span><small>03</small><strong><Localized en="Sunline" zh="日照线" /></strong><em><Localized en="Time and sunlight" zh="时间与日照变化" /></em></span>
     </figcaption>
   </figure>
 
@@ -36,6 +31,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
     <div class="platform-copy">
       <p class="eyebrow"><Localized en="Shared platform" zh="共享平台" /></p>
       <h3><Localized en="Add a lens, not another globe." zh="增加一种观察方式，而不是再造一个地球。" /></h3>
+      <p><Localized en="Registered modes declare a version, scientific category, state schema, and data resources while sharing one globe." zh="注册模式声明版本、科学类别、状态结构与数据资源，同时共享同一个地球。" /></p>
       <p id="mundus-extension-label" class="sr-only"><Localized en="Mundus extension contract" zh="Mundus 扩展契约" /></p>
       <ol aria-labelledby="mundus-extension-label">
         <li><Localized en="Declare the question" zh="声明观察问题" /></li>
@@ -71,7 +67,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   h3 { margin: .8rem 0 1rem; font-size: clamp(2rem, 4vw, 3.4rem); }
   header > p:last-child, .platform-copy > p { color: var(--muted); line-height: 1.65; }
   .overview-visual { margin: clamp(2.5rem, 6vw, 5rem) 0 0; }
-  .overview-visual img, .platform-moment img { display: block; width: 100%; object-fit: cover; border: 1px solid var(--line); background: #090b0a; }
+  .overview-visual img { display: block; width: 100%; object-fit: cover; border: 1px solid var(--line); background: #090b0a; }
   .overview-visual img { aspect-ratio: 4 / 3; }
   .overview-visual figcaption { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
   .overview-visual figcaption > span { display: grid; gap: .25rem; padding: 1rem; border-right: 1px solid var(--line); }
@@ -85,7 +81,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .platform-copy li::before { content: '0' counter(step); color: var(--signal); font-size: .68rem; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   @media (max-width: 1024px) {
-    .overview-visual figcaption, .platform-moment { grid-template-columns: 1fr; }
+    .overview-visual figcaption { grid-template-columns: 1fr; }
     .overview-visual figcaption > span { border-right: 0; border-bottom: 1px solid var(--line); }
     .overview-visual figcaption > span:last-child { border-bottom: 0; }
   }

@@ -2,39 +2,39 @@
   "schemaVersion": 1,
   "screenshots": [
     {
-      "height": 4558,
-      "path": "task7-home-en-light-1440x900.webp",
       "scenario": "home-en-light-desktop",
-      "sha256": "fb7ae7c0278566cf186d78dbd47191d96089c5b44b07029c1c330cdca6046b7e",
-      "width": 1200
+      "path": "task7-home-en-light-1440x900.webp",
+      "width": 1440,
+      "height": 5470,
+      "sha256": "54ed376a4fb98ef0362863654829adc1835e13ac0f893cb8557f3a3631eb8ec4"
     },
     {
-      "height": 4494,
-      "path": "task7-mundus-zh-dark-reduced-1440x900.webp",
       "scenario": "mundus-zh-dark-desktop",
-      "sha256": "72fedc5d1bdebde3c5b48566ecdbb55d77d37afd4fda4bd6c446868dcba6c7ef",
-      "width": 1200
+      "path": "task7-mundus-zh-dark-reduced-1440x900.webp",
+      "width": 1440,
+      "height": 5322,
+      "sha256": "fde98ffd155f434f8de06d26854ccdf80d35a90b40b73618f078f591e06bfee0"
     },
     {
-      "height": 4538,
-      "path": "task7-mundus-zh-dark-reduced-390x844.webp",
       "scenario": "mundus-zh-dark-mobile",
-      "sha256": "9bd138692fbd0151f42f81b7fbb0452e5d0611f48ed7fed69c75f0ac3fb0e3c1",
-      "width": 390
+      "path": "task7-mundus-zh-dark-reduced-390x844.webp",
+      "width": 390,
+      "height": 4422,
+      "sha256": "287666a3796a22edb3e2fac3da46102c52b84bcb4fab0bda90115ebe735d5262"
     },
     {
-      "height": 4404,
-      "path": "task7-omnipet-zh-dark-reduced-1440x900.webp",
       "scenario": "omnipet-zh-dark-desktop",
-      "sha256": "a05397f8c2f7e0d4036bec16857e7d514e6ac99df1f029bc802ddd856f60253c",
-      "width": 1200
+      "path": "task7-omnipet-zh-dark-reduced-1440x900.webp",
+      "width": 1440,
+      "height": 5394,
+      "sha256": "48f535025d5c278f7750cf2965b67a885417437f0dbd693c6e1913cdba708eeb"
     },
     {
-      "height": 4994,
-      "path": "task7-omnipet-zh-dark-reduced-390x844.webp",
       "scenario": "omnipet-zh-dark-mobile",
-      "sha256": "a2615453fa6a26a80183dd52e53bac55e2410a19ff3925ff06166908840f243d",
-      "width": 390
+      "path": "task7-omnipet-zh-dark-reduced-390x844.webp",
+      "width": 390,
+      "height": 5076,
+      "sha256": "214f88170c6ca23a277ba352498ce43a2e0802884ab492f80193e683cb683a98"
     }
   ]
 }

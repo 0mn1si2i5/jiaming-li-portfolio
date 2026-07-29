@@ -1,13 +1,14 @@
 # Task 7 Release Verification
 
-Verified on 2026-07-29 against branch `feat/mundus-omnipet-portfolio`. The
-publishing-rule baseline is `21c919b`; the first retained-evidence baseline is
-`942dd12`. The verification used Node.js `v22.23.1`, npm `10.9.8`, Astro
-`7.0.7`, and `agent-browser 0.27.0` driving Chrome.
+Verified on 2026-07-29 against the current production build on branch
+`feat/mundus-omnipet-portfolio`. Browser evidence is bound to deterministic
+SHA-256 digests of the relevant built HTML, not to a portfolio commit hash.
+The verification used Node.js `v22.23.1`, npm `10.9.8`, Astro `7.0.7`, and
+`agent-browser 0.27.0` driving Chrome.
 
 ## Result
 
-Task 7 passes. The production build succeeds, all five project detail routes
+Task 7 passes. The production build succeeds, all seven static pages
 are emitted, the generated site contains none of the scanned private terms or
 remote font hosts, the browser acceptance matrix passes without console errors
 or failed requests, every approved public link reaches the expected
@@ -99,8 +100,8 @@ to the repository.
 | Viewport | Locale | Theme | Reduced motion | Page | Result |
 | --- | --- | --- | --- | --- | --- |
 | 1440 x 900 | English | Light | Off | Homepage | Selected Work and Other Work order correct; no overflow or broken images |
-| 1440 x 900 | Chinese | Dark | On | Mundus | Product-first narrative and two visuals; no animation, overflow, or broken images |
-| 1440 x 900 | Chinese | Dark | On | OmniPet | Product-first narrative, two visuals, and two approved public links; no animation, overflow, or broken images |
+| 1440 x 900 | Chinese | Dark | On | Mundus | Product-first narrative, two page images, and one Story visual; no animation, overflow, or broken images |
+| 1440 x 900 | Chinese | Dark | On | OmniPet | Product-first narrative, two page images, and one Story visual; no animation, overflow, or broken images |
 | 768 x 1024 | Chinese | Dark | On | Homepage | Correct localized order and alternatives; 27 visible focusable controls; all lazy images decode |
 | 390 x 844 | Chinese | Dark | On | Mundus | Product problem precedes overview; no animation, clipped text, overflow, or broken images |
 | 390 x 844 | Chinese | Dark | On | OmniPet | Product problem precedes engine overview; no animation, overflow, or broken images |
@@ -217,9 +218,9 @@ HOME=/tmp/task7-evidence/browser-home \
 Observed:
 
 - Console output: empty, `0` bytes.
-- Recorded requests: `117`.
-- Status `200`: `87`.
-- Status `304`: `30`.
+- Recorded requests: `95`.
+- Status `200`: `76`.
+- Status `304`: `19`.
 - Other statuses or failed requests: `0`.
 - Documents, CSS, local WOFF2 files, favicon, and project images all loaded
   successfully.
@@ -231,11 +232,13 @@ by this report:
 
 - [Acceptance matrix](evidence/browser-matrix.json): six page, viewport,
   locale, theme, image, focus, and overflow scenarios.
+- [Build binding](evidence/browser-build.json): deterministic SHA-256 digests
+  for the homepage, Mundus, and OmniPet HTML emitted by the current build.
 - [Reduced-motion observations](evidence/browser-reduced-motion.json): four
   Mundus and OmniPet desktop/mobile observations.
 - [Console observations](evidence/browser-console.json): zero messages, errors,
   or warnings.
-- [Network observations](evidence/browser-network.json): 117 normalized
+- [Network observations](evidence/browser-network.json): 95 normalized
   requests, status and resource-type counts, and an empty failure list.
 - [Screenshot manifest](evidence/browser-screenshots.json): five retained
   captures with scenario, dimensions, and SHA-256.
@@ -245,10 +248,12 @@ labels, and aggregate values. It excludes browser profile data, request IDs,
 headers, query secrets, filesystem paths, and host-specific user information.
 The unified validator checks schema versions, required scenarios, console and
 network aggregate consistency, reduced-motion/matrix agreement, screenshot
-dimensions, and screenshot hashes. Scenario order and every required success
-field are mandatory; all requests must be successful, failure lists must be
-empty, and console messages must use structured levels while the retained
-release evidence remains warning- and error-free.
+dimensions, screenshot hashes, and current `dist` HTML digests. Scenario order
+and every required success field are mandatory; all requests must be successful,
+failure lists must be empty, and console messages must use structured levels
+while the retained release evidence remains warning- and error-free. Rebuilding
+the same sources reproduces the HTML digests; changing any bound HTML byte makes
+the retained browser evidence fail without introducing a commit-hash cycle.
 Each of the six matrix scenarios is bound to its exact route, locale, theme,
 viewport, and reduced-motion value; changing a valid field to another valid
 value still fails verification.
@@ -300,21 +305,19 @@ corresponding evidence must exist in the pinned public source revision.
 
 | Public evidence | Claims checked |
 | --- | --- |
-| `README.md` | Three-mode public scope; 110m/50m vector quality and raster fallback |
-| `src/features/modes/modeRegistry.ts` | Three registered modes; spatial, human, and temporal categories; versioned Zod state; data resources |
-| `src/features/sunline/solar.ts` | 2000-2099 range; minute precision; `-0.833` degree sunrise altitude; daylight, civil twilight, polar day, and polar night |
-| `src/data/registry.ts` | Manifest validation for source, license, SHA-256, transformations, missing-value and boundary policies, geometry metrics |
-| `DATA_SOURCES.md` | 6,944 GeoNames records; UNDP 1990-2023 series; Natural Earth 110m/50m policy; NOAA/Meeus-style approximation and limitations |
+| `README.md` | Three-mode public scope; one globe viewed through three scientific lenses; explicit educational and cartographic limits |
+| `src/features/modes/modeRegistry.ts` | Registered mode version, scientific category, state schema, and data resources |
 
 ### OmniPet
 
 | Public evidence | Claims checked |
 | --- | --- |
-| `README.md` | Alpha status; Python engine and CLI; resumable state; approval, QA, packaging, export, and verification |
-| `docs/architecture.md` | No automatic retry; transactional repair; downstream invalidation; allowlisted provider; clean public boundary |
-| `docs/generation-workflow.md` | Nine standard rows plus two look rows; 8 x 11 atlas; exact 1536 x 2288 dimensions; explicit approval gates |
-| `src/omnipet/public_release.py` | Closed release file set; canonical release record; SHA-256 binding; extra-file and private-material rejection |
-| OmniPets `README.md` and `catalog/index.json` | SuShi v1.0.1; sprite v2; public preview, atlas, manifest, documentation, license, and hashes |
+| `README.md` / `README.en.md` | Open-source sprite v2 engine and Alpha review boundary |
+| `docs/pet-project-format.md` | Manifest identity, sprite requirement, and release-input contract |
+| `src/omnipet/actions.py` | Versioned next-action contract bound to the current run revision |
+| `src/omnipet/cli.py` | Separate project validation and package-check commands |
+| `docs/architecture.md` | Bounded review behavior and the built-in provider/model boundary |
+| OmniPets `README.md` | Export, independent verification, catalog publication, and SuShi v1.0.1 |
 
 The unified release verifier checks 13 atomic, product-level facts:
 
@@ -324,10 +327,11 @@ npm run verify
 
 The 13 rules live in `scripts/verification/facts.json`. Each item contains
 separate claim and evidence sources. The product-focused revision keeps 13
-pinned product-evidence checks but binds them to concise, visitor-visible claims about
-platform contracts, reproducibility, recoverability, release boundaries, and
-public outcomes; low-level source evidence no longer forces an algorithm or
-atlas-dimension exhibition into the page. MDX checks remove frontmatter,
+pinned product-evidence checks but binds them to concise, visitor-visible claims
+about platform contracts, manifest/action contracts, validation, publication,
+provider boundaries, and public outcomes. Low-level provenance hashes,
+rendering fallbacks, transaction internals, algorithms, and atlas dimensions
+are not release facts. MDX checks remove frontmatter,
 imports, HTML/JSX comments; source
 checks remove comments and unrelated standalone string assignments; JSON
 evidence uses structural `json_path` rules. The latest run returned `13/13`.
@@ -377,11 +381,11 @@ extension-contract exhibition. The replacement keeps:
 - OmniPet: the product problem, resumable review engine, publication boundary,
   Alpha limitation, compact three-step overview, and SuShi release result.
 
-Both Story components now render exactly two images. In Chinese dark mode with
-reduced motion, Mundus reports `924` visible text characters on desktop and
-`921` on mobile; OmniPet reports `1066` and `1063`. The previous retained
-values were `3609` and `2529`, respectively. All four scenarios report two
-product visuals, zero active animations, zero broken images, and no horizontal
+Both Story components render exactly one image, while each full project page
+contains two images including its hero. In Chinese dark mode with reduced
+motion, Mundus reports `916` visible text characters on desktop and `913` on
+mobile; OmniPet reports `1294` and `1291`. All four scenarios report one Story
+product visual, zero active animations, zero broken images, and no horizontal
 overflow. Visual inspection also confirms that the product problem and
 platform/engine capability precede the visual overview in both languages.
 
@@ -392,8 +396,8 @@ public hero plus one Story image. Browser inspection at 1440 x 900 and 390 x
 844 reported `totalImageCount: 2` and `productVisualCount: 1` for both Mundus
 and OmniPet, with zero broken images or horizontal overflow.
 
-At 1024 px, OmniPet's engine flow and outcome each resolved to one CSS grid
-column. At 768 px, Mundus's mode overview resolved to one column. The Chinese
+At 1024 px, OmniPet's engine flow and outcome each resolve to one CSS grid
+column. At 768 px, Mundus's mode overview resolves to one column. The Chinese
 semantic group names resolved to `公开发布属性` and `Mundus 扩展契约`; both are
 provided by localized `aria-labelledby` targets rather than fixed English
 labels.
@@ -401,9 +405,10 @@ labels.
 The fact gate now contains 13 atomic product claims. Every claim binds visible
 English MDX, visible Chinese MDX, Story text, and one reviewed public source at
 a pinned revision. Unshown atlas dimensions, action-row counts, solar
-thresholds, city counts, and other implementation-only details were deleted
-from the release gate. OmniPet's remaining claims explicitly cover the shipped
-extension axes and the single allowlisted built-in provider boundary.
+thresholds, city counts, provenance hashes, transaction internals, and other
+implementation-only details were deleted from the release gate. OmniPet's
+remaining claims explicitly cover the manifest contract, revision-bound action
+contract, validation and publication steps, and built-in provider boundary.
 
 ## Screenshot Evidence
 
@@ -415,18 +420,15 @@ Five optimized full-page WebP captures are retained:
 4. [Chinese/dark OmniPet at 1440 x 900 with reduced motion](assets/task7-omnipet-zh-dark-reduced-1440x900.webp)
 5. [Chinese/dark OmniPet at 390 x 844 with reduced motion](assets/task7-omnipet-zh-dark-reduced-390x844.webp)
 
-The original PNG captures were stored only under `/tmp/task7-evidence`. The
-retained WebP files use quality `82`; desktop captures were reduced to 1200
-pixels wide and mobile captures remain 390 pixels wide. The two review-gap
-captures add approximately 424 KB for Mundus desktop and 320 KB for OmniPet
-mobile.
+The original PNG captures were stored only under `/tmp`. The retained WebP
+files use quality `82`; desktop captures remain 1440 pixels wide and mobile
+captures remain 390 pixels wide.
 
 Conversion command:
 
 ```bash
 node_modules/ffmpeg-static/ffmpeg \
   -y -loglevel error -i <capture.png> \
-  -vf scale=<width>:-2 \
-  -c:v libwebp -quality 82 -compression_level 6 \
+  -c:v libwebp -q:v 82 \
   docs/verification/assets/<capture>.webp
 ```

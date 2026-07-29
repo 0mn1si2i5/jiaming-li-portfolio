@@ -50,6 +50,11 @@ SCREENSHOT_FILES = {
     "omnipet-zh-dark-desktop": "task7-omnipet-zh-dark-reduced-1440x900.webp",
     "omnipet-zh-dark-mobile": "task7-omnipet-zh-dark-reduced-390x844.webp",
 }
+DIST_HTML_FILES = (
+    "index.html",
+    "projects/mundus/index.html",
+    "projects/omnipet/index.html",
+)
 PROJECT_ORDER = ["DialogTree", "Mundus", "OmniPet", "NBTI"]
 OTHER_ORDER = ["Side B", "RSZ Namelist"]
 
@@ -211,8 +216,59 @@ def validate_screenshots(
     return errors
 
 
-def validate_all(evidence_root: Path, assets_root: Path) -> list[str]:
+def validate_dist_html(path: Path, dist_root: Path) -> list[str]:
+    if not path.is_file():
+        return [f"{path.name}: evidence is missing"]
+    manifest = read_json(path)
+    items = manifest.get("html")
+    if not isinstance(items, list):
+        return ["dist HTML entries must be an array"]
+    errors: list[str] = []
+    if [item.get("path") for item in items] != list(DIST_HTML_FILES):
+        errors.append("dist HTML paths are incomplete")
+    root = dist_root.resolve()
+    for item in items:
+        if not isinstance(item, dict):
+            errors.append("dist HTML entry schema is invalid")
+            continue
+        raw_path = str(item.get("path", ""))
+        candidate = Path(raw_path)
+        if (
+            candidate.is_absolute()
+            or ".." in candidate.parts
+            or candidate.as_posix() != raw_path
+        ):
+            errors.append(f"{raw_path}: dist HTML path is unsafe")
+            continue
+        html = dist_root / candidate
+        if html.is_symlink():
+            errors.append(f"{raw_path}: dist HTML symlink is forbidden")
+            continue
+        resolved = html.resolve()
+        if not resolved.is_relative_to(root):
+            errors.append(f"{raw_path}: dist HTML path escapes dist")
+            continue
+        if not resolved.is_file():
+            errors.append(f"{raw_path}: dist HTML is missing")
+            continue
+        digest = hashlib.sha256(resolved.read_bytes()).hexdigest()
+        if digest != item.get("sha256"):
+            errors.append(f"{raw_path}: dist HTML digest mismatch")
+    return errors
+
+
+def validate_all(
+    evidence_root: Path,
+    assets_root: Path,
+    dist_root: Path,
+) -> list[str]:
     errors = validate_network(evidence_root / "browser-network.json")
+    errors.extend(
+        validate_dist_html(
+            evidence_root / "browser-build.json",
+            dist_root,
+        )
+    )
     matrix = read_json(evidence_root / "browser-matrix.json")
     reduced = read_json(evidence_root / "browser-reduced-motion.json")
     console = read_json(evidence_root / "browser-console.json")

@@ -1,11 +1,6 @@
 ---
 import Localized from './Localized.astro';
 
-const flow = [
-  { index: '01', title: { en: 'Describe in the manifest', zh: '在清单中描述' }, copy: { en: 'Define the pet, sprite requirements, and release inputs.', zh: '声明桌宠、精灵要求与发布输入。' } },
-  { index: '02', title: { en: 'Extend actions and validate', zh: '扩展动作并验证' }, copy: { en: 'Add behavior in the engine contract, then check the project and package.', zh: '在引擎契约中增加行为，再检查项目与安装包。' } },
-  { index: '03', title: { en: 'Export, verify, and publish', zh: '导出、验证并发布' }, copy: { en: 'Verify the public bundle independently before it enters the catalog.', zh: '在进入公共目录前独立验证公开包。' } },
-];
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
@@ -17,18 +12,27 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       <span><Localized en="Open-source Alpha" zh="开源 Alpha" /></span>
     </div>
     <h2 id="omnipet-story-title"><Localized en="From uncertain image to bounded release." zh="从不确定图像到有边界的发布。" /></h2>
-    <p><Localized en="A compact path from a declared project to a checked public handoff." zh="从声明项目到经过检查的公开交付，形成一条紧凑路径。" /></p>
+    <p><Localized en="The open-source sprite v2 engine keeps failures visible, pauses for explicit review, and resumes through bounded actions." zh="开源 sprite v2 引擎保留失败结果、等待明确审查，并通过有界动作继续推进。" /></p>
   </header>
 
   <ol class="engine-flow">
-    {flow.map((step) => (
-      <li>
-        <span>{step.index}</span>
-        <h3><Localized {...step.title} /></h3>
-        <p><Localized {...step.copy} /></p>
-      </li>
-    ))}
+    <li>
+      <span>01</span>
+      <h3><Localized en="Describe in the manifest" zh="在清单中描述" /></h3>
+      <p><Localized en="The project manifest defines pet identity, sprite requirements, and release inputs." zh="项目清单声明桌宠身份、精灵要求与发布输入。" /></p>
+    </li>
+    <li>
+      <span>02</span>
+      <h3><Localized en="Follow actions and validate" zh="遵循动作并验证" /></h3>
+      <p><Localized en="A versioned action contract binds available next actions to the current run revision; project and package checks run before release." zh="带版本的动作契约将可用的下一步绑定到当前运行修订；发布前先检查项目与安装包。" /></p>
+    </li>
+    <li>
+      <span>03</span>
+      <h3><Localized en="Export, verify, and publish" zh="导出、验证并发布" /></h3>
+      <p><Localized en="Export and independently verify the public bundle before publishing it to the catalog." zh="导出并独立验证公开包，再发布到公共目录。" /></p>
+    </li>
   </ol>
+  <p class="provider-boundary"><Localized en="Alpha currently supports one allowlisted built-in image provider; arbitrary provider, endpoint, or model configuration is not exposed." zh="Alpha 当前仅支持一个白名单内置图像 provider；不开放任意 provider、端点或模型配置。" /></p>
 
   <section class="outcome" aria-labelledby="omnipet-outcome-title">
     <div class="outcome-copy">
@@ -82,6 +86,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .engine-flow li > span { color: var(--signal); font-size: .68rem; letter-spacing: .1em; }
   .engine-flow h3 { margin: 2rem 0 .6rem; font-size: 1.25rem; letter-spacing: -.02em; }
   .engine-flow p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .provider-boundary { max-width: 760px; margin: 1.25rem 0 0; color: var(--muted); font-size: .82rem; line-height: 1.6; }
   .outcome { display: grid; grid-template-columns: minmax(16rem, .72fr) minmax(0, 1.28fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; margin-top: clamp(4rem, 9vw, 8rem); }
   .outcome h3 { margin: .8rem 0 1rem; font-size: clamp(2rem, 4vw, 3.4rem); }
   .release-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
@@ -95,7 +100,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   figcaption span { color: var(--muted); font-size: .68rem; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   @media (max-width: 1024px) {
-    .engine-flow, .outcome, .result-visuals { grid-template-columns: 1fr; }
+    .engine-flow, .outcome { grid-template-columns: 1fr; }
     .engine-flow li:not(:last-child) { margin-right: 0; border-right: 0; }
     .engine-flow li:not(:last-child)::after { content: '↓'; top: auto; right: .2rem; bottom: -.65rem; }
   }
