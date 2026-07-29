@@ -2,12 +2,12 @@
 
 ## Goal
 
-Add Mundus and OmniPet as substantial bilingual case studies, present both as extensible platforms or engines rather than isolated features, and evolve the portfolio into a coherent digital research exhibition.
+Add Mundus and OmniPet as concise bilingual product case studies, present both as extensible platforms or engines rather than isolated features, and keep the portfolio focused on what each product enables.
 
 The result must:
 
 - explain Mundus as a shared globe platform whose current modes are extensions of a common rendering, state, data, and validation foundation;
-- give Mundus a readable technical deep dive into its algorithms, data transformations, approximations, and error boundaries;
+- support Mundus with only the technical detail needed to establish reproducibility, extensibility, and responsible boundaries;
 - explain OmniPet as an extensible AI pet production and release engine rather than a one-off sprite generator;
 - use only public, approved evidence and assets in visitor-facing pages;
 - preserve the current bilingual, static, GitHub Pages-compatible architecture;
@@ -28,7 +28,7 @@ Project grouping must be represented in content metadata rather than inferred fr
 
 ## Narrative Strategy
 
-Both new case studies lead with user and product value, then use algorithms and architecture as evidence of depth. They should not read like repository documentation.
+Both new case studies lead with the product problem, platform capability, user value, extensibility, and a concrete result. Technical detail is short supporting evidence, not the exhibition itself. Each project uses roughly one or two core technical paragraphs and one or two visual moments.
 
 ### Mundus
 
@@ -40,40 +40,25 @@ Mundus is presented as an extensible globe observation platform. Its three curre
 - a validated data registry with sources, licenses, transformations, hashes, caveats, and quality metrics;
 - reusable rendering, accessibility, fallback, and performance infrastructure.
 
-The case study follows this structure:
+The case study follows this compact structure:
 
-1. The premise: one globe can support multiple ways of seeing.
-2. The platform: shared globe engine, mode registry, state, data, and validation layers.
-3. The current extensions: Other Side, Development Unpacked, and Sunline.
-4. The algorithms: a readable technical deep dive.
-5. The data pipeline: reproducibility, geometry processing, budgets, and scientific boundaries.
-6. Extensibility: how another mode can join the platform without rebuilding the globe.
+1. Product problem and user value: one navigable globe supports several reproducible ways to observe Earth.
+2. Platform capability: registered modes share rendering, interaction, addressable state, data provenance, and validation.
+3. Result and extensibility: three public modes demonstrate the platform, while a new mode can join without rebuilding the globe.
 
-The algorithm section explains:
-
-- spherical coordinate transforms and the antipodal mapping `(-latitude, longitude +/- 180 degrees)`;
-- point-in-polygon and land/ocean classification on geographic boundaries;
-- nearest eligible major-city record search and why the filtered dataset scope affects the answer;
-- HDI component derivation, normalization context, year completeness, and deterministic structural comparison selection;
-- NOAA/Meeus solar-position approximation, subsolar point, solar altitude, sunrise/sunset, and polar-day or polar-night handling;
-- the fragment-shader solar-altitude field: surface-normal and sun-direction dot product, `asin` altitude, and the `0°` to `-6°` civil-twilight blend before full night opacity;
-- TopoJSON or source-vector conversion, spherical mesh construction, compression, geometry-quality thresholds, and GPU or download budgets.
-
-The writing remains accessible: formulas and implementation constraints are explained through inputs, transformations, outputs, and caveats rather than paper-style derivations. It must not claim legal-boundary authority, navigation-grade solar accuracy, or globally optimal precision.
+The visual story retains a three-mode product overview and one representative globe image. The former six-card algorithm atlas and five-stage data pipeline are removed. One short technical paragraph may cite representative constraints such as versioned mode state, source manifests, deterministic data handling, and educational accuracy boundaries. It must not claim legal-boundary authority, navigation-grade solar accuracy, or globally optimal precision.
 
 ### OmniPet
 
 OmniPet is presented as an extensible AI desktop-pet production and release engine. Its value is turning uncertain generated imagery into a reviewable, recoverable, and publishable asset workflow.
 
-The case study follows this structure:
+The case study follows this compact structure:
 
-1. The problem: one successful image generation is not a releasable animated pet.
-2. The engine: manifest-driven projects, generation stages, runtime state, and explicit approvals.
-3. The production pipeline: canonical base, standard actions, directions, QA, repair, atlas assembly, and package validation.
-4. Safety and publication: private production evidence, closed public bundles, and clean-room verification.
-5. Extensibility: versioned manifests, action definitions, provider boundaries, validation contracts, and catalog contribution.
-6. A real outcome: SuShi as a publicly installable release.
-7. Current boundary: the engine is Alpha and the wider community workflow remains in development.
+1. Product problem and user value: a convincing generated image is not yet a reliable, installable desktop pet.
+2. Engine capability and differentiation: resumable state, explicit approvals, repair, packaging, and a separate public release boundary turn uncertain inputs into reviewable output.
+3. Extensibility and result: versioned contracts keep generation, validation, and publication separable; SuShi demonstrates the current public outcome while Alpha limitations remain explicit.
+
+The visual story retains one compact production-to-release overview and the SuShi outcome preview. The former seven-stage workflow and six-card contract exhibition are removed. Atlas dimensions and other implementation facts may remain in fact verification without all appearing in visitor-facing prose; visitor claims stay limited to the facts that support product value and public boundaries.
 
 Only the public `OmniPet` engine and public `OmniPets` catalog are linked. Private production and planning repositories may inform accurate high-level writing, but their names, files, paths, prompts, references, provider responses, checkpoints, reviewer evidence, internal URLs, and audit details must not appear in visitor-facing content.
 
@@ -136,24 +121,18 @@ The homepage reads the collection once, separates featured and non-featured entr
 
 ### MundusStory
 
-`MundusStory.astro` owns Mundus-specific explanatory visuals:
+`MundusStory.astro` owns two Mundus-specific explanatory visuals:
 
-- a shared-core and mode-orbit diagram;
-- three current mode summaries;
-- an algorithm-layer sequence;
-- a reproducible data-pipeline diagram;
-- extension points for a future observation mode.
+- a concise three-mode product overview;
+- one representative globe image paired with the shared platform and extension contract.
 
 Use semantic HTML and inline or component-scoped SVG/CSS. Diagrams require readable text alternatives, meaningful source order, and a static reduced-motion state. They must not require JavaScript to convey core information.
 
 ### OmniPetStory
 
-`OmniPetStory.astro` owns OmniPet-specific explanatory visuals:
+`OmniPetStory.astro` owns two OmniPet-specific explanatory visuals:
 
-- the manifest-driven production flow;
-- explicit approval gates and fail-closed transitions;
-- QA, repair, package, export, and clean-room verification;
-- the boundary between the public engine, private production process, and public installable catalog;
+- a compact engine-to-public-release overview with human review and publication boundaries;
 - SuShi as the public outcome.
 
 The visitor-facing diagram uses only public concepts. It does not expose private filenames, paths, evidence, or repository details.
@@ -172,15 +151,14 @@ Capture public screenshots from the deployed site for:
 - Development Unpacked;
 - Sunline.
 
-Use a composed mode overview for the homepage preview and either a wide mode sequence or selected screenshots in the detail page. Captures must reflect the public site and contain no browser or local-development artifacts.
+Use a composed mode overview for the homepage preview and one representative globe capture in the detail page. Captures must reflect the public site and contain no browser or local-development artifacts.
 
 ### OmniPet
 
 Use only public assets from the OmniPets catalog and public repository:
 
 - SuShi preview;
-- a useful crop or presentation of the public spritesheet;
-- public CLI concepts or output only when it improves comprehension.
+- a compact code-drawn engine-to-release overview.
 
 Do not use private production screenshots. If a public screenshot is not useful, use code-drawn workflow visuals rather than a placeholder or fabricated product UI.
 
