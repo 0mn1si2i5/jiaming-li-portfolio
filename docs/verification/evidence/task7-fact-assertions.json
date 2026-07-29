@@ -1,7 +1,7 @@
 {
   "assertions": [
     {
-      "claim": "Mundus publicly presents three scientific modes.",
+      "claim": "three public modes—spatial, human, and temporal",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -11,7 +11,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "The three modes have a stable registry order.",
+      "claim": "three public modes—spatial, human, and temporal",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -21,7 +21,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Mode definitions are versioned.",
+      "claim": "Each registered, versioned extension declares its state and data dependencies",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -31,7 +31,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Mode definitions include scientific categories.",
+      "claim": "three public modes—spatial, human, and temporal",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -41,7 +41,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Development declares its Natural Earth and UNDP resources.",
+      "claim": "declares its state and data dependencies",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -51,7 +51,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "The data registry validates provenance and boundary metadata.",
+      "claim": "A data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -61,7 +61,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Sunline starts at 2000 UTC.",
+      "claim": "solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -71,7 +71,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Sunline ends at the final minute of 2099 UTC.",
+      "claim": "solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -81,7 +81,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Sunrise and sunset use an apparent altitude of -0.833 degrees.",
+      "claim": "solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -91,7 +91,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Solar observations expose civil twilight.",
+      "claim": "changing daylight and civil twilight explorable through time",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -101,7 +101,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Solar events expose polar day.",
+      "claim": "solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -111,7 +111,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Solar events expose polar night.",
+      "claim": "solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -121,7 +121,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "The immutable GeoNames index contains 6,944 records.",
+      "claim": "dataset scope, cartographic boundaries, and solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -131,7 +131,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "The UNDP series covers 1990 through 2023.",
+      "claim": "dataset scope, cartographic boundaries, and solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -141,7 +141,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Vector quality uses 110m for low and 50m for medium/high.",
+      "claim": "quality loading, and raster fallback",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -151,7 +151,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "Sunline uses NOAA/Meeus-style approximations.",
+      "claim": "solar approximations are presented as limits",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "Mundus",
@@ -161,7 +161,7 @@
       "portfolioSource": "src/content/projects/mundus.mdx"
     },
     {
-      "claim": "OmniPet is a public sprite v2 production engine.",
+      "claim": "open-source Python engine and CLI for sprite v2 production",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -171,7 +171,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "Provider failures are not retried automatically.",
+      "claim": "persists a failed generation instead of retrying automatically",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -181,7 +181,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "Repair archives a selected visual job transactionally.",
+      "claim": "repair a selected job while preserving unaffected upstream work",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -191,7 +191,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "Public release export uses a closed allowlist.",
+      "claim": "export creates a closed, allowlisted bundle",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -201,7 +201,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "Public verification requires neither credentials nor a production project.",
+      "claim": "independent verification needs no generation credential or production project",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -211,7 +211,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "The atlas contains nine standard action rows.",
+      "claim": "Structure and approval gates protect downstream output",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -221,7 +221,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "The final atlas uses an 8 by 11 grid.",
+      "claim": "Structure and approval gates protect downstream output",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -231,7 +231,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "The final atlas is exactly 1536 by 2288 pixels.",
+      "claim": "Structure and approval gates protect downstream output",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -241,7 +241,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "The final atlas adds two directional rows.",
+      "claim": "Structure and approval gates protect downstream output",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -251,7 +251,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "The release contract requires the sprite atlas.",
+      "claim": "visitors receive a documented, licensed, verifiable pet release",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -261,7 +261,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "Release file records use SHA-256 hashes.",
+      "claim": "declared files are bound by SHA-256",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -271,7 +271,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "Verification rejects files outside the declared release set.",
+      "claim": "rejects extra material",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -281,7 +281,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "The public engine documents release export and verification.",
+      "claim": "generation, review, packaging, and publication separable",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPet",
@@ -291,7 +291,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "The public catalog documents SuShi v1.0.1.",
+      "claim": "SuShi v1.0.1 is the current installable sprite v2 example",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPets",
@@ -301,7 +301,7 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     },
     {
-      "claim": "SuShi uses sprite version 2.",
+      "claim": "installable sprite v2 example",
       "claimPassed": true,
       "evidencePassed": true,
       "evidenceRepository": "OmniPets",
@@ -311,11 +311,8 @@
       "portfolioSource": "src/content/projects/omnipet.mdx"
     }
   ],
-  "schemaVersion": 1,
-  "summary": {
-    "assertionCount": 31,
-    "failedCount": 0,
-    "passedCount": 31,
-    "privateBoundaryHitCount": 0
-  }
+  "passed": 31,
+  "privateBoundaryHitCount": 0,
+  "schemaVersion": 2,
+  "total": 31
 }

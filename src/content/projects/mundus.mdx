@@ -24,25 +24,25 @@ import MundusStory from '../../components/MundusStory.astro';
 
 <section lang="en" data-locale-content="en">
 
-## One globe, more than one way to see
+## Product problem
 
-Most digital globes answer one class of question. Mundus begins from a different premise: the same navigable Earth can support several scientific lenses if geography, interaction, data provenance, and uncertainty are treated as shared infrastructure. Its V1 is a small digital museum exhibit with three modes—spatial, human, and temporal—rather than three disconnected demos.
+Digital globes often make one dataset easier to browse, but they rarely help people compare different ways of understanding the same place. Mundus turns one navigable Earth into three public modes—spatial, human, and temporal—so a visitor can move from geometric relationships to development patterns and sunlight without learning three separate products.
 
-## The platform beneath the modes
+## Platform capability
 
-I built one WebGL globe and geographic interaction model, then made each lens a registered extension. A mode definition names its version, category, resources, and Zod state schema. The selected mode and its meaningful inputs can be serialized into a versioned URL, so an observation can be reopened rather than described from memory. Data manifests separately record sources, licenses, transformations, checksums, missing-value policies, and boundary caveats. The platform also shares quality-dependent vector loading, a raster loading/failure fallback, bilingual interface patterns, and validation gates.
+The modes share one WebGL globe, geographic interaction model, and bilingual interface. Each registered, versioned extension declares its state and data dependencies; meaningful inputs can be reopened from a versioned URL. A data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats. This shared contract keeps new questions focused on their evidence instead of rebuilding the globe.
 
 </section>
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 一个地球，不止一种观察方式
+## 产品问题
 
-多数数字地球围绕一类问题展开。Mundus 的出发点不同：如果将地理模型、交互、数据来源与不确定性作为共享基础，同一个可导航的地球就能承载多种科学观察方式。V1 是一件小型数字博物馆展品，由空间、人类与时间三类模式组成，而不是三个彼此割裂的演示。
+数字地球通常只是让一份数据更容易浏览，却很少帮助人们比较理解同一地点的不同方式。Mundus 将同一个可导航地球组织为空间、人类与时间三种公开模式，让访客可以从球面关系转向发展结构和日照变化，而不必学习三个彼此割裂的产品。
 
-## 模式之下的平台
+## 平台能力
 
-我先实现一套 WebGL 地球与地理交互模型，再把每种观察方式做成注册式扩展。模式定义声明版本、类别、所需资源与 Zod 状态结构；当前模式及其关键输入可以序列化到带版本的 URL，让一次观察能够被重新打开，而不必依赖口头复述。数据清单则独立记录来源、许可、转换、校验和、缺失值策略与边界说明。平台还共用按质量加载的矢量地球、栅格加载与失败回退、双语界面模式和验证关卡。
+三种模式共用一套 WebGL 地球、地理交互模型和双语界面。每个注册式、带版本的扩展都声明自身状态与数据依赖，关键输入可以通过带版本的 URL 重新打开。数据注册表记录来源、许可、转换、哈希、缺失值策略与边界说明。这套共享契约让新问题聚焦于自身证据，而不是重建地球。
 
 </section>
 
@@ -50,52 +50,24 @@ I built one WebGL globe and geographic interaction model, then made each lens a 
 
 <section lang="en" data-locale-content="en">
 
-## Three current extensions
+## User value
 
-**Other Side** transforms a chosen coordinate into its exact antipode and keeps the exact endpoints distinct from nearby place names. **Development, Unpacked** places reported HDI beside health, education, and income dimensions so similar aggregate outcomes can reveal different structures. **Sunline** lets a visitor move through UTC time and inspect daylight, civil twilight, night, the subsolar point, and approximate solar events. They use the same globe, but each asks for different state, data, and evidence.
+Other Side makes a distant spherical relationship tangible. Development, Unpacked reveals how similar aggregate outcomes can hide different health, education, and income structures. Sunline makes changing daylight and civil twilight explorable through time. Together they turn abstract geographic evidence into observations a visitor can inspect, revisit, and share.
 
-## From coordinates to evidence
+## Extensible by design
 
-The shortest algorithm in Mundus is the antipodal transform: latitude changes sign; longitude moves by 180 degrees and is normalized. The geographic answer around that point is more conditional. Natural Earth polygons support represented land/ocean and country picking, but they are cartographic geometry rather than legal boundaries. Nearby labels come from an immutable GeoNames index of 6,944 eligible major-city records. Mundus computes great-circle distance from each exact endpoint and resolves equal distances by population, then GeoNames ID. “Nearest” therefore means nearest entry in this filtered snapshot—not the nearest settlement, boundary, or built area.
-
-The development mode uses the UNDP Human Development Report 2025 series for 1990–2023. Reported HDI is preserved while health, education, and income dimension indices are derived with the report's Technical Note 1 goalposts and rounded to four decimals. Missing observations remain `null`, never zero. A structural contrast is available only when both countries have HDI and all three dimensions for the selected year. Candidates must fall within `0.02` HDI; among them, the system chooses the largest sum of absolute component differences, with ISO code as a deterministic tie-break. This is a reproducible contrast, not a claim that one country is the globally “best” comparison.
-
-Sunline calculates in the browser from a UTC timestamp and coordinate; it does not bundle a solar dataset. NOAA/Meeus-style equations estimate solar declination and the equation of time, which locate the subsolar point. Latitude, declination, longitude, and hour angle then produce local solar altitude. Sunrise and sunset use an apparent altitude of `-0.833°`; impossible hour angles become explicit polar-day or polar-night states. Across the globe, altitude at or above `0°` is day, `0°` to `-6°` is civil twilight, and lower values are night. Inputs are limited to 2000–2099 at minute precision. Atmospheric conditions and high latitudes add error, so these outputs are educational—not legal, navigational, or engineering guidance.
-
-## A reproducible data and geometry pipeline
-
-The public repository keeps machine-readable manifests and committed derived snapshots while leaving raw downloads out of version control. Build scripts pin source URLs and expected SHA-256 hashes before transformation; verification checks the generated assets and installed source distributions again. This makes a data update a reviewable change to source, transformation, output, and caveat rather than an invisible replacement.
-
-The globe follows the same discipline. Natural Earth TopoJSON rings are classified by projected area and containment, projected locally, triangulated with holes, subdivided on the sphere, and filtered for degenerate or outside slivers. Country surfaces share coastline and internal-boundary buffers. Signed-normalized 16-bit positions and mesh compression reduce transport cost, while manifests retain raw, gzip, and runtime GPU sizes alongside geometry counts, edge limits, and area-loss measurements. Low quality requests 110m geometry; medium and high request 50m; the raster sphere remains visible while vectors load or if they fail. Small states without a polygon at the chosen Natural Earth scale can remain in the semantic development table even when the globe cannot paint them.
-
-## Extending the observation system
-
-A fourth lens does not need a second scene, camera, picker, share system, or data policy. It registers a versioned mode, declares and validates its state, lists required data resources, and connects its presentation to the shared globe. URL parsing supplies safe defaults for invalid or absent values; the data registry and build checks make provenance and integrity visible; rendering quality and fallback policies remain reusable. That contract does not make every future mode automatic, but it keeps new scientific questions focused on their own transformation and evidence instead of rebuilding the platform around them.
+A new lens can reuse the scene, camera, picking, addressable state, provenance, validation, quality loading, and raster fallback. The current public results remain educational: dataset scope, cartographic boundaries, and solar approximations are presented as limits rather than hidden behind visual certainty.
 
 </section>
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 当前的三种扩展
+## 用户价值
 
-**地球另一端**将选定坐标转换为精确对跖点，并始终区分精确端点与附近地名。**发展的不同侧面**把报告 HDI 与健康、教育和收入维度并列，让相近的综合结果显露不同结构。**日照线**允许访客沿 UTC 时间移动，查看白昼、民用曙暮光、夜晚、太阳直射点与近似日出日落。三者使用同一个地球，但各自需要不同的状态、数据与证据。
+“地球另一端”让遥远的球面关系变得直观；“发展的不同侧面”揭示相近综合结果下不同的健康、教育与收入结构；“日照线”让访客沿时间探索白昼与民用曙暮光。三者共同把抽象地理证据变成可以检查、重访与分享的观察。
 
-## 从坐标到证据
+## 为扩展而设计
 
-Mundus 中最简洁的算法是对跖点转换：纬度取反，经度移动 180 度并归一化。围绕这个点的地理答案则更有条件。Natural Earth 多边形用于判断数据所表达的陆地、海洋与国家，但它是制图几何，不是法定边界。附近地名来自一个固定的 GeoNames 索引，其中包含 6,944 条符合条件的主要城市记录。Mundus 分别计算每个精确端点到索引条目的大圆距离；距离相同时，依次按人口与 GeoNames ID 决定结果。因此，“最近”指这个筛选快照中的最近条目，而非最近聚落、行政边界或建成区。
-
-发展模式使用联合国开发计划署《2025 年人类发展报告》的 1990–2023 年序列。系统保留报告 HDI，并依据报告技术说明 1 的目标值推导健康、教育和收入维度指数，结果四舍五入到四位小数。缺失观测保持为 `null`，不会被替换成零。只有当所选年份的两个国家都具备 HDI 和三个分项时，结构对比才成立。候选对象的 HDI 差不得超过 `0.02`；系统随后选择三个分项绝对差之和最大的对象，并以 ISO 代码进行确定性并列处理。这是一种可复现的结构对照，而不是“全球最佳比较对象”的判断。
-
-日照线直接在浏览器中根据 UTC 时间戳和坐标计算，不捆绑太阳数据集。NOAA/Meeus 风格方程近似太阳赤纬与时间方程，由此定位太阳直射点；再结合纬度、赤纬、经度和时角求得局地太阳高度。日出日落采用 `-0.833°` 视高度；当时角无解时，系统明确返回极昼或极夜。地球表面上，太阳高度不低于 `0°` 为白昼，`0°` 到 `-6°` 为民用曙暮光，更低则为夜晚。输入限于 2000–2099 年并精确到分钟。大气条件与高纬度会增加误差，因此结果只用于教育展示，不适合法律、导航或工程用途。
-
-## 可复现的数据与几何管线
-
-公开仓库保留机器可读清单和提交后的派生快照，不把原始下载文件纳入版本控制。构建脚本在转换前固定来源 URL 与预期 SHA-256；验证流程再次检查生成资产与已安装的源分发文件。这样，数据更新会成为来源、转换、输出与限制均可审查的变更，而不是一次不可见的替换。
-
-地球几何遵循同样的原则。Natural Earth TopoJSON 的环先按投影面积与包含关系分类，再经过局部投影、含孔洞三角剖分、球面边细分，并剔除退化或落在外部的碎片。国家表面共用海岸线与内部边界缓冲区。16 位有符号归一化坐标与网格压缩降低传输成本；清单同时保留原始、gzip 与运行时 GPU 体积，以及几何数量、边长限制和面积损失测量。低质量加载 110m 几何，中高质量加载 50m；矢量加载期间或失败时，栅格地球仍然可见。在所选 Natural Earth 比例尺中没有多边形的小型国家，可以保留在语义发展表中，但无法在地球表面着色。
-
-## 扩展观察系统
-
-第四种观察方式无需重新实现场景、相机、拾取、分享系统或数据政策。它注册一个带版本的模式，声明并校验状态，列出所需数据资源，再将自己的呈现连接到共享地球。URL 解析会为缺失或无效值提供安全默认值；数据注册表与构建检查让来源和完整性可见；渲染质量与回退策略继续复用。这套契约不会让所有新模式自动完成，但能让新的科学问题聚焦于自身的转换与证据，而不是围绕它重新搭建平台。
+新的观察方式可以复用场景、相机、拾取、可寻址状态、来源记录、验证、质量加载和栅格回退。当前公开结果保持教育用途定位：数据集范围、制图边界与太阳近似都作为明确限制呈现，而不会被视觉确定性掩盖。
 
 </section>

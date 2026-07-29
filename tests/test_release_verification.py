@@ -11,6 +11,67 @@ from pathlib import Path
 from scripts.verification import browser, facts, privacy
 
 
+class TestProductCaseStudyFocus(unittest.TestCase):
+    def setUp(self) -> None:
+        self.project = Path(__file__).parents[1]
+
+    def test_mundus_is_a_concise_product_case_study(self) -> None:
+        content = (
+            self.project / "src/content/projects/mundus.mdx"
+        ).read_text(encoding="utf-8")
+        story = (
+            self.project / "src/components/MundusStory.astro"
+        ).read_text(encoding="utf-8")
+
+        for phrase in (
+            "Product problem",
+            "Platform capability",
+            "User value",
+            "Extensible by design",
+            "产品问题",
+            "平台能力",
+            "用户价值",
+            "为扩展而设计",
+        ):
+            self.assertIn(phrase, content)
+        for removed in (
+            "Algorithm atlas",
+            "Reproducible data flow",
+            "const algorithms",
+            "const dataStages",
+        ):
+            self.assertNotIn(removed, story)
+        self.assertEqual(story.count("<img"), 2)
+
+    def test_omnipet_is_a_concise_product_case_study(self) -> None:
+        content = (
+            self.project / "src/content/projects/omnipet.mdx"
+        ).read_text(encoding="utf-8")
+        story = (
+            self.project / "src/components/OmniPetStory.astro"
+        ).read_text(encoding="utf-8")
+
+        for phrase in (
+            "Product problem",
+            "Engine capability",
+            "User value",
+            "Public result",
+            "产品问题",
+            "引擎能力",
+            "用户价值",
+            "公开结果",
+        ):
+            self.assertIn(phrase, content)
+        for removed in (
+            "Seven bounded stages",
+            "Extension contracts",
+            "const stages",
+            "const contracts",
+        ):
+            self.assertNotIn(removed, story)
+        self.assertEqual(story.count("<img"), 2)
+
+
 class TestStructuredFacts(unittest.TestCase):
     def test_mdx_visible_text_excludes_hidden_jsx_and_multiline_export(self) -> None:
         hidden = """

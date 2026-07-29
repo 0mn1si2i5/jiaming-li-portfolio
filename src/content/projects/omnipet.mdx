@@ -24,25 +24,25 @@ import OmniPetStory from '../../components/OmniPetStory.astro';
 
 <section lang="en" data-locale-content="en">
 
-## A good image is not yet a pet
+## Product problem
 
-One generated character can look convincing and still fail as an animated desktop pet. Identity must survive repeated actions and directions; frames need compatible dimensions, edges, transparency, timing, and semantics; a package must remain installable after the production context is removed. OmniPet treats those requirements as a bounded production system rather than a single generation request.
+A convincing generated image is not yet a desktop pet. Identity must survive multiple actions and directions, frames need compatible structure and transparency, and the final package must remain installable after the production context is removed. OmniPet treats that gap as a product workflow rather than a single prompt.
 
-## The engine and its state
+## Engine capability
 
-OmniPet is an open-source Python engine and CLI for sprite v2 production. A project manifest and creative brief define durable inputs, while ignored runtime state records generated attempts and the next bounded action. The workflow advances one step at a time: it can resume after interruption, persists a failed generation instead of retrying automatically, and requires explicit human approval before accepted visual work becomes the basis for downstream stages.
+OmniPet is an open-source Python engine and CLI for sprite v2 production. Manifest-driven projects and resumable state let work advance one bounded step at a time: the engine persists a failed generation instead of retrying automatically, requires explicit human approval, and can repair a selected job while preserving unaffected upstream work. Structure and approval gates protect downstream output. Versioned manifests, action definitions, bounded APIs, validators, and a release schema keep generation, review, packaging, and publication separable.
 
 </section>
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 一张好图，还不是一个桌宠
+## 产品问题
 
-单张生成图即使足够动人，也可能无法成为可发布的动画桌宠。角色身份需要在重复动作和方向中保持一致；各帧必须具备兼容的尺寸、边缘、透明度、时序和语义；安装包还要在脱离生产环境后继续成立。OmniPet 将这些要求组织为边界清晰的生产系统，而不是一次生成请求。
+一张令人信服的生成图还不是桌宠。角色身份需要跨越多种动作与方向，各帧要具备兼容的结构和透明度，最终安装包也必须在脱离生产上下文后继续成立。OmniPet 将这段差距设计成产品工作流，而不是一次提示词调用。
 
-## 引擎与运行状态
+## 引擎能力
 
-OmniPet 是面向 sprite v2 生产的开源 Python 引擎与 CLI。项目清单和创作简报定义持久输入，独立的本地运行状态保存生成尝试与下一项有界操作。工作流每次只推进一步：中断后可以恢复；生成失败会被记录并阻塞流程，而不是自动重试；被接受的视觉结果必须经过显式人工批准，才能成为后续阶段的基础。
+OmniPet 是面向 sprite v2 生产的开源 Python 引擎与 CLI。清单驱动的项目和可恢复状态让工作每次只推进一个有界步骤：引擎会记录失败而不是自动重试，要求显式人工批准，并能修复指定任务而保留不受影响的上游成果。带版本的清单、动作定义、有界 API、验证器和发布结构让生成、审查、打包与发布彼此分离。
 
 </section>
 
@@ -50,52 +50,24 @@ OmniPet 是面向 sprite v2 生产的开源 Python 引擎与 CLI。项目清单�
 
 <section lang="en" data-locale-content="en">
 
-## From a canonical base to an atlas
+## User value
 
-Production begins with one approved canonical base that anchors identity. Standard action rows are generated and reviewed separately; directional work follows approved cardinal anchors and continuity checks. QA happens beside each stage rather than at the end. When a completed or failed visual job must change, repair archives that job transactionally and invalidates dependent QA, approvals, package evidence, and delivery while preserving unaffected upstream work.
+Creators can stop, inspect, approve, repair, and resume without treating every failure as a restart. Publication is a separate boundary: export creates a closed, allowlisted bundle whose declared files are bound by SHA-256; independent verification needs no generation credential or production project and rejects extra material.
 
-The final sprite v2 package is not assembled until every hard gate passes. The public workflow checks an eight-column, eleven-row atlas at `1536 × 2288`, including nine standard action rows and two directional rows. Validation covers package structure and atlas requirements; visual reviews remain explicit human decisions rather than inferred success.
+## Public result
 
-## Publication is a separate product boundary
-
-A production project, a recoverable accepted-state snapshot, validated package output, and a public release bundle are different objects. Export creates a closed, allowlisted bundle with the manifest, sprite atlas, preview, public documentation, asset license, and a canonical release record. Every declared file is bound by SHA-256. Verification reads only that bundle, requires no generation credential or production project, rejects extra or unsafe material, and can run independently in public catalog CI.
-
-## Extension contracts, not accidental coupling
-
-The shipped Alpha already uses versioned project manifests, explicit action and row definitions, bounded engine APIs, validators, approval state, and a closed release schema. These contracts keep generation, inspection, packaging, and publication separable. The current public engine uses one allowlisted built-in image provider and does not expose arbitrary provider or model configuration. A broader community contribution path is not shipped public behavior today.
-
-## SuShi, the public outcome
-
-SuShi v1.0.1 is the current installable sprite v2 example in the public OmniPets catalog. Its catalog record publishes the pet manifest, preview, atlas, documentation, license, version, and hashes, but not the production material that created them. That separation is the point: visitors receive a verifiable pet release, while creators retain the context needed to review, recover, and improve production.
-
-## Current boundary
-
-OmniPet is Alpha software. Its interfaces and project files may still change, and generated results require review before use. The engine, release export and verification path, and SuShi catalog release are public now. A wider community workflow remains under development and is not described here as shipped.
+SuShi v1.0.1 is the current installable sprite v2 example in the public OmniPets catalog. It demonstrates the intended separation: visitors receive a documented, licensed, verifiable pet release, while production context stays with its creator. OmniPet remains Alpha software; interfaces may change, generated results still require review, and a broader community contribution workflow is not presented as shipped.
 
 </section>
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 从标准基础形象到图集
+## 用户价值
 
-生产从一个经过批准的标准基础形象开始，它负责锚定角色身份。标准动作行被逐项生成和审查；方向生成则建立在已批准的四向锚点与连续性检查之上。QA 紧邻每个阶段发生，而不是全部留到最后。当某项已完成或失败的视觉任务需要替换时，修复操作会以事务方式归档该任务，并使依赖它的 QA、批准、打包证据与交付状态失效，同时保留不受影响的上游成果。
+创作者可以暂停、检查、批准、修复和继续，而不必把每次失败都当作从头开始。发布是独立边界：导出流程生成闭集白名单包，每个声明文件均由 SHA-256 绑定；独立验证不需要生成凭据或生产项目，并会拒绝额外材料。
 
-只有全部硬性门禁通过后，系统才组装最终 sprite v2 包。公开工作流检查一个 `1536 × 2288` 的八列十一行图集，其中包含九行标准动作与两行方向动作。验证覆盖包结构和图集要求；视觉审查仍然是明确的人工决定，不会被系统推断为自动成功。
+## 公开结果
 
-## 发布是独立的产品边界
-
-生产项目、可恢复的已接受状态快照、经过验证的打包输出和公开发布包是四类不同对象。导出流程通过闭集白名单生成发布包，只包含清单、精灵图集、预览、公开说明、资产许可与规范化发布记录；每个声明文件均由 SHA-256 绑定。验证只读取该发布包，不需要生成凭据或生产项目，并会拒绝额外或不安全的材料，因此可以在公共目录 CI 中独立运行。
-
-## 依靠扩展契约，而非偶然耦合
-
-当前 Alpha 已公开交付带版本的项目清单、明确的动作与行定义、有界引擎 API、验证器、批准状态和闭集发布结构。这些契约让生成、检查、打包与发布彼此分离。当前公开引擎只使用一个白名单内置图像 provider，不开放任意 provider 或模型配置；更广泛的社区贡献路径也不是当前已交付的公开行为。
-
-## SuShi：公开结果
-
-SuShi v1.0.1 是 OmniPets 公共目录中当前可安装的 sprite v2 示例。目录记录公开宠物清单、预览、图集、说明、许可、版本与哈希，但不公开生成这些结果的生产材料。这种分离正是系统价值所在：访客获得可验证的桌宠发布，创作者则保留审查、恢复和继续改进生产所需的上下文。
-
-## 当前边界
-
-OmniPet 仍处于 Alpha 阶段，接口与项目文件可能变化，生成结果在使用前必须经过检查。引擎、发布导出与验证路径，以及 SuShi 目录版本已经公开；更完整的社区工作流仍在开发中，本文不会把它描述为已交付功能。
+SuShi v1.0.1 是 OmniPets 公共目录中当前可安装的 sprite v2 示例。它验证了这套分离：访客获得带说明、许可且可验证的桌宠发布，生产上下文则保留在创作者一侧。OmniPet 仍处于 Alpha 阶段，接口可能变化，生成结果仍需检查；更广泛的社区贡献工作流不会被描述为已交付功能。
 
 </section>

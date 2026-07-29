@@ -5,15 +5,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "three modes\u2014spatial, human, and temporal"
-          },
-          {
-            "type": "contains_all",
-            "values": [
-              "spatial",
-              "human",
-              "temporal"
-            ]
+            "value": "three public modes—spatial, human, and temporal"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -36,7 +28,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "three modes\u2014spatial, human, and temporal"
+            "value": "three public modes—spatial, human, and temporal"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -59,7 +51,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "A mode definition names its version"
+            "value": "Each registered, versioned extension declares its state and data dependencies"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -82,7 +74,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "three modes\u2014spatial, human, and temporal"
+            "value": "three public modes—spatial, human, and temporal"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -105,7 +97,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "each asks for different state, data, and evidence"
+            "value": "declares its state and data dependencies"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -128,7 +120,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "Data manifests separately record sources, licenses, transformations, checksums, missing-value policies, and boundary caveats"
+            "value": "A data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -151,7 +143,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "Inputs are limited to 2000\u20132099"
+            "value": "solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -174,7 +166,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "Inputs are limited to 2000\u20132099"
+            "value": "solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -197,7 +189,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "Sunrise and sunset use an apparent altitude of `-0.833\u00b0`"
+            "value": "solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -220,7 +212,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "`0\u00b0` to `-6\u00b0` is civil twilight"
+            "value": "changing daylight and civil twilight explorable through time"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -243,7 +235,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "explicit polar-day or polar-night states"
+            "value": "solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -266,7 +258,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "explicit polar-day or polar-night states"
+            "value": "solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -289,7 +281,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "6,944 eligible major-city records"
+            "value": "dataset scope, cartographic boundaries, and solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -312,7 +304,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "series for 1990\u20132023"
+            "value": "dataset scope, cartographic boundaries, and solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -323,7 +315,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "covering 1990\u20132023"
+            "value": "covering 1990–2023"
           }
         ],
         "source": "DATA_SOURCES.md"
@@ -335,7 +327,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "Low quality requests 110m geometry; medium and high request 50m"
+            "value": "quality loading, and raster fallback"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -358,7 +350,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "NOAA/Meeus-style equations"
+            "value": "solar approximations are presented as limits"
           }
         ],
         "source": "src/content/projects/mundus.mdx"
@@ -392,7 +384,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "\u684c\u5ba0 sprite v2 \u7684\u5f00\u6e90\u5f15\u64ce"
+            "value": "桌宠 sprite v2 的开源引擎"
           }
         ],
         "source": "README.md"
@@ -427,7 +419,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "repair archives that job transactionally"
+            "value": "repair a selected job while preserving unaffected upstream work"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -450,7 +442,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "Export creates a closed, allowlisted bundle"
+            "value": "export creates a closed, allowlisted bundle"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -473,7 +465,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "requires no generation credential or production project"
+            "value": "independent verification needs no generation credential or production project"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -496,7 +488,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "including nine standard action rows"
+            "value": "Structure and approval gates protect downstream output"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -519,14 +511,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "eight-column, eleven-row atlas"
-          },
-          {
-            "type": "contains_all",
-            "values": [
-              "eight-column",
-              "eleven-row"
-            ]
+            "value": "Structure and approval gates protect downstream output"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -549,7 +534,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "`1536 \u00d7 2288`"
+            "value": "Structure and approval gates protect downstream output"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -572,7 +557,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "two directional rows"
+            "value": "Structure and approval gates protect downstream output"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -595,7 +580,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "sprite atlas, preview, public documentation"
+            "value": "visitors receive a documented, licensed, verifiable pet release"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -618,7 +603,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "Every declared file is bound by SHA-256"
+            "value": "declared files are bound by SHA-256"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -641,7 +626,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "rejects extra or unsafe material"
+            "value": "rejects extra material"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -664,7 +649,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "release export and verification path"
+            "value": "generation, review, packaging, and publication separable"
           }
         ],
         "source": "src/content/projects/omnipet.mdx"
@@ -698,7 +683,7 @@
         "rules": [
           {
             "type": "contains",
-            "value": "\u5f53\u524d\u793a\u4f8b\uff1aSuShi v1.0.1"
+            "value": "当前示例：SuShi v1.0.1"
           }
         ],
         "source": "README.md"

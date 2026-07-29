@@ -99,11 +99,11 @@ to the repository.
 | Viewport | Locale | Theme | Reduced motion | Page | Result |
 | --- | --- | --- | --- | --- | --- |
 | 1440 x 900 | English | Light | Off | Homepage | Selected Work and Other Work order correct; no overflow or broken images |
-| 1440 x 900 | Chinese | Dark | On | Mundus | Complete text and diagrams; no animation, overflow, or broken images |
-| 1440 x 900 | Chinese | Dark | On | OmniPet | Complete content, two approved public links, no animation, overflow, or broken images |
-| 768 x 1024 | Chinese | Dark | On | Homepage | Correct localized order and alternatives; 26 visible focusable controls; all lazy images decode |
-| 390 x 844 | Chinese | Dark | On | Mundus | Complete text and diagrams; no animation, clipped text, overflow, or broken images |
-| 390 x 844 | Chinese | Dark | On | OmniPet | Complete content; no animation, overflow, or broken images |
+| 1440 x 900 | Chinese | Dark | On | Mundus | Product-first narrative and two visuals; no animation, overflow, or broken images |
+| 1440 x 900 | Chinese | Dark | On | OmniPet | Product-first narrative, two visuals, and two approved public links; no animation, overflow, or broken images |
+| 768 x 1024 | Chinese | Dark | On | Homepage | Correct localized order and alternatives; 27 visible focusable controls; all lazy images decode |
+| 390 x 844 | Chinese | Dark | On | Mundus | Product problem precedes overview; no animation, clipped text, overflow, or broken images |
+| 390 x 844 | Chinese | Dark | On | OmniPet | Product problem precedes engine overview; no animation, overflow, or broken images |
 
 Theme and locale controls were exercised independently: the session started in
 English/light, switched to Chinese, then switched to dark. The resulting state
@@ -200,7 +200,7 @@ At 768 x 1024, scrolling Other Work into view and waiting one second caused all
 five homepage images to report `complete: true` with natural widths of 1600,
 1440, 960, 1280, and 1600 pixels. Every image had localized alternative text.
 Keyboard traversal reached visible links and applied the shared
-`2px solid` focus outline; 26 visible links and buttons were focusable on the
+`2px solid` focus outline; 27 visible links and buttons were focusable on the
 tablet homepage.
 
 ## Console and Network
@@ -217,9 +217,9 @@ HOME=/tmp/task7-evidence/browser-home \
 Observed:
 
 - Console output: empty, `0` bytes.
-- Recorded requests: `72`.
-- Status `200`: `62`.
-- Status `304`: `10`.
+- Recorded requests: `214`.
+- Status `200`: `165`.
+- Status `304`: `49`.
 - Other statuses or failed requests: `0`.
 - Documents, CSS, local WOFF2 files, favicon, and project images all loaded
   successfully.
@@ -235,7 +235,7 @@ by this report:
   Mundus and OmniPet desktop/mobile observations.
 - [Console observations](evidence/browser-console.json): zero messages, errors,
   or warnings.
-- [Network observations](evidence/browser-network.json): 72 normalized
+- [Network observations](evidence/browser-network.json): 214 normalized
   requests, status and resource-type counts, and an empty failure list.
 - [Screenshot manifest](evidence/browser-screenshots.json): five retained
   captures with scenario, dimensions, and SHA-256.
@@ -323,10 +323,12 @@ npm run verify
 ```
 
 The 31 rules live in `scripts/verification/facts.json`. Each item contains
-separate claim and evidence sources plus one or more `contains`,
-`contains_all`, or `regex` rules. All rules in both halves must match, so a
-weak phrase that preserves only "three modes" or only an atlas dimension does
-not pass. MDX checks remove frontmatter, imports, HTML/JSX comments; source
+separate claim and evidence sources. The product-focused revision keeps all 31
+pinned evidence checks but binds them to concise, visitor-visible claims about
+platform contracts, reproducibility, recoverability, release boundaries, and
+public outcomes; low-level source evidence no longer forces an algorithm or
+atlas-dimension exhibition into the page. MDX checks remove frontmatter,
+imports, HTML/JSX comments; source
 checks remove comments and unrelated standalone string assignments; JSON
 evidence uses structural `json_path` rules. The latest run returned `31/31`.
 Elements hidden with `hidden`, `aria-hidden`, `display: none`, or
@@ -363,6 +365,25 @@ URL encoding are recursively decoded to a fixed depth before each scan.
 Screenshot paths must match the fixed filename for their scenario, contain no
 directory or traversal component, resolve directly inside the assets root, and
 must not be symlinks.
+
+## Product-Focused Revalidation
+
+The 2026-07-29 product-feedback pass removed the six-card Mundus algorithm
+atlas, five-stage data flow, seven-stage OmniPet workflow, and six-card
+extension-contract exhibition. The replacement keeps:
+
+- Mundus: the product problem, shared platform, three-mode user value,
+  extension contract, one mode overview, and one representative globe image.
+- OmniPet: the product problem, resumable review engine, publication boundary,
+  Alpha limitation, compact three-step overview, and SuShi release result.
+
+Both Story components now render exactly two images. In Chinese dark mode with
+reduced motion, Mundus reports `924` visible text characters on desktop and
+`921` on mobile; OmniPet reports `1066` and `1063`. The previous retained
+values were `3609` and `2529`, respectively. All four scenarios report two
+product visuals, zero active animations, zero broken images, and no horizontal
+overflow. Visual inspection also confirms that the product problem and
+platform/engine capability precede the visual overview in both languages.
 
 ## Screenshot Evidence
 

@@ -26,7 +26,7 @@
     {
       "brokenImageCount": 0,
       "decodedImageCount": 5,
-      "focusableCount": 26,
+      "focusableCount": 27,
       "locale": "zh",
       "other": [
         "Side B",
@@ -61,7 +61,9 @@
         "height": 900,
         "width": 1440
       },
-      "visibleTextLength": 3609
+      "visibleTextLength": 924,
+      "decodedImageCount": 3,
+      "productVisualCount": 2
     },
     {
       "activeAnimationCount": 0,
@@ -76,7 +78,9 @@
         "height": 844,
         "width": 390
       },
-      "visibleTextLength": 3609
+      "visibleTextLength": 921,
+      "decodedImageCount": 3,
+      "productVisualCount": 2
     },
     {
       "activeAnimationCount": 0,
@@ -91,7 +95,9 @@
         "height": 900,
         "width": 1440
       },
-      "visibleTextLength": 2529
+      "visibleTextLength": 1066,
+      "decodedImageCount": 3,
+      "productVisualCount": 2
     },
     {
       "activeAnimationCount": 0,
@@ -106,7 +112,9 @@
         "height": 844,
         "width": 390
       },
-      "visibleTextLength": 2529
+      "visibleTextLength": 1063,
+      "decodedImageCount": 3,
+      "productVisualCount": 2
     }
   ],
   "schemaVersion": 1

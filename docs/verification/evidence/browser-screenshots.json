@@ -9,31 +9,31 @@
       "width": 1200
     },
     {
-      "height": 10796,
+      "height": 4656,
       "path": "task7-mundus-zh-dark-reduced-1440x900.webp",
       "scenario": "mundus-zh-dark-desktop",
-      "sha256": "970aa98cf02fbd55be955b924a346bf5833b9a9a85f4fc416272f7b259143629",
+      "sha256": "a6c9d4d44fdb40ec6ae0870304a89f60d5ff3e428be6d5b89ff895977907b132",
       "width": 1200
     },
     {
-      "height": 11484,
+      "height": 4690,
       "path": "task7-mundus-zh-dark-reduced-390x844.webp",
       "scenario": "mundus-zh-dark-mobile",
-      "sha256": "457e8f55d8a34d45c873069d40adb769a0fb366e3555ab776c3145697d756db8",
+      "sha256": "cc7ea585faecaf21f9e6557bc17980fdbabffeb1b694db1edb5ace6140922a5a",
       "width": 390
     },
     {
-      "height": 7838,
+      "height": 4246,
       "path": "task7-omnipet-zh-dark-reduced-1440x900.webp",
       "scenario": "omnipet-zh-dark-desktop",
-      "sha256": "e1d18ef77fdb5e6f9c64013b373d5a2d2f7125acaa25e7b269de38eed83f07a6",
+      "sha256": "0b99f92dd7655e0cf19948034fc883a2f17da3c9febcbf6f67425498cf149e18",
       "width": 1200
     },
     {
-      "height": 9784,
+      "height": 5160,
       "path": "task7-omnipet-zh-dark-reduced-390x844.webp",
       "scenario": "omnipet-zh-dark-mobile",
-      "sha256": "2d36a960327a69ed24dfc38de4946c0d2e6f3eab6384f9209d3983e373c45e53",
+      "sha256": "326144068260dff04dbc80a2926614c45a2026a95aecb66b2af410114ab00487",
       "width": 390
     }
   ]

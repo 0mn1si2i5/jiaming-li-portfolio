@@ -1,610 +1,107 @@
 ---
 import Localized from './Localized.astro';
 
-const stages = [
-  { index: '01', en: 'Manifest and brief', zh: '清单与创作简报', gate: false },
-  { index: '02', en: 'Canonical base', zh: '标准基础形象', gate: true },
-  { index: '03', en: 'Actions and directions', zh: '动作与方向', gate: true },
-  { index: '04', en: 'Visual QA and repair', zh: '视觉 QA 与修复', gate: true },
-  { index: '05', en: 'Atlas and package', zh: '图集与安装包', gate: true },
-  { index: '06', en: 'Release export', zh: '发布导出', gate: false },
-  { index: '07', en: 'Clean-room verify', zh: '洁净环境验证', gate: false },
+const flow = [
+  { index: '01', title: { en: 'Create and review', zh: '生成与审查' }, copy: { en: 'Resumable work stops at explicit human decisions.', zh: '可恢复流程停在明确的人工决定处。' } },
+  { index: '02', title: { en: 'Validate and package', zh: '验证与打包' }, copy: { en: 'Structure and approval gates protect downstream output.', zh: '结构与批准门禁保护下游产物。' } },
+  { index: '03', title: { en: 'Export and verify', zh: '导出与验证' }, copy: { en: 'A closed public bundle can be checked without production access.', zh: '闭集公开包无需生产权限即可验证。' } },
 ];
-
-const boundaries = [
-  {
-    index: '01',
-    title: { en: 'Public engine', zh: '公开引擎' },
-    copy: {
-      en: 'Manifest validation, bounded generation, resumable state, approvals, repair, packaging, release export, and verification.',
-      zh: '清单校验、有界生成、可恢复状态、批准、修复、打包、发布导出与验证。',
-    },
-    label: { en: 'Open source', zh: '开源' },
-  },
-  {
-    index: '02',
-    title: { en: 'Private production boundary', zh: '私有生产边界' },
-    copy: {
-      en: 'Creator inputs and production context stay outside the public bundle. Only approved package outputs may cross the release gate.',
-      zh: '创作者输入与生产上下文不进入公开包，只有已批准的打包结果可以通过发布门禁。',
-    },
-    label: { en: 'No production material exported', zh: '不导出生产材料' },
-  },
-  {
-    index: '03',
-    title: { en: 'Public catalog', zh: '公开目录' },
-    copy: {
-      en: 'A closed installable file set, canonical release record, asset license, and hashes that can be verified without generation access.',
-      zh: '闭集可安装文件、规范化发布记录、资产许可与哈希，无需生成权限即可验证。',
-    },
-    label: { en: 'Installable and verifiable', zh: '可安装、可验证' },
-  },
-];
-
-const contracts = [
-  {
-    index: 'A',
-    title: { en: 'Versioned manifests', zh: '带版本的清单' },
-    copy: {
-      en: 'Closed schemas keep project identity, sprite requirements, and release metadata explicit and bounded.',
-      zh: '闭合结构让项目身份、精灵要求与发布元数据保持明确且有界。',
-    },
-    state: { en: 'Shipped in Alpha', zh: 'Alpha 已交付' },
-  },
-  {
-    index: 'B',
-    title: { en: 'Action definitions', zh: '动作定义' },
-    copy: {
-      en: 'Named rows, cardinal anchors, and atlas dimensions give generation and QA a shared structural target.',
-      zh: '命名动作行、四向锚点与图集尺寸为生成和 QA 提供共同的结构目标。',
-    },
-    state: { en: 'Shipped in Alpha', zh: 'Alpha 已交付' },
-  },
-  {
-    index: 'C',
-    title: { en: 'Provider boundary', zh: 'Provider 边界' },
-    copy: {
-      en: 'The current engine isolates one allowlisted built-in image provider behind bounded APIs and rejects arbitrary provider or model configuration.',
-      zh: '当前引擎通过有界 API 隔离一个白名单内置图像 provider，并拒绝任意 provider 或模型配置。',
-    },
-    state: { en: 'One built-in provider', zh: '一个内置 provider' },
-  },
-  {
-    index: 'D',
-    title: { en: 'Validators and gates', zh: '验证器与门禁' },
-    copy: {
-      en: 'Schema, atlas, package, approval, path, and release checks fail closed before downstream work advances.',
-      zh: '结构、图集、安装包、批准、路径与发布检查默认关闭，未通过时下游不会推进。',
-    },
-    state: { en: 'Shipped in Alpha', zh: 'Alpha 已交付' },
-  },
-  {
-    index: 'E',
-    title: { en: 'Release contract', zh: '发布契约' },
-    copy: {
-      en: 'A closed file allowlist and per-file hashes separate an installable pet from its production context.',
-      zh: '闭集文件白名单与逐文件哈希将可安装桌宠和生产上下文分离。',
-    },
-    state: { en: 'Shipped in Alpha', zh: 'Alpha 已交付' },
-  },
-  {
-    index: 'F',
-    title: { en: 'Community contribution', zh: '社区贡献' },
-    copy: {
-      en: 'The public catalog documents a release path, while a broader creator contribution workflow remains in development.',
-      zh: '公共目录已记录发布路径，更广泛的创作者贡献工作流仍在开发中。',
-    },
-    state: { en: 'Planned, not shipped', zh: '规划中，尚未交付' },
-  },
-];
-
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
 
-<section class="engine-exhibit" aria-labelledby="omnipet-engine-title">
-  <header class="exhibit-intro">
+<section class="product-story" aria-labelledby="omnipet-story-title">
+  <header>
     <div class="intro-meta">
-      <p class="eyebrow"><Localized en="Engine anatomy" zh="引擎结构" /></p>
-      <span class="alpha-badge"><Localized en="Alpha · 0.1.0a1" zh="Alpha · 0.1.0a1" /></span>
+      <p class="eyebrow"><Localized en="Engine overview" zh="引擎总览" /></p>
+      <span><Localized en="Open-source Alpha" zh="开源 Alpha" /></span>
     </div>
-    <h2 id="omnipet-engine-title"><Localized en="Uncertain images enter. Bounded releases leave." zh="不确定的图像进入，有边界的发布离开。" /></h2>
-    <p><Localized en="OmniPet turns generation into a stateful production line with explicit human decisions. Every transition either preserves accepted work, stops at a visible gate, or produces a bundle that can be checked without the production environment." zh="OmniPet 将生成组织为带状态的生产线，并保留明确的人工决定。每次转换要么保留已接受成果，要么停在可见门禁，要么生成无需生产环境即可检查的发布包。" /></p>
+    <h2 id="omnipet-story-title"><Localized en="From uncertain image to bounded release." zh="从不确定图像到有边界的发布。" /></h2>
+    <p><Localized en="OmniPet makes generation reviewable and recoverable, then deliberately separates creator context from the installable result." zh="OmniPet 让生成过程可审查、可恢复，再将创作者上下文与可安装结果明确分离。" /></p>
   </header>
 
-  <section class="workflow-section" aria-labelledby="omnipet-workflow-title">
-    <header>
-      <p class="eyebrow"><Localized en="Reviewable workflow" zh="可审查工作流" /></p>
-      <h3 id="omnipet-workflow-title"><Localized en="Seven bounded stages. Four explicit approvals." zh="七个有界阶段，四道显式批准。" /></h3>
-    </header>
-    <ol class="workflow">
-      {stages.map((stage) => (
-        <li class:list={[{ 'has-gate': stage.gate }]}>
-          <span class="stage-index">{stage.index}</span>
-          <div class="stage-copy">
-            <h4><Localized en={stage.en} zh={stage.zh} /></h4>
-            {stage.gate && (
-              <span class="gate-label">
-                <span aria-hidden="true">◆</span>
-                <Localized en="Human approval required" zh="需要人工批准" />
-              </span>
-            )}
-          </div>
-        </li>
-      ))}
-    </ol>
-    <p class="workflow-note"><Localized en="A failed generation is persisted and blocks progress; it is never silently retried. Repair archives the selected job and invalidates only its dependent evidence and delivery state." zh="生成失败会被持久化并阻塞流程，不会被静默重试。修复会归档选定任务，并仅使依赖它的证据与交付状态失效。" /></p>
-  </section>
+  <ol class="engine-flow">
+    {flow.map((step) => (
+      <li>
+        <span>{step.index}</span>
+        <h3><Localized {...step.title} /></h3>
+        <p><Localized {...step.copy} /></p>
+      </li>
+    ))}
+  </ol>
 
-  <section class="boundary-section" aria-labelledby="omnipet-boundary-title">
-    <header>
-      <p class="eyebrow"><Localized en="Publication boundary" zh="发布边界" /></p>
-      <h3 id="omnipet-boundary-title"><Localized en="Production context stops before the public catalog." zh="生产上下文止步于公共目录之前。" /></h3>
-      <p><Localized en="Export is a deliberate transformation, not a folder copy. The release gate accepts a closed public file set and rejects undeclared material." zh="导出是一次有意的转换，而不是目录复制。发布门禁只接受闭集公开文件，并拒绝未声明材料。" /></p>
-    </header>
-    <ol class="boundary-flow">
-      {boundaries.map((zone) => (
-        <li>
-          <div class="zone-heading">
-            <span>{zone.index}</span>
-            <small><Localized {...zone.label} /></small>
-          </div>
-          <h4><Localized {...zone.title} /></h4>
-          <p><Localized {...zone.copy} /></p>
-        </li>
-      ))}
-    </ol>
-    <div class="release-record" role="group" aria-labelledby="omnipet-release-contract-title">
-      <span id="omnipet-release-contract-title" class="sr-only"><Localized en="Public release bundle contract" zh="公开发布包契约" /></span>
-      <span><Localized en="Closed file allowlist" zh="闭集文件白名单" /></span>
-      <span><Localized en="Canonical release record" zh="规范化发布记录" /></span>
-      <span><Localized en="SHA-256 per file" zh="逐文件 SHA-256" /></span>
-      <span><Localized en="Independent verification" zh="独立验证" /></span>
+  <section class="outcome" aria-labelledby="omnipet-outcome-title">
+    <div class="outcome-copy">
+      <p class="eyebrow"><Localized en="Public result" zh="公开结果" /></p>
+      <h3 id="omnipet-outcome-title"><Localized en="SuShi leaves as a pet, not a production archive." zh="SuShi 以桌宠而非生产档案的形式离开流程。" /></h3>
+      <p><Localized en="The public catalog contains the installable release, documentation, license, and verifiable hashes. Production inputs and generation access do not cross that boundary." zh="公共目录包含可安装发布、说明、许可和可验证哈希；生产输入与生成权限不会越过这条边界。" /></p>
+      <div class="release-tags" aria-label="Public release properties">
+        <span><Localized en="Installable" zh="可安装" /></span>
+        <span><Localized en="Licensed" zh="有许可" /></span>
+        <span><Localized en="Verifiable" zh="可验证" /></span>
+      </div>
     </div>
-  </section>
-
-  <section class="outcome-section" aria-labelledby="omnipet-outcome-title">
-    <header>
-      <p class="eyebrow"><Localized en="Public outcome" zh="公开结果" /></p>
-      <h3 id="omnipet-outcome-title"><Localized en="SuShi crosses the boundary as a pet, not a production archive." zh="SuShi 以桌宠而非生产档案的形式通过边界。" /></h3>
-    </header>
-    <div class="outcome-grid">
-      <figure class="preview-figure">
-        <img
-          src={asset('/media/omnipet/sushi-preview.webp')}
-          alt="SuShi, the public installable desktop pet produced through OmniPet."
-          data-alt-en="SuShi, the public installable desktop pet produced through OmniPet."
-          data-alt-zh="通过 OmniPet 生产并公开发布的可安装桌宠 SuShi。"
-          loading="lazy"
-        />
-        <figcaption>
-          <strong>SuShi</strong>
-          <span><Localized en="Public catalog · v1.0.1" zh="公共目录 · v1.0.1" /></span>
-        </figcaption>
+    <div class="result-visuals">
+      <figure>
+        <img src={asset('/media/omnipet/sushi-preview.webp')} alt="SuShi, the public installable desktop pet produced through OmniPet." data-alt-en="SuShi, the public installable desktop pet produced through OmniPet." data-alt-zh="通过 OmniPet 生产并公开发布的可安装桌宠 SuShi。" loading="lazy" />
+        <figcaption><strong>SuShi</strong><span><Localized en="Public catalog · v1.0.1" zh="公共目录 · v1.0.1" /></span></figcaption>
       </figure>
-      <figure class="atlas-figure">
-        <div class="atlas-frame">
-          <img
-            src={asset('/media/omnipet/sushi-spritesheet.webp')}
-            alt="A detail from the public SuShi sprite v2 atlas showing standard action frames."
-            data-alt-en="A detail from the public SuShi sprite v2 atlas showing standard action frames."
-            data-alt-zh="SuShi 公开 sprite v2 图集局部，展示标准动作帧。"
-            loading="lazy"
-          />
-        </div>
-        <figcaption>
-          <strong><Localized en="Public sprite v2 atlas detail" zh="公开 sprite v2 图集局部" /></strong>
-          <span><Localized en="Release atlas: 8 columns · 11 rows · 1536 × 2288" zh="发布图集：8 列 · 11 行 · 1536 × 2288" /></span>
-        </figcaption>
+      <figure>
+        <div class="atlas-frame"><img src={asset('/media/omnipet/sushi-spritesheet.webp')} alt="The public SuShi sprite v2 atlas." data-alt-en="The public SuShi sprite v2 atlas." data-alt-zh="SuShi 的公开 sprite v2 图集。" loading="lazy" /></div>
+        <figcaption><strong><Localized en="Release atlas" zh="发布图集" /></strong><span><Localized en="Public package asset" zh="公开包资产" /></span></figcaption>
       </figure>
     </div>
   </section>
-
-  <section class="contract-section" aria-labelledby="omnipet-contract-title">
-    <header>
-      <p class="eyebrow"><Localized en="Extension contracts" zh="扩展契约" /></p>
-      <h3 id="omnipet-contract-title"><Localized en="The engine grows through explicit seams." zh="引擎通过明确的接缝扩展。" /></h3>
-    </header>
-    <div class="contract-grid">
-      {contracts.map((contract) => (
-        <article>
-          <div class="contract-meta">
-            <span>{contract.index}</span>
-            <small><Localized {...contract.state} /></small>
-          </div>
-          <h4><Localized {...contract.title} /></h4>
-          <p><Localized {...contract.copy} /></p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <aside class="alpha-note" aria-labelledby="omnipet-alpha-title">
-    <p class="eyebrow"><Localized en="Current boundary" zh="当前边界" /></p>
-    <h3 id="omnipet-alpha-title"><Localized en="Alpha means inspect the result." zh="Alpha 意味着结果仍需检查。" /></h3>
-    <p><Localized en="The public engine, release exporter, clean-room verifier, and SuShi catalog release exist today. Interfaces and project files may change; a broader community contribution workflow is not shipped." zh="公开引擎、发布导出器、洁净环境验证器与 SuShi 目录版本已存在。接口和项目文件可能变化；更广泛的社区贡献工作流尚未交付。" /></p>
-  </aside>
 </section>
 
 <style>
-  .engine-exhibit {
-    --exhibit-paper: #181513;
-    --exhibit-ink: #f4eee7;
-    --exhibit-muted: #b8aaa0;
-    --exhibit-line: #4c403a;
-    --exhibit-signal: #f08b6f;
-    --exhibit-signal-soft: color-mix(in srgb, var(--exhibit-signal) 14%, transparent);
-    --chapter-marker: var(--exhibit-muted);
+  .product-story {
+    --paper: #181513;
+    --ink: #f4eee7;
+    --muted: #b8aaa0;
+    --line: #4c403a;
+    --signal: #f08b6f;
     box-sizing: border-box;
     width: 100%;
-    max-width: 100%;
     margin: 5rem 0;
-    padding: clamp(2rem, 6vw, 4rem);
+    padding: clamp(1.5rem, 6vw, 4rem);
     overflow: clip;
-    color: var(--exhibit-ink);
-    background:
-      linear-gradient(135deg, color-mix(in srgb, var(--exhibit-signal) 5%, transparent), transparent 38%),
-      var(--exhibit-paper);
-    border: 1px solid var(--exhibit-line);
+    color: var(--ink);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--signal) 5%, transparent), transparent 38%), var(--paper);
+    border: 1px solid var(--line);
     border-radius: clamp(1rem, 3vw, 1.75rem);
   }
-  .eyebrow {
-    margin: 0;
-    color: var(--exhibit-muted);
-    font-family: var(--font-body);
-    font-size: .72rem;
-    font-weight: 650;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-  }
-  .intro-meta, .contract-meta, .zone-heading {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .alpha-badge {
-    padding: .4rem .65rem;
-    color: var(--exhibit-signal);
-    font-size: .66rem;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    border: 1px solid var(--exhibit-signal);
-    border-radius: 999px;
-  }
-  .exhibit-intro {
-    max-width: 900px;
-  }
-  .exhibit-intro h2,
-  .workflow-section h3,
-  .boundary-section h3,
-  .outcome-section h3,
-  .contract-section h3,
-  .alpha-note h3 {
-    margin: 1rem 0 1.5rem;
-    color: var(--exhibit-ink);
-    font-size: clamp(2.35rem, 5vw, 4.9rem);
-    font-weight: 400;
-    line-height: .96;
-    letter-spacing: -.045em;
-  }
-  .exhibit-intro > p {
-    max-width: 690px;
-    margin: 0;
-    color: var(--exhibit-muted);
-    font-size: 1.05rem;
-    line-height: 1.65;
-  }
-  .workflow-section,
-  .boundary-section,
-  .outcome-section,
-  .contract-section,
-  .alpha-note {
-    margin-top: clamp(6rem, 12vw, 11rem);
-  }
-  .workflow-section > header,
-  .boundary-section > header,
-  .outcome-section > header,
-  .contract-section > header {
-    max-width: 880px;
-  }
-  .workflow {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    margin: 4rem 0 0;
-    padding: 0;
-    list-style: none;
-    border-top: 1px solid var(--exhibit-line);
-    border-bottom: 1px solid var(--exhibit-line);
-  }
-  .workflow li {
-    position: relative;
-    display: grid;
-    grid-template-columns: 2rem minmax(0, 1fr);
-    gap: 1rem;
-    min-width: 0;
-    padding: 1.2rem 0;
-    border-bottom: 1px solid var(--exhibit-line);
-  }
-  .workflow li:not(:last-child)::after {
-    content: '↓';
-    position: absolute;
-    z-index: 1;
-    right: .2rem;
-    bottom: -.65rem;
-    padding: 0 .18rem;
-    color: var(--exhibit-muted);
-    background: var(--exhibit-paper);
-  }
-  .workflow .has-gate {
-    background: linear-gradient(180deg, var(--exhibit-signal-soft), transparent 72%);
-  }
-  .stage-index,
-  .contract-meta > span,
-  .zone-heading > span {
-    color: var(--exhibit-signal);
-    font-family: var(--font-body);
-    font-size: .7rem;
-    letter-spacing: .1em;
-  }
-  .stage-copy {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .workflow h4 {
-    margin: 0;
-    color: var(--exhibit-ink);
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.25;
-  }
-  .gate-label {
-    display: flex;
-    gap: .4rem;
-    align-items: baseline;
-    color: var(--exhibit-signal);
-    font-family: var(--font-body);
-    font-size: .63rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-  }
-  .has-gate .gate-label {
-    margin-top: .8rem;
-  }
-  .workflow-note {
-    max-width: 720px;
-    margin: 1.5rem 0 0;
-    color: var(--exhibit-muted);
-    font-size: .82rem;
-    line-height: 1.6;
-  }
-  .boundary-section > header > p:last-child {
-    max-width: 640px;
-    color: var(--exhibit-muted);
-    line-height: 1.6;
-  }
-  .boundary-flow {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin: 4rem 0 0;
-    padding: 0;
-    list-style: none;
-    border-top: 1px solid var(--exhibit-line);
-  }
-  .boundary-flow li {
-    position: relative;
-    min-width: 0;
-    padding: 1.4rem clamp(1rem, 2.5vw, 2rem) 2rem 0;
-    border-bottom: 1px solid var(--exhibit-line);
-  }
-  .boundary-flow li:not(:last-child) {
-    margin-right: clamp(1rem, 2.5vw, 2rem);
-    border-right: 1px solid var(--exhibit-line);
-  }
-  .boundary-flow li:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    top: 50%;
-    right: calc(clamp(1rem, 2.5vw, 2rem) * -.55);
-    color: var(--exhibit-signal);
-  }
-  .zone-heading small,
-  .contract-meta small {
-    color: var(--exhibit-muted);
-    font-family: var(--font-body);
-    font-size: .62rem;
-    line-height: 1.35;
-    letter-spacing: .05em;
-    text-align: right;
-    text-transform: uppercase;
-  }
-  .boundary-flow h4,
-  .contract-grid h4 {
-    margin: 2.2rem 0 .8rem;
-    color: var(--exhibit-ink);
-    font-size: 1.22rem;
-    font-weight: 500;
-    line-height: 1.2;
-  }
-  .boundary-flow p,
-  .contract-grid p {
-    margin: 0;
-    color: var(--exhibit-muted);
-    font-size: .84rem;
-    line-height: 1.58;
-  }
-  .release-record {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: 1.2rem;
-    border: 1px solid var(--exhibit-line);
-  }
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-  .release-record > span:not(.sr-only) {
-    padding: .85rem;
-    color: var(--exhibit-ink);
-    font-size: .68rem;
-    font-weight: 650;
-    line-height: 1.35;
-    letter-spacing: .04em;
-    text-align: center;
-    text-transform: uppercase;
-    border-right: 1px solid var(--exhibit-line);
-  }
-  .release-record > span:last-child {
-    border-right: 0;
-  }
-  .outcome-grid {
-    display: grid;
-    grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
-    gap: clamp(1.5rem, 4vw, 3.5rem);
-    margin-top: 4rem;
-    align-items: end;
-  }
-  .outcome-grid figure {
-    min-width: 0;
-    margin: 0;
-  }
-  .preview-figure img,
-  .atlas-frame {
-    display: block;
-    width: 100%;
-    border: 1px solid var(--exhibit-line);
-    border-radius: 3px;
-    background: #0c0a09;
-  }
-  .preview-figure img {
-    aspect-ratio: 1;
-    object-fit: cover;
-  }
-  .atlas-frame {
-    box-sizing: border-box;
-    padding: clamp(1rem, 3vw, 2rem);
-    overflow: hidden;
-    aspect-ratio: 16 / 10;
-  }
-  .atlas-frame img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  .outcome-grid figcaption {
-    display: flex;
-    gap: .5rem 1rem;
-    align-items: baseline;
-    justify-content: space-between;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--exhibit-line);
-  }
-  .outcome-grid strong {
-    color: var(--exhibit-ink);
-    font-size: .9rem;
-  }
-  .outcome-grid figcaption span {
-    color: var(--exhibit-muted);
-    font-size: .68rem;
-    text-align: right;
-  }
-  .contract-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-top: 4rem;
-    border-top: 1px solid var(--exhibit-line);
-  }
-  .contract-grid article {
-    min-width: 0;
-    padding: 1.5rem clamp(1rem, 2.5vw, 2rem) 2rem 0;
-    border-bottom: 1px solid var(--exhibit-line);
-  }
-  .contract-grid article:not(:nth-child(3n)) {
-    margin-right: clamp(1rem, 2.5vw, 2rem);
-    border-right: 1px solid var(--exhibit-line);
-  }
-  .alpha-note {
-    padding: clamp(1.5rem, 4vw, 3rem);
-    background: var(--exhibit-signal-soft);
-    border: 1px solid var(--exhibit-signal);
-  }
-  .alpha-note h3 {
-    max-width: 780px;
-    font-size: clamp(2rem, 4vw, 3.8rem);
-  }
-  .alpha-note > p:last-child {
-    max-width: 700px;
-    margin: 0;
-    color: var(--exhibit-muted);
-    line-height: 1.65;
-  }
-  @media (max-width: 900px) {
-    .contract-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .contract-grid article:not(:nth-child(3n)) {
-      margin-right: 0;
-      border-right: 0;
-    }
-    .contract-grid article:nth-child(odd) {
-      margin-right: clamp(1rem, 2.5vw, 2rem);
-      border-right: 1px solid var(--exhibit-line);
-    }
-  }
+  header { max-width: 860px; }
+  .intro-meta { display: flex; gap: 1rem; align-items: center; justify-content: space-between; }
+  .intro-meta > span { padding: .4rem .65rem; color: var(--signal); font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--signal); border-radius: 999px; }
+  .eyebrow { margin: 0; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  h2, h3 { color: var(--ink); font-weight: 400; line-height: .98; letter-spacing: -.04em; }
+  h2 { margin: 1rem 0 1.25rem; font-size: clamp(2.5rem, 6vw, 5rem); }
+  header > p:last-child, .outcome-copy > p { max-width: 700px; color: var(--muted); line-height: 1.65; }
+  .engine-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: clamp(3rem, 7vw, 6rem) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+  .engine-flow li { position: relative; padding: 1.4rem clamp(1rem, 2.5vw, 2rem) 1.8rem 0; border-bottom: 1px solid var(--line); }
+  .engine-flow li:not(:last-child) { margin-right: clamp(1rem, 2.5vw, 2rem); border-right: 1px solid var(--line); }
+  .engine-flow li:not(:last-child)::after { content: '→'; position: absolute; top: 50%; right: -.55rem; color: var(--signal); }
+  .engine-flow li > span { color: var(--signal); font-size: .68rem; letter-spacing: .1em; }
+  .engine-flow h3 { margin: 2rem 0 .6rem; font-size: 1.25rem; letter-spacing: -.02em; }
+  .engine-flow p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .outcome { display: grid; grid-template-columns: minmax(16rem, .72fr) minmax(0, 1.28fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; margin-top: clamp(4rem, 9vw, 8rem); }
+  .outcome h3 { margin: .8rem 0 1rem; font-size: clamp(2rem, 4vw, 3.4rem); }
+  .release-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+  .release-tags span { padding: .45rem .65rem; color: var(--signal); font-size: .65rem; font-weight: 700; text-transform: uppercase; border: 1px solid var(--line); }
+  .result-visuals { display: grid; grid-template-columns: .72fr 1.28fr; gap: 1.25rem; align-items: end; }
+  figure { min-width: 0; margin: 0; }
+  figure img, .atlas-frame { display: block; width: 100%; border: 1px solid var(--line); background: #0c0a09; }
+  figure > img { aspect-ratio: 1; object-fit: cover; }
+  .atlas-frame { box-sizing: border-box; padding: 1rem; aspect-ratio: 4 / 3; }
+  .atlas-frame img { height: 100%; object-fit: contain; }
+  figcaption { display: grid; gap: .2rem; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+  figcaption strong { color: var(--ink); font-size: .82rem; }
+  figcaption span { color: var(--muted); font-size: .68rem; }
   @media (max-width: 760px) {
-    .engine-exhibit {
-      margin-top: 4rem;
-      margin-bottom: 4rem;
-      padding: 1.5rem;
-      border-radius: 1rem;
-    }
-    .intro-meta {
-      align-items: flex-start;
-    }
-    .boundary-flow,
-    .release-record,
-    .outcome-grid,
-    .contract-grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
-    .boundary-flow li:not(:last-child),
-    .contract-grid article:nth-child(odd) {
-      margin-right: 0;
-      border-right: 0;
-    }
-    .boundary-flow li:not(:last-child)::after {
-      content: '↓';
-      top: auto;
-      right: .2rem;
-      bottom: -.65rem;
-    }
-    .release-record > span:not(.sr-only) {
-      border-right: 0;
-      border-bottom: 1px solid var(--exhibit-line);
-    }
-    .release-record > span:last-child {
-      border-bottom: 0;
-    }
-    .atlas-frame {
-      aspect-ratio: 4 / 3;
-    }
-    .outcome-grid figcaption {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-    .outcome-grid figcaption span {
-      text-align: left;
-    }
+    .product-story { margin: 4rem 0; }
+    .engine-flow, .outcome, .result-visuals { grid-template-columns: 1fr; }
+    .engine-flow li:not(:last-child) { margin-right: 0; border-right: 0; }
+    .engine-flow li:not(:last-child)::after { content: '↓'; top: auto; right: .2rem; bottom: -.65rem; }
   }
 </style>

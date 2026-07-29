@@ -919,7 +919,7 @@ escape, and scenario/filename mismatch; all real release gates remain green.
 - Modify: `docs/verification/assets/task7-omnipet-zh-dark-reduced-390x844.webp`
 - Modify: `docs/verification/task7-release-verification.md`
 
-- [ ] **Step 1: Add product-focus regression checks**
+- [x] **Step 1: Add product-focus regression checks**
 
 Assert that both MDX files retain bilingual product problem, platform or engine
 capability, user value, extensibility, result, public links, and current
@@ -932,14 +932,14 @@ npm test
 
 Expected: the new product-focus checks fail against the long-form exhibition.
 
-- [ ] **Step 2: Rewrite the bilingual product narratives**
+- [x] **Step 2: Rewrite the bilingual product narratives**
 
 Keep each language to a compact product problem, a platform/engine capability
 section, and a result/current-boundary section. Use only one or two short
 technical paragraphs per project. Preserve the approved public links and avoid
 private production detail.
 
-- [ ] **Step 3: Reduce each story component to two visual moments**
+- [x] **Step 3: Reduce each story component to two visual moments**
 
 For Mundus, render a three-mode product overview plus one representative globe
 capture with a compact shared-platform/extension explanation. For OmniPet,
@@ -947,7 +947,7 @@ render a compact engine-to-release overview plus the SuShi public outcome.
 Remove the six algorithm cards, five-stage data flow, seven-stage workflow, and
 six extension-contract cards.
 
-- [ ] **Step 4: Rebind all 31 fact assertions**
+- [x] **Step 4: Rebind all 31 fact assertions**
 
 Keep exactly 31 bidirectional assertions and all pinned public sources. Replace
 claims removed from visitor prose with concise, visible product-level claims;
@@ -959,7 +959,7 @@ npm run verify
 
 Expected: facts report `31/31` after the new claim bindings are generated.
 
-- [ ] **Step 5: Run real-browser acceptance and replace evidence**
+- [x] **Step 5: Run real-browser acceptance and replace evidence**
 
 At `1440×900` and `390×844`, open Mundus and OmniPet in Chinese dark mode with
 reduced motion. Also check the existing homepage desktop and tablet scenarios.
@@ -968,7 +968,7 @@ decode state, overflow, active animations, console messages, network failures,
 and public links. Replace the four affected optimized WebP screenshots and
 their dimensions/SHA-256 manifest entries.
 
-- [ ] **Step 6: Update the verification report and complete Task 8**
+- [x] **Step 6: Update the verification report and complete Task 8**
 
 Document the shorter product narrative, retained visual count, 31/31 fact
 boundary, browser matrix, console/network result, and new screenshot hashes.
