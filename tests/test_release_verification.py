@@ -45,6 +45,19 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertLessEqual(content.count("\n## Platform capability") + content.count("\n## 平台能力"), 2)
         self.assertNotIn('aria-label="Mundus extension contract"', story)
         self.assertIn("@media (max-width: 1024px)", story)
+        for phrase in (
+            "same platform underneath",
+            "Add a lens, not another globe",
+            "Declare the question",
+            "Connect evidence",
+            "Reuse and share",
+        ):
+            self.assertIn(phrase, story)
+        for repeated in (
+            "versioned registered mode brings its own state, data, and explanation",
+            "Dataset scope, cartographic boundaries, and solar approximations",
+        ):
+            self.assertNotIn(repeated, story)
 
     def test_omnipet_is_a_concise_product_case_study(self) -> None:
         content = (
@@ -77,16 +90,36 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertNotIn('aria-label="Public release properties"', story)
         self.assertIn("@media (max-width: 1024px)", story)
         for phrase in (
-            "versioned manifests",
-            "action definitions",
-            "bounded engine APIs",
-            "validators",
-            "approval state",
-            "closed release schema",
+            "Manifest-driven projects make adding a pet repeatable",
+            "maintainers extend action definitions in the engine",
+            "pet validate",
+            "package --check",
+            "release export",
+            "release verify",
             "one allowlisted built-in image provider",
             "does not expose arbitrary provider or model configuration",
         ):
             self.assertIn(phrase, content)
+        for phrase in (
+            "Describe in the manifest",
+            "Extend actions and validate",
+            "Export, verify, and publish",
+            "SuShi",
+        ):
+            self.assertIn(phrase, story)
+        for repeated in (
+            "failures persist without automatic retry",
+            "repair preserves unaffected work",
+            "Shipped extension axes",
+            "verifiable hashes",
+        ):
+            self.assertNotIn(repeated, story)
+        for obsolete in (
+            "bounded engine APIs",
+            "approval state",
+            "closed release schema",
+        ):
+            self.assertNotIn(obsolete, content)
 
 
 class TestStructuredFacts(unittest.TestCase):
@@ -144,13 +177,14 @@ const mode = { category: "spatial" };
     def test_fact_catalog_uses_fewer_atomic_product_claims(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
 
-        self.assertGreaterEqual(len(rules), 10)
-        self.assertLessEqual(len(rules), 16)
-        self.assertTrue(all(len(rule["claims"]) == 3 for rule in rules))
+        self.assertEqual(len(rules), 13)
         self.assertTrue(
             all(
-                {claim["locale"] for claim in rule["claims"]}
-                == {"en", "zh", "story"}
+                {"en", "zh"}.issubset(
+                    {claim["locale"] for claim in rule["claims"]}
+                )
+                and {claim["locale"] for claim in rule["claims"]}
+                <= {"en", "zh", "story"}
                 for rule in rules
             )
         )
@@ -165,6 +199,9 @@ const mode = { category: "spatial" };
             "omnipet-look-rows",
         }
         self.assertTrue(forbidden.isdisjoint({rule["id"] for rule in rules}))
+        rule_ids = {rule["id"] for rule in rules}
+        self.assertIn("omnipet-manifest-extension-flow", rule_ids)
+        self.assertNotIn("omnipet-shipped-extension-axes", rule_ids)
 
     def test_all_semantic_rules_must_match(self) -> None:
         rules = [

@@ -70,16 +70,6 @@
               "value": "注册式、带版本的扩展都声明自身状态与数据依赖"
             }
           ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/MundusStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "versioned registered mode brings its own state, data"
-            }
-          ]
         }
       ],
       "evidence": {
@@ -118,16 +108,6 @@
             {
               "type": "contains",
               "value": "数据注册表记录来源、许可、转换、哈希、缺失值策略与边界说明"
-            }
-          ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/MundusStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "provenance, validation"
             }
           ]
         }
@@ -170,16 +150,6 @@
               "value": "复用场景、相机、拾取、来源记录、验证、质量加载和栅格回退"
             }
           ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/MundusStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "rendering fallbacks"
-            }
-          ]
         }
       ],
       "evidence": {
@@ -214,16 +184,6 @@
             {
               "type": "contains",
               "value": "数据集范围、制图边界与太阳近似都作为明确限制呈现"
-            }
-          ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/MundusStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "solar approximations remain visible product limits"
             }
           ]
         }
@@ -262,16 +222,6 @@
               "value": "面向 sprite v2 生产的开源 Python 引擎与 CLI"
             }
           ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/OmniPetStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "open-source engine"
-            }
-          ]
         }
       ],
       "evidence": {
@@ -295,7 +245,7 @@
           "rules": [
             {
               "type": "contains",
-              "value": "persists a failed generation instead of retrying automatically, requires explicit human approval"
+              "value": "keeps failed work visible instead of retrying automatically, pauses for explicit review"
             }
           ]
         },
@@ -305,17 +255,7 @@
           "rules": [
             {
               "type": "contains",
-              "value": "记录失败而不是自动重试，要求显式人工批准"
-            }
-          ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/OmniPetStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "failures persist without automatic retry"
+              "value": "保留失败结果而不自动重试，在关键节点暂停并等待明确审查"
             }
           ]
         }
@@ -358,16 +298,6 @@
               "value": "修复指定任务而保留不受影响的上游成果"
             }
           ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/OmniPetStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "repair preserves unaffected work"
-            }
-          ]
         }
       ],
       "evidence": {
@@ -382,8 +312,8 @@
       }
     },
     {
-      "id": "omnipet-shipped-extension-axes",
-      "description": "Six shipped seams keep engine stages separable.",
+      "id": "omnipet-manifest-extension-flow",
+      "description": "Manifest-driven projects expose separate validation and release steps.",
       "claims": [
         {
           "locale": "en",
@@ -391,7 +321,16 @@
           "rules": [
             {
               "type": "contains",
-              "value": "versioned manifests, action definitions, bounded engine APIs, validators, approval state, and a closed release schema"
+              "value": "Manifest-driven projects make adding a pet repeatable"
+            },
+            {
+              "type": "contains_all",
+              "values": [
+                "pet validate",
+                "package --check",
+                "release export",
+                "release verify"
+              ]
             }
           ]
         },
@@ -401,36 +340,33 @@
           "rules": [
             {
               "type": "contains",
-              "value": "带版本的清单、动作定义、有界引擎 API、验证器、批准状态与闭集发布结构"
-            }
-          ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/OmniPetStory.astro",
-          "rules": [
+              "value": "清单驱动让新增桌宠成为可重复流程"
+            },
             {
-              "type": "contains",
-              "value": "versioned manifests, action definitions, bounded engine APIs, validators, approval state, and a closed release schema"
+              "type": "contains_all",
+              "values": [
+                "pet validate",
+                "package --check",
+                "release export",
+                "release verify"
+              ]
             }
           ]
         }
       ],
       "evidence": {
         "repository": "OmniPet",
-        "source": "docs/architecture.md",
+        "source": "README.en.md",
         "rules": [
           {
-            "type": "contains",
-            "value": "one bounded action at a time"
-          },
-          {
-            "type": "contains",
-            "value": "approval"
-          },
-          {
-            "type": "contains",
-            "value": "public release bundle"
+            "type": "contains_all",
+            "values": [
+              "omnipet pet init",
+              "omnipet pet validate",
+              "omnipet package my-pet --check",
+              "omnipet release export",
+              "omnipet release verify"
+            ]
           }
         ]
       }
@@ -458,16 +394,6 @@
               "value": "一个白名单内置图像 provider，不开放任意 provider 或模型配置"
             }
           ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/OmniPetStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "One allowlisted built-in image provider is supported; arbitrary provider or model configuration is not"
-            }
-          ]
         }
       ],
       "evidence": {
@@ -487,7 +413,7 @@
     },
     {
       "id": "omnipet-closed-release",
-      "description": "Public export is closed, hashed, and independently verifiable.",
+      "description": "Public export and verification exclude production access.",
       "claims": [
         {
           "locale": "en",
@@ -495,7 +421,7 @@
           "rules": [
             {
               "type": "contains",
-              "value": "closed, allowlisted bundle whose declared files are bound by SHA-256 and can be verified independently without generation credentials"
+              "value": "Export and independent verification keep generation credentials and production context out of the public handoff"
             }
           ]
         },
@@ -505,17 +431,7 @@
           "rules": [
             {
               "type": "contains",
-              "value": "闭集白名单包，每个声明文件均由 SHA-256 绑定，并可在不使用生成凭据的情况下独立验证"
-            }
-          ]
-        },
-        {
-          "locale": "story",
-          "source": "src/components/OmniPetStory.astro",
-          "rules": [
-            {
-              "type": "contains",
-              "value": "closed installable release"
+              "value": "导出与独立验证让生成凭据和生产上下文留在公开交付之外"
             }
           ]
         }

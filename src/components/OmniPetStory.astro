@@ -2,9 +2,9 @@
 import Localized from './Localized.astro';
 
 const flow = [
-  { index: '01', title: { en: 'Create and review', zh: '生成与审查' }, copy: { en: 'The open-source engine resumes at explicit human decisions; failures persist without automatic retry, and repair preserves unaffected work.', zh: '开源引擎可从明确的人工决定处恢复；失败会被记录而不自动重试，修复会保留不受影响的成果。' } },
-  { index: '02', title: { en: 'Validate and package', zh: '验证与打包' }, copy: { en: 'Structure and approval gates protect downstream output.', zh: '结构与批准门禁保护下游产物。' } },
-  { index: '03', title: { en: 'Export and verify', zh: '导出与验证' }, copy: { en: 'A closed public bundle can be checked without production access.', zh: '闭集公开包无需生产权限即可验证。' } },
+  { index: '01', title: { en: 'Describe in the manifest', zh: '在清单中描述' }, copy: { en: 'Define the pet, sprite requirements, and release inputs.', zh: '声明桌宠、精灵要求与发布输入。' } },
+  { index: '02', title: { en: 'Extend actions and validate', zh: '扩展动作并验证' }, copy: { en: 'Add behavior in the engine contract, then check the project and package.', zh: '在引擎契约中增加行为，再检查项目与安装包。' } },
+  { index: '03', title: { en: 'Export, verify, and publish', zh: '导出、验证并发布' }, copy: { en: 'Verify the public bundle independently before it enters the catalog.', zh: '在进入公共目录前独立验证公开包。' } },
 ];
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
@@ -17,7 +17,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       <span><Localized en="Open-source Alpha" zh="开源 Alpha" /></span>
     </div>
     <h2 id="omnipet-story-title"><Localized en="From uncertain image to bounded release." zh="从不确定图像到有边界的发布。" /></h2>
-    <p><Localized en="The open-source engine makes generation reviewable and recoverable: failures persist without automatic retry, and repair preserves unaffected work." zh="开源引擎让生成可审查、可恢复：失败会被记录而不自动重试，修复会保留不受影响的成果。" /></p>
+    <p><Localized en="A compact path from a declared project to a checked public handoff." zh="从声明项目到经过检查的公开交付，形成一条紧凑路径。" /></p>
   </header>
 
   <ol class="engine-flow">
@@ -29,13 +29,12 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       </li>
     ))}
   </ol>
-  <p class="shipped-seams"><Localized en="Shipped extension axes: versioned manifests, action definitions, bounded engine APIs, validators, approval state, and a closed release schema. One allowlisted built-in image provider is supported; arbitrary provider or model configuration is not." zh="已交付扩展轴：带版本的清单、动作定义、有界引擎 API、验证器、批准状态与闭集发布结构。当前支持一个白名单内置图像 provider，不开放任意 provider 或模型配置。" /></p>
 
   <section class="outcome" aria-labelledby="omnipet-outcome-title">
     <div class="outcome-copy">
       <p class="eyebrow"><Localized en="Public result" zh="公开结果" /></p>
       <h3 id="omnipet-outcome-title"><Localized en="SuShi leaves as a pet, not a production archive." zh="SuShi 以桌宠而非生产档案的形式离开流程。" /></h3>
-      <p><Localized en="The public catalog contains a closed installable release, documentation, license, and verifiable hashes that can be checked without production access." zh="公共目录包含闭集可安装发布、说明、许可与可验证哈希，无需生产权限即可检查。" /></p>
+      <p><Localized en="The public catalog contains an installable release, documentation, and an asset license that can be checked without production access." zh="公共目录包含可安装发布、说明与资产许可，无需生产权限即可检查。" /></p>
       <p id="omnipet-release-label" class="sr-only"><Localized en="Public release properties" zh="公开发布属性" /></p>
       <div class="release-tags" aria-labelledby="omnipet-release-label">
         <span><Localized en="Installable" zh="可安装" /></span>
@@ -83,7 +82,6 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .engine-flow li > span { color: var(--signal); font-size: .68rem; letter-spacing: .1em; }
   .engine-flow h3 { margin: 2rem 0 .6rem; font-size: 1.25rem; letter-spacing: -.02em; }
   .engine-flow p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
-  .shipped-seams { max-width: 760px; margin: 1.25rem 0 0; color: var(--muted); font-size: .82rem; line-height: 1.6; }
   .outcome { display: grid; grid-template-columns: minmax(16rem, .72fr) minmax(0, 1.28fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; margin-top: clamp(4rem, 9vw, 8rem); }
   .outcome h3 { margin: .8rem 0 1rem; font-size: clamp(2rem, 4vw, 3.4rem); }
   .release-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
