@@ -13,6 +13,9 @@ class TestSiteInterface(unittest.TestCase):
         self.home = (self.root / "src/pages/index.astro").read_text(
             encoding="utf-8"
         )
+        self.project = (
+            self.root / "src/pages/projects/[...slug].astro"
+        ).read_text(encoding="utf-8")
 
     def test_navigation_uses_home_work_and_about(self) -> None:
         self.assertIn('<Localized en="Home" zh="主页" />', self.layout)
@@ -36,6 +39,28 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn("site.name", footer)
         self.assertNotIn("site.github", footer)
         self.assertNotIn("GitHub", footer)
+
+    def test_internal_project_ctas_are_removed_but_titles_and_media_link(self) -> None:
+        self.assertNotIn("Read the exploration", self.home)
+        self.assertNotIn("查看项目详情", self.home)
+        self.assertIn('class="media-link"', self.home)
+        self.assertIn('<h3><a href={`${base}projects/${project.id}`}>', self.home)
+        self.assertIn('class="other-media"', self.home)
+
+    def test_external_links_are_blue_and_use_external_arrow(self) -> None:
+        about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
+        self.assertIn('class="external-link"', about)
+        self.assertIn('aria-hidden="true">↗</span>', about)
+        self.assertIn('class="external-link"', self.home)
+        self.assertIn("--external-link: var(--blue);", self.layout)
+        self.assertIn("color: var(--external-link);", self.project)
+
+    def test_project_titles_do_not_inherit_external_link_color(self) -> None:
+        self.assertRegex(
+            self.home,
+            r"\.other-copy > h3 a\s*\{[^}]*color: var\(--ink\);",
+        )
+        self.assertNotIn(".other-card a { color: var(--blue);", self.home)
 
 
 if __name__ == "__main__":

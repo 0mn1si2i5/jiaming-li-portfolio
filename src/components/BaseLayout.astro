@@ -103,6 +103,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     --violet: #7659d7;
     --coral: #d46754;
     --blue: #477bb7;
+    --external-link: var(--blue);
     --font-body: "Instrument Sans Variable", "Noto Sans Bilingual", "PingFang SC", sans-serif;
     --font-display: "Cormorant Display", "Newsreader Variable", Georgia, serif;
     --font-editorial: "Newsreader Variable", Georgia, serif;
@@ -130,6 +131,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   ::selection { color: var(--paper); background: var(--ink); }
   a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
   a:hover { text-decoration-thickness: 2px; }
+  .external-link { color: var(--external-link); font-weight: 620; text-decoration: none; }
+  .external-link:hover { text-decoration: underline; }
   :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 2px; }
   .page-width { width: min(var(--page-width), calc(100% - 3rem)); margin-right: auto; margin-left: auto; }
   .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 5; padding: .5rem .75rem; background: var(--ink); color: var(--paper); }
