@@ -4,7 +4,10 @@
     {
       "scenario": "home-zh-dark-768",
       "route": "/",
-      "viewport": {"width": 768, "height": 1024},
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
       "matches": true,
       "overflow": false,
       "brokenImageCount": 0,
@@ -13,7 +16,10 @@
     {
       "scenario": "home-zh-dark-390",
       "route": "/",
-      "viewport": {"width": 390, "height": 844},
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
       "matches": true,
       "overflow": false,
       "brokenImageCount": 0,
@@ -22,7 +28,10 @@
     {
       "scenario": "mundus-zh-dark-desktop",
       "route": "/projects/mundus",
-      "viewport": {"width": 1440, "height": 900},
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
       "matches": true,
       "overflow": false,
       "brokenImageCount": 0,
@@ -31,7 +40,10 @@
     {
       "scenario": "mundus-zh-dark-mobile",
       "route": "/projects/mundus",
-      "viewport": {"width": 390, "height": 844},
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
       "matches": true,
       "overflow": false,
       "brokenImageCount": 0,

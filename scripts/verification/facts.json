@@ -2,76 +2,73 @@
   "schemaVersion": 2,
   "assertions": [
     {
-      "id": "mundus-three-modes",
-      "description": "Three public observation modes share one product.",
+      "id": "mundus-personal-globe-first-lenses",
+      "description": "Mundus is a maintained personal globe whose current modes are its first shipped lenses.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "three public modes—spatial, human, and temporal"}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "空间、人类与时间三种公开模式"}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Other Side", "Development, Unpacked", "Sunline"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Mundus is a personal digital globe I maintain over time", "The current modes are the first three observation lenses"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Mundus 是我长期维护的一颗个人数字地球", "当前模式是最早落地的三个观察视角"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["The first shipped lenses share one place", "首批上线视角共享同一地点"]}]}
       ],
       "evidence": {
         "repository": "Mundus",
         "source": "README.md",
-        "rules": [{"type": "contains_all", "values": ["The V1 scope is intentionally limited to three modes:", "Other Side", "Development, Unpacked", "Sunline"]}]
+        "rules": [{"type": "contains_all", "values": ["long-lived personal digital globe", "The current public product begins with three modes", "Other Side", "Development, Unpacked", "Sunline"]}]
       }
     },
     {
-      "id": "mundus-shared-globe-platform",
-      "description": "The three lenses share one globe platform.",
+      "id": "mundus-observation-workflow",
+      "description": "Every current lens follows one inspectable and shareable observation loop.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "modes share one WebGL globe, geographic interaction model, and bilingual interface"}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "三种模式共用一套 WebGL 地球、地理交互模型和双语界面"}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains", "value": "extensions of the same platform underneath"}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "A visitor chooses a lens, manipulates the same globe and place, receives a specific result, opens its method, source, year, and limits"}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "访客先选择一个观察视角，再操作同一颗地球和地点，得到一个明确结果，查看方法、来源、年份与限制"}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Frame one question", "Reuse one globe and place", "Verify the public release"]}]}
+      ],
+      "evidence": {
+        "repository": "Mundus",
+        "source": "docs/PROJECT_PLAN.md",
+        "rules": [{"type": "contains_all", "values": ["核心体验循环：选择一种观察方式，操纵地球，获得一个清晰发现，查看解释与来源，分享当前状态，再进入下一个模式", "地球另一端 / Other Side", "发展的不同侧面 / Development, Unpacked", "日照线 / Sunline"]}]
+      }
+    },
+    {
+      "id": "mundus-v11-parchment-atlas",
+      "description": "The live V1.1 product contains the Parchment Atlas interaction and data updates.",
+      "claims": [
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas moved the public product", "draggable through-Earth cross-section", "GeoNames supports English and Chinese major-city search", "Natural Earth 110m/50m vector geometry"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas 将公开产品", "拖拽穿过地球的剖面", "GeoNames 支持中英文主要城市搜索", "Natural Earth 110m/50m 矢量几何"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["V1.1 Parchment Atlas", "V1.1 羊皮纸地图集"]}]}
       ],
       "evidence": {
         "repository": "Mundus",
         "source": "README.md",
-        "rules": [{"type": "contains_all", "values": ["interactive three-dimensional globe", "three different scientific lenses", "Globe kernel and domain-oriented modes"]}]
+        "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "draggable Other Side cross-section", "bilingual city search", "bilateral city relations", "Natural Earth vector"]}]
       }
     },
     {
-      "id": "mundus-versioned-mode-contract",
-      "description": "Registered modes declare versioned state and data contracts.",
+      "id": "mundus-maintainable-release",
+      "description": "Static delivery, pinned data, accessibility, and artifact gates support long-term maintenance.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "registered, versioned extension declares its state and data dependencies"}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "注册式、带版本的扩展都声明自身状态与数据依赖"}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains", "value": "Registered modes declare a version, scientific category, state schema, and data resources"}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Static delivery avoids accounts, telemetry, and server maintenance", "Reviewed data snapshots and hashes", "Pages subpath checks and artifact verification"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["静态交付避免账号、遥测和服务器维护", "经过审核的数据快照与哈希", "Pages 子路径检查与制品验证"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Pin data and method", "Verify the public release"]}]}
       ],
       "evidence": {
         "repository": "Mundus",
-        "source": "src/features/modes/modeRegistry.ts",
-        "rules": [{"type": "contains_all", "values": ["version: 1;", "category: 'spatial' | 'human' | 'temporal'", "resources: readonly string[]", "stateSchema: z.ZodType"]}]
+        "source": "docs/2026-08-01-v1.1-publication-packet.md",
+        "rules": [{"type": "contains_all", "values": ["static, one-Canvas architecture", "SHA-256", "accessible fallbacks", "pages-artifact", "desktop/mobile"]}]
       }
     },
     {
-      "id": "mundus-data-registry",
-      "description": "The validated data registry records provenance and boundary policy.",
+      "id": "mundus-boundaries-ghsl",
+      "description": "The case distinguishes current product limits from governed future work.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "A data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats"}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "数据注册表记录来源、许可、转换、哈希、缺失值策略与边界说明"}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains", "value": "Connect evidence"}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["not street navigation, a professional GIS, or an authoritative scientific service", "It is not a plugin platform", "GHSL Human Morphology did not pass global validation and is not a public feature"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["不是街道导航、专业 GIS 或权威科学服务", "它现在不是插件平台", "GHSL Human Morphology 尚未通过全球验证，不是公开功能"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["not runtime plugins", "不是运行时插件"]}]}
       ],
       "evidence": {
         "repository": "Mundus",
-        "source": "src/data/registry.ts",
-        "rules": [{"type": "contains_all", "values": ["sourceName: z.string().min(1)", "sourceUrl: z.url()", "licenseName: z.string().min(1)", "licenseUrl: z.url()", "version: z.string().min(1)", "sha256: z.string().regex", "transformations: z.array", "missingValuePolicy: z.string().min(1)", "boundaryPolicy: z.string().min(1)"]}]
-      }
-    },
-    {
-      "id": "mundus-educational-limits",
-      "description": "Dataset, cartographic, and solar limitations remain explicit.",
-      "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "dataset scope, cartographic boundaries, and solar approximations are presented as limits"}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "数据集范围、制图边界与太阳近似都作为明确限制呈现"}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains", "value": "Keep limits visible"}]}
-      ],
-      "evidence": {
-        "repository": "Mundus",
-        "source": "README.md",
-        "rules": [
-          {"type": "contains_all", "values": ["cartographic representation, not a legal", "solar results are educational", "navigational"]},
-          {"type": "regex", "value": "engineering\\s+advice"}
-        ]
+        "source": "docs/ROADMAP_HANDOFF.md",
+        "rules": [{"type": "contains_all", "values": ["no backend, general GIS, tile platform, plugin system, or fourth mode", "STOP_GLOBAL_MORPHOLOGY", "Plans 2 through 7", "frozen and blocked"]}]
       }
     }
   ]

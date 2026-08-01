@@ -4,7 +4,7 @@
 
 Add Mundus as a concise bilingual product case study while retaining the
 portfolio's static Astro architecture and digital research exhibition system.
-The published case must describe only the deployed Mundus V1.0.0 surface.
+The published case must describe only the deployed Mundus V1.1 public surface.
 
 ## Public Hierarchy
 
@@ -19,20 +19,25 @@ ordering remain content metadata rather than project-ID conditionals.
 
 ## Mundus Narrative
 
-Mundus is an interactive 3D Earth observation product, not a professional GIS
-editor or generic mapping platform. The case follows five concise beats:
+Mundus is a personal digital globe maintained over time, not a professional GIS
+editor, street-navigation product, or authoritative scientific service. The
+case follows five concise beats:
 
-1. the problem of comparing several ways of understanding one place;
-2. a shared WebGL globe and interaction model;
-3. three deployed V1 modes: Other Side, Development, Unpacked, and Sunline;
-4. a registered mode contract with versioned state and declared data;
-5. visible solar, development-data, cartographic, and major-city limits.
+1. world knowledge is split across maps, tables, astronomy tools, and portals;
+2. one user loop preserves a place while changing observation lenses;
+3. Other Side, Development, Unpacked, and Sunline are the first shipped lenses,
+   not a final catalog;
+4. Parchment Atlas delivers the draggable cross-section, bilingual GeoNames
+   search, bilateral city relations, and Natural Earth vector globe;
+5. static delivery, pinned data, accessibility, and release gates make future
+   product additions maintainable.
 
 The page uses one public hero and one three-mode Story visual. English and
-Chinese must agree in meaning. Public links target the V1.0.0 live site and
-repository. Parchment Atlas, GeoNames search, bilateral relations, vector-globe
-hardening, GHSL work, private review, migration, and performance evidence are
-not published.
+Chinese must agree in meaning. Public links target the live V1.1 Pages product
+and repository. The page states that Mundus is not a runtime plugin platform.
+GHSL Human Morphology remains outside the public product after
+`STOP_GLOBAL_MORPHOLOGY`; private review, migration, and candidate-only evidence
+are not published.
 
 ## Shared Presentation
 
@@ -53,10 +58,11 @@ owns its Story component; the shared route does not become a project switchboard
 ## Evidence Boundary
 
 Visitor-visible Mundus claims are verified only against immutable reviewed
-commit `a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1`, using `git show` semantics.
-The fact catalog covers the three modes, shared globe, versioned mode contract,
-validated data registry, and published limits. No other product repository is a
-required build input.
+and deployed commit `c6e625fa68879f9771debffebdaf32e295d56769`,
+using `git show` semantics. The fact catalog covers the maintained personal
+globe, observation loop, public V1.1 capabilities, maintainable release
+decisions, and explicit GHSL/product boundaries. No other product repository is
+a required build input.
 
 Pull requests run checkout, install, tests, build, release verification, and a
 bounded Pages artifact upload. Deployment is restricted to non-PR runs on
@@ -67,7 +73,7 @@ job.
 
 - Selected Work is DialogTree, Mundus, NBTI.
 - Side B remains in Other Work and its route remains available.
-- Generated routes are home, Notes, DialogTree, Mundus, NBTI, and Side B.
+- Generated routes are home, About, DialogTree, Mundus, NBTI, and Side B.
 - No `/projects/omnipet` route or OmniPet visitor content is generated.
 - Mundus works in English and Chinese, light and dark themes, reduced motion,
   and widths 1440, 1024, 768, and 390.
@@ -79,7 +85,7 @@ job.
 
 ## Out Of Scope
 
-- Mundus product development or V1.1 publication.
+- Mundus product development, tag creation, or Release creation.
 - OmniPet portfolio publication in this release.
 - Changes to DialogTree, NBTI, or Side B content.
 - Merge, Pages deployment, tags, Releases, repository settings, or history

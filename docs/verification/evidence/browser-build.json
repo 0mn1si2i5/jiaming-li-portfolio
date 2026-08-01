@@ -1,11 +1,29 @@
 {
   "schemaVersion": 1,
   "html": [
-    {"path": "index.html", "sha256": "ca157d35808166fb01c47bb1909acc40e177c497780939d4e6d44b1e0e1b52bd"},
-    {"path": "about/index.html", "sha256": "31699925f251d0a46a51f9f17943d1498f16bc9bb90b4f6858ec4aec4a8a4f29"},
-    {"path": "projects/dialogtree/index.html", "sha256": "d5afe645fdb4952526626549116936a9042599965d86f4f470ae98c5cf88f11a"},
-    {"path": "projects/mundus/index.html", "sha256": "ff87065f7521aca81e3d89ca538c188920d65466a7833b067bb3ccedb83bd979"},
-    {"path": "projects/nbti/index.html", "sha256": "10220cb9db073f4a008070e87828a970dd2fc0f2f01e18d5bbfec2423044557e"},
-    {"path": "projects/side-b/index.html", "sha256": "115870b70f1e39f1efd0bc90d8ca0ff643c6f2637329793d96e1aa5253dbfab7"}
+    {
+      "path": "index.html",
+      "sha256": "c9d526f1a5e925a61a82d94db77ccda0fc61d0dce4f427a5609df296f3a9fa6d"
+    },
+    {
+      "path": "about/index.html",
+      "sha256": "31699925f251d0a46a51f9f17943d1498f16bc9bb90b4f6858ec4aec4a8a4f29"
+    },
+    {
+      "path": "projects/dialogtree/index.html",
+      "sha256": "d5afe645fdb4952526626549116936a9042599965d86f4f470ae98c5cf88f11a"
+    },
+    {
+      "path": "projects/mundus/index.html",
+      "sha256": "7b7df4272124ef559912007c0a7e5272117ef1503f8a86f16bd98b123342f080"
+    },
+    {
+      "path": "projects/nbti/index.html",
+      "sha256": "10220cb9db073f4a008070e87828a970dd2fc0f2f01e18d5bbfec2423044557e"
+    },
+    {
+      "path": "projects/side-b/index.html",
+      "sha256": "115870b70f1e39f1efd0bc90d8ca0ff643c6f2637329793d96e1aa5253dbfab7"
+    }
   ]
 }

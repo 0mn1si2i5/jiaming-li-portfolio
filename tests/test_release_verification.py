@@ -24,14 +24,16 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         for phrase in (
-            "Product problem",
-            "Platform capability",
-            "User value",
-            "Extensible by design",
-            "产品问题",
-            "平台能力",
-            "用户价值",
-            "为扩展而设计",
+            "What I am solving",
+            "How the product works",
+            "What V1.1 delivered",
+            "Product and technical decisions",
+            "Boundaries and future",
+            "我在解决什么问题",
+            "当前产品如何工作",
+            "V1.1 做了什么",
+            "关键产品与技术决策",
+            "边界与未来",
         ):
             self.assertIn(phrase, content)
         for removed in (
@@ -42,15 +44,15 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         ):
             self.assertNotIn(removed, story)
         self.assertEqual(story.count("<img"), 1)
-        self.assertLessEqual(content.count("\n## Platform capability") + content.count("\n## 平台能力"), 2)
-        self.assertNotIn('aria-label="Mundus extension contract"', story)
+        self.assertEqual(content.count("\n## "), 10)
+        self.assertNotIn('aria-label="Mundus product governance loop"', story)
         self.assertIn("@media (max-width: 1024px)", story)
         for phrase in (
-            "same platform underneath",
-            "Add a lens, not another globe",
-            "Declare the question",
-            "Connect evidence",
-            "Reuse and share",
+            "The first shipped lenses share one place",
+            "Add a governed view, not another globe",
+            "Frame one question",
+            "Pin data and method",
+            "Verify the public release",
         ):
             self.assertIn(phrase, story)
         for repeated in (
@@ -83,19 +85,22 @@ class TestProductCaseStudyFocus(unittest.TestCase):
 
 
 class TestStructuredFacts(unittest.TestCase):
-    def test_mundus_uses_live_v1_reviewed_revision(self) -> None:
+    def test_mundus_uses_live_v11_deployed_revision(self) -> None:
         self.assertEqual(
             facts.EXPECTED_REVISIONS["Mundus"],
-            "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
+            "c6e625fa68879f9771debffebdaf32e295d56769",
         )
 
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
-        registry = next(
-            rule for rule in rules if rule["id"] == "mundus-data-registry"
-        )
         self.assertEqual(
-            registry["evidence"]["source"],
-            "src/data/registry.ts",
+            [rule["id"] for rule in rules],
+            [
+                "mundus-personal-globe-first-lenses",
+                "mundus-observation-workflow",
+                "mundus-v11-parchment-atlas",
+                "mundus-maintainable-release",
+                "mundus-boundaries-ghsl",
+            ],
         )
 
     def test_source_revision_evidence_records_reviewed_commits(self) -> None:
@@ -112,7 +117,7 @@ class TestStructuredFacts(unittest.TestCase):
         }
         self.assertEqual(
             revisions["Mundus"]["revision"],
-            "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
+            "c6e625fa68879f9771debffebdaf32e295d56769",
         )
         self.assertEqual(set(revisions), {"Mundus"})
         for item in revisions.values():
@@ -123,6 +128,30 @@ class TestStructuredFacts(unittest.TestCase):
             self.assertNotIn("branch", item)
             self.assertNotIn("dirty", item)
             self.assertNotIn("expectedClean", item)
+
+    def test_mundus_case_study_keeps_delivered_and_future_scope_distinct(
+        self,
+    ) -> None:
+        case = Path("src/content/projects/mundus.mdx").read_text(
+            encoding="utf-8"
+        )
+        story = Path("src/components/MundusStory.astro").read_text(
+            encoding="utf-8"
+        )
+
+        for phrase in (
+            "a personal digital globe I maintain over time",
+            "the first three observation lenses",
+            "not a plugin platform",
+            "GHSL Human Morphology did not pass global validation",
+            "我长期维护的一颗个人数字地球",
+            "最早落地的三个观察视角",
+            "不是插件平台",
+            "GHSL Human Morphology 尚未通过全球验证",
+        ):
+            self.assertIn(phrase, case)
+        self.assertIn("The first shipped lenses share one place", story)
+        self.assertIn("首批上线视角共享同一地点", story)
 
     def test_retained_fact_evidence_matches_the_catalog(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
@@ -206,8 +235,16 @@ const mode = { category: "spatial" };
         )
         self.assertTrue(all(rule["evidence"]["rules"] for rule in rules))
         rule_ids = {rule["id"] for rule in rules}
-        self.assertTrue(all(rule_id.startswith("mundus-") for rule_id in rule_ids))
-        self.assertIn("mundus-data-registry", rule_ids)
+        self.assertEqual(
+            rule_ids,
+            {
+                "mundus-personal-globe-first-lenses",
+                "mundus-observation-workflow",
+                "mundus-v11-parchment-atlas",
+                "mundus-maintainable-release",
+                "mundus-boundaries-ghsl",
+            },
+        )
 
     def test_fact_catalog_rejects_missing_story_claim(self) -> None:
         catalog = {

@@ -9,7 +9,7 @@ The static build emits six pages:
 
 ```text
 dist/index.html
-dist/notes/index.html
+dist/about/index.html
 dist/projects/dialogtree/index.html
 dist/projects/mundus/index.html
 dist/projects/nbti/index.html
@@ -21,29 +21,33 @@ NBTI; Side B remains first in Other Work.
 
 ## Source Authority
 
-Mundus is pinned to deployed V1.0.0:
+Mundus is pinned to the deployed V1.1 public `main`:
 
 ```text
-a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1
+c6e625fa68879f9771debffebdaf32e295d56769
 ```
 
 The verifier requires that immutable commit object and reads evidence with
 `git show <revision>:<path>`. Five visitor-visible facts bind the bilingual
 case and Story to:
 
-- `README.md`: three live modes, shared globe, and published limits;
-- `src/features/modes/modeRegistry.ts`: versioned mode/state/data declarations;
-- `src/data/registry.ts`: source, license, hash, transformation,
-  missing-value, and boundary metadata.
+- `README.md`: the maintained personal globe, first three lenses, and public
+  Parchment Atlas capabilities;
+- `docs/PROJECT_PLAN.md`: the shared observation loop and current modes;
+- `docs/2026-08-01-v1.1-publication-packet.md`: static architecture, hashed
+  data, accessibility, and release gates;
+- `docs/ROADMAP_HANDOFF.md`: product limits, the GHSL stop decision, and the
+  frozen follow-on plans.
 
-No unpublished V1.1, Parchment Atlas, GeoNames, bilateral-relations,
-vector-globe hardening, GHSL, migration, private-review, or performance claim
-is used.
+Only capabilities observable on the public Pages deployment are presented as
+shipped. GHSL Human Morphology is explicitly not a public feature. The
+`v1.0.0` tag and Release remain unchanged; no V1.1 tag or Release is claimed.
 
 ## Browser Matrix
 
 The exact GitHub Pages build was served under `/Oh-My-Portfolio/` and exercised
-with Chrome through `agent-browser 0.27.0`.
+with Playwright Chromium after the `agent-browser` daemon failed to establish a
+CDP channel.
 
 | Scenario | Result |
 | --- | --- |
@@ -61,14 +65,16 @@ preference, image counts, focus result, and overflow result in
 `evidence/browser-matrix.json`. Reduced-motion observations are independently
 cross-bound in `evidence/browser-reduced-motion.json`.
 
-The fresh browser session reported:
+The eight isolated browser sessions reported:
 
 - console messages: 0;
-- normalized completed network requests: 24;
-- statuses: 18 x 200 and 6 x 304;
+- normalized completed network requests: 96;
+- statuses: 96 x 200;
 - failed requests: 0;
-- every document, stylesheet, local font, favicon, and image remained beneath
-  the GitHub Pages project base.
+- `/projects/omnipet` status: 404;
+- the public Mundus site and repository links returned successful responses;
+- every local document, stylesheet, font, favicon, and image resolved from the
+  GitHub Pages project base.
 
 ## Retained Screenshots
 

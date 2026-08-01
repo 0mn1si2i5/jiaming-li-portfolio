@@ -1,7 +1,7 @@
 # Mundus Portfolio Expansion Implementation Plan
 
-**Goal:** Publish the existing bilingual Mundus case study and generic
-exhibition improvements without making any deferred product a build input.
+**Goal:** Bind the bilingual Mundus case study to the verified V1.1 Pages
+product without making any deferred product a build input.
 
 **Architecture:** Astro Content Collections remain the source of truth. Mundus
 owns one focused Story component and public media directory. Shared typography,
@@ -15,17 +15,19 @@ layout, accessibility, privacy, evidence, and Pages safeguards remain generic.
 - [x] Bundle the exhibition typography locally.
 - [x] Apply the responsive homepage and common detail-page system.
 - [x] Add the bilingual Mundus product narrative, one Story visual, and public
-  V1 screenshots.
+  screenshots.
 
 ## Mundus Evidence
 
-- [x] Pin Mundus to reviewed V1.0.0 commit
-  `a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1`.
-- [x] Verify the three deployed modes and shared globe from `README.md`.
-- [x] Verify versioned state/data declarations from
-  `src/features/modes/modeRegistry.ts`.
-- [x] Verify provenance and limit fields from `src/data/registry.ts`.
-- [x] Verify public educational/cartographic/solar limits from `README.md`.
+- [x] Pin Mundus to deployed V1.1 public `main`
+  `c6e625fa68879f9771debffebdaf32e295d56769`.
+- [x] Verify the maintained personal globe and first three lenses.
+- [x] Verify the shared observation loop and three delivered modes.
+- [x] Verify public Parchment Atlas, cross-section, city-search, bilateral
+  relation, and vector-globe behavior.
+- [x] Verify static delivery, pinned data, accessibility, and release gates.
+- [x] Verify that no runtime plugin platform exists and GHSL Human Morphology
+  remains outside the public product.
 - [x] Read evidence with `git show <revision>:<path>` so caller checkout state
   cannot alter results.
 
@@ -40,7 +42,7 @@ layout, accessibility, privacy, evidence, and Pages safeguards remain generic.
 ## Pull Request Gate
 
 - [x] Run on pull requests targeting `main`.
-- [x] Check out the portfolio and exact Mundus V1.0.0 source.
+- [x] Check out the portfolio and exact deployed Mundus V1.1 source.
 - [x] Run `npm ci`, `npm test`, `npm run build`, and `npm run verify` with an
   explicit isolated Mundus source root.
 - [x] Pin all GitHub Actions to immutable SHAs.
@@ -78,7 +80,7 @@ Expected:
 
 - all tests pass;
 - six static pages are generated;
-- five Mundus facts pass from V1.0.0;
+- five Mundus facts pass from deployed commit `c6e625f`;
 - browser evidence and screenshot hashes match the exact build;
 - privacy scanning passes;
 - the feature worktree is clean;

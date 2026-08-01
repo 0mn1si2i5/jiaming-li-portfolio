@@ -18,7 +18,8 @@ npm run verify
 ```
 
 `npm run verify` is the single release-verification entry point. It checks all
-5 bidirectional portfolio/public-source facts, retained browser evidence and
+5 bidirectional portfolio/public-source facts pinned to deployed Mundus commit
+`c6e625fa68879f9771debffebdaf32e295d56769`, retained browser evidence and
 screenshot hashes, and the final `dist/` privacy boundary. For an isolated
 checkout, pass `--mundus-root`; facts are read with `git show` from the pinned
 commit rather than from the source working tree. Fact matching excludes
