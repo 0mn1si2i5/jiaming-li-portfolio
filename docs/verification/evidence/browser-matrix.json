@@ -12,7 +12,7 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "reducedMotion": false,
-      "focusableCount": 23,
+      "focusableCount": 18,
       "focusVisible": true,
       "selected": ["DialogTree", "Mundus", "NBTI"],
       "other": ["Side B", "RSZ Namelist"]
@@ -28,7 +28,7 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "reducedMotion": false,
-      "focusableCount": 23,
+      "focusableCount": 18,
       "focusVisible": true,
       "selected": ["DialogTree", "Mundus", "NBTI"],
       "other": ["Side B", "RSZ Namelist"]
@@ -45,8 +45,8 @@
       "totalImageCount": 4,
       "reducedMotion": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 789,
-      "focusableCount": 23,
+      "visibleTextLength": 610,
+      "focusableCount": 18,
       "focusVisible": true,
       "selected": ["DialogTree", "Mundus", "NBTI"],
       "other": ["Side B", "RSZ Namelist"]
@@ -63,8 +63,8 @@
       "totalImageCount": 4,
       "reducedMotion": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 789,
-      "focusableCount": 23,
+      "visibleTextLength": 607,
+      "focusableCount": 18,
       "focusVisible": true,
       "selected": ["DialogTree", "Mundus", "NBTI"],
       "other": ["Side B", "RSZ Namelist"]
@@ -81,7 +81,7 @@
       "totalImageCount": 2,
       "productVisualCount": 1,
       "reducedMotion": false,
-      "visibleTextLength": 2280,
+      "visibleTextLength": 2360,
       "focusableCount": 11,
       "focusVisible": true
     },
@@ -98,7 +98,7 @@
       "productVisualCount": 1,
       "reducedMotion": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 846,
+      "visibleTextLength": 899,
       "focusableCount": 11,
       "focusVisible": true
     },
@@ -114,7 +114,7 @@
       "totalImageCount": 2,
       "productVisualCount": 1,
       "reducedMotion": false,
-      "visibleTextLength": 2280,
+      "visibleTextLength": 2355,
       "focusableCount": 11,
       "focusVisible": true
     },
@@ -131,7 +131,7 @@
       "productVisualCount": 1,
       "reducedMotion": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 846,
+      "visibleTextLength": 896,
       "focusableCount": 11,
       "focusVisible": true
     }
