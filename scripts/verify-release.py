@@ -14,8 +14,6 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--portfolio-root", type=Path, default=Path.cwd())
     parser.add_argument("--mundus-root", type=Path)
-    parser.add_argument("--omnipet-root", type=Path)
-    parser.add_argument("--omnipets-root", type=Path)
     parser.add_argument("--dist-root", type=Path)
     args = parser.parse_args()
 
@@ -27,8 +25,6 @@ def main() -> int:
     )
     repositories = {
         "Mundus": (args.mundus_root or workspace / "Mundus").resolve(),
-        "OmniPet": (args.omnipet_root or workspace / "OmniPet").resolve(),
-        "OmniPets": (args.omnipets_root or workspace / "OmniPets").resolve(),
     }
     errors = facts.verify(
         portfolio,

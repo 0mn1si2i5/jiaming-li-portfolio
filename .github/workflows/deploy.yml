@@ -25,16 +25,6 @@ jobs:
           repository: 0mn1si2i5/Mundus
           ref: a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1
           path: sources/Mundus
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          repository: 0mn1si2i5/OmniPet
-          ref: f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d
-          path: sources/OmniPet
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          repository: 0mn1si2i5/OmniPets
-          ref: 081b7c6f651183987c79c4321ff46e1b082e03b7
-          path: sources/OmniPets
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24.18.0
@@ -50,8 +40,6 @@ jobs:
       - run: >-
           npm run verify --
           --mundus-root sources/Mundus
-          --omnipet-root sources/OmniPet
-          --omnipets-root sources/OmniPets
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: ./dist

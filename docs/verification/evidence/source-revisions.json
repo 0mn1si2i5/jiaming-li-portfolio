@@ -9,24 +9,6 @@
       "revision": "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
       "revisionType": "immutable-commit",
       "verificationMethod": "git show"
-    },
-    {
-      "failures": [],
-      "objectVerified": true,
-      "repository": "OmniPet",
-      "reviewStatus": "reviewed",
-      "revision": "f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d",
-      "revisionType": "immutable-commit",
-      "verificationMethod": "git show"
-    },
-    {
-      "failures": [],
-      "objectVerified": true,
-      "repository": "OmniPets",
-      "reviewStatus": "reviewed",
-      "revision": "081b7c6f651183987c79c4321ff46e1b082e03b7",
-      "revisionType": "immutable-commit",
-      "verificationMethod": "git show"
     }
   ],
   "schemaVersion": 3

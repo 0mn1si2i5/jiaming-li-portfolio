@@ -1,17 +1,11 @@
 {
   "schemaVersion": 1,
   "html": [
-    {
-      "path": "index.html",
-      "sha256": "e94fd8d5262be327213c9cbd45682af693d2d56a5acf25a7641b1b49dd10bc1a"
-    },
-    {
-      "path": "projects/mundus/index.html",
-      "sha256": "ee68bf5e9d940a41b039a5a167b043b147ae2068509e456e1db0b59139580016"
-    },
-    {
-      "path": "projects/omnipet/index.html",
-      "sha256": "e0877279f073ba59a3fb494bbf6e06418681a385ad0e79f01598407ba1261d5a"
-    }
+    {"path": "index.html", "sha256": "b9acea52d6601e5553d90b43fe9026629e03a40d571e38cc962aef74da1c660c"},
+    {"path": "notes/index.html", "sha256": "c89a9f870c7631bdcdb34735bb5d646d3a962f35d117d0eccd8f51cc86031502"},
+    {"path": "projects/dialogtree/index.html", "sha256": "742db413f9c08235826f1ee21c6776a7f414ecbd179d1814d3c71ea1018bab2e"},
+    {"path": "projects/mundus/index.html", "sha256": "6e598b3fe0fad7246d53904873d70ddaabcbdbe625635dfaf549c48f5c2e27f6"},
+    {"path": "projects/nbti/index.html", "sha256": "01f5ec6a89e084cc8e184a246cd08d7455ec4f22b3f6e090f90a25713b070b5d"},
+    {"path": "projects/side-b/index.html", "sha256": "6730b7f0c7a366e8d1a957e747b03221a46cd0270539f724cca51ba5a199e8dc"}
   ]
 }

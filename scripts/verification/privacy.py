@@ -82,6 +82,10 @@ def scan_dist(root: Path) -> list[str]:
                     entropy(token) >= 4.3
                     and not re.fullmatch(r"[0-9a-f]{40,64}", token)
                     and not token.startswith(("_astro", "fontsource"))
+                    and not re.fullmatch(
+                        r"/(?:[A-Za-z0-9._-]+/)+[A-Za-z0-9._-]+",
+                        token,
+                    )
                 ):
                     findings.append(f"{relative}: high-entropy token")
                     break

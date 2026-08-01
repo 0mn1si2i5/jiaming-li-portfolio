@@ -24,6 +24,9 @@ class TestPullRequestWorkflow(unittest.TestCase):
             "ref: a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
             self.workflow,
         )
+        self.assertNotIn("OmniPet", self.workflow)
+        self.assertNotIn("--omnipet-root", self.workflow)
+        self.assertNotIn("--omnipets-root", self.workflow)
         self.assertIn(
             "github.event_name != 'pull_request'",
             self.workflow,
@@ -54,10 +57,15 @@ class TestPullRequestWorkflow(unittest.TestCase):
             r"uses:\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@([^\s#]+)",
             self.workflow,
         )
-        self.assertGreaterEqual(len(action_uses), 7)
+        self.assertGreaterEqual(len(action_uses), 5)
         for action, revision in action_uses:
             with self.subTest(action=action):
                 self.assertRegex(revision, r"^[0-9a-f]{40}$")
+
+    def test_local_and_ci_builds_share_the_pages_base(self) -> None:
+        config = Path("astro.config.mjs").read_text(encoding="utf-8")
+        self.assertIn("const localProjectBase = '/Oh-My-Portfolio';", config)
+        self.assertIn(": localProjectBase", config)
 
 
 if __name__ == "__main__":

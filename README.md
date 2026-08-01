@@ -18,11 +18,11 @@ npm run verify
 ```
 
 `npm run verify` is the single release-verification entry point. It checks all
-14 bidirectional portfolio/public-source facts, retained browser evidence and
+5 bidirectional portfolio/public-source facts, retained browser evidence and
 screenshot hashes, and the final `dist/` privacy boundary. For an isolated
-checkout, pass `--mundus-root`, `--omnipet-root`, and `--omnipets-root`; facts
-are read with `git show` from the pinned commits rather than from each source
-working tree. Fact matching excludes comments, imports, frontmatter, and
+checkout, pass `--mundus-root`; facts are read with `git show` from the pinned
+commit rather than from the source working tree. Fact matching excludes
+comments, imports, frontmatter, and
 unrelated string assignments, hidden JSX, and exported metadata; JSON evidence
 is checked structurally. The privacy gate recursively decodes HTML entities and
 URL encoding while scanning text and binary bytes, including image metadata and
@@ -45,6 +45,6 @@ inside the assets directory; traversal and symlinks are rejected.
 
 Push `main` to GitHub. In the repository’s Pages settings, select **GitHub Actions** as the source. The included workflow detects whether the repository is a project site or a user site and builds with the corresponding base path.
 
-The deployment workflow checks out Mundus, OmniPet, and OmniPets at their
-reviewed immutable revisions, runs tests, builds the static site, and requires
-`npm run verify` to pass before uploading the Pages artifact.
+The deployment workflow checks out Mundus at its reviewed immutable revision,
+runs tests, builds the static site, and requires `npm run verify` to pass before
+uploading the Pages artifact.

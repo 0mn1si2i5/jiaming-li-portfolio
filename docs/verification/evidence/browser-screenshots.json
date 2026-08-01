@@ -1,40 +1,13 @@
 {
   "schemaVersion": 1,
   "screenshots": [
-    {
-      "scenario": "home-en-light-desktop",
-      "path": "task7-home-en-light-1440x900.webp",
-      "width": 1440,
-      "height": 5470,
-      "sha256": "54ed376a4fb98ef0362863654829adc1835e13ac0f893cb8557f3a3631eb8ec4"
-    },
-    {
-      "scenario": "mundus-zh-dark-desktop",
-      "path": "task7-mundus-zh-dark-reduced-1440x900.webp",
-      "width": 1440,
-      "height": 5322,
-      "sha256": "fde98ffd155f434f8de06d26854ccdf80d35a90b40b73618f078f591e06bfee0"
-    },
-    {
-      "scenario": "mundus-zh-dark-mobile",
-      "path": "task7-mundus-zh-dark-reduced-390x844.webp",
-      "width": 390,
-      "height": 4422,
-      "sha256": "287666a3796a22edb3e2fac3da46102c52b84bcb4fab0bda90115ebe735d5262"
-    },
-    {
-      "scenario": "omnipet-zh-dark-desktop",
-      "path": "task7-omnipet-zh-dark-reduced-1440x900.webp",
-      "width": 1440,
-      "height": 5394,
-      "sha256": "48f535025d5c278f7750cf2965b67a885417437f0dbd693c6e1913cdba708eeb"
-    },
-    {
-      "scenario": "omnipet-zh-dark-mobile",
-      "path": "task7-omnipet-zh-dark-reduced-390x844.webp",
-      "width": 390,
-      "height": 5076,
-      "sha256": "214f88170c6ca23a277ba352498ce43a2e0802884ab492f80193e683cb683a98"
-    }
+    {"scenario": "home-en-light-1440", "path": "task7-home-en-light-1440x900.webp", "width": 1440, "height": 4729, "sha256": "b86c7e8c7efa9765441795c0ab57434ab27e14a60d6b82f6c0d9180f41a76987"},
+    {"scenario": "home-en-light-1024", "path": "task7-home-en-light-1024x768.webp", "width": 1024, "height": 4192, "sha256": "f6438c7ca362e50d7ec476576d163b71dfca54ffbb1fe8bd4718f0470816f80f"},
+    {"scenario": "home-zh-dark-768", "path": "task7-home-zh-dark-reduced-768x1024.webp", "width": 768, "height": 3754, "sha256": "c8a145219d8d0fecee1a72accf9c96c52bf67f802ec8027e36006087c95e3a6a"},
+    {"scenario": "home-zh-dark-390", "path": "task7-home-zh-dark-reduced-390x844.webp", "width": 390, "height": 4876, "sha256": "9f404a2e24d4963f5ac4600cb30b99a8754da66a9fafe437c8825c5d447340af"},
+    {"scenario": "mundus-en-light-1440", "path": "task7-mundus-en-light-1440x900.webp", "width": 1440, "height": 5434, "sha256": "8d09ce908ac03b727ab877ab4c43bbb90218755758e97e496e3268ec7d832578"},
+    {"scenario": "mundus-zh-dark-desktop", "path": "task7-mundus-zh-dark-reduced-1440x900.webp", "width": 1440, "height": 5322, "sha256": "7a7f05c6bc801d68b7428697f13e959b351da2538ff82e42484d686bd57f860f"},
+    {"scenario": "mundus-en-light-390", "path": "task7-mundus-en-light-390x844.webp", "width": 390, "height": 4640, "sha256": "2ca7f1affb47184235f7071ef01a22f9bba48833d324c29f8238be8b7b7df52e"},
+    {"scenario": "mundus-zh-dark-mobile", "path": "task7-mundus-zh-dark-reduced-390x844.webp", "width": 390, "height": 4422, "sha256": "8149f1acac3aa9bc9dba2ab1a8ab1f4bc93a6f9a5bec9fdda9adc85f06e7c159"}
   ]
 }

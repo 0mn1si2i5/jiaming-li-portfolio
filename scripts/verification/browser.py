@@ -9,53 +9,74 @@ from pathlib import Path
 
 
 REQUIRED_SCENARIOS = (
-    "home-en-light-desktop",
-    "home-zh-dark-tablet",
+    "home-en-light-1440",
+    "home-en-light-1024",
+    "home-zh-dark-768",
+    "home-zh-dark-390",
+    "mundus-en-light-1440",
+    "mundus-zh-dark-desktop",
+    "mundus-en-light-390",
+    "mundus-zh-dark-mobile",
+)
+REDUCED_SCENARIOS = (
+    "home-zh-dark-768",
+    "home-zh-dark-390",
     "mundus-zh-dark-desktop",
     "mundus-zh-dark-mobile",
-    "omnipet-zh-dark-desktop",
-    "omnipet-zh-dark-mobile",
 )
-REDUCED_SCENARIOS = REQUIRED_SCENARIOS[2:]
 SCENARIO_EXPECTATIONS = {
-    "home-en-light-desktop": {
+    "home-en-light-1440": {
         "route": "/", "locale": "en", "theme": "light",
         "viewport": {"width": 1440, "height": 900}, "reducedMotion": False,
     },
-    "home-zh-dark-tablet": {
+    "home-en-light-1024": {
+        "route": "/", "locale": "en", "theme": "light",
+        "viewport": {"width": 1024, "height": 768}, "reducedMotion": False,
+    },
+    "home-zh-dark-768": {
         "route": "/", "locale": "zh", "theme": "dark",
         "viewport": {"width": 768, "height": 1024}, "reducedMotion": True,
+    },
+    "home-zh-dark-390": {
+        "route": "/", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
+    },
+    "mundus-en-light-1440": {
+        "route": "/projects/mundus", "locale": "en", "theme": "light",
+        "viewport": {"width": 1440, "height": 900}, "reducedMotion": False,
     },
     "mundus-zh-dark-desktop": {
         "route": "/projects/mundus", "locale": "zh", "theme": "dark",
         "viewport": {"width": 1440, "height": 900}, "reducedMotion": True,
     },
+    "mundus-en-light-390": {
+        "route": "/projects/mundus", "locale": "en", "theme": "light",
+        "viewport": {"width": 390, "height": 844}, "reducedMotion": False,
+    },
     "mundus-zh-dark-mobile": {
         "route": "/projects/mundus", "locale": "zh", "theme": "dark",
         "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
     },
-    "omnipet-zh-dark-desktop": {
-        "route": "/projects/omnipet", "locale": "zh", "theme": "dark",
-        "viewport": {"width": 1440, "height": 900}, "reducedMotion": True,
-    },
-    "omnipet-zh-dark-mobile": {
-        "route": "/projects/omnipet", "locale": "zh", "theme": "dark",
-        "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
-    },
 }
 SCREENSHOT_FILES = {
-    "home-en-light-desktop": "task7-home-en-light-1440x900.webp",
+    "home-en-light-1440": "task7-home-en-light-1440x900.webp",
+    "home-en-light-1024": "task7-home-en-light-1024x768.webp",
+    "home-zh-dark-768": "task7-home-zh-dark-reduced-768x1024.webp",
+    "home-zh-dark-390": "task7-home-zh-dark-reduced-390x844.webp",
+    "mundus-en-light-1440": "task7-mundus-en-light-1440x900.webp",
     "mundus-zh-dark-desktop": "task7-mundus-zh-dark-reduced-1440x900.webp",
+    "mundus-en-light-390": "task7-mundus-en-light-390x844.webp",
     "mundus-zh-dark-mobile": "task7-mundus-zh-dark-reduced-390x844.webp",
-    "omnipet-zh-dark-desktop": "task7-omnipet-zh-dark-reduced-1440x900.webp",
-    "omnipet-zh-dark-mobile": "task7-omnipet-zh-dark-reduced-390x844.webp",
 }
 DIST_HTML_FILES = (
     "index.html",
+    "notes/index.html",
+    "projects/dialogtree/index.html",
     "projects/mundus/index.html",
-    "projects/omnipet/index.html",
+    "projects/nbti/index.html",
+    "projects/side-b/index.html",
 )
-PROJECT_ORDER = ["DialogTree", "Mundus", "OmniPet", "NBTI"]
+PROJECT_ORDER = ["DialogTree", "Mundus", "NBTI"]
 OTHER_ORDER = ["Side B", "RSZ Namelist"]
 
 
@@ -100,7 +121,11 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
         errors.append("browser matrix scenario order is invalid")
     for item in items:
         name = str(item.get("scenario"))
-        required = ("route", "locale", "theme", "viewport", "overflow", "brokenImageCount", "reducedMotion")
+        required = (
+            "route", "locale", "theme", "viewport", "overflow",
+            "brokenImageCount", "decodedImageCount", "totalImageCount",
+            "focusableCount", "focusVisible", "reducedMotion",
+        )
         for field in required:
             if field not in item:
                 errors.append(f"{name}: missing {field}")
@@ -111,6 +136,10 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             errors.append(f"{name}: overflow is not false")
         if item.get("brokenImageCount") != 0:
             errors.append(f"{name}: brokenImageCount is not zero")
+        if item.get("focusVisible") is not True:
+            errors.append(f"{name}: keyboard focus is not visible")
+        if not isinstance(item.get("focusableCount"), int) or item["focusableCount"] <= 0:
+            errors.append(f"{name}: focusableCount is not positive")
         if name in REDUCED_SCENARIOS:
             if item.get("reducedMotion") is not True:
                 errors.append(f"{name}: reducedMotion is not true")
@@ -118,20 +147,18 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
                 errors.append(f"{name}: activeAnimationCount is not zero")
             if not isinstance(item.get("visibleTextLength"), int) or item["visibleTextLength"] <= 0:
                 errors.append(f"{name}: visibleTextLength is not positive")
-            if item.get("totalImageCount") != 2:
-                errors.append(f"{name}: totalImageCount is not two")
-            if item.get("productVisualCount") != 1:
-                errors.append(f"{name}: productVisualCount is not one")
         if name.startswith("home-"):
+            if item.get("totalImageCount") != 4:
+                errors.append(f"{name}: homepage image count is not four")
             if item.get("selected") != PROJECT_ORDER:
                 errors.append(f"{name}: selected project order is invalid")
             if item.get("other") != OTHER_ORDER:
                 errors.append(f"{name}: other project order is invalid")
-        if name == "home-zh-dark-tablet":
-            if not isinstance(item.get("decodedImageCount"), int) or item["decodedImageCount"] <= 0:
-                errors.append(f"{name}: decodedImageCount is not positive")
-            if not isinstance(item.get("focusableCount"), int) or item["focusableCount"] <= 0:
-                errors.append(f"{name}: focusableCount is not positive")
+        if name.startswith("mundus-"):
+            if item.get("totalImageCount") != 2:
+                errors.append(f"{name}: Mundus image count is not two")
+            if item.get("productVisualCount") != 1:
+                errors.append(f"{name}: productVisualCount is not one")
     return errors
 
 
@@ -181,7 +208,7 @@ def validate_screenshots(
         return ["screenshots must be an array"]
     errors: list[str] = []
     scenarios = [str(item.get("scenario")) for item in screenshots]
-    expected = [name for name in REQUIRED_SCENARIOS if name != "home-zh-dark-tablet"]
+    expected = list(REQUIRED_SCENARIOS)
     if scenarios != expected:
         errors.append("screenshot scenarios are incomplete")
     for item in screenshots:
@@ -226,6 +253,8 @@ def validate_dist_html(path: Path, dist_root: Path) -> list[str]:
     errors: list[str] = []
     if [item.get("path") for item in items] != list(DIST_HTML_FILES):
         errors.append("dist HTML paths are incomplete")
+    if (dist_root / "projects/omnipet/index.html").exists():
+        errors.append("retired OmniPet route is still generated")
     root = dist_root.resolve()
     for item in items:
         if not isinstance(item, dict):

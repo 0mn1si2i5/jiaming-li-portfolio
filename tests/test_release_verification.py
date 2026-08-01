@@ -64,71 +64,22 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             story,
         )
 
-    def test_omnipet_is_a_concise_product_case_study(self) -> None:
-        content = (
-            self.project / "src/content/projects/omnipet.mdx"
-        ).read_text(encoding="utf-8")
-        story = (
-            self.project / "src/components/OmniPetStory.astro"
-        ).read_text(encoding="utf-8")
-
-        for phrase in (
-            "Product problem",
-            "Engine capability",
-            "User value",
-            "Public result",
-            "产品问题",
-            "引擎能力",
-            "用户价值",
-            "公开结果",
+    def test_deferred_omnipet_case_study_is_absent(self) -> None:
+        for path in (
+            "src/content/projects/omnipet.mdx",
+            "src/components/OmniPetStory.astro",
         ):
-            self.assertIn(phrase, content)
-        for removed in (
-            "Seven bounded stages",
-            "Extension contracts",
-            "const stages",
-            "const contracts",
-        ):
-            self.assertNotIn(removed, story)
-        self.assertEqual(story.count("<img"), 1)
-        self.assertNotIn("sushi-spritesheet.webp", story)
-        self.assertNotIn('aria-label="Public release properties"', story)
-        self.assertIn("@media (max-width: 1024px)", story)
-        for phrase in (
-            "Manifest-driven projects make adding a pet repeatable",
-            "versioned action contract binds each available next action",
-            "pet validate",
-            "package --check",
-            "release export",
-            "release verify",
-            "one allowlisted built-in image provider",
-            "does not expose arbitrary provider, endpoint, or model configuration",
-        ):
-            self.assertIn(phrase, content)
-        for phrase in (
-            "Describe in the manifest",
-            "Follow actions and validate",
-            "Export, verify, and publish",
-            "SuShi",
-        ):
-            self.assertIn(phrase, story)
-        for repeated in (
-            "failures persist without automatic retry",
-            "repair preserves unaffected work",
-            "Shipped extension axes",
-            "verifiable hashes",
-        ):
-            self.assertNotIn(repeated, story)
-        for obsolete in (
-            "bounded engine APIs",
-            "approval state",
-            "closed release schema",
-        ):
-            self.assertNotIn(obsolete, content)
-        self.assertNotIn(
-            ".engine-flow, .outcome, .result-visuals",
-            story,
+            self.assertFalse((self.project / path).exists())
+        self.assertEqual(
+            list((self.project / "public/media/omnipet").glob("*")),
+            [],
         )
+        site = (self.project / "src/config/site.ts").read_text(encoding="utf-8")
+        self.assertNotIn("omnipet", site.lower())
+        verifier = (self.project / "scripts/verify-release.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertNotIn("omnipet", verifier.lower())
 
 
 class TestStructuredFacts(unittest.TestCase):
@@ -163,6 +114,7 @@ class TestStructuredFacts(unittest.TestCase):
             revisions["Mundus"]["revision"],
             "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
         )
+        self.assertEqual(set(revisions), {"Mundus"})
         for item in revisions.values():
             self.assertEqual(item["revisionType"], "immutable-commit")
             self.assertEqual(item["reviewStatus"], "reviewed")
@@ -243,7 +195,7 @@ const mode = { category: "spatial" };
     def test_fact_catalog_uses_fewer_atomic_product_claims(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
 
-        self.assertEqual(len(rules), 14)
+        self.assertEqual(len(rules), 5)
         self.assertTrue(
             all(
                 len(rule["claims"]) == 3
@@ -253,35 +205,9 @@ const mode = { category: "spatial" };
             )
         )
         self.assertTrue(all(rule["evidence"]["rules"] for rule in rules))
-        forbidden = {
-            "mundus-sunrise-altitude",
-            "mundus-city-count",
-            "mundus-undp-years",
-            "omnipet-standard-rows",
-            "omnipet-atlas-grid",
-            "omnipet-atlas-size",
-            "omnipet-look-rows",
-        }
-        self.assertTrue(forbidden.isdisjoint({rule["id"] for rule in rules}))
         rule_ids = {rule["id"] for rule in rules}
-        self.assertTrue(
-            {
-                "mundus-data-registry",
-                "omnipet-manifest-contract",
-                "omnipet-action-contract",
-                "omnipet-validation-steps",
-                "omnipet-publication-path",
-                "omnipet-provider-boundary",
-            }.issubset(rule_ids)
-        )
-        self.assertNotIn("omnipet-shipped-extension-axes", rule_ids)
-        self.assertTrue(
-            {
-                "mundus-shared-fallbacks",
-                "omnipet-transactional-repair",
-                "omnipet-closed-release",
-            }.isdisjoint(rule_ids)
-        )
+        self.assertTrue(all(rule_id.startswith("mundus-") for rule_id in rule_ids))
+        self.assertIn("mundus-data-registry", rule_ids)
 
     def test_fact_catalog_rejects_missing_story_claim(self) -> None:
         catalog = {
@@ -294,7 +220,7 @@ const mode = { category: "spatial" };
                         {"locale": "zh", "source": "a", "rules": []},
                     ],
                     "evidence": {
-                        "repository": "OmniPet",
+                        "repository": "Mundus",
                         "source": "README.md",
                         "rules": [{"type": "contains", "value": "evidence"}],
                     },
@@ -422,7 +348,7 @@ class TestBrowserEvidence(unittest.TestCase):
                 "schemaVersion": 1,
                 "screenshots": [
                     {
-                        "scenario": "home-en-light-desktop",
+                        "scenario": "home-en-light-1440",
                         "path": "capture.webp",
                         "width": 1,
                         "height": 1,
@@ -453,7 +379,7 @@ class TestBrowserEvidence(unittest.TestCase):
                 "schemaVersion": 1,
                 "screenshots": [
                     {
-                        "scenario": "home-en-light-desktop",
+                        "scenario": "home-en-light-1440",
                         "path": "",
                         "width": 1,
                         "height": 1,
@@ -527,7 +453,7 @@ class TestBrowserEvidence(unittest.TestCase):
                 ),
                 [],
             )
-            html = copied_dist / "projects/omnipet/index.html"
+            html = copied_dist / "projects/mundus/index.html"
             html.write_text(
                 html.read_text(encoding="utf-8") + "\n<!-- changed build -->\n",
                 encoding="utf-8",
@@ -570,12 +496,12 @@ class TestBrowserEvidence(unittest.TestCase):
             matrix["scenarios"][0],
         )
         matrix["scenarios"][0]["brokenImageCount"] = 1
-        matrix["scenarios"][2]["totalImageCount"] = 3
-        matrix["scenarios"][2]["productVisualCount"] = 2
+        matrix["scenarios"][4]["totalImageCount"] = 3
+        matrix["scenarios"][4]["productVisualCount"] = 2
         errors = browser.validate_matrix(matrix)
         self.assertIn("order", " ".join(errors))
         self.assertIn("brokenImageCount", " ".join(errors))
-        self.assertIn("totalImageCount", " ".join(errors))
+        self.assertIn("image count", " ".join(errors))
         self.assertIn("productVisualCount", " ".join(errors))
 
     def test_console_requires_structured_levels_and_no_failures(self) -> None:
@@ -645,7 +571,8 @@ class TestPrivacyScan(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "index.html").write_text(
-                '<link href="/_astro/index.Bw6D59th.css">',
+                '<link href="/Oh-My-Portfolio/_astro/index.Bw6D59th.css">'
+                '<img src="/Oh-My-Portfolio/media/side-b/01-parse-link.webp">',
                 encoding="utf-8",
             )
 
