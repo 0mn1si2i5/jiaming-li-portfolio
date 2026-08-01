@@ -299,6 +299,20 @@ class TestBrowserEvidence(unittest.TestCase):
             item["sha256"] = hashlib.sha256(content).hexdigest()
         manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
 
+    def test_generated_route_contract_uses_about_not_notes(self) -> None:
+        self.assertEqual(
+            browser.DIST_HTML_FILES,
+            (
+                "index.html",
+                "about/index.html",
+                "projects/dialogtree/index.html",
+                "projects/mundus/index.html",
+                "projects/nbti/index.html",
+                "projects/side-b/index.html",
+            ),
+        )
+        self.assertNotIn("notes/index.html", browser.DIST_HTML_FILES)
+
     def test_each_scenario_requires_exact_identity_values(self) -> None:
         project = Path(__file__).parents[1]
         matrix = json.loads(

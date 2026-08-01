@@ -70,7 +70,7 @@ SCREENSHOT_FILES = {
 }
 DIST_HTML_FILES = (
     "index.html",
-    "notes/index.html",
+    "about/index.html",
     "projects/dialogtree/index.html",
     "projects/mundus/index.html",
     "projects/nbti/index.html",
