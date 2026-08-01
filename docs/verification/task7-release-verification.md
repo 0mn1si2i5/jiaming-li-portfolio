@@ -42,6 +42,9 @@ case and Story to:
 Only capabilities observable on the public Pages deployment are presented as
 shipped. GHSL Human Morphology is explicitly not a public feature. The
 `v1.0.0` tag and Release remain unchanged; no V1.1 tag or Release is claimed.
+The two case-study media files are direct captures of that deployment: the
+Other Side Parchment Atlas is the hero, and its open Mode atlas is the single
+Story visual.
 
 ## Browser Matrix
 
