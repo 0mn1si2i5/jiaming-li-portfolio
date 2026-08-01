@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import Localized from '../components/Localized.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout title="About" description="About Jiaming Li's product and research practice.">
+  <section class="about page-width" aria-labelledby="about-title">
+    <div>
+      <p class="eyebrow"><Localized en="About" zh="关于" /></p>
+      <h1 id="about-title"><Localized en="A practice of making things clear." zh="研究、产品与实现。" /></h1>
+    </div>
+    <div class="about-copy">
+      <p><Localized en="I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes." zh="我目前在新加坡国立大学计算机系攻读硕士，师从 Yi-Chieh Lee 教授，并在校内 AI4SG Lab 开展人机协作研究。我的工作覆盖研究设计、产品决策与原型实现。" /></p>
+      <p><Localized en="I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious." zh="我通常从具体的问题出发：难以回溯的对话、失去上下文的音乐链接，或不符合中文语境的游戏命名。随后通过产品设计和工程实现，把问题转化为可验证的解决方案。" /></p>
+      <a class="external-link" href={site.github} target="_blank" rel="noreferrer">
+        <Localized en="Find more on GitHub" zh="在 GitHub 查看更多" />
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="notes page-width" aria-labelledby="notes-title">
+    <p class="eyebrow"><Localized en="Notes" zh="随笔" /></p>
+    <h2 id="notes-title"><Localized en="Notes" zh="随笔" /></h2>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow {
+    margin: 0;
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 650;
+    letter-spacing: .075em;
+    text-transform: uppercase;
+  }
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: var(--space-section) 0;
+  }
+  h1, h2, p { margin-top: 0; }
+  h1, h2 {
+    margin-bottom: 0;
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+    line-height: .98;
+    letter-spacing: var(--display-tracking);
+  }
+  .about-copy { max-width: 530px; }
+  .about-copy p {
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+  .about-copy p + p { color: var(--muted); }
+  .about-copy .external-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+  }
+  .notes {
+    padding: var(--space-section) 0;
+    border-top: 1px solid var(--rule-strong);
+  }
+  .notes .eyebrow { margin-bottom: 1.5rem; }
+  :global(:root[data-locale='zh']) h1,
+  :global(:root[data-locale='zh']) h2 {
+    font-size: clamp(2.1rem, 4.2vw, 3.75rem);
+    line-height: 1.2;
+    letter-spacing: -.04em;
+  }
+  @media (max-width: 760px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .about, .notes { padding: 5rem 0; }
+  }
+  @media (max-width: 560px) {
+    :global(:root[data-locale='zh']) h1,
+    :global(:root[data-locale='zh']) h2 {
+      font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+  }
+</style>

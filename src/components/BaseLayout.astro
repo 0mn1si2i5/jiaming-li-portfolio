@@ -39,11 +39,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   <body id="top">
     <a class="skip-link" href="#main"><Localized en="Skip to content" zh="跳至主要内容" /></a>
     <header class="site-header">
-      <a class="monogram" href={base} aria-label={`${site.name}, home`}>{site.name}</a>
+      <a class="monogram" href={base} aria-label={`${site.name}, home`}><Localized en="Home" zh="主页" /></a>
       <nav aria-label="Primary navigation">
+        <a href={base}><Localized en="Home" zh="主页" /></a>
         <a href={`${base}#work`}><Localized en="Work" zh="项目" /></a>
-        <a href={`${base}#about`}><Localized en="About" zh="关于" /></a>
-        <a href={`${base}notes`}><Localized en="Notes" zh="随笔" /></a>
+        <a href={`${base}about`}><Localized en="About" zh="关于" /></a>
       </nav>
       <button class="locale-toggle" type="button" aria-label="切换至中文">
         <span class="locale-label">中文</span>
@@ -55,7 +55,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <main id="main"><slot /></main>
     <footer class="site-footer">
       <span>© {new Date().getFullYear()} {site.name}</span>
-      <a href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
     </footer>
     <a class="back-to-top" href="#top"><Localized en="Back to top" zh="返回顶部" /> <span aria-hidden="true">↑</span></a>
     <script>
@@ -144,7 +143,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   nav a:hover { color: var(--ink); }
   .theme-toggle, .locale-toggle { display: inline-flex; align-items: center; gap: .38rem; min-height: 2.25rem; padding: .45rem .65rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
   .locale-toggle { margin-right: .45rem; }
-  .site-footer { justify-content: space-between; min-height: 94px; color: var(--muted); border-top: 1px solid var(--rule-strong); }
+  .site-footer { justify-content: flex-start; min-height: 94px; color: var(--muted); border-top: 1px solid var(--rule-strong); }
   .back-to-top { position: fixed; right: max(1rem, calc((100vw - var(--page-width)) / 2)); bottom: 1rem; z-index: 20; padding: .55rem .75rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 88%, transparent); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 4px 18px rgb(0 0 0 / .08); font-size: .7rem; font-weight: 650; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; backdrop-filter: blur(8px); }
   .back-to-top:hover { color: var(--paper); background: var(--ink); border-color: var(--ink); }
   @media (max-width: 560px) {
