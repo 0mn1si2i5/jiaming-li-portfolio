@@ -1,0 +1,64 @@
+from __future__ import annotations
+
+import re
+import unittest
+from pathlib import Path
+
+
+class TestPullRequestWorkflow(unittest.TestCase):
+    def setUp(self) -> None:
+        self.workflow = Path(".github/workflows/deploy.yml").read_text(
+            encoding="utf-8"
+        )
+
+    def test_pull_requests_run_the_complete_non_deploying_gate(self) -> None:
+        self.assertIn("pull_request:", self.workflow)
+        for command in (
+            "npm ci",
+            "npm test",
+            "npm run build",
+            "npm run verify --",
+        ):
+            self.assertIn(command, self.workflow)
+        self.assertIn(
+            "ref: a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
+            self.workflow,
+        )
+        self.assertIn(
+            "github.event_name != 'pull_request'",
+            self.workflow,
+        )
+        self.assertIn("github.ref == 'refs/heads/main'", self.workflow)
+
+    def test_jobs_have_minimal_permissions_and_separate_concurrency(self) -> None:
+        self.assertIn(
+            "build:\n    permissions:\n      contents: read",
+            self.workflow,
+        )
+        self.assertIn(
+            "deploy:\n    if:",
+            self.workflow,
+        )
+        self.assertIn(
+            "permissions:\n      pages: write\n      id-token: write",
+            self.workflow,
+        )
+        self.assertIn("github.event.pull_request.number", self.workflow)
+        self.assertIn(
+            "cancel-in-progress: ${{ github.event_name == 'pull_request' }}",
+            self.workflow,
+        )
+
+    def test_actions_are_pinned_to_full_commit_shas(self) -> None:
+        action_uses = re.findall(
+            r"uses:\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@([^\s#]+)",
+            self.workflow,
+        )
+        self.assertGreaterEqual(len(action_uses), 7)
+        for action, revision in action_uses:
+            with self.subTest(action=action):
+                self.assertRegex(revision, r"^[0-9a-f]{40}$")
+
+
+if __name__ == "__main__":
+    unittest.main()
