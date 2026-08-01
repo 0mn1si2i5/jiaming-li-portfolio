@@ -288,6 +288,17 @@ const mode = { category: "spatial" };
 
 
 class TestBrowserEvidence(unittest.TestCase):
+    def write_bound_dist(self, evidence_root: Path, dist_root: Path) -> None:
+        manifest_path = evidence_root / "browser-build.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        for item in manifest["html"]:
+            content = f"<html><body>{item['path']}</body></html>".encode()
+            target = dist_root / item["path"]
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
+            item["sha256"] = hashlib.sha256(content).hexdigest()
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
     def test_each_scenario_requires_exact_identity_values(self) -> None:
         project = Path(__file__).parents[1]
         matrix = json.loads(
@@ -412,11 +423,13 @@ class TestBrowserEvidence(unittest.TestCase):
             root = Path(directory)
             for path in source.glob("browser-*.json"):
                 shutil.copy2(path, root / path.name)
+            dist = root / "dist"
+            self.write_bound_dist(root, dist)
             self.assertEqual(
                 browser.validate_all(
                     root,
                     project / "docs/verification/assets",
-                    project / "dist",
+                    dist,
                 ),
                 [],
             )
@@ -428,7 +441,7 @@ class TestBrowserEvidence(unittest.TestCase):
             errors = browser.validate_all(
                 root,
                 project / "docs/verification/assets",
-                project / "dist",
+                dist,
             )
 
         self.assertIn("scenario order", " ".join(errors))
@@ -441,9 +454,9 @@ class TestBrowserEvidence(unittest.TestCase):
             copied_evidence = root / "evidence"
             copied_dist = root / "dist"
             copied_evidence.mkdir()
-            shutil.copytree(project / "dist", copied_dist)
             for path in evidence.glob("browser-*.json"):
                 shutil.copy2(path, copied_evidence / path.name)
+            self.write_bound_dist(copied_evidence, copied_dist)
 
             self.assertEqual(
                 browser.validate_all(
