@@ -1,6 +1,7 @@
 # Task 7 Release Verification
 
-Verified on 2026-07-29 against the current production build on branch
+Verified on 2026-07-29 and source-revision revalidated on 2026-08-02 against
+the current production build on branch
 `feat/mundus-omnipet-portfolio`. Browser evidence is bound to deterministic
 SHA-256 digests of the relevant built HTML, not to a portfolio commit hash.
 The verification used Node.js `v22.23.1`, npm `10.9.8`, Astro `7.0.7`, and
@@ -307,6 +308,7 @@ corresponding evidence must exist in the pinned public source revision.
 | --- | --- |
 | `README.md` | Three-mode public scope; one globe viewed through three scientific lenses; explicit educational and cartographic limits |
 | `src/features/modes/modeRegistry.ts` | Registered mode version, scientific category, state schema, and data resources |
+| `src/data/registry.ts` | Validated source, license, version, hash, transformation, missing-value, and boundary metadata |
 
 ### OmniPet
 
@@ -319,14 +321,14 @@ corresponding evidence must exist in the pinned public source revision.
 | `docs/architecture.md` | Bounded review behavior and the built-in provider/model boundary |
 | OmniPets `README.md` | Export, independent verification, catalog publication, and SuShi v1.0.1 |
 
-The unified release verifier checks 13 atomic, product-level facts:
+The unified release verifier checks 14 atomic, product-level facts:
 
 ```bash
 npm run verify
 ```
 
-The 13 rules live in `scripts/verification/facts.json`. Each item contains
-separate claim and evidence sources. The product-focused revision keeps 13
+The 14 rules live in `scripts/verification/facts.json`. Each item contains
+separate claim and evidence sources. The product-focused revision keeps 14
 pinned product-evidence checks but binds them to concise, visitor-visible claims
 about platform contracts, manifest/action contracts, validation, publication,
 provider boundaries, and public outcomes. Low-level provenance hashes,
@@ -334,7 +336,7 @@ rendering fallbacks, transaction internals, algorithms, and atlas dimensions
 are not release facts. MDX checks remove frontmatter,
 imports, HTML/JSX comments; source
 checks remove comments and unrelated standalone string assignments; JSON
-evidence uses structural `json_path` rules. The latest run returned `13/13`.
+evidence uses structural `json_path` rules. The latest run returned `14/14`.
 Elements hidden with `hidden`, `aria-hidden`, `display: none`, or
 `visibility: hidden`, plus multiline exported metadata/functions, are excluded
 from visitor-visible claim text.
@@ -345,12 +347,16 @@ uncommitted working-tree content cannot influence verification:
 
 | Repository | Revision |
 | --- | --- |
-| Mundus | `b7b2d0f9e453efd8be83216a43e642f0ee7350ed` |
+| Mundus | `a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1` |
 | OmniPet | `f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d` |
 | OmniPets | `081b7c6f651183987c79c4321ff46e1b082e03b7` |
 
-Deployment CI checks out all three repositories at those exact revisions and
-passes their paths explicitly. Negative tests cover weakened semantic facts,
+These are immutable reviewed commit identities, not claims about the branch,
+HEAD, or cleanliness of a caller's current source checkout. Verification first
+requires each commit object to exist in the supplied repository, then reads
+every evidence file with `git show <revision>:<path>`. Deployment CI checks out
+all three repositories at those exact revisions and passes their paths
+explicitly. Negative tests cover weakened semantic facts,
 inconsistent browser aggregates, screenshot hash drift, absolute paths,
 internal URLs, credentials, and high-entropy secrets:
 
@@ -369,6 +375,20 @@ URL encoding are recursively decoded to a fixed depth before each scan.
 Screenshot paths must match the fixed filename for their scenario, contain no
 directory or traversal component, resolve directly inside the assets root, and
 must not be symlinks.
+
+## Pull Request Gate
+
+The shared GitHub Actions workflow runs the complete build and release gate for
+pull requests targeting `main`: exact source checkouts, `npm ci`, `npm test`,
+`npm run build`, and `npm run verify` with explicit isolated source roots. The
+build job has only `contents: read`; the deploy job alone receives `pages:
+write` and `id-token: write`.
+
+Every action is pinned to a full commit SHA with a major-version comment.
+Pull-request runs use a PR-number concurrency group and may cancel only another
+run for the same PR. Main publication uses a distinct group. The deploy job is
+additionally gated to a non-PR event on `refs/heads/main`, so a pull request can
+upload the one-day Pages artifact for review but cannot deploy it.
 
 ## Product-Focused Revalidation
 
@@ -402,7 +422,7 @@ semantic group names resolved to `公开发布属性` and `Mundus 扩展契约`;
 provided by localized `aria-labelledby` targets rather than fixed English
 labels.
 
-The fact gate now contains 13 atomic product claims. Every claim binds visible
+The fact gate now contains 14 atomic product claims. Every claim binds visible
 English MDX, visible Chinese MDX, Story text, and one reviewed public source at
 a pinned revision. Unshown atlas dimensions, action-row counts, solar
 thresholds, city counts, provenance hashes, transaction internals, and other

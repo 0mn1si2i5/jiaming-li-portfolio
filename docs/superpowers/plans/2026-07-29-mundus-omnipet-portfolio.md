@@ -810,7 +810,9 @@ screenshots are referenced by the verification report.
 
 - [x] **Step 8: Fail closed on source drift and unbound claims**
 
-Pin Mundus, OmniPet, and OmniPets to the reviewed SHA on clean `main`. Require
+Pin Mundus, OmniPet, and OmniPets to immutable reviewed commit identities.
+Require each commit object to exist and read evidence with `git show`; do not
+require the caller's current branch, HEAD, or working tree to match. Require
 all 31 assertions to bind one visitor-facing portfolio claim to one public
 source evidence check. The evidence set must include Mundus
 `src/data/registry.ts` and the public README files from Mundus, OmniPet, and
@@ -829,8 +831,8 @@ Expected:
 - temporary wrong-SHA and missing-claim script variants return nonzero without
   replacing prior evidence;
 - the real run reports 31/31 paired assertions and zero private-boundary hits;
-- `source-revisions.json` records matching expected and actual revisions with
-  `gatePassed: true`;
+- `source-revisions.json` records the reviewed immutable revisions and
+  `git show` verification method with `gatePassed: true`;
 - no JSON contains local absolute paths or private material.
 
 - [x] **Step 9: Unify and deploy the complete release gate**

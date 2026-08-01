@@ -18,7 +18,7 @@ npm run verify
 ```
 
 `npm run verify` is the single release-verification entry point. It checks all
-31 bidirectional portfolio/public-source facts, retained browser evidence and
+14 bidirectional portfolio/public-source facts, retained browser evidence and
 screenshot hashes, and the final `dist/` privacy boundary. For an isolated
 checkout, pass `--mundus-root`, `--omnipet-root`, and `--omnipets-root`; facts
 are read with `git show` from the pinned commits rather than from each source
