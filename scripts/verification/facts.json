@@ -158,6 +158,62 @@
       }
     },
     {
+      "id": "mundus-data-registry",
+      "description": "The validated data registry records provenance and boundary policy.",
+      "claims": [
+        {
+          "locale": "en",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "A data registry records sources, licenses, transformations, hashes, missing-value policies, and boundary caveats"
+            }
+          ]
+        },
+        {
+          "locale": "zh",
+          "source": "src/content/projects/mundus.mdx",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "数据注册表记录来源、许可、转换、哈希、缺失值策略与边界说明"
+            }
+          ]
+        },
+        {
+          "locale": "story",
+          "source": "src/components/MundusStory.astro",
+          "rules": [
+            {
+              "type": "contains",
+              "value": "Connect evidence"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "repository": "Mundus",
+        "source": "src/data/registry.ts",
+        "rules": [
+          {
+            "type": "contains_all",
+            "values": [
+              "sourceName: z.string().min(1)",
+              "sourceUrl: z.url()",
+              "licenseName: z.string().min(1)",
+              "licenseUrl: z.url()",
+              "version: z.string().min(1)",
+              "sha256: z.string().regex",
+              "transformations: z.array",
+              "missingValuePolicy: z.string().min(1)",
+              "boundaryPolicy: z.string().min(1)"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "mundus-educational-limits",
       "description": "Dataset, cartographic, and solar limitations remain explicit.",
       "claims": [

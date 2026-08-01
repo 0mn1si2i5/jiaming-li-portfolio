@@ -132,6 +132,63 @@ class TestProductCaseStudyFocus(unittest.TestCase):
 
 
 class TestStructuredFacts(unittest.TestCase):
+    def test_mundus_uses_live_v1_reviewed_revision(self) -> None:
+        self.assertEqual(
+            facts.EXPECTED_REVISIONS["Mundus"],
+            "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
+        )
+
+        rules = facts.load_rules(Path("scripts/verification/facts.json"))
+        registry = next(
+            rule for rule in rules if rule["id"] == "mundus-data-registry"
+        )
+        self.assertEqual(
+            registry["evidence"]["source"],
+            "src/data/registry.ts",
+        )
+
+    def test_source_revision_evidence_records_reviewed_commits(self) -> None:
+        evidence = json.loads(
+            Path(
+                "docs/verification/evidence/source-revisions.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        self.assertEqual(evidence["schemaVersion"], 3)
+        self.assertTrue(evidence["gatePassed"])
+        revisions = {
+            item["repository"]: item for item in evidence["repositories"]
+        }
+        self.assertEqual(
+            revisions["Mundus"]["revision"],
+            "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
+        )
+        for item in revisions.values():
+            self.assertEqual(item["revisionType"], "immutable-commit")
+            self.assertEqual(item["reviewStatus"], "reviewed")
+            self.assertEqual(item["verificationMethod"], "git show")
+            self.assertTrue(item["objectVerified"])
+            self.assertNotIn("branch", item)
+            self.assertNotIn("dirty", item)
+            self.assertNotIn("expectedClean", item)
+
+    def test_retained_fact_evidence_matches_the_catalog(self) -> None:
+        rules = facts.load_rules(Path("scripts/verification/facts.json"))
+        evidence = json.loads(
+            Path(
+                "docs/verification/evidence/task7-fact-assertions.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        self.assertEqual(evidence["schemaVersion"], 4)
+        self.assertEqual(evidence["total"], len(rules))
+        self.assertEqual(evidence["passed"], len(rules))
+        self.assertEqual(
+            [item["id"] for item in evidence["assertions"]],
+            [item["id"] for item in rules],
+        )
+        self.assertTrue(all(item["passed"] for item in evidence["assertions"]))
+
     def test_mdx_visible_text_excludes_hidden_jsx_and_multiline_export(self) -> None:
         hidden = """
 <div hidden>hidden claim</div>
@@ -186,7 +243,7 @@ const mode = { category: "spatial" };
     def test_fact_catalog_uses_fewer_atomic_product_claims(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
 
-        self.assertEqual(len(rules), 13)
+        self.assertEqual(len(rules), 14)
         self.assertTrue(
             all(
                 len(rule["claims"]) == 3
@@ -209,6 +266,7 @@ const mode = { category: "spatial" };
         rule_ids = {rule["id"] for rule in rules}
         self.assertTrue(
             {
+                "mundus-data-registry",
                 "omnipet-manifest-contract",
                 "omnipet-action-contract",
                 "omnipet-validation-steps",
@@ -219,7 +277,6 @@ const mode = { category: "spatial" };
         self.assertNotIn("omnipet-shipped-extension-axes", rule_ids)
         self.assertTrue(
             {
-                "mundus-provenance-registry",
                 "mundus-shared-fallbacks",
                 "omnipet-transactional-repair",
                 "omnipet-closed-release",

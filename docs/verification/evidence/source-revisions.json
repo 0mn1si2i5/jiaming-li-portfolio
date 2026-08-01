@@ -2,38 +2,32 @@
   "gatePassed": true,
   "repositories": [
     {
-      "branch": "main",
-      "dirty": false,
-      "expectedBranch": "main",
-      "expectedClean": true,
-      "expectedSha": "b7b2d0f9e453efd8be83216a43e642f0ee7350ed",
       "failures": [],
-      "passed": true,
+      "objectVerified": true,
       "repository": "Mundus",
-      "sha": "b7b2d0f9e453efd8be83216a43e642f0ee7350ed"
+      "reviewStatus": "reviewed",
+      "revision": "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
+      "revisionType": "immutable-commit",
+      "verificationMethod": "git show"
     },
     {
-      "branch": "main",
-      "dirty": false,
-      "expectedBranch": "main",
-      "expectedClean": true,
-      "expectedSha": "f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d",
       "failures": [],
-      "passed": true,
+      "objectVerified": true,
       "repository": "OmniPet",
-      "sha": "f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d"
+      "reviewStatus": "reviewed",
+      "revision": "f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d",
+      "revisionType": "immutable-commit",
+      "verificationMethod": "git show"
     },
     {
-      "branch": "main",
-      "dirty": false,
-      "expectedBranch": "main",
-      "expectedClean": true,
-      "expectedSha": "081b7c6f651183987c79c4321ff46e1b082e03b7",
       "failures": [],
-      "passed": true,
+      "objectVerified": true,
       "repository": "OmniPets",
-      "sha": "081b7c6f651183987c79c4321ff46e1b082e03b7"
+      "reviewStatus": "reviewed",
+      "revision": "081b7c6f651183987c79c4321ff46e1b082e03b7",
+      "revisionType": "immutable-commit",
+      "verificationMethod": "git show"
     }
   ],
-  "schemaVersion": 2
+  "schemaVersion": 3
 }

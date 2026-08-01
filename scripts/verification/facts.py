@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 EXPECTED_REVISIONS = {
-    "Mundus": "b7b2d0f9e453efd8be83216a43e642f0ee7350ed",
+    "Mundus": "a5ff99bc60fb7cd2e6e14f4d3bc4f54e5abfb4a1",
     "OmniPet": "f08e47c7dcee1bf7d89e1c673c73abb6fa90c20d",
     "OmniPets": "081b7c6f651183987c79c4321ff46e1b082e03b7",
 }

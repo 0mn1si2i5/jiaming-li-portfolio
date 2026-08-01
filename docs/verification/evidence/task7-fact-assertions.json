@@ -1,333 +1,134 @@
 {
   "assertions": [
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/MundusStory.astro"
-        }
-      ],
-      "description": "Three public observation modes share one product.",
-      "evidencePassed": true,
-      "evidenceRepository": "Mundus",
-      "evidenceSource": "README.md",
       "id": "mundus-three-modes",
-      "passed": true
+      "passed": true,
+      "evidence": {
+        "repository": "Mundus",
+        "source": "README.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/MundusStory.astro"
-        }
-      ],
-      "description": "Modes are versioned registered extensions with state and data.",
-      "evidencePassed": true,
-      "evidenceRepository": "Mundus",
-      "evidenceSource": "src/features/modes/modeRegistry.ts",
-      "id": "mundus-versioned-extensions",
-      "passed": true
+      "id": "mundus-shared-globe-platform",
+      "passed": true,
+      "evidence": {
+        "repository": "Mundus",
+        "source": "README.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/MundusStory.astro"
-        }
-      ],
-      "description": "The platform carries data provenance and boundary policy.",
-      "evidencePassed": true,
-      "evidenceRepository": "Mundus",
-      "evidenceSource": "src/data/registry.ts",
-      "id": "mundus-provenance-registry",
-      "passed": true
+      "id": "mundus-versioned-mode-contract",
+      "passed": true,
+      "evidence": {
+        "repository": "Mundus",
+        "source": "src/features/modes/modeRegistry.ts",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/MundusStory.astro"
-        }
-      ],
-      "description": "New lenses reuse shared interaction and rendering fallbacks.",
-      "evidencePassed": true,
-      "evidenceRepository": "Mundus",
-      "evidenceSource": "README.md",
-      "id": "mundus-shared-fallbacks",
-      "passed": true
+      "id": "mundus-data-registry",
+      "passed": true,
+      "evidence": {
+        "repository": "Mundus",
+        "source": "src/data/registry.ts",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/mundus.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/MundusStory.astro"
-        }
-      ],
-      "description": "Dataset, cartographic, and solar limitations remain explicit.",
-      "evidencePassed": true,
-      "evidenceRepository": "Mundus",
-      "evidenceSource": "DATA_SOURCES.md",
       "id": "mundus-educational-limits",
-      "passed": true
+      "passed": true,
+      "evidence": {
+        "repository": "Mundus",
+        "source": "README.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "OmniPet is an open-source sprite v2 production engine.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPet",
-      "evidenceSource": "README.md",
       "id": "omnipet-open-engine",
-      "passed": true
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "README.en.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "The workflow resumes at human decisions and does not auto-retry failures.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPet",
-      "evidenceSource": "docs/architecture.md",
-      "id": "omnipet-resumable-review",
-      "passed": true
+      "id": "omnipet-bounded-review",
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "docs/architecture.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "Repair preserves unaffected upstream work.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPet",
-      "evidenceSource": "docs/architecture.md",
-      "id": "omnipet-transactional-repair",
-      "passed": true
+      "id": "omnipet-manifest-contract",
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "docs/pet-project-format.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "Six shipped seams keep engine stages separable.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPet",
-      "evidenceSource": "docs/architecture.md",
-      "id": "omnipet-shipped-extension-axes",
-      "passed": true
+      "id": "omnipet-action-contract",
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "src/omnipet/actions.py",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "The current engine permits one built-in provider and no arbitrary configuration.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPet",
-      "evidenceSource": "docs/architecture.md",
+      "id": "omnipet-validation-steps",
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "src/omnipet/cli.py",
+        "passed": true
+      }
+    },
+    {
+      "id": "omnipet-publication-path",
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPets",
+        "source": "README.md",
+        "passed": true
+      }
+    },
+    {
       "id": "omnipet-provider-boundary",
-      "passed": true
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "docs/architecture.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "Public export is closed, hashed, and independently verifiable.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPet",
-      "evidenceSource": "docs/architecture.md",
-      "id": "omnipet-closed-release",
-      "passed": true
-    },
-    {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "The public engine remains Alpha and generated output requires review.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPet",
-      "evidenceSource": "README.md",
       "id": "omnipet-alpha-boundary",
-      "passed": true
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPet",
+        "source": "README.md",
+        "passed": true
+      }
     },
     {
-      "claims": [
-        {
-          "locale": "en",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "zh",
-          "passed": true,
-          "source": "src/content/projects/omnipet.mdx"
-        },
-        {
-          "locale": "story",
-          "passed": true,
-          "source": "src/components/OmniPetStory.astro"
-        }
-      ],
-      "description": "SuShi v1.0.1 is the public installable sprite v2 outcome.",
-      "evidencePassed": true,
-      "evidenceRepository": "OmniPets",
-      "evidenceSource": "README.md",
       "id": "omnipets-sushi-outcome",
-      "passed": true
+      "passed": true,
+      "evidence": {
+        "repository": "OmniPets",
+        "source": "README.md",
+        "passed": true
+      }
     }
   ],
-  "passed": 13,
+  "passed": 14,
   "privateBoundaryHitCount": 0,
-  "schemaVersion": 3,
-  "total": 13
+  "schemaVersion": 4,
+  "total": 14
 }
