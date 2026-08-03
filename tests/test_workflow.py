@@ -21,7 +21,7 @@ class TestPullRequestWorkflow(unittest.TestCase):
         ):
             self.assertIn(command, self.workflow)
         self.assertIn(
-            "ref: c6e625fa68879f9771debffebdaf32e295d56769",
+            "ref: 378fe528ca1c8f83f0280f83383b5e785e851285",
             self.workflow,
         )
         self.assertNotIn("OmniPet", self.workflow)
