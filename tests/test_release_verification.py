@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -23,26 +24,43 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             self.project / "src/components/MundusStory.astro"
         ).read_text(encoding="utf-8")
         visitor_copy = f"{case}\n{story}"
-        headings = [
-            line.removeprefix("## ")
-            for line in case.splitlines()
-            if line.startswith("## ")
-        ]
+        sections = re.findall(
+            r'<section\b[^>]*data-locale-content="(en|zh)"[^>]*>'
+            r"(.*?)</section>",
+            case,
+            flags=re.DOTALL,
+        )
+        headings_by_locale = {"en": [], "zh": []}
+        for locale, section in sections:
+            headings_by_locale[locale].extend(
+                line.removeprefix("## ")
+                for line in section.splitlines()
+                if line.startswith("## ")
+            )
 
         self.assertEqual(
-            headings,
+            headings_by_locale["en"],
             [
                 "A globe I can keep extending",
                 "One place, several ways to read it",
                 "Three lenses in use today",
                 "The current release",
                 "Built for continued maintenance",
+            ],
+        )
+        self.assertEqual(
+            headings_by_locale["zh"],
+            [
                 "一颗持续生长的个人数字地球",
                 "同一地点，几种观察方式",
                 "目前使用的三个视角",
                 "当前公开版本",
                 "为长期维护做出的选择",
             ],
+        )
+        self.assertEqual(
+            sum(len(headings) for headings in headings_by_locale.values()),
+            10,
         )
 
         for phrase in (
