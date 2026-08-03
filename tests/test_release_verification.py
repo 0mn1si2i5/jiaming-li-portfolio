@@ -116,6 +116,49 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             story,
         )
 
+    def test_mundus_source_media_is_bound_to_current_public_deployment(
+        self,
+    ) -> None:
+        manifest = json.loads(
+            (
+                self.project
+                / "docs/verification/evidence/mundus-media.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        self.assertEqual(
+            manifest["sourceRevision"],
+            "378fe528ca1c8f83f0280f83383b5e785e851285",
+        )
+        self.assertEqual(manifest["captureLocale"], "zh-CN")
+        self.assertEqual(manifest["previewVisibleUiCount"], 0)
+        self.assertEqual(
+            [item["role"] for item in manifest["images"]],
+            [
+                "homepage-globe",
+                "project-full-interface",
+                "story-other-side-detail",
+            ],
+        )
+        self.assertEqual(manifest["panelOverflowCount"], 0)
+        self.assertGreaterEqual(manifest["images"][1]["width"], 1920)
+        self.assertEqual(
+            len({item["sha256"] for item in manifest["images"]}),
+            3,
+        )
+
+        for item in manifest["images"]:
+            path = self.project / "public/media/mundus" / item["path"]
+            self.assertTrue(path.is_file())
+            self.assertEqual(
+                hashlib.sha256(path.read_bytes()).hexdigest(),
+                item["sha256"],
+            )
+            self.assertEqual(
+                browser.webp_dimensions(path),
+                (item["width"], item["height"]),
+            )
+
     def test_deferred_omnipet_case_study_is_absent(self) -> None:
         for path in (
             "src/content/projects/omnipet.mdx",
