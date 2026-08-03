@@ -5,7 +5,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 const [owner, repository] = (process.env.GITHUB_REPOSITORY ?? '').split('/');
 const isUserSite = repository === `${owner}.github.io`;
-const localProjectBase = '/Oh-My-Portfolio';
+const localProjectBase = '/jiaming-li-portfolio';
 const base = process.env.ASTRO_BASE
   ?? (repository ? (isUserSite ? '/' : `/${repository}`) : localProjectBase);
 

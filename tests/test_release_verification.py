@@ -635,8 +635,8 @@ class TestPrivacyScan(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "index.html").write_text(
-                '<link href="/Oh-My-Portfolio/_astro/index.Bw6D59th.css">'
-                '<img src="/Oh-My-Portfolio/media/side-b/01-parse-link.webp">',
+                '<link href="/jiaming-li-portfolio/_astro/index.Bw6D59th.css">'
+                '<img src="/jiaming-li-portfolio/media/side-b/01-parse-link.webp">',
                 encoding="utf-8",
             )
 

@@ -48,7 +48,7 @@ Story visual.
 
 ## Browser Matrix
 
-The exact GitHub Pages build was served under `/Oh-My-Portfolio/` and exercised
+The exact GitHub Pages build was served under `/jiaming-li-portfolio/` and exercised
 with Playwright Chromium after the `agent-browser` daemon failed to establish a
 CDP channel.
 

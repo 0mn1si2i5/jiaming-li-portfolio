@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
@@ -37,6 +38,22 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn(
             '<dt><Localized en="Status" zh="项目状态" /></dt>',
             self.project,
+        )
+
+    def test_package_and_local_pages_base_use_canonical_repository_name(self) -> None:
+        package = json.loads(
+            (self.root / "package.json").read_text(encoding="utf-8")
+        )
+        lock = json.loads(
+            (self.root / "package-lock.json").read_text(encoding="utf-8")
+        )
+        config = (self.root / "astro.config.mjs").read_text(encoding="utf-8")
+        self.assertEqual(package["name"], "jiaming-li-portfolio")
+        self.assertEqual(lock["name"], "jiaming-li-portfolio")
+        self.assertEqual(lock["packages"][""]["name"], "jiaming-li-portfolio")
+        self.assertIn(
+            "const localProjectBase = '/jiaming-li-portfolio';",
+            config,
         )
 
     def test_about_page_owns_about_copy_and_empty_notes_section(self) -> None:

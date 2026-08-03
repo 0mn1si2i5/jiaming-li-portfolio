@@ -1,4 +1,4 @@
-# Jiaming Li — Explorations & Work
+# Jiaming Li Portfolio
 
 A bilingual (English / 中文) static portfolio built with Astro and deployed through GitHub Pages.
 

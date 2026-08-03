@@ -64,7 +64,7 @@ class TestPullRequestWorkflow(unittest.TestCase):
 
     def test_local_and_ci_builds_share_the_pages_base(self) -> None:
         config = Path("astro.config.mjs").read_text(encoding="utf-8")
-        self.assertIn("const localProjectBase = '/Oh-My-Portfolio';", config)
+        self.assertIn("const localProjectBase = '/jiaming-li-portfolio';", config)
         self.assertIn(": localProjectBase", config)
 
 
