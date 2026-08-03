@@ -37,6 +37,11 @@ class TestProductCaseStudyFocus(unittest.TestCase):
                 for line in section.splitlines()
                 if line.startswith("## ")
             )
+        all_headings = [
+            line.removeprefix("## ")
+            for line in case.splitlines()
+            if line.startswith("## ")
+        ]
 
         self.assertEqual(
             headings_by_locale["en"],
@@ -58,10 +63,7 @@ class TestProductCaseStudyFocus(unittest.TestCase):
                 "为长期维护做出的选择",
             ],
         )
-        self.assertEqual(
-            sum(len(headings) for headings in headings_by_locale.values()),
-            10,
-        )
+        self.assertEqual(len(all_headings), 10)
 
         for phrase in (
             "not a final",
