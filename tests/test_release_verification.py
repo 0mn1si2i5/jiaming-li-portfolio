@@ -23,20 +23,27 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             self.project / "src/components/MundusStory.astro"
         ).read_text(encoding="utf-8")
         visitor_copy = f"{case}\n{story}"
+        headings = [
+            line.removeprefix("## ")
+            for line in case.splitlines()
+            if line.startswith("## ")
+        ]
 
-        for heading in (
-            "A globe I can keep extending",
-            "One place, several ways to read it",
-            "Three lenses in use today",
-            "The current release",
-            "Built for continued maintenance",
-            "一颗持续生长的个人数字地球",
-            "同一地点，几种观察方式",
-            "目前使用的三个视角",
-            "当前公开版本",
-            "为长期维护做出的选择",
-        ):
-            self.assertIn(heading, case)
+        self.assertEqual(
+            headings,
+            [
+                "A globe I can keep extending",
+                "One place, several ways to read it",
+                "Three lenses in use today",
+                "The current release",
+                "Built for continued maintenance",
+                "一颗持续生长的个人数字地球",
+                "同一地点，几种观察方式",
+                "目前使用的三个视角",
+                "当前公开版本",
+                "为长期维护做出的选择",
+            ],
+        )
 
         for phrase in (
             "not a final",
@@ -46,18 +53,21 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "not runtime plugins",
             "rather than",
             "instead of",
+            "ghsl",
+            "stop_global_morphology",
+        ):
+            self.assertNotIn(phrase, visitor_copy.casefold())
+
+        for phrase in (
             "不是最终",
             "不是候选",
             "不是街道",
             "不是插件",
             "而不是",
             "不代表",
-            "GHSL",
-            "STOP_GLOBAL_MORPHOLOGY",
         ):
             self.assertNotIn(phrase, visitor_copy)
 
-        self.assertEqual(case.count("\n## "), 10)
         self.assertEqual(story.count("<img"), 1)
 
     def test_mundus_media_has_three_distinct_roles(self) -> None:
