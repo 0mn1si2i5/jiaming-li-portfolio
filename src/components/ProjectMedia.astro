@@ -8,6 +8,7 @@ const { media, title, accent } = project.data;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path?: string) => path ? `${base}${path.replace(/^\//, '')}` : undefined;
 const imageSource = compact && media.preview ? media.preview : media.src;
+const imageAlt = compact && media.preview && media.previewAlt ? media.previewAlt : media.alt;
 ---
 
 {media.type === 'video' && media.src ? (
@@ -23,7 +24,7 @@ const imageSource = compact && media.preview ? media.preview : media.src;
   </div>
 ) : media.type === 'image' && media.src ? (
   <div class:list={['project-media', 'image-media', `accent-${accent}`, { compact, 'preview-media': compact && Boolean(media.preview) }]}>
-    <img src={asset(imageSource)} alt={media.alt.en} data-alt-en={media.alt.en} data-alt-zh={media.alt.zh} loading={compact ? 'lazy' : 'eager'} />
+    <img src={asset(imageSource)} alt={imageAlt.en} data-alt-en={imageAlt.en} data-alt-zh={imageAlt.zh} loading={compact ? 'lazy' : 'eager'} />
   </div>
 ) : (
   <div class:list={['project-media', 'media-placeholder', `accent-${accent}`, { compact }]} role="img" aria-label={media.alt.en}>

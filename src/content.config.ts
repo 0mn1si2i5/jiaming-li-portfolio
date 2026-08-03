@@ -22,6 +22,7 @@ const projects = defineCollection({
       type: z.enum(['video', 'image', 'placeholder']),
       src: z.string().optional(),
       preview: z.string().optional(),
+      previewAlt: localized.optional(),
       poster: z.string().optional(),
       walkthrough: z.object({ src: z.string(), poster: z.string().optional() }).optional(),
       alt: localized,
