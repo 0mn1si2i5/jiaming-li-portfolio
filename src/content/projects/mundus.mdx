@@ -25,37 +25,37 @@ import MundusStory from '../../components/MundusStory.astro';
 
 <section lang="en" data-locale-content="en">
 
-## What I am solving
+## A globe I can keep extending
 
-World knowledge is usually split across maps, statistical tables, astronomy tools, and data portals. Mundus is a personal digital globe I maintain over time: one geographic context where I can add governed ways of looking without rebuilding the product around every dataset.
+Maps, statistical tables, astronomy tools, and data portals each hold a different part of how we understand Earth. Mundus brings those materials into one geographic workspace. I maintain it as a long-running personal globe whose data, methods, and interactions can grow together.
 
-The current modes are the first three observation lenses, not a final catalog. They establish the shared globe, place state, sources, methods, bilingual interface, and accessible controls that later views must reuse.
+## One place, several ways to read it
 
-## How the product works
+A visit begins with a place. The visitor rotates or searches the globe, chooses an observation lens, reads the result with its source and method, and shares the current view. Changing lenses keeps the same geographic context, so the next question starts from somewhere already familiar.
 
-A visitor chooses a lens, manipulates the same globe and place, receives a specific result, opens its method, source, year, and limits, then shares the current URL or changes lenses without losing geographic context.
+## Three lenses in use today
 
-- **Other Side** starts from one location, calculates its antipode, and makes the two endpoints and their represented major-city relationships tangible.
-- **Development, Unpacked** shows reported HDI beside derived health, education, and income structure, with year, median, history, source, and missing states.
-- **Sunline** turns a UTC time into solar position, daylight, twilight, sunrise, and sunset estimates on the same globe.
+- **Other Side** follows a point through Earth to its antipode and connects both endpoints with represented major cities from the bundled GeoNames snapshot.
+- **Development, Unpacked** places reported HDI beside health, education, and income dimensions, with year, history, source, and missing states.
+- **Sunline** turns UTC time into solar position, daylight, twilight, and approximate sunrise and sunset on the shared globe.
 
 </section>
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 我在解决什么问题
+## 一颗持续生长的个人数字地球
 
-现实中的世界知识通常分散在地图、统计表、天文工具和数据门户中。Mundus 是我长期维护的一颗个人数字地球：它保留同一个地理上下文，让我可以持续增加经过治理的观察方式，而不必围绕每份数据重新搭建产品。
+地图、统计表、天文工具和数据门户保存着理解地球的不同线索。Mundus 把这些材料放进同一个地理空间。我长期维护这颗个人数字地球，让数据、方法与交互能够沿着同一套产品结构继续生长。
 
-当前模式是最早落地的三个观察视角，不是最终目录。它们建立了后续视角必须复用的共享地球、地点状态、来源与方法说明、中英双语界面和无障碍控件。
+## 同一地点，几种观察方式
 
-## 当前产品如何工作
+一次使用从地点开始。访客旋转地球或搜索城市，选择观察视角，阅读结果及其来源与方法，再分享当前画面。切换视角时，地理上下文会保留下来，下一个问题可以从熟悉的位置继续。
 
-访客先选择一个观察视角，再操作同一颗地球和地点，得到一个明确结果，查看方法、来源、年份与限制，最后分享当前 URL，或在不丢失地理上下文的情况下切换视角。
+## 目前使用的三个视角
 
-- **地球另一端**从一个地点出发，计算对跖点，并让两端位置及其收录主要城市关系变得直观。
-- **发展的不同侧面**把已发布 HDI 与派生的健康、教育和收入结构并置，同时显示年份、中位数、历史变化、来源与缺失状态。
-- **日照线**把一个 UTC 时间转换为同一颗地球上的太阳位置、白昼、曙暮光与近似日出日落。
+- **地球另一端**沿地心找到对跖点，并用 GeoNames 固定快照中的收录主要城市呈现两端关系。
+- **发展的不同侧面**把已发布 HDI 与健康、教育、收入维度放在一起，同时给出年份、历史变化、来源与缺失状态。
+- **日照线**把 UTC 时间转换为共享地球上的太阳位置、白昼、曙暮光与近似日出日落。
 
 </section>
 
@@ -63,44 +63,32 @@ A visitor chooses a lens, manipulates the same globe and place, receives a speci
 
 <section lang="en" data-locale-content="en">
 
-## What V1.1 delivered
+## The current release
 
-Parchment Atlas moved the public product from a dark laboratory treatment to a warmer digital exhibition. Other Side now opens a draggable through-Earth cross-section. GeoNames supports English and Chinese major-city search, marks canonical-name fallbacks instead of inventing translations, and shows represented city relationships at both endpoints. Natural Earth 110m/50m vector geometry gives the shared globe a bounded, reproducible cartographic surface.
+Parchment Atlas gives the globe a warmer exhibition surface built from Natural Earth vector geometry. Other Side combines bilingual GeoNames search, endpoint city relationships, and a draggable through-Earth section. The latest update supports closer inspection, preserves the globe's color while that section moves, and gives Sunline a consistent Twilight label and definition.
 
-The result remains a static client that can be built, verified, and published under the GitHub Pages project path. It is the shipped V1.1 product, not a candidate description.
+Sharing creates a URL that restores the selected location and observation mode. The dialog explains that the exact selected location is included before the visitor copies the link; Sunline links also retain the displayed UTC time.
 
-## Product and technical decisions
+## Built for continued maintenance
 
-A single globe kernel keeps place, camera behavior, controls, and sharing consistent across lenses. Static delivery avoids accounts, telemetry, and server maintenance. Reviewed data snapshots and hashes prevent upstream changes from silently altering results; larger assets load only when a lens needs them. English, Chinese, keyboard use, visible focus, reduced motion, and WebGL fallback make the product testable beyond my own machine.
+One globe kernel carries place, camera behavior, controls, and sharing across every lens. Reviewed data snapshots and hashes keep published results stable. Larger assets load when their lens needs them, while the base experience stays light.
 
-Pages subpath checks and artifact verification exist for the same reason: a public version should be reproducible, not merely work in a local development session.
-
-## Boundaries and future
-
-Mundus is not street navigation, a professional GIS, or an authoritative scientific service. The first three observation lenses can be followed by new views or governed data overlays, but each addition must pass data identity, method transparency, performance, accessibility, and release verification.
-
-It is not a plugin platform and has no third-party runtime plugin system. GHSL Human Morphology did not pass global validation and is not a public feature. “Maintaining my own globe” describes a long-term product direction, not a claim that every view of Earth is already present.
+The product ships as a static client with bilingual copy, keyboard access, visible focus, reduced motion, and a WebGL fallback. Pages subpath checks and artifact verification make each public build reproducible.
 
 </section>
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## V1.1 做了什么
+## 当前公开版本
 
-Parchment Atlas 将公开产品从深色实验室视觉转向更温暖的数字展览。“地球另一端”现在可以打开并拖拽穿过地球的剖面。GeoNames 支持中英文主要城市搜索，在缺少中文名时明确标记原名 fallback，而不是编造翻译，并显示起点与对跖点两侧的收录城市关系。Natural Earth 110m/50m 矢量几何为共享地球提供有边界、可复现的制图表面。
+Parchment Atlas 用 Natural Earth 矢量几何构成更温暖的展览式地球。“地球另一端”整合了 GeoNames 中英文城市搜索、两端城市关系与可拖拽的穿地剖面。最新更新支持更近距离的观察，拖动剖面时地球颜色保持稳定，日照线也统一使用“曙暮光”名称与定义。
 
-产品仍是可以在 GitHub Pages 项目子路径下构建、验证和发布的纯静态客户端。这些内容是已经上线的 V1.1，而不是候选版本说明。
+分享链接会恢复所选地点与观察视角。复制之前，弹窗会明确说明链接包含精确地点；日照线链接还会保留画面中的 UTC 时间。
 
-## 关键产品与技术决策
+## 为长期维护做出的选择
 
-单一地球内核让不同视角共享地点、相机行为、控件和分享方式。静态交付避免账号、遥测和服务器维护。经过审核的数据快照与哈希避免上游变化悄悄改写结果，较大的资源只在对应视角需要时加载。中英文、键盘操作、可见焦点、reduced motion 和 WebGL fallback 让产品不只在作者电脑上成立。
+单一地球内核承载所有视角的地点、相机行为、控件与分享方式。经过审核的数据快照和哈希让公开结果保持稳定，较大的资源只在对应视角使用时加载。
 
-Pages 子路径检查与制品验证服务于同一个目标：公开版本必须可复现，而不是只在本地开发环境中可用。
-
-## 边界与未来
-
-Mundus 不是街道导航、专业 GIS 或权威科学服务。最早落地的三个观察视角之后可以继续增加新的观察方式或经过治理的数据叠层，但每项扩展都必须通过数据身份、方法透明度、性能、无障碍与发布验证。
-
-它现在不是插件平台，也没有第三方运行时插件系统。GHSL Human Morphology 尚未通过全球验证，不是公开功能。“维护一颗自己的地球”是长期产品方向，不代表所有观察方式已经完成。
+产品以静态客户端交付，并提供中英文、键盘操作、可见焦点、reduced motion 与 WebGL fallback。Pages 子路径检查和制品验证让每次公开构建都可以复现。
 
 </section>

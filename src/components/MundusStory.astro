@@ -7,17 +7,17 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
 <section class="product-story" aria-labelledby="mundus-story-title">
   <header>
-    <p class="eyebrow"><Localized en="V1.1 Parchment Atlas" zh="V1.1 羊皮纸地图集" /></p>
-    <h2 id="mundus-story-title"><Localized en="One globe. The first three lenses." zh="同一颗地球，首批三个视角。" /></h2>
-    <p><Localized en="The first shipped lenses share one place, one interaction model, and one evidence standard. Future views remain governed product additions, not runtime plugins." zh="首批上线视角共享同一地点、同一交互模型与同一证据标准。未来视角仍是经过治理的产品扩展，不是运行时插件。" /></p>
+    <p class="eyebrow"><Localized en="Parchment Atlas · Current product" zh="Parchment Atlas · 当前产品" /></p>
+    <h2 id="mundus-story-title"><Localized en="One place stays in view." zh="地点始终留在视野中。" /></h2>
+    <p><Localized en="The current release supports closer globe inspection, a stable through-Earth section, clear Twilight language, and exact-location sharing with an explicit privacy notice." zh="当前版本支持更近距离观察地球、稳定拖动穿地剖面、清晰呈现曙暮光，并在分享精确地点前给出隐私提示。" /></p>
   </header>
 
   <figure class="overview-visual">
     <img
-      src={asset('/media/mundus/modes-overview.webp')}
-      alt="Mundus overview combining its three public observation modes."
-      data-alt-en="Mundus overview combining its three public observation modes."
-      data-alt-zh="Mundus 三种公开观察模式的产品总览。"
+      src={asset('/media/mundus/other-side-detail.webp')}
+      alt="A close view of the Other Side cross-section and its endpoint city relationship."
+      data-alt-en="A close view of the Other Side cross-section and its endpoint city relationship."
+      data-alt-zh="“地球另一端”穿地剖面及两端城市关系的细节画面。"
       loading="lazy"
     />
     <figcaption>
@@ -29,15 +29,15 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
   <div class="platform-moment">
     <div class="platform-copy">
-      <p class="eyebrow"><Localized en="Maintained product" zh="持续维护的产品" /></p>
-      <h3><Localized en="Add a governed view, not another globe." zh="增加经过治理的视角，而不是再造地球。" /></h3>
-      <p><Localized en="The shared globe preserves geographic context while each view owns a specific question, evidence, method, and limit." zh="共享地球保留地理上下文，每个视角则负责一个具体问题及其证据、方法与边界。" /></p>
+      <p class="eyebrow"><Localized en="How it grows" zh="如何继续生长" /></p>
+      <h3><Localized en="Each lens joins the same globe." zh="每个视角都接入同一颗地球。" /></h3>
+      <p><Localized en="A lens starts with a specific question, pins its data and method, reuses the existing place and controls, and passes the public-build gate." zh="每个视角从具体问题出发，固定数据与方法，复用既有地点与控件，并通过公开构建门禁。" /></p>
       <p id="mundus-extension-label" class="sr-only"><Localized en="Mundus product governance loop" zh="Mundus 产品治理循环" /></p>
       <ol aria-labelledby="mundus-extension-label">
-        <li><Localized en="Frame one question" zh="界定一个问题" /></li>
+        <li><Localized en="Start with one question" zh="从一个问题出发" /></li>
         <li><Localized en="Pin data and method" zh="固定数据与方法" /></li>
-        <li><Localized en="Reuse one globe and place" zh="复用地球与地点" /></li>
-        <li><Localized en="Verify the public release" zh="验证公开版本" /></li>
+        <li><Localized en="Keep place and controls" zh="保留地点与控件" /></li>
+        <li><Localized en="Verify the public build" zh="验证公开构建" /></li>
       </ol>
     </div>
   </div>
@@ -67,8 +67,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   h3 { margin: .8rem 0 1rem; font-size: clamp(2rem, 4vw, 3.4rem); }
   header > p:last-child, .platform-copy > p { color: var(--muted); line-height: 1.65; }
   .overview-visual { margin: clamp(2.5rem, 6vw, 5rem) 0 0; }
-  .overview-visual img { display: block; width: 100%; object-fit: cover; border: 1px solid var(--line); background: #090b0a; }
-  .overview-visual img { aspect-ratio: 4 / 3; }
+  .overview-visual img { display: block; width: 100%; height: auto; object-fit: contain; border: 1px solid var(--line); background: #090b0a; }
   .overview-visual figcaption { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
   .overview-visual figcaption > span { display: grid; gap: .25rem; padding: 1rem; border-right: 1px solid var(--line); }
   .overview-visual figcaption > span:last-child { border-right: 0; }
