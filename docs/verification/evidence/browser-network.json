@@ -1,14 +1,15 @@
 {
   "schemaVersion": 1,
-  "requestCount": 96,
+  "requestCount": 102,
   "failureCount": 0,
   "failures": [],
   "statusCounts": {
-    "200": 96
+    "200": 87,
+    "304": 15
   },
   "resourceTypeCounts": {
     "Document": 8,
-    "Font": 48,
+    "Font": 54,
     "Image": 24,
     "Stylesheet": 16
   },
@@ -21,19 +22,31 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
       "resourceType": "Stylesheet",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/index.NecucfxX.css",
+      "path": "/_astro/index.CNqhALnv.css",
       "resourceType": "Stylesheet",
       "status": 200
     },
     {
       "method": "GET",
       "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -51,7 +64,19 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -65,30 +90,6 @@
       "method": "GET",
       "path": "/media/side-b/side-b-journey-hero.webp",
       "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
       "status": 200
     },
     {
@@ -99,14 +100,20 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
       "resourceType": "Stylesheet",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/index.NecucfxX.css",
+      "path": "/_astro/index.CNqhALnv.css",
       "resourceType": "Stylesheet",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
@@ -118,18 +125,6 @@
     {
       "method": "GET",
       "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -147,18 +142,6 @@
     },
     {
       "method": "GET",
-      "path": "/media/nbti-home.png",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/media/side-b/side-b-journey-hero.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
       "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
       "resourceType": "Font",
       "status": 200
@@ -167,6 +150,24 @@
       "method": "GET",
       "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
       "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/media/nbti-home.png",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/media/side-b/side-b-journey-hero.webp",
+      "resourceType": "Image",
       "status": 200
     },
     {
@@ -177,19 +178,49 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
       "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/index.CNqhALnv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/media/dialogtree-tree-preview.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/media/mundus/modes-overview.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/media/nbti-home.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/index.NecucfxX.css",
-      "resourceType": "Stylesheet",
+      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -201,31 +232,19 @@
     },
     {
       "method": "GET",
-      "path": "/media/dialogtree-tree-preview.png",
-      "resourceType": "Image",
+      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/media/mundus/modes-overview.webp",
-      "resourceType": "Image",
+      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/media/nbti-home.png",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/media/side-b/side-b-journey-hero.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "path": "/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -237,14 +256,8 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
+      "path": "/media/side-b/side-b-journey-hero.webp",
+      "resourceType": "Image",
       "status": 200
     },
     {
@@ -255,14 +268,44 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
       "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/index.CNqhALnv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/media/dialogtree-tree-preview.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/media/mundus/modes-overview.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/index.NecucfxX.css",
-      "resourceType": "Stylesheet",
+      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
@@ -273,14 +316,20 @@
     },
     {
       "method": "GET",
-      "path": "/media/dialogtree-tree-preview.png",
-      "resourceType": "Image",
+      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/media/mundus/modes-overview.webp",
-      "resourceType": "Image",
+      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
@@ -303,37 +352,13 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
       "path": "/projects/mundus",
       "resourceType": "Document",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
       "resourceType": "Stylesheet",
       "status": 200
     },
@@ -347,138 +372,6 @@
       "method": "GET",
       "path": "/media/mundus/other-side.webp",
       "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/media/mundus/modes-overview.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/media/mundus/other-side.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/media/mundus/modes-overview.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/media/mundus/other-side.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
       "status": 200
     },
     {
@@ -501,8 +394,8 @@
     },
     {
       "method": "GET",
-      "path": "/media/mundus/modes-overview.webp",
-      "resourceType": "Image",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
@@ -513,8 +406,8 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
+      "path": "/media/mundus/modes-overview.webp",
+      "resourceType": "Image",
       "status": 200
     },
     {
@@ -525,31 +418,37 @@
     },
     {
       "method": "GET",
-      "path": "/_astro/BaseLayout.DXCOrRoQ.css",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
       "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/media/mundus/other-side.webp",
-      "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/_astro/_..ZCOylJpv.css",
       "resourceType": "Stylesheet",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "path": "/media/mundus/other-side.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
       "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -561,13 +460,13 @@
     },
     {
       "method": "GET",
-      "path": "/media/mundus/modes-overview.webp",
-      "resourceType": "Image",
+      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "path": "/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -579,7 +478,139 @@
     },
     {
       "method": "GET",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/media/mundus/modes-overview.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/projects/mundus",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
+      "resourceType": "Stylesheet",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/media/mundus/other-side.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
       "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/media/mundus/modes-overview.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/projects/mundus",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/BaseLayout.kX0dL1KM.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/media/mundus/other-side.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -587,6 +618,12 @@
       "method": "GET",
       "path": "/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
       "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/media/mundus/modes-overview.webp",
+      "resourceType": "Image",
       "status": 200
     }
   ]

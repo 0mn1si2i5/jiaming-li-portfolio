@@ -15,8 +15,9 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "reducedMotion": false,
-      "focusableCount": 18,
+      "focusableCount": 17,
       "focusVisible": true,
+      "visibleTextLength": 1154,
       "selected": [
         "DialogTree",
         "Mundus",
@@ -41,8 +42,9 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "reducedMotion": false,
-      "focusableCount": 18,
+      "focusableCount": 17,
       "focusVisible": true,
+      "visibleTextLength": 1154,
       "selected": [
         "DialogTree",
         "Mundus",
@@ -67,10 +69,10 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "reducedMotion": true,
-      "focusableCount": 18,
+      "focusableCount": 17,
       "focusVisible": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 601,
+      "visibleTextLength": 556,
       "selected": [
         "DialogTree",
         "Mundus",
@@ -95,10 +97,10 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "reducedMotion": true,
-      "focusableCount": 18,
+      "focusableCount": 17,
       "focusVisible": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 598,
+      "visibleTextLength": 553,
       "selected": [
         "DialogTree",
         "Mundus",
@@ -123,10 +125,10 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": false,
-      "focusableCount": 11,
+      "focusableCount": 10,
       "focusVisible": true,
-      "productVisualCount": 1,
-      "visibleTextLength": 4021
+      "visibleTextLength": 4016,
+      "productVisualCount": 1
     },
     {
       "scenario": "mundus-zh-dark-desktop",
@@ -142,10 +144,10 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": true,
-      "focusableCount": 11,
+      "focusableCount": 10,
       "focusVisible": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 1557,
+      "visibleTextLength": 1554,
       "productVisualCount": 1
     },
     {
@@ -162,10 +164,10 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": false,
-      "focusableCount": 11,
+      "focusableCount": 10,
       "focusVisible": true,
-      "productVisualCount": 1,
-      "visibleTextLength": 4016
+      "visibleTextLength": 4011,
+      "productVisualCount": 1
     },
     {
       "scenario": "mundus-zh-dark-mobile",
@@ -181,10 +183,10 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": true,
-      "focusableCount": 11,
+      "focusableCount": 10,
       "focusVisible": true,
       "activeAnimationCount": 0,
-      "visibleTextLength": 1554,
+      "visibleTextLength": 1551,
       "productVisualCount": 1
     }
   ]

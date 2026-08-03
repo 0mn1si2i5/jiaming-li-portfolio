@@ -48,9 +48,8 @@ Story visual.
 
 ## Browser Matrix
 
-The exact GitHub Pages build was served under `/jiaming-li-portfolio/` and exercised
-with Playwright Chromium after the `agent-browser` daemon failed to establish a
-CDP channel.
+The exact GitHub Pages build was served under `/jiaming-li-portfolio/` and
+exercised with isolated `agent-browser` sessions using system Chrome.
 
 | Scenario | Result |
 | --- | --- |
@@ -71,8 +70,8 @@ cross-bound in `evidence/browser-reduced-motion.json`.
 The eight isolated browser sessions reported:
 
 - console messages: 0;
-- normalized completed network requests: 96;
-- statuses: 96 x 200;
+- normalized completed network requests: 102;
+- statuses: 87 x 200 and 15 x 304;
 - failed requests: 0;
 - `/projects/omnipet` status: 404;
 - the public Mundus site and repository links returned successful responses;
