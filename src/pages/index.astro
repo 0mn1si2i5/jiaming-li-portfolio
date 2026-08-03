@@ -39,7 +39,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
             </div>
             <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
             <p><Localized {...project.data.summary} /></p>
-            <p class="status"><span><Localized en="Status" zh="状态" /></span><Localized {...project.data.status} /></p>
           </div>
         </article>
       ))}
@@ -91,9 +90,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .project-copy h3 { margin: 1.15rem 0 1rem; font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5.3rem); font-weight: 400; letter-spacing: -.055em; }
   .project-copy h3 a, .other-copy > h3 a { color: var(--ink); text-decoration: none; }
   .project-copy h3 a:hover, .project-copy h3 a:focus-visible, .other-copy > h3 a:hover, .other-copy > h3 a:focus-visible { text-decoration: underline; }
-  .project-copy > p:not(.status) { max-width: 380px; color: var(--muted); }
-  .project-copy .status { display: grid; grid-template-columns: 4.5rem 1fr; max-width: 380px; margin: 1.5rem 0 0; padding-top: .9rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
-  .project-copy .status span:first-child { color: var(--ink); font-size: .68rem; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+  .project-copy > p { max-width: 380px; color: var(--muted); }
   .other-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.other-section > .eyebrow { margin-bottom: 1.5rem; }.other-grid { display: grid; grid-template-columns: minmax(260px, .75fr) minmax(0, 1.25fr); gap: clamp(3rem, 7vw, 7rem); }.other-list { display: grid; gap: 1.5rem; }.other-card { display: grid; grid-template-columns: minmax(150px, .8fr) minmax(0, 1.2fr); max-width: 680px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }.other-media { min-height: 100%; }.other-media :global(.project-media) { height: 100%; border: 0; border-right: 1px solid var(--line); border-radius: 0; }.other-media:focus-visible { z-index: 1; outline-offset: -4px; }.other-copy { padding: 1.5rem; }.other-card h3 { margin: 1.5rem 0 .75rem; font-family: var(--font-display); font-size: 2rem; font-weight: 400; letter-spacing: -.035em; }.other-card p { color: var(--muted); }.other-card .outcome { margin: 1.7rem 0 .6rem; color: var(--ink); font-weight: 650; }.external-link { color: var(--external-link); }.external-card { display: block; margin-left: clamp(0rem, 5vw, 3.5rem); background: transparent; border-color: var(--rule-strong); }
   :global(:root[data-locale='zh']) .hero h1 { max-width: 15ch; font-size: clamp(2.8rem, 5.8vw, 5.2rem); line-height: 1.16; letter-spacing: -.045em; }
   :global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2.1rem, 4.2vw, 3.75rem); line-height: 1.2; letter-spacing: -.04em; }

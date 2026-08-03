@@ -23,6 +23,22 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('href={`${base}about`}', self.layout)
         self.assertNotIn('href={`${base}notes`}', self.layout)
 
+    def test_header_has_one_home_destination_without_monogram(self) -> None:
+        header = self.layout.split('<header class="site-header">', 1)[1].split(
+            "</header>", 1
+        )[0]
+        self.assertEqual(header.count('<Localized en="Home" zh="主页" />'), 1)
+        self.assertNotIn('class="monogram"', header)
+        self.assertNotIn(".monogram", self.layout)
+
+    def test_home_cards_omit_status_while_project_details_keep_it(self) -> None:
+        self.assertNotIn('class="status"', self.home)
+        self.assertNotIn(".project-copy .status", self.home)
+        self.assertIn(
+            '<dt><Localized en="Status" zh="项目状态" /></dt>',
+            self.project,
+        )
+
     def test_about_page_owns_about_copy_and_empty_notes_section(self) -> None:
         about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
         self.assertIn('id="about-title"', about)
