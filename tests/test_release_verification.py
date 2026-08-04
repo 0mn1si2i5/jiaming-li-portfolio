@@ -260,12 +260,11 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertEqual(story.count("<img"), 1)
         for token in (
             "const defaultMode = modes[0]",
-            'id="mundus-preview-panel"',
-            'role="tabpanel"',
             "href={defaultMode.href}",
             "src={asset(defaultMode.image)}",
             "alt={defaultMode.alt.en}",
-            'aria-labelledby="mundus-preview-antipodes"',
+            'aria-labelledby="mundus-preview-antipodes '
+            'mundus-preview-new-tab-label"',
             'role="tablist"',
             'role="tab"',
             'aria-controls="mundus-preview-panel"',
@@ -275,14 +274,13 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "data-href={mode.href}",
             "data-alt-en={mode.alt.en}",
             "data-alt-zh={mode.alt.zh}",
-            "data-label-en={`${mode.title.en}. Open this Mundus mode "
-            "in a new tab.`}",
-            "data-label-zh={`${mode.title.zh}。在新标签页打开这个 Mundus "
-            "模式。`}",
             'target="_blank"',
             'rel="noopener noreferrer"',
+            "const panel = preview.querySelector<HTMLElement>("
+            "'#mundus-preview-panel')",
             "const candidate = new Image()",
             "candidate.onload = () => {",
+            "candidate.onerror = () => {",
             "const syncLocale = (tab: HTMLButtonElement) => {",
             "new MutationObserver",
             "syncLocale(tabs[0]);",
@@ -294,6 +292,26 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "End",
         ):
             self.assertIn(token, story)
+
+        panel_match = re.search(
+            r'<div\b(?=[^>]*\bid="mundus-preview-panel")'
+            r'(?=[^>]*\brole="tabpanel")'
+            r'(?=[^>]*\baria-labelledby="mundus-preview-antipodes")'
+            r"[^>]*>(?P<body>.*?)</div>",
+            story,
+            flags=re.DOTALL,
+        )
+        self.assertIsNotNone(panel_match)
+        self.assertRegex(
+            panel_match.group("body"),
+            r'(?s)<a\b(?=[^>]*\bdata-preview-link\b)'
+            r'(?=[^>]*\baria-labelledby="mundus-preview-antipodes '
+            r'mundus-preview-new-tab-label")[^>]*>.*?<img\b',
+        )
+        self.assertNotRegex(
+            panel_match.group("body"),
+            r"<a\b[^>]*\brole=",
+        )
 
         onload_match = re.search(
             r"candidate\.onload = \(\) => \{(?P<body>.*?)"
@@ -314,19 +332,59 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "link.href = href;",
             "item.setAttribute('aria-selected', String(selected));",
             "item.tabIndex = selected ? 0 : -1;",
-            "link.setAttribute('aria-labelledby', tab.id);",
+            "panel.setAttribute('aria-labelledby', tab.id);",
+            "`${tab.id} mundus-preview-new-tab-label`,",
             "syncLocale(tab);",
-            "if (moveFocus) tab.focus();",
         )
         for token in update_tokens:
             self.assertIn(token, onload)
         self.assertRegex(
-            story,
-            r"(?s)const syncLocale = \(tab: HTMLButtonElement\) => \{.*?"
-            r"image\.alt = tab\.dataset\[`alt\$\{suffix\}`\] \?\? '';.*?"
-            r"link\.setAttribute\("
-            r"'aria-label', tab\.dataset\[`label\$\{suffix\}`\] \?\? ''\);",
+            onload,
+            r"(?s)panel\.setAttribute\('aria-labelledby', tab\.id\);.*?"
+            r"link\.setAttribute\(\s*'aria-labelledby',\s*"
+            r"`\$\{tab\.id\} mundus-preview-new-tab-label`,\s*\);.*?"
+            r"syncLocale\(tab\);",
         )
+        self.assertNotIn("moveFocus", story)
+        onerror_match = re.search(
+            r"candidate\.onerror = \(\) => \{(?P<body>.*?)"
+            r"^\s*\};",
+            story,
+            flags=re.DOTALL | re.MULTILINE,
+        )
+        self.assertIsNotNone(onerror_match)
+        onerror = onerror_match.group("body")
+        self.assertRegex(
+            onerror,
+            r"(?s)if \(\s*currentRequest !== requestId\s*\|\|\s*"
+            r"document\.activeElement !== tab\s*\) return;.*?"
+            r"const selected = tabs\.find\(.*?"
+            r"item\.getAttribute\('aria-selected'\) === 'true'.*?"
+            r"if \(selected\) selected\.focus\(\);",
+        )
+        for mutation in (
+            "image.src",
+            "link.href",
+            "setAttribute",
+            "tabIndex",
+        ):
+            self.assertNotIn(mutation, onerror)
+        keydown_match = re.search(
+            r"tab\.addEventListener\('keydown', \(event\) => \{"
+            r"(?P<body>.*?)^\s*\}\);",
+            story,
+            flags=re.DOTALL | re.MULTILINE,
+        )
+        self.assertIsNotNone(keydown_match)
+        keydown = keydown_match.group("body")
+        prevent_default = keydown.find("event.preventDefault();")
+        focus_next = keydown.find("tabs[next].focus();")
+        activate_next = keydown.find("activate(tabs[next]);")
+        self.assertNotEqual(prevent_default, -1)
+        self.assertNotEqual(focus_next, -1)
+        self.assertNotEqual(activate_next, -1)
+        self.assertLess(prevent_default, focus_next)
+        self.assertLess(focus_next, activate_next)
         observer_match = re.search(
             r"new MutationObserver\(\(\) => \{(?P<callback>.*?)"
             r"\}\)\.observe\((?P<options>.*?)\);",
