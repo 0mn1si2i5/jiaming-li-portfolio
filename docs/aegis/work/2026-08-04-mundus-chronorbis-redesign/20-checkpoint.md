@@ -3,7 +3,7 @@
 ## Authority
 
 - Branch: `feat/mundus-next`
-- Current HEAD: `d092eab`
+- Current HEAD: `fdbd093`
 - Public Mundus SHA:
   `378fe528ca1c8f83f0280f83383b5e785e851285`
 - Approved spec commit: `89ab2d8`
@@ -18,7 +18,7 @@
 - [x] Task 3: bilingual Mundus and Chronorbis narrative.
 - [x] Task 4: verified three-mode media capture.
 - [x] Task 5: narrow immutable facts.
-- [ ] Task 6: browser evidence contract.
+- [x] Task 6: browser evidence contract.
 - [ ] Task 7: regenerate browser evidence.
 - [ ] Task 8: release record, full gates, push, and Draft PR CI.
 - [ ] Final independent review and verification-before-completion.
@@ -52,10 +52,18 @@
 - Task 5 plan correction: claim extraction now routes `.astro` sources
   through a bounded rendered-semantics parser instead of treating them as
   MDX. The Story UI and approved fact tokens were not changed.
+- Task 6 browser-contract commit: `fdbd093`.
+- Task 6 focused validator tests: four passed under Python 3.9.6.
+- Task 6 full browser test class: 12 passed and 2 expected stale-evidence
+  failures pending Task 7.
+- Task 6 specification review: compliant.
+- Task 6 quality review: approved after rejecting malformed viewports,
+  non-finite measurements, and boolean durations.
 
 ## Active Slice
 
-Task 6: extend the browser evidence validator contract for the preview fields.
+Task 7: rebuild the exact Portfolio output and regenerate all eight browser
+evidence scenarios.
 
 ## Resume State Hint
 
@@ -74,8 +82,9 @@ Verify current branch, HEAD, and worktree before editing.
 - Compatibility boundary intact: yes.
 - New owner/fallback introduced: no.
 - Authority migration documented: yes.
-- Evidence sufficient for Task 5: yes.
+- Evidence sufficient for Task 6: yes.
 - Task 1 RED contract preserved: yes.
 - New product owner or fallback introduced: no.
 - Unsupported complex Astro syntax remains fail-closed: yes.
+- Stale browser evidence is isolated to Task 7: yes.
 - Decision: `continue`.
