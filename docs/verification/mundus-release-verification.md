@@ -2,7 +2,9 @@
 
 ## Release
 
-- Portfolio merge commit:
+- Visible-history merge commit:
+  `75c937166c17716463b472efd9365d03fa2f41f1`
+- Original GitHub merge object:
   `3966ee16d343f402b497d3da146ef68c4a807124`
 - Pull request:
   [#2](https://github.com/0mn1si2i5/jiaming-li-portfolio/pull/2)
@@ -13,8 +15,9 @@
 - Published:
   `2026-08-04`
 
-The exact merge commit passed the complete build and verification workflow and
-was deployed successfully to GitHub Pages.
+The original merge object passed the complete build and verification workflow
+and was deployed successfully to GitHub Pages. The visible-history commit is
+its content-equivalent replacement after repository history normalization.
 
 ## Scope
 
@@ -147,6 +150,7 @@ Verified results:
 ## Deployment Boundary
 
 Pull requests run the complete non-deploying verification workflow. Deployment
-is permitted only for non-pull-request events on `refs/heads/main`. The release
-was deployed from merge commit
-`3966ee16d343f402b497d3da146ef68c4a807124`.
+is permitted only for non-pull-request events on `refs/heads/main`. The
+original release was deployed from GitHub merge object
+`3966ee16d343f402b497d3da146ef68c4a807124`. Its normalized visible-history
+equivalent is `75c937166c17716463b472efd9365d03fa2f41f1`.
