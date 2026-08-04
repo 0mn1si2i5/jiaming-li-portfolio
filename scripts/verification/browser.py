@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from collections import Counter
 from pathlib import Path
 
@@ -78,6 +79,14 @@ DIST_HTML_FILES = (
 )
 PROJECT_ORDER = ["DialogTree", "Mundus", "NBTI"]
 OTHER_ORDER = ["Side B", "RSZ Namelist"]
+
+
+def is_finite_number(value: object) -> bool:
+    return (
+        isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        and (not isinstance(value, float) or math.isfinite(value))
+    )
 
 
 def read_json(path: Path) -> dict[str, object]:
@@ -158,10 +167,75 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             if item.get("other") != OTHER_ORDER:
                 errors.append(f"{name}: other project order is invalid")
         if name.startswith("mundus-"):
+            preview_required = (
+                "previewDefaultMode",
+                "previewPointerModes",
+                "previewKeyboardModes",
+                "previewLinkTargetsCorrect",
+                "previewSelectionSynchronized",
+                "previewLayout",
+                "previewMinTargetHeight",
+                "previewTransitionDurationMs",
+            )
+            for field in preview_required:
+                if field not in item:
+                    errors.append(f"{name}: missing {field}")
             if item.get("totalImageCount") != 2:
                 errors.append(f"{name}: Mundus image count is not two")
             if item.get("productVisualCount") != 1:
                 errors.append(f"{name}: productVisualCount is not one")
+            if item.get("previewDefaultMode") != "antipodes":
+                errors.append(f"{name}: previewDefaultMode is invalid")
+            if item.get("previewPointerModes") != [
+                "antipodes", "development", "sunline"
+            ]:
+                errors.append(f"{name}: previewPointerModes is invalid")
+            if item.get("previewKeyboardModes") != [
+                "antipodes", "development", "sunline"
+            ]:
+                errors.append(f"{name}: previewKeyboardModes is invalid")
+            if item.get("previewLinkTargetsCorrect") is not True:
+                errors.append(
+                    f"{name}: previewLinkTargetsCorrect is not true"
+                )
+            if item.get("previewSelectionSynchronized") is not True:
+                errors.append(
+                    f"{name}: previewSelectionSynchronized is not true"
+                )
+            viewport = item.get("viewport")
+            width = (
+                viewport.get("width")
+                if isinstance(viewport, dict)
+                else None
+            )
+            if not is_finite_number(width):
+                errors.append(f"{name}: viewport width is invalid")
+                errors.append(f"{name}: previewLayout is invalid")
+            else:
+                expected_layout = (
+                    "vertical" if width <= 760 else "columns"
+                )
+                if item.get("previewLayout") != expected_layout:
+                    errors.append(f"{name}: previewLayout is invalid")
+            min_target_height = item.get("previewMinTargetHeight")
+            if not (
+                is_finite_number(min_target_height)
+                and min_target_height >= 44
+            ):
+                errors.append(
+                    f"{name}: previewMinTargetHeight is below 44"
+                )
+            if name in REDUCED_SCENARIOS:
+                transition_duration = item.get(
+                    "previewTransitionDurationMs"
+                )
+                if not (
+                    is_finite_number(transition_duration)
+                    and transition_duration in (0, 0.01)
+                ):
+                    errors.append(
+                        f"{name}: previewTransitionDurationMs is not reduced"
+                    )
     return errors
 
 

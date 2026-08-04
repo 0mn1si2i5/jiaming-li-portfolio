@@ -1127,6 +1127,44 @@ const mode = { category: "spatial" };
 
 
 class TestBrowserEvidence(unittest.TestCase):
+    def load_matrix_with_preview_evidence(self) -> dict[str, object]:
+        project = Path(__file__).parents[1]
+        matrix = json.loads(
+            (
+                project / "docs/verification/evidence/browser-matrix.json"
+            ).read_text(encoding="utf-8")
+        )
+        for item in matrix["scenarios"]:
+            if not item["scenario"].startswith("mundus-"):
+                continue
+            item.update(
+                {
+                    "previewDefaultMode": "antipodes",
+                    "previewPointerModes": [
+                        "antipodes",
+                        "development",
+                        "sunline",
+                    ],
+                    "previewKeyboardModes": [
+                        "antipodes",
+                        "development",
+                        "sunline",
+                    ],
+                    "previewLinkTargetsCorrect": True,
+                    "previewSelectionSynchronized": True,
+                    "previewLayout": (
+                        "vertical"
+                        if item["viewport"]["width"] <= 760
+                        else "columns"
+                    ),
+                    "previewMinTargetHeight": 44,
+                    "previewTransitionDurationMs": (
+                        0 if item["reducedMotion"] else 100
+                    ),
+                }
+            )
+        return matrix
+
     def write_bound_dist(self, evidence_root: Path, dist_root: Path) -> None:
         manifest_path = evidence_root / "browser-build.json"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -1290,6 +1328,88 @@ class TestBrowserEvidence(unittest.TestCase):
                 changed = json.loads(json.dumps(matrix))
                 changed["scenarios"][index][field] = value
                 self.assertIn(field, " ".join(browser.validate_matrix(changed)))
+
+    def test_matrix_rejects_malformed_mundus_preview_measurements(
+        self,
+    ) -> None:
+        matrix = self.load_matrix_with_preview_evidence()
+        scenario_index = next(
+            index
+            for index, item in enumerate(matrix["scenarios"])
+            if item["scenario"] == "mundus-en-light-390"
+        )
+        valid_floats = json.loads(json.dumps(matrix))
+        valid_floats["scenarios"][scenario_index]["viewport"]["width"] = 390.0
+        valid_floats["scenarios"][scenario_index][
+            "previewMinTargetHeight"
+        ] = 44.0
+        self.assertEqual(browser.validate_matrix(valid_floats), [])
+
+        viewport_mutations = (
+            None,
+            "390",
+            {},
+            {"height": 844},
+            {"width": "390", "height": 844},
+            {"width": True, "height": 844},
+            {"width": float("nan"), "height": 844},
+            {"width": float("inf"), "height": 844},
+            {"width": float("-inf"), "height": 844},
+        )
+        for viewport in viewport_mutations:
+            with self.subTest(field="viewport", value=viewport):
+                changed = json.loads(json.dumps(matrix))
+                changed["scenarios"][scenario_index]["viewport"] = viewport
+                errors = " ".join(browser.validate_matrix(changed))
+                self.assertIn("viewport", errors)
+                self.assertIn("previewLayout", errors)
+
+        changed = json.loads(json.dumps(matrix))
+        del changed["scenarios"][scenario_index]["viewport"]
+        errors = " ".join(browser.validate_matrix(changed))
+        self.assertIn("viewport", errors)
+        self.assertIn("previewLayout", errors)
+
+        for height in (
+            True,
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(field="previewMinTargetHeight", value=height):
+                changed = json.loads(json.dumps(matrix))
+                changed["scenarios"][scenario_index][
+                    "previewMinTargetHeight"
+                ] = height
+                errors = " ".join(browser.validate_matrix(changed))
+                self.assertIn("previewMinTargetHeight", errors)
+
+    def test_matrix_rejects_invalid_reduced_preview_duration(self) -> None:
+        matrix = self.load_matrix_with_preview_evidence()
+        scenario_index = next(
+            index
+            for index, item in enumerate(matrix["scenarios"])
+            if item["scenario"] == "mundus-zh-dark-desktop"
+        )
+        valid_fraction = json.loads(json.dumps(matrix))
+        valid_fraction["scenarios"][scenario_index][
+            "previewTransitionDurationMs"
+        ] = 0.01
+        self.assertEqual(browser.validate_matrix(valid_fraction), [])
+
+        for duration in (
+            False,
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(value=duration):
+                changed = json.loads(json.dumps(matrix))
+                changed["scenarios"][scenario_index][
+                    "previewTransitionDurationMs"
+                ] = duration
+                errors = " ".join(browser.validate_matrix(changed))
+                self.assertIn("previewTransitionDurationMs", errors)
 
     def write_json(self, root: Path, name: str, value: object) -> None:
         (root / name).write_text(json.dumps(value), encoding="utf-8")
