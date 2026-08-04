@@ -116,10 +116,10 @@ build, explicit-root verification, and a one-day Pages artifact. Actions use
 immutable SHA pins. Only the deploy job receives Pages/id-token permissions,
 and it is restricted to non-PR events on `refs/heads/main`.
 
-The remote PR gate is pending because PR #1 is closed. Its former head is
-`feat/mundus-omnipet-portfolio@bbf00b2`; the current authority is
-`feat/mundus-next`. No replacement PR was created or modified during this
-local verification.
+PR #1 remains closed on its former `feat/mundus-omnipet-portfolio@bbf00b2`
+head. The current authority is `feat/mundus-next`. A replacement Draft PR was
+explicitly authorized for that branch so its exact head can run the
+non-deploying pull-request gate.
 
 ## Commands
 
@@ -160,7 +160,6 @@ No dependency, source, workflow, browser evidence, screenshot, or unrelated
 design file changed while rerunning the local gate. The only working-tree
 change is this release record.
 
-The local command evidence is recorded here. Remote exact-head CI remains
-blocked until there is an authorized pull-request path for
-`feat/mundus-next`; this verification does not reopen PR #1 or create a second
-pull request.
+The local command evidence is recorded here. Remote exact-head CI is run only
+through the authorized replacement Draft PR. This verification does not
+reopen PR #1, merge a pull request, or deploy the site.

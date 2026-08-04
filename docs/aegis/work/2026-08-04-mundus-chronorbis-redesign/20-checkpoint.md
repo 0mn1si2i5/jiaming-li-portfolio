@@ -3,7 +3,7 @@
 ## Authority
 
 - Branch: `feat/mundus-next`
-- Current HEAD: `f25ba5b`
+- Current HEAD: `999dc17`
 - Public Mundus SHA:
   `378fe528ca1c8f83f0280f83383b5e785e851285`
 - Approved spec commit: `89ab2d8`
@@ -74,15 +74,15 @@
   built, and `facts=4/4 browser=pass privacy=pass`.
 - Task 8 local release record specification review: compliant.
 - Task 8 local release record quality review: approved.
-- Remote blocker: PR #1 is closed on the retired
-  `feat/mundus-omnipet-portfolio` head; `feat/mundus-next` has no associated
-  pull request, and creating a second PR is prohibited without a new decision.
+- Remote drift: PR #1 is closed on the retired
+  `feat/mundus-omnipet-portfolio` head.
+- Remote decision: the user explicitly authorized a replacement Draft PR for
+  `feat/mundus-next` so exact-head non-deploying CI can run.
 
 ## Active Slice
 
-Task 8: update release evidence, run the complete local gate, push the existing
-branch, then stop at the pull-request decision because exact-head PR CI has no
-authorized target.
+Task 8: commit the authorized PR-path update, create the replacement Draft PR,
+and verify exact-head non-deploying CI.
 
 ## Resume State Hint
 
@@ -107,5 +107,5 @@ Verify current branch, HEAD, and worktree before editing.
 - Unsupported complex Astro syntax remains fail-closed: yes.
 - Browser evidence is current: yes.
 - Task 8 local evidence is sufficient: yes.
-- Exact-head pull-request CI is blocked by remote PR drift: yes.
+- Exact-head pull-request CI path is authorized: yes.
 - Decision: `continue`.
