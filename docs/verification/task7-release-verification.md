@@ -1,7 +1,7 @@
 # Mundus Release Verification
 
-Verified on 2026-08-02 against the exact Mundus-only production build on
-`feat/mundus-omnipet-portfolio`.
+Verified on 2026-08-04 against the exact Mundus-only build on
+`chore/portfolio-rename-migration`.
 
 ## Result
 
@@ -24,27 +24,24 @@ NBTI; Side B remains first in Other Work.
 Mundus is pinned to the deployed V1.1 public `main`:
 
 ```text
-c6e625fa68879f9771debffebdaf32e295d56769
+378fe528ca1c8f83f0280f83383b5e785e851285
 ```
 
 The verifier requires that immutable commit object and reads evidence with
 `git show <revision>:<path>`. Five visitor-visible facts bind the bilingual
 case and Story to:
 
-- `README.md`: the maintained personal globe, first three lenses, and public
+- `README.md`: the maintained personal globe, current lenses, and public
   Parchment Atlas capabilities;
-- `docs/PROJECT_PLAN.md`: the shared observation loop and current modes;
+- `tests/e2e/app.spec.ts`: closer inspection, stable drag rendering, Twilight
+  terminology, and exact-location sharing disclosure;
 - `docs/2026-08-01-v1.1-publication-packet.md`: static architecture, hashed
-  data, accessibility, and release gates;
-- `docs/ROADMAP_HANDOFF.md`: product limits, the GHSL stop decision, and the
-  frozen follow-on plans.
+  data, accessibility, and release gates.
 
 Only capabilities observable on the public Pages deployment are presented as
-shipped. GHSL Human Morphology is explicitly not a public feature. The
-`v1.0.0` tag and Release remain unchanged; no V1.1 tag or Release is claimed.
-The two case-study media files are direct captures of that deployment: the
-Other Side Parchment Atlas is the hero, and its open Mode atlas is the single
-Story visual.
+shipped. The source media set contains a globe-only homepage preview, a
+complete Other Side interface hero, and a focused Other Side Story detail.
+The project detail page retains two images: the hero and the Story visual.
 
 ## Browser Matrix
 
@@ -70,11 +67,10 @@ cross-bound in `evidence/browser-reduced-motion.json`.
 The eight isolated browser sessions reported:
 
 - console messages: 0;
-- normalized completed network requests: 102;
-- statuses: 87 x 200 and 15 x 304;
+- normalized completed network requests: 104;
+- statuses: 104 x 200;
 - failed requests: 0;
 - `/projects/omnipet` status: 404;
-- the public Mundus site and repository links returned successful responses;
 - every local document, stylesheet, font, favicon, and image resolved from the
   GitHub Pages project base.
 
