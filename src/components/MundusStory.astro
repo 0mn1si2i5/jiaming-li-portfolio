@@ -69,26 +69,30 @@ const defaultMode = modes[0];
         zh="在新标签页打开这个 Mundus 模式。"
       />
     </span>
-    <a
+    <div
       id="mundus-preview-panel"
-      class="preview-link"
       role="tabpanel"
-      href={defaultMode.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      data-preview-link
-      aria-labelledby="mundus-preview-antipodes mundus-preview-new-tab-label"
+      aria-labelledby="mundus-preview-antipodes"
     >
-      <img
-        src={asset(defaultMode.image)}
-        alt={defaultMode.alt.en}
-        data-preview-image
-        loading="lazy"
-      />
-      <span class="preview-action" aria-hidden="true">
-        <Localized en="Open mode ↗" zh="打开模式 ↗" />
-      </span>
-    </a>
+      <a
+        class="preview-link"
+        href={defaultMode.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-preview-link
+        aria-labelledby="mundus-preview-antipodes mundus-preview-new-tab-label"
+      >
+        <img
+          src={asset(defaultMode.image)}
+          alt={defaultMode.alt.en}
+          data-preview-image
+          loading="lazy"
+        />
+        <span class="preview-action" aria-hidden="true">
+          <Localized en="Open mode ↗" zh="打开模式 ↗" />
+        </span>
+      </a>
+    </div>
     <figcaption role="tablist" aria-label="Mundus mode preview">
       {modes.map((mode, index) => (
         <button
@@ -121,6 +125,7 @@ const defaultMode = modes[0];
     const tabs = [
       ...preview.querySelectorAll<HTMLButtonElement>('[data-preview-tab]'),
     ];
+    const panel = preview.querySelector<HTMLElement>('#mundus-preview-panel');
     const link = preview.querySelector<HTMLAnchorElement>('[data-preview-link]');
     const image = preview.querySelector<HTMLImageElement>('[data-preview-image]');
     let requestId = 0;
@@ -134,8 +139,8 @@ const defaultMode = modes[0];
       image.alt = tab.dataset[`alt${suffix}`] ?? '';
     };
 
-    const activate = (tab: HTMLButtonElement, moveFocus = false) => {
-      if (!link || !image || !tabs.includes(tab)) return;
+    const activate = (tab: HTMLButtonElement) => {
+      if (!panel || !link || !image || !tabs.includes(tab)) return;
       const src = tab.dataset.src;
       const href = tab.dataset.href;
       if (!src || !href) return;
@@ -151,12 +156,22 @@ const defaultMode = modes[0];
           item.setAttribute('aria-selected', String(selected));
           item.tabIndex = selected ? 0 : -1;
         });
+        panel.setAttribute('aria-labelledby', tab.id);
         link.setAttribute(
           'aria-labelledby',
           `${tab.id} mundus-preview-new-tab-label`,
         );
         syncLocale(tab);
-        if (moveFocus) tab.focus();
+      };
+      candidate.onerror = () => {
+        if (
+          currentRequest !== requestId ||
+          document.activeElement !== tab
+        ) return;
+        const selected = tabs.find(
+          (item) => item.getAttribute('aria-selected') === 'true',
+        );
+        if (selected) selected.focus();
       };
       candidate.src = src;
     };
@@ -181,7 +196,8 @@ const defaultMode = modes[0];
           return;
         }
         event.preventDefault();
-        activate(tabs[next], true);
+        tabs[next].focus();
+        activate(tabs[next]);
       });
     });
 
