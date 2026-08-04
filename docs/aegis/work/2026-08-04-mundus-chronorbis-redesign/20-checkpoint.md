@@ -3,7 +3,7 @@
 ## Authority
 
 - Branch: `feat/mundus-next`
-- Current HEAD: `7532d9d`
+- Current HEAD: `98bee4c`
 - Public Mundus SHA:
   `378fe528ca1c8f83f0280f83383b5e785e851285`
 - Approved spec commit: `89ab2d8`
@@ -15,8 +15,8 @@
 
 - [x] Preserve and harden Task 1 RED contract.
 - [x] Task 2: accessible three-mode preview.
-- [ ] Task 3: bilingual Mundus and Chronorbis narrative.
-- [ ] Task 4: verified three-mode media capture.
+- [x] Task 3: bilingual Mundus and Chronorbis narrative.
+- [x] Task 4: verified three-mode media capture.
 - [ ] Task 5: narrow immutable facts.
 - [ ] Task 6: browser evidence contract.
 - [ ] Task 7: regenerate browser evidence.
@@ -32,11 +32,20 @@
 - Astro build: six pages.
 - Task 2 specification review: compliant.
 - Task 2 quality review: approved.
+- Task 3 narrative and Chronorbis commit: `76b0ea6`.
+- Task 3 specification review: compliant.
+- Task 3 quality review: approved after the prose-column overflow fix.
+- Task 4 media capture commit: `98bee4c`.
+- Task 4 specification review: compliant.
+- Task 4 quality review: approved after adding staged publication rollback.
+- Task 4 focused media tests: two passed under Python 3.9.6.
+- Task 4 media evidence: three `1920x1080` Story assets, five distinct
+  SHA-256 values, and zero error, failed-request, or panel-overflow counts.
+- Task 4 `git diff --check`: pass.
 
 ## Active Slice
 
-Task 3: rewrite bilingual visitor content and add the explicitly unfinished
-Chronorbis chapter.
+Task 5: narrow immutable facts to the four approved current Mundus claims.
 
 ## Resume State Hint
 
@@ -55,5 +64,7 @@ Verify current branch, HEAD, and worktree before editing.
 - Compatibility boundary intact: yes.
 - New owner/fallback introduced: no.
 - Authority migration documented: yes.
-- Evidence sufficient for Task 3: yes.
+- Evidence sufficient for Task 4: yes.
+- Task 1 RED contract preserved: yes.
+- Task 5 not started: yes.
 - Decision: `continue`.
