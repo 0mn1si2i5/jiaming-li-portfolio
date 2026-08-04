@@ -1,0 +1,151 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import unittest
+from pathlib import Path
+
+
+class TestSiteInterface(unittest.TestCase):
+    def setUp(self) -> None:
+        self.root = Path(__file__).parents[1]
+        self.layout = (self.root / "src/components/BaseLayout.astro").read_text(
+            encoding="utf-8"
+        )
+        self.home = (self.root / "src/pages/index.astro").read_text(
+            encoding="utf-8"
+        )
+        self.project = (
+            self.root / "src/pages/projects/[...slug].astro"
+        ).read_text(encoding="utf-8")
+        self.dialogtree = (
+            self.root / "src/content/projects/dialogtree.mdx"
+        ).read_text(encoding="utf-8")
+        self.side_b = (
+            self.root / "src/content/projects/side-b.mdx"
+        ).read_text(encoding="utf-8")
+
+    def test_navigation_uses_home_work_and_about(self) -> None:
+        self.assertIn('<Localized en="Home" zh="主页" />', self.layout)
+        self.assertIn('href={`${base}#work`}', self.layout)
+        self.assertIn('href={`${base}about`}', self.layout)
+        self.assertNotIn('href={`${base}notes`}', self.layout)
+
+    def test_header_has_one_home_destination_without_monogram(self) -> None:
+        header = self.layout.split('<header class="site-header">', 1)[1].split(
+            "</header>", 1
+        )[0]
+        self.assertEqual(header.count('<Localized en="Home" zh="主页" />'), 1)
+        self.assertNotIn('class="monogram"', header)
+        self.assertNotIn(".monogram", self.layout)
+
+    def test_home_cards_omit_status_while_project_details_keep_it(self) -> None:
+        self.assertNotIn('class="status"', self.home)
+        self.assertNotIn(".project-copy .status", self.home)
+        self.assertIn(
+            '<dt><Localized en="Status" zh="项目状态" /></dt>',
+            self.project,
+        )
+
+    def test_package_and_local_pages_base_use_canonical_repository_name(self) -> None:
+        package = json.loads(
+            (self.root / "package.json").read_text(encoding="utf-8")
+        )
+        lock = json.loads(
+            (self.root / "package-lock.json").read_text(encoding="utf-8")
+        )
+        config = (self.root / "astro.config.mjs").read_text(encoding="utf-8")
+        self.assertEqual(package["name"], "jiaming-li-portfolio")
+        self.assertEqual(lock["name"], "jiaming-li-portfolio")
+        self.assertEqual(lock["packages"][""]["name"], "jiaming-li-portfolio")
+        self.assertIn(
+            "const localProjectBase = '/jiaming-li-portfolio';",
+            config,
+        )
+
+    def test_about_page_owns_about_copy_and_empty_notes_section(self) -> None:
+        about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
+        self.assertIn('id="about-title"', about)
+        self.assertIn('id="notes-title"', about)
+        self.assertIn('href={site.github}', about)
+        self.assertNotIn('class="note"', about)
+        self.assertFalse((self.root / "src/pages/notes.astro").exists())
+        self.assertNotIn('id="about"', self.home)
+
+    def test_footer_keeps_copyright_without_github(self) -> None:
+        footer = self.layout.split('<footer class="site-footer">', 1)[1].split(
+            "</footer>", 1
+        )[0]
+        self.assertIn("site.name", footer)
+        self.assertNotIn("site.github", footer)
+        self.assertNotIn("GitHub", footer)
+
+    def test_internal_project_ctas_are_removed_but_titles_and_media_link(self) -> None:
+        self.assertNotIn("Read the exploration", self.home)
+        self.assertNotIn("查看项目详情", self.home)
+        self.assertIn('class="media-link"', self.home)
+        self.assertIn('<h3><a href={`${base}projects/${project.id}`}>', self.home)
+        self.assertIn('class="other-media"', self.home)
+
+    def test_external_links_are_blue_and_use_external_arrow(self) -> None:
+        about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
+        self.assertIn('class="external-link"', about)
+        self.assertIn('aria-hidden="true">↗</span>', about)
+        self.assertIn('class="external-link"', self.home)
+        self.assertIn("--external-link: var(--blue);", self.layout)
+        self.assertIn("color: var(--external-link);", self.project)
+
+    def test_project_titles_do_not_inherit_external_link_color(self) -> None:
+        self.assertRegex(
+            self.home,
+            r"\.other-copy > h3 a\s*\{[^}]*color: var\(--ink\);",
+        )
+        self.assertNotIn(".other-card a { color: var(--blue);", self.home)
+
+    def test_dialogtree_story_images_use_pages_base(self) -> None:
+        self.assertIn("const dialogTreeAsset =", self.dialogtree)
+        self.assertNotIn('src="../../media/dialogtree-live-', self.dialogtree)
+        self.assertEqual(
+            self.dialogtree.count(
+                'src={dialogTreeAsset("dialogtree-live-tree.png")}'
+            ),
+            2,
+        )
+        self.assertEqual(
+            self.dialogtree.count(
+                'src={dialogTreeAsset("dialogtree-live-node-switch.png")}'
+            ),
+            2,
+        )
+
+    def test_side_b_uses_dedicated_homepage_preview(self) -> None:
+        self.assertIn(
+            "preview: /media/side-b/side-b-journey-preview.webp",
+            self.side_b,
+        )
+        self.assertIn(
+            "src: /media/side-b/side-b-journey-hero.webp",
+            self.side_b,
+        )
+        preview = (
+            self.root
+            / "public/media/side-b/side-b-journey-preview.webp"
+        )
+        self.assertTrue(preview.is_file())
+        self.assertEqual(
+            hashlib.sha256(preview.read_bytes()).hexdigest(),
+            "079260c356eee7df46dc21eecb8f96ec0fbd26bf833b74678d65b390ac649d26",
+        )
+        self.assertIn(
+            ".other-media :global(.project-media) { width: 100%; height: 100%; "
+            "aspect-ratio: auto;",
+            self.home,
+        )
+        self.assertIn(
+            ".other-media :global(.preview-media img) { object-fit: contain; }",
+            self.home,
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -8,6 +8,7 @@ const { media, title, accent } = project.data;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path?: string) => path ? `${base}${path.replace(/^\//, '')}` : undefined;
 const imageSource = compact && media.preview ? media.preview : media.src;
+const imageAlt = compact && media.preview && media.previewAlt ? media.previewAlt : media.alt;
 ---
 
 {media.type === 'video' && media.src ? (
@@ -23,7 +24,7 @@ const imageSource = compact && media.preview ? media.preview : media.src;
   </div>
 ) : media.type === 'image' && media.src ? (
   <div class:list={['project-media', 'image-media', `accent-${accent}`, { compact, 'preview-media': compact && Boolean(media.preview) }]}>
-    <img src={asset(imageSource)} alt={media.alt.en} data-alt-en={media.alt.en} data-alt-zh={media.alt.zh} loading={compact ? 'lazy' : 'eager'} />
+    <img src={asset(imageSource)} alt={imageAlt.en} data-alt-en={imageAlt.en} data-alt-zh={imageAlt.zh} loading={compact ? 'lazy' : 'eager'} />
   </div>
 ) : (
   <div class:list={['project-media', 'media-placeholder', `accent-${accent}`, { compact }]} role="img" aria-label={media.alt.en}>
@@ -35,9 +36,10 @@ const imageSource = compact && media.preview ? media.preview : media.src;
 )}
 
 <style>
-  .project-media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
-  video, img { display: block; width: 100%; height: 100%; object-fit: cover; background: #111; }
-  .image-media img { object-fit: contain; background: var(--surface); }
+  .project-media { position: relative; overflow: hidden; isolation: isolate; aspect-ratio: 16 / 9; padding: clamp(.35rem, .7vw, .6rem); background: color-mix(in srgb, var(--surface) 84%, var(--paper)); border: 1px solid color-mix(in srgb, var(--ink) 12%, var(--line)); border-radius: clamp(14px, 2vw, 24px); box-shadow: 0 18px 50px rgb(0 0 0 / .045); }
+  .project-media::after { content: ''; position: absolute; inset: clamp(.35rem, .7vw, .6rem); z-index: 2; pointer-events: none; border: 1px solid rgb(255 255 255 / .1); border-radius: clamp(9px, 1.5vw, 17px); }
+  video, img { display: block; width: 100%; height: 100%; object-fit: cover; background: #111; border-radius: clamp(9px, 1.5vw, 17px); }
+  .image-media img { object-fit: contain; background: color-mix(in srgb, var(--surface) 92%, var(--paper)); }
   .preview-media { aspect-ratio: 4 / 3; }
   .preview-media img { object-fit: cover; }
   .media-placeholder { padding: clamp(1.2rem, 3vw, 2rem); display: flex; flex-direction: column; justify-content: flex-end; gap: .7rem; }
@@ -47,4 +49,10 @@ const imageSource = compact && media.preview ? media.preview : media.src;
   .placeholder-orb { position: absolute; width: 26%; aspect-ratio: 1; top: 13%; right: 14%; border-radius: 50%; background: color-mix(in srgb, var(--accent) 48%, transparent); filter: blur(1px); }
   .media-placeholder span { position: relative; z-index: 1; color: var(--muted); font-size: .82rem; }
   .accent-violet { --accent: var(--violet); } .accent-coral { --accent: var(--coral); } .accent-blue { --accent: var(--blue); }
+  @media (max-width: 560px) {
+    .project-media:not(.compact) { aspect-ratio: 4 / 3; }
+    .project-media { padding: .3rem; border-radius: 13px; box-shadow: 0 10px 30px rgb(0 0 0 / .04); }
+    .project-media::after { inset: .3rem; border-radius: 9px; }
+    video, img { border-radius: 9px; }
+  }
 </style>

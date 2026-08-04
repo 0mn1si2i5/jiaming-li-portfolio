@@ -5,7 +5,13 @@ import ProjectMedia from '../components/ProjectMedia.astro';
 import Localized from '../components/Localized.astro';
 import { site } from '../config/site';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const projects = await getCollection('projects');
+const featuredProjects = projects
+  .filter((project) => project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+const otherProjects = projects
+  .filter((project) => !project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
@@ -22,14 +28,17 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   <section id="work" class="work-section page-width" aria-labelledby="work-title">
     <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Things I have been following closely." zh="持续推进的项目。" /></h2></div>
     <div class="project-list">
-      {projects.map((project) => (
+      {featuredProjects.map((project, index) => (
         <article class:list={['project-card', `accent-${project.data.accent}`]}>
-          <a class="media-link" href={`${base}projects/${project.id}`} aria-label={`Read about ${project.data.title.en}`}><ProjectMedia project={project} compact /></a>
+          <div class="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
+          <a class="media-link" href={`${base}projects/${project.id}`}><ProjectMedia project={project} compact /></a>
           <div class="project-copy">
-            <div class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.status} /></span></div>
+            <div class="meta project-meta">
+              <span class="kind"><Localized {...project.data.kind} /></span>
+              <span><Localized {...project.data.year} /></span>
+            </div>
             <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
             <p><Localized {...project.data.summary} /></p>
-            <a class="project-link" href={`${base}projects/${project.id}`}><Localized en="Read the exploration" zh="查看项目详情" /> <span aria-hidden="true">→</span></a>
           </div>
         </article>
       ))}
@@ -38,34 +47,55 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
   <section class="other-section page-width" aria-labelledby="other-title">
     <p class="eyebrow"><Localized en="Other work" zh="其他作品" /></p>
-    <div class="other-grid"><h2 id="other-title"><Localized en="Small things with a longer life." zh="同样值得记录的项目。" /></h2><article class="other-card"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="为《群星》提供更符合中文语境的舰船、星球与人物默认名称，改善中文玩家的沉浸体验。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></article></div>
-  </section>
-
-  <section id="about" class="about-section page-width" aria-labelledby="about-title">
-    <div><p class="eyebrow"><Localized en="About" zh="关于" /></p><h2 id="about-title"><Localized en="A practice of making things clear." zh="研究、产品与实现。" /></h2></div>
-    <div class="about-copy">
-      <p><Localized en="I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes." zh="我目前在新加坡国立大学计算机系攻读硕士，师从 Yi-Chieh Lee 教授，并在校内 AI4SG Lab 开展人机协作研究。我的工作覆盖研究设计、产品决策与原型实现。" /></p>
-      <p><Localized en="I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious." zh="我通常从具体的问题出发：难以回溯的对话、失去上下文的音乐链接，或不符合中文语境的游戏命名。随后通过产品设计和工程实现，把问题转化为可验证的解决方案。" /></p>
-      <a class="quiet-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="Find more on GitHub" zh="在 GitHub 查看更多" /> <span aria-hidden="true">↗</span></a>
+    <div class="other-grid">
+      <h2 id="other-title"><Localized en="Small things with a longer life." zh="同样值得记录的项目。" /></h2>
+      <div class="other-list">
+        {otherProjects.map((project) => (
+          <article class="other-card">
+            <a class="other-media" href={`${base}projects/${project.id}`}><ProjectMedia project={project} compact /></a>
+            <div class="other-copy">
+              <p class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.kind} /></span></p>
+              <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
+              <p><Localized {...project.data.summary} /></p>
+            </div>
+          </article>
+        ))}
+        <article class="other-card external-card"><div class="other-copy"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="为《群星》提供更符合中文语境的舰船、星球与人物默认名称，改善中文玩家的沉浸体验。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a class="external-link" href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></div></article>
+      </div>
     </div>
   </section>
+
 </BaseLayout>
 
 <style>
-  .page-width { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
   .eyebrow, .meta { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
   .hero { min-height: min(700px, calc(100vh - 84px)); padding: clamp(5rem, 11vw, 10rem) 0 4rem; display: flex; flex-direction: column; justify-content: space-between; }
-  h1, h2, h3, p { margin-top: 0; } h1, h2, h3 { letter-spacing: -.055em; font-weight: 560; line-height: .98; }
+  h1, h2, h3, p { margin-top: 0; } h1, h2, h3 { letter-spacing: var(--display-tracking); line-height: .98; }
   h1 { max-width: 1000px; margin: 3rem 0; font-size: clamp(3.35rem, 7.1vw, 7.1rem); } h1 em { font-family: Georgia, serif; font-weight: 400; }
   .hero-bottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; } .hero-bottom p { max-width: 430px; margin: 0; color: var(--muted); font-size: 1.08rem; }
-  .quiet-link, .project-link, .other-card a { font-weight: 620; text-decoration: none; } .quiet-link:hover, .project-link:hover, .other-card a:hover { text-decoration: underline; }
-  .work-section { padding: 7rem 0; border-top: 1px solid var(--line); }.section-heading { display: flex; justify-content: space-between; margin-bottom: 4rem; }.section-heading h2, .about-section h2, .other-section h2 { margin-bottom: 0; font-size: clamp(2.4rem, 5vw, 4.6rem); }
-  .project-list { display: grid; gap: 5rem; }.project-card { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(250px, .8fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }.project-card:nth-child(even) .media-link { order: 2; }.media-link { display: block; }.project-copy .meta, .other-card .meta { display: flex; justify-content: space-between; gap: 1rem; }.project-copy h3 { margin: 1.4rem 0 1rem; font-size: clamp(2.25rem, 4vw, 4.25rem); }.project-copy h3 a { text-decoration: none; }.project-copy p { max-width: 340px; color: var(--muted); }.project-link { display: inline-block; margin-top: .5rem; }.accent-violet .project-link { color: var(--violet); }.accent-coral .project-link { color: var(--coral); }.accent-blue .project-link { color: var(--blue); }
-  .about-section { padding: 8rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; border-top: 1px solid var(--line); }.about-copy { max-width: 530px; }.about-copy p { font-size: 1.25rem; line-height: 1.45; }.about-copy p + p { color: var(--muted); }.about-copy .quiet-link { display: inline-block; margin-top: 1.5rem; }
-  .other-section { padding: 7rem 0; border-top: 1px solid var(--line); }.other-section > .eyebrow { margin-bottom: 1.5rem; }.other-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }.other-card { max-width: 440px; padding: 1.8rem; background: var(--surface); border-radius: 14px; }.other-card h3 { margin: 2rem 0 .9rem; font-size: 2rem; }.other-card p { color: var(--muted); }.other-card .outcome { margin: 1.7rem 0 .6rem; color: var(--ink); font-weight: 650; }.other-card a { color: var(--blue); }
+  .quiet-link { font-weight: 620; text-decoration: none; }.quiet-link:hover { text-decoration: underline; }
+  .work-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.section-heading { display: flex; justify-content: space-between; margin-bottom: clamp(4rem, 7vw, 7rem); }.section-heading h2, .other-section h2 { margin-bottom: 0; font-size: clamp(2.4rem, 5vw, 4.6rem); }
+  .project-list { display: grid; gap: clamp(5rem, 10vw, 10rem); }
+  .project-card { position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .72fr); align-items: center; gap: clamp(2.5rem, 6vw, 6.5rem); padding-top: 2.25rem; border-top: 1px solid var(--rule-strong); }
+  .project-card:nth-child(even) { grid-template-columns: minmax(260px, .72fr) minmax(0, 1.55fr); }
+  .project-card:nth-child(even) .media-link { order: 2; }
+  .project-card:nth-child(even) .project-copy { order: 1; }
+  .project-index { position: absolute; top: 0; left: 0; transform: translateY(-50%); padding-right: .75rem; color: var(--muted); background: var(--paper); font-size: .72rem; font-weight: 650; letter-spacing: .14em; line-height: 1; }
+  .project-card:nth-child(even) .project-index { right: 0; left: auto; padding: 0 0 0 .75rem; }
+  .media-link, .other-media { display: block; overflow: hidden; }
+  .media-link :global(.project-media), .other-media :global(.project-media) { transition: filter 180ms ease, transform 180ms ease; }
+  .media-link:hover :global(.project-media), .media-link:focus-visible :global(.project-media), .other-media:hover :global(.project-media), .other-media:focus-visible :global(.project-media) { filter: brightness(1.04) saturate(1.05); transform: scale(1.015); }
+  .project-copy .meta, .other-card .meta { display: flex; justify-content: space-between; gap: 1rem; }
+  .project-meta .kind { color: var(--ink); }
+  .project-copy h3 { margin: 1.15rem 0 1rem; font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5.3rem); font-weight: 400; letter-spacing: -.055em; }
+  .project-copy h3 a, .other-copy > h3 a { color: var(--ink); text-decoration: none; }
+  .project-copy h3 a:hover, .project-copy h3 a:focus-visible, .other-copy > h3 a:hover, .other-copy > h3 a:focus-visible { text-decoration: underline; }
+  .project-copy > p { max-width: 380px; color: var(--muted); }
+  .other-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.other-section > .eyebrow { margin-bottom: 1.5rem; }.other-grid { display: grid; grid-template-columns: minmax(260px, .75fr) minmax(0, 1.25fr); gap: clamp(3rem, 7vw, 7rem); }.other-list { display: grid; gap: 1.5rem; }.other-card { display: grid; grid-template-columns: minmax(150px, .8fr) minmax(0, 1.2fr); max-width: 680px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }.other-media { min-height: 100%; }.other-media :global(.project-media) { width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-right: 1px solid var(--line); border-radius: 0; }.other-media :global(.preview-media img) { object-fit: contain; }.other-media:focus-visible { z-index: 1; outline-offset: -4px; }.other-copy { padding: 1.5rem; }.other-card h3 { margin: 1.5rem 0 .75rem; font-family: var(--font-display); font-size: 2rem; font-weight: 400; letter-spacing: -.035em; }.other-card p { color: var(--muted); }.other-card .outcome { margin: 1.7rem 0 .6rem; color: var(--ink); font-weight: 650; }.external-link { color: var(--external-link); }.external-card { display: block; margin-left: clamp(0rem, 5vw, 3.5rem); background: transparent; border-color: var(--rule-strong); }
   :global(:root[data-locale='zh']) .hero h1 { max-width: 15ch; font-size: clamp(2.8rem, 5.8vw, 5.2rem); line-height: 1.16; letter-spacing: -.045em; }
-  :global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .about-section h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2.1rem, 4.2vw, 3.75rem); line-height: 1.2; letter-spacing: -.04em; }
-  :global(:root[data-locale='zh']) .project-copy h3 { font-size: clamp(2rem, 3.4vw, 3.5rem); line-height: 1.18; letter-spacing: -.04em; }
-  @media (max-width: 760px) { .hero { min-height: 620px; }.hero-bottom, .section-heading, .project-card, .about-section, .other-grid { grid-template-columns: 1fr; display: grid; }.hero-bottom { align-items: start; }.project-card:nth-child(even) .media-link { order: 0; }.project-list { gap: 4rem; }.work-section, .about-section, .other-section { padding: 5rem 0; }.section-heading { gap: 1.3rem; }.about-section { gap: 2.5rem; } }
-  @media (max-width: 560px) { .page-width { width: min(100% - 2rem, 1180px); } h1 { font-size: clamp(3rem, 15vw, 4.6rem); }.hero { padding-top: 4rem; }.project-card { gap: 1.5rem; }:global(:root[data-locale='zh']) .hero h1 { max-width: none; font-size: clamp(2.45rem, 10.2vw, 3.75rem); }:global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .about-section h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2rem, 8vw, 2.8rem); } }
+  :global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2.1rem, 4.2vw, 3.75rem); line-height: 1.2; letter-spacing: -.04em; }
+  :global(:root[data-locale='zh']) .project-copy h3 { font-family: var(--font-display-zh); font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1.18; letter-spacing: -.04em; }
+  :global(:root[data-locale='zh']) .other-card h3 { font-family: var(--font-display-zh); letter-spacing: -.025em; }
+  @media (max-width: 760px) { .hero { min-height: 620px; }.hero-bottom, .section-heading, .project-card, .project-card:nth-child(even), .other-grid { grid-template-columns: 1fr; display: grid; }.hero-bottom { align-items: start; }.project-card:nth-child(even) .media-link, .project-card:nth-child(even) .project-copy { order: initial; }.project-card:nth-child(even) .project-index { right: auto; left: 0; padding: 0 .75rem 0 0; }.project-list { gap: 5rem; }.work-section, .other-section { padding: 5rem 0; }.section-heading { gap: 1.3rem; }.external-card { margin-left: 0; } }
+  @media (max-width: 560px) { h1 { font-size: clamp(3rem, 15vw, 4.6rem); }.hero { min-height: calc(100svh - 116px); padding-top: 4rem; }.project-card { gap: 1.5rem; }.project-copy h3 { font-size: clamp(3rem, 15vw, 4.4rem); }.other-card { grid-template-columns: 1fr; }.other-media :global(.project-media) { height: auto; aspect-ratio: 16 / 9; border-right: 0; border-bottom: 1px solid var(--line); }:global(:root[data-locale='zh']) .hero h1 { max-width: none; font-size: clamp(2.45rem, 10.2vw, 3.75rem); }:global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2rem, 8vw, 2.8rem); } }
 </style>

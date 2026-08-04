@@ -1,0 +1,13 @@
+{
+  "assertions": [
+    {"id": "mundus-maintained-globe", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
+    {"id": "mundus-current-lenses", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
+    {"id": "mundus-parchment-atlas", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
+    {"id": "mundus-interaction-and-sharing", "passed": true, "evidence": {"repository": "Mundus", "source": "tests/e2e/app.spec.ts", "passed": true}},
+    {"id": "mundus-maintainable-delivery", "passed": true, "evidence": {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-publication-packet.md", "passed": true}}
+  ],
+  "passed": 5,
+  "privateBoundaryHitCount": 0,
+  "schemaVersion": 4,
+  "total": 5
+}

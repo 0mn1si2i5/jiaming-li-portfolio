@@ -1,5 +1,5 @@
 {
-  "name": "oh-my-portfolio",
+  "name": "jiaming-li-portfolio",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "test": "python3 -m unittest discover -s tests -p 'test_*.py' -v",
+    "verify": "python3 scripts/verify-release.py",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -15,9 +17,10 @@
     "@astrojs/mdx": "^7.0.2",
     "@fontsource-variable/instrument-sans": "^5.2.8",
     "@fontsource-variable/newsreader": "^5.2.8",
+    "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/noto-sans-sc": "^5.2.9",
     "@fontsource/noto-serif-sc": "^5.2.9",
-    "astro": "^7.0.7"
+    "astro": "^7.1.1"
   },
   "devDependencies": {
     "ffmpeg-static": "^5.3.0"

@@ -1,0 +1,94 @@
+---
+title: { en: Mundus, zh: Mundus }
+year: { en: 'Jul 2026', zh: '2026 年 7 月' }
+status: { en: Live open-source globe, zh: 已上线的开源数字地球 }
+order: 2
+featured: true
+kind: { en: Personal digital globe, zh: 个人数字地球 }
+summary: { en: A personal digital globe I maintain over time, beginning with three shipped lenses for antipodes, development structure, and sunlight., zh: 一颗由我长期维护的个人数字地球，首批上线视角观察对跖点、发展结构与日照变化。 }
+role: { en: Product concept, interaction and visual design, data pipeline, algorithms, and front-end engineering, zh: 产品概念、交互与视觉设计、数据管线、算法与前端工程 }
+accent: blue
+media:
+  type: image
+  src: /media/mundus/other-side-full.webp
+  preview: /media/mundus/globe-preview.webp
+  previewAlt: { en: A close crop of the parchment-styled Mundus globe., zh: Mundus 羊皮卷质感数字地球的局部画面。 }
+  alt: { en: 'The complete Mundus Other Side interface with the globe, controls, and location results.', zh: Mundus“地球另一端”的完整界面，包含地球、操作控件与地点结果。 }
+links:
+  - label: { en: Visit Mundus, zh: 访问 Mundus }
+    href: https://0mn1si2i5.github.io/Mundus/
+  - label: { en: View source, zh: 查看源代码 }
+    href: https://github.com/0mn1si2i5/Mundus
+---
+
+import MundusStory from '../../components/MundusStory.astro';
+
+<section lang="en" data-locale-content="en">
+
+## A globe I can keep extending
+
+Maps, statistical tables, astronomy tools, and data portals each hold a different part of how we understand Earth. Mundus brings those materials into one geographic workspace. I maintain it as a long-running personal globe whose data, methods, and interactions can grow together.
+
+## One place, several ways to read it
+
+A visit begins with a place. The visitor rotates or searches the globe, chooses an observation lens, reads the result with its source and method, and shares the current view. Changing lenses keeps the same geographic context, so the next question starts from somewhere already familiar.
+
+## Three lenses in use today
+
+- **Other Side** follows a point through Earth to its antipode and connects both endpoints with represented major cities from the bundled GeoNames snapshot.
+- **Development, Unpacked** places reported HDI beside health, education, and income dimensions, with year, history, source, and missing states.
+- **Sunline** turns UTC time into solar position, daylight, twilight, and approximate sunrise and sunset on the shared globe.
+
+</section>
+
+<section lang="zh-CN" data-locale-content="zh">
+
+## 一颗持续生长的个人数字地球
+
+地图、统计表、天文工具和数据门户保存着理解地球的不同线索。Mundus 把这些材料放进同一个地理空间。我长期维护这颗个人数字地球，让数据、方法与交互能够沿着同一套产品结构继续生长。
+
+## 同一地点，几种观察方式
+
+一次使用从地点开始。访客旋转地球或搜索城市，选择观察视角，阅读结果及其来源与方法，再分享当前画面。切换视角时，地理上下文会保留下来，下一个问题可以从熟悉的位置继续。
+
+## 目前使用的三个视角
+
+- **地球另一端**沿地心找到对跖点，并用 GeoNames 固定快照中的收录主要城市呈现两端关系。
+- **发展的不同侧面**把已发布 HDI 与健康、教育、收入维度放在一起，同时给出年份、历史变化、来源与缺失状态。
+- **日照线**把 UTC 时间转换为共享地球上的太阳位置、白昼、曙暮光与近似日出日落。
+
+</section>
+
+<MundusStory />
+
+<section lang="en" data-locale-content="en">
+
+## The current release
+
+Parchment Atlas gives the globe a warmer exhibition surface built from Natural Earth vector geometry. Other Side combines bilingual GeoNames search, endpoint city relationships, and a draggable through-Earth section. The latest update supports closer inspection, preserves the globe's color while that section moves, and gives Sunline a consistent Twilight label and definition.
+
+Sharing creates a URL that restores the selected location and observation mode. The dialog explains that the exact selected location is included before the visitor copies the link; Sunline links also retain the displayed UTC time.
+
+## Built for continued maintenance
+
+One globe kernel carries place, camera behavior, controls, and sharing across every lens. Reviewed data snapshots and hashes keep published results stable. Larger assets load when their lens needs them, while the base experience stays light.
+
+The product ships as a static client with bilingual copy, keyboard access, visible focus, reduced motion, and a WebGL fallback. Pages subpath checks and artifact verification make each public build reproducible.
+
+</section>
+
+<section lang="zh-CN" data-locale-content="zh">
+
+## 当前公开版本
+
+Parchment Atlas 用 Natural Earth 矢量几何构成更温暖的展览式地球。“地球另一端”整合了 GeoNames 中英文城市搜索、两端城市关系与可拖拽的穿地剖面。最新更新支持更近距离的观察，拖动剖面时地球颜色保持稳定，日照线也统一使用“曙暮光”名称与定义。
+
+分享链接会恢复所选地点与观察视角。复制之前，弹窗会明确说明链接包含精确地点；日照线链接还会保留画面中的 UTC 时间。
+
+## 为长期维护做出的选择
+
+单一地球内核承载所有视角的地点、相机行为、控件与分享方式。经过审核的数据快照和哈希让公开结果保持稳定，较大的资源只在对应视角使用时加载。
+
+产品以静态客户端交付，并提供中英文、键盘操作、可见焦点、reduced motion 与 WebGL fallback。Pages 子路径检查和制品验证让每次公开构建都可以复现。
+
+</section>

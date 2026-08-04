@@ -3,6 +3,8 @@ title: { en: DialogTree, zh: DialogTree }
 year: { en: 'December 2025', zh: '2025 年 12 月' }
 status: { en: Closed-source collaborative product & research, zh: 闭源合作产品与研究 }
 order: 1
+featured: true
+kind: { en: Human–AI research product, zh: 人机协作研究产品 }
 summary: { en: A tree-shaped workspace for revisiting, organizing, and understanding long-running LLM conversations., zh: 用于重新访问、组织与理解长程 LLM 对话的树状工作区。 }
 role: { en: Co-creator · product direction, interaction design, and full-stack development, zh: 共同创作者 · 产品方向、交互设计与全栈开发 }
 accent: violet
@@ -20,6 +22,12 @@ links:
   - label: { en: Read CHI 2026 Poster, zh: 阅读 CHI 2026 海报论文 }
     href: https://doi.org/10.1145/3772363.3798792
 ---
+
+export const dialogTreeBase = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+export const dialogTreeAsset = (file) =>
+  `${dialogTreeBase}media/${file}?v=20260712-1130`;
 
 <section lang="en" data-locale-content="en">
 
@@ -40,14 +48,14 @@ DialogTree is the product expression of that idea. It turns a conversation into 
 **1. Start a new root conversation—or select an existing node.** Selecting a node makes it the active point of departure; a new message there becomes a child conversation. Earlier work remains intact, so an alternative can grow without overwriting the original path.
 
 <figure>
-  <img src="../../media/dialogtree-live-tree.png?v=20260712-1130" alt="A DialogTree workspace with several conversation branches visible at once." />
+  <img src={dialogTreeAsset("dialogtree-live-tree.png")} alt="A DialogTree workspace with several conversation branches visible at once." />
   <figcaption>The tree keeps alternatives visible as structure rather than burying them in a linear transcript.</figcaption>
 </figure>
 
 **2. Change the node, change the context.** The right-hand chat is deliberately narrow: it shows the selected node and its ancestor chain, not every sibling branch. This gives each continuation the context that led to it, while keeping competing directions available in the tree.
 
 <figure>
-  <img src="../../media/dialogtree-live-node-switch.png?v=20260712-1130" alt="A selected Hash collision avoidance strategies node, with its corresponding path visible in the chat panel." />
+  <img src={dialogTreeAsset("dialogtree-live-node-switch.png")} alt="A selected Hash collision avoidance strategies node, with its corresponding path visible in the chat panel." />
   <figcaption>Choosing a different node switches the working path—and the chat context—without losing the rest of the tree.</figcaption>
 </figure>
 
@@ -76,14 +84,14 @@ DialogTree 将对话组织为可交互的树状结构。用户可以沿路径浏
 **1. 创建一个新的根对话，或选择已有节点继续。** 选中节点后，它就是当前的出发点；新的输入会生成它的子对话。原有路径不会被改写，因此不同思路可以同时保留、继续生长。
 
 <figure>
-  <img src="../../media/dialogtree-live-tree.png?v=20260712-1130" alt="DialogTree 工作区中同时可见的多条对话分支。" />
+  <img src={dialogTreeAsset("dialogtree-live-tree.png")} alt="DialogTree 工作区中同时可见的多条对话分支。" />
   <figcaption>分支以结构的方式并列可见，而不是被埋进一条不断变长的聊天记录。</figcaption>
 </figure>
 
 **2. 切换节点，也切换上下文。** 右侧不会展示整棵树的全部消息，而只显示当前节点及其直系祖先形成的路径。这样，每次继续对话都带着它自己的来路，同时其他方向仍留在树上可随时回访。
 
 <figure>
-  <img src="../../media/dialogtree-live-node-switch.png?v=20260712-1130" alt="选中 Hash collision avoidance strategies 节点后，右侧显示对应路径上下文的 DialogTree 工作区。" />
+  <img src={dialogTreeAsset("dialogtree-live-node-switch.png")} alt="选中 Hash collision avoidance strategies 节点后，右侧显示对应路径上下文的 DialogTree 工作区。" />
   <figcaption>选中另一节点，就切换到另一条工作路径与对应聊天上下文；其余分支不会丢失。</figcaption>
 </figure>
 
