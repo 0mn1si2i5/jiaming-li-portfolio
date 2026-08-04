@@ -471,6 +471,32 @@ class TestBrowserEvidence(unittest.TestCase):
                 changed["scenarios"][2][field] = value
                 self.assertIn(field, " ".join(browser.validate_matrix(changed)))
 
+    def test_matrix_rejects_incorrect_pages_base_evidence(self) -> None:
+        project = Path(__file__).parents[1]
+        matrix = json.loads(
+            (
+                project / "docs/verification/evidence/browser-matrix.json"
+            ).read_text(encoding="utf-8")
+        )
+        matrix["scenarios"][0]["pagesBaseCorrect"] = False
+
+        errors = browser.validate_matrix(matrix)
+
+        self.assertIn("pagesBaseCorrect", " ".join(errors))
+
+    def test_matrix_rejects_present_omnipet_route(self) -> None:
+        project = Path(__file__).parents[1]
+        matrix = json.loads(
+            (
+                project / "docs/verification/evidence/browser-matrix.json"
+            ).read_text(encoding="utf-8")
+        )
+        matrix["omnipetRouteStatus"] = 200
+
+        errors = browser.validate_matrix(matrix)
+
+        self.assertIn("omnipetRouteStatus", " ".join(errors))
+
     def write_json(self, root: Path, name: str, value: object) -> None:
         (root / name).write_text(json.dumps(value), encoding="utf-8")
 

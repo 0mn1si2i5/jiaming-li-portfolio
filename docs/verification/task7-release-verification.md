@@ -46,7 +46,8 @@ The project detail page retains two images: the hero and the Story visual.
 ## Browser Matrix
 
 The exact GitHub Pages build was served under `/jiaming-li-portfolio/` and
-exercised with isolated `agent-browser` sessions using system Chrome.
+exercised with isolated system Chrome browser sessions driven by
+repository-owned Playwright.
 
 | Scenario | Result |
 | --- | --- |

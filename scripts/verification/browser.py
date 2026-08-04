@@ -114,6 +114,8 @@ def validate_network(path: Path) -> list[str]:
 def validate_matrix(value: dict[str, object]) -> list[str]:
     items = value.get("scenarios", [])
     errors: list[str] = []
+    if value.get("omnipetRouteStatus") != 404:
+        errors.append("browser matrix omnipetRouteStatus is not 404")
     if not isinstance(items, list):
         return ["browser matrix scenarios must be an array"]
     names = [item.get("scenario") for item in items]
@@ -125,6 +127,7 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             "route", "locale", "theme", "viewport", "overflow",
             "brokenImageCount", "decodedImageCount", "totalImageCount",
             "focusableCount", "focusVisible", "reducedMotion",
+            "pagesBaseCorrect",
         )
         for field in required:
             if field not in item:
@@ -138,6 +141,8 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             errors.append(f"{name}: brokenImageCount is not zero")
         if item.get("focusVisible") is not True:
             errors.append(f"{name}: keyboard focus is not visible")
+        if item.get("pagesBaseCorrect") is not True:
+            errors.append(f"{name}: pagesBaseCorrect is not true")
         if not isinstance(item.get("focusableCount"), int) or item["focusableCount"] <= 0:
             errors.append(f"{name}: focusableCount is not positive")
         if name in REDUCED_SCENARIOS:
