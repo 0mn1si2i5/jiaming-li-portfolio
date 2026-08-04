@@ -6,56 +6,56 @@
       "path": "task7-home-en-light-1440x900.webp",
       "width": 1440,
       "height": 4091,
-      "sha256": "c5adabcdaf2f63dab65b83cfec09e4d23f03efa163a8ddfbbffe41a373e2bd09"
+      "sha256": "6bf86e03a0e132a87a6516b5ac48c76c12fd878c720d189b242287aac582b30a"
     },
     {
       "scenario": "home-en-light-1024",
       "path": "task7-home-en-light-1024x768.webp",
       "width": 1024,
       "height": 3587,
-      "sha256": "1763c57483eb0222323597567e5a4912573ba5647816dd3078779cd768cb4bbf"
+      "sha256": "a1c067a63a578650f20e41fe7cfac6bcf4785a983e1a50c69cc414dd43181b8c"
     },
     {
       "scenario": "home-zh-dark-768",
       "path": "task7-home-zh-dark-reduced-768x1024.webp",
       "width": 768,
       "height": 3125,
-      "sha256": "2032e5e44b27499ee5f4ca38169c995a4fefb0ba73a066fd951ef597675f9d9b"
+      "sha256": "5ef73bb95dcbf3ba4f0921f0a82fc9ca2f9aa10a17a47cc3409efcfa75d16e0a"
     },
     {
       "scenario": "home-zh-dark-390",
       "path": "task7-home-zh-dark-reduced-390x844.webp",
       "width": 390,
       "height": 3928,
-      "sha256": "cfec2d016758f27becd8e5634730795837cdd6233df1f946b3fc4d5d5e5e3906"
+      "sha256": "581b4950d8406583fed47a5415937392e643fca3f03a05815a8d114a60c110d5"
     },
     {
       "scenario": "mundus-en-light-1440",
       "path": "task7-mundus-en-light-1440x900.webp",
       "width": 1440,
-      "height": 5763,
-      "sha256": "5ed7a94adb1ccc10266fadb04a51bb745338ce11645e93effcf9effd150b5b00"
+      "height": 5730,
+      "sha256": "c78f3258c112bf278be173c7b3cc4f4600c135da2b87e3d6f7a0d87963db02ea"
     },
     {
       "scenario": "mundus-zh-dark-desktop",
       "path": "task7-mundus-zh-dark-reduced-1440x900.webp",
       "width": 1440,
-      "height": 5553,
-      "sha256": "da965835da0174106fa6e91f2edf6583d3181c190d0bc7f1c17b9025f2e33e31"
+      "height": 5471,
+      "sha256": "cb7a4ec45dc1001fbe9895ef6d9d489a032c476b9e8336b9aeee2586c4a68e34"
     },
     {
       "scenario": "mundus-en-light-390",
       "path": "task7-mundus-en-light-390x844.webp",
       "width": 390,
-      "height": 5380,
-      "sha256": "df23043c4b099c29e67e4b322ecfe202b663991ebcc03063d5ac21c36cacb960"
+      "height": 5261,
+      "sha256": "fd36c184a770a5423d998f56ec02f9378368f4d3126206af764c901de76253dd"
     },
     {
       "scenario": "mundus-zh-dark-mobile",
       "path": "task7-mundus-zh-dark-reduced-390x844.webp",
       "width": 390,
-      "height": 4918,
-      "sha256": "03d71585a94837a86c35f3aedc5ac50e6b3d9606201d4305caeeee10c5b64843"
+      "height": 4828,
+      "sha256": "7b03631ed5c3d54ceac77b5f118a481dac6ead09457bc6250d249e8848a4a354"
     }
   ]
 }
