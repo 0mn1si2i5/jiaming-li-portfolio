@@ -7,8 +7,13 @@
     "width": 2160,
     "height": 1350
   },
+  "storyViewport": {
+    "width": 1920,
+    "height": 1080
+  },
   "previewVisibleUiCount": 0,
   "panelOverflowCount": 0,
+  "storyPanelOverflowCount": 0,
   "consoleErrorCount": 0,
   "pageErrorCount": 0,
   "failedRequestCount": 0,
@@ -28,11 +33,25 @@
       "sha256": "7bceebd2d6d4d3a7c6b0a0cf086dfbe01bda8ea412ef32cf9c39af01b009477d"
     },
     {
-      "role": "story-other-side-detail",
+      "role": "story-other-side",
       "path": "other-side-detail.webp",
-      "width": 1555,
-      "height": 815,
-      "sha256": "9213cffeed11ad38a57a2eb6f8226302b431fdf763fcf891c323510a81e60cde"
+      "width": 1920,
+      "height": 1080,
+      "sha256": "4285be0e4d68eba5cca1c9f4747b9f5255508e3a59a9c104c9f18ee52e9bac81"
+    },
+    {
+      "role": "story-development",
+      "path": "development.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "915ad9b211bc0f0729a37b8c20c5fd66ceab1e55e375ed280cb93e621af0d328"
+    },
+    {
+      "role": "story-sunline",
+      "path": "sunline.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "47c712dc3983ec6c237d033ae7e82b66dce6b19eaa9fbb7ce7a355b976201471"
     }
   ]
 }

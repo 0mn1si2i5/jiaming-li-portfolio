@@ -9,6 +9,7 @@ import { pathToFileURL } from 'node:url';
 const revision = '378fe528ca1c8f83f0280f83383b5e785e851285';
 const liveUrl = 'https://0mn1si2i5.github.io/Mundus/';
 const viewport = { width: 2160, height: 1350 };
+const storyViewport = { width: 1920, height: 1080 };
 const mundusRoot = process.env.MUNDUS_ROOT;
 
 assert(mundusRoot, 'MUNDUS_ROOT is required');
@@ -28,7 +29,7 @@ const evidencePath = path.join(
   portfolioRoot,
   'docs/verification/evidence/mundus-media.json',
 );
-const captures = [
+const retainedCaptures = [
   {
     role: 'homepage-globe',
     png: '/tmp/mundus-globe-preview.png',
@@ -39,10 +40,28 @@ const captures = [
     png: '/tmp/mundus-other-side-full.png',
     target: 'other-side-full.webp',
   },
+];
+const storyCaptures = [
   {
-    role: 'story-other-side-detail',
+    mode: 'other-side',
+    role: 'story-other-side',
+    url: `${liveUrl}?mode=antipodes&v=1`,
     png: '/tmp/mundus-other-side-detail.png',
     target: 'other-side-detail.webp',
+  },
+  {
+    mode: 'development',
+    role: 'story-development',
+    url: `${liveUrl}?mode=development&indicator=hdi&year=2023&v=1`,
+    png: '/tmp/mundus-development.png',
+    target: 'development.webp',
+  },
+  {
+    mode: 'sunline',
+    role: 'story-sunline',
+    url: `${liveUrl}?mode=sunline&v=1`,
+    png: '/tmp/mundus-sunline.png',
+    target: 'sunline.webp',
   },
 ];
 
@@ -70,6 +89,120 @@ function webpDimensions(data) {
     width: (packed & 0x3fff) + 1,
     height: ((packed >> 14) & 0x3fff) + 1,
   };
+}
+
+async function waitForHealthyPage(page, url, mode) {
+  const response = await page.goto(url, { waitUntil: 'networkidle' });
+  assert(response?.ok(), `${mode} returned ${response?.status()}`);
+  await page.waitForFunction(() =>
+    [...document.images].every(
+      (image) =>
+        image.complete &&
+        image.naturalWidth > 0 &&
+        image.naturalHeight > 0,
+    ),
+  );
+  await page.locator('section[data-mode]').waitFor({ state: 'visible' });
+  await page.waitForFunction((expectedMode) => {
+    const intro = document.querySelector('section[data-mode]');
+    const globe = document.querySelector(
+      '[role="region"][aria-label="交互式三维地球"]',
+    );
+    return (
+      intro?.getAttribute('data-mode') ===
+        (expectedMode === 'other-side' ? 'antipodes' : expectedMode) &&
+      globe?.getAttribute('data-vector-state') === 'ready' &&
+      (expectedMode !== 'other-side' ||
+        globe.getAttribute('data-antipode-relation-state') === 'ready')
+    );
+  }, mode);
+  await page.waitForTimeout(500);
+}
+
+async function visiblePanelOverflows(page) {
+  return page
+    .locator('[role="complementary"], [role="complementary"] *')
+    .evaluateAll((elements) =>
+      elements
+        .filter((element) => {
+          if (
+            !(element instanceof HTMLElement) ||
+            element.offsetParent === null
+          ) {
+            return false;
+          }
+          const hasHorizontalOverflow =
+            element.scrollWidth > element.clientWidth + 1;
+          const hasVerticalOverflow =
+            element.scrollHeight > element.clientHeight + 1;
+          const overflowY = getComputedStyle(element).overflowY;
+          const intentionalVerticalScroll =
+            hasVerticalOverflow &&
+            (overflowY === 'auto' || overflowY === 'scroll');
+          return (
+            hasHorizontalOverflow ||
+            (hasVerticalOverflow && !intentionalVerticalScroll)
+          );
+        })
+        .map((element) => ({
+          tag: element.tagName,
+          text: element.innerText.slice(0, 120),
+          overflowY: getComputedStyle(element).overflowY,
+          clientWidth: element.clientWidth,
+          scrollWidth: element.scrollWidth,
+          clientHeight: element.clientHeight,
+          scrollHeight: element.scrollHeight,
+        })),
+    );
+}
+
+async function pathExists(filePath) {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch (error) {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  }
+}
+
+async function publishArtifacts(artifacts) {
+  for (const artifact of artifacts) {
+    artifact.hadOriginal = await pathExists(artifact.target);
+    if (artifact.hadOriginal) {
+      await fs.copyFile(artifact.target, artifact.backup);
+    }
+  }
+
+  try {
+    for (const artifact of artifacts) {
+      await fs.rename(artifact.staged, artifact.target);
+    }
+  } catch (publicationError) {
+    const rollbackErrors = [];
+    for (const artifact of [...artifacts].reverse()) {
+      try {
+        if (artifact.hadOriginal) {
+          await fs.rename(artifact.backup, artifact.target);
+        } else {
+          await fs.rm(artifact.target, { force: true });
+        }
+      } catch (rollbackError) {
+        rollbackErrors.push(rollbackError);
+      }
+    }
+
+    if (rollbackErrors.length > 0) {
+      const rollbackFailure = new AggregateError(
+        [publicationError, ...rollbackErrors],
+        'Mundus media publication failed and rollback was incomplete',
+        { cause: publicationError },
+      );
+      rollbackFailure.rollbackIncomplete = true;
+      throw rollbackFailure;
+    }
+    throw publicationError;
+  }
 }
 
 execFileSync('git', ['-C', mundusRoot, 'fetch', 'origin', 'main'], {
@@ -114,8 +247,6 @@ assert.equal(
   'success',
   `Mundus Pages deployment is ${deploymentState}`,
 );
-
-await fs.mkdir(mediaRoot, { recursive: true });
 
 const consoleErrors = [];
 const pageErrors = [];
@@ -162,16 +293,7 @@ try {
     }
   });
 
-  const response = await page.goto(liveUrl, { waitUntil: 'networkidle' });
-  assert(response?.ok(), `Mundus returned ${response?.status()}`);
-  await page.waitForFunction(() =>
-    [...document.images].every(
-      (image) =>
-        image.complete &&
-        image.naturalWidth > 0 &&
-        image.naturalHeight > 0,
-    ),
-  );
+  await waitForHealthyPage(page, liveUrl, 'other-side');
 
   const globe = page.getByRole('region', {
     name: '交互式三维地球',
@@ -181,16 +303,6 @@ try {
   });
   await globe.waitFor();
   await result.waitFor();
-  await page.waitForFunction(() => {
-    const element = document.querySelector(
-      '[role="region"][aria-label="交互式三维地球"]',
-    );
-    return (
-      element?.getAttribute('data-vector-state') === 'ready' &&
-      element?.getAttribute('data-antipode-relation-state') === 'ready'
-    );
-  });
-  await page.waitForTimeout(500);
 
   assert.equal(
     await page.evaluate(
@@ -200,33 +312,12 @@ try {
     'public page has horizontal overflow',
   );
 
-  const panelOverflows = await result.locator('*').evaluateAll((elements) =>
-    elements
-      .filter((element) => {
-        if (!(element instanceof HTMLElement) || element.offsetParent === null) {
-          return false;
-        }
-        return (
-          element.scrollWidth > element.clientWidth + 1 ||
-          element.scrollHeight > element.clientHeight + 1
-        );
-      })
-      .map((element) => ({
-        tag: element.tagName,
-        text: element.innerText.slice(0, 120),
-        clientWidth: element.clientWidth,
-        scrollWidth: element.scrollWidth,
-        clientHeight: element.clientHeight,
-        scrollHeight: element.scrollHeight,
-      })),
-  );
+  const panelOverflows = await visiblePanelOverflows(page);
   assert.deepEqual(panelOverflows, [], 'result-panel content is clipped');
 
   const canvas = globe.locator('canvas');
   const canvasBox = await canvas.boundingBox();
-  const globeBox = await globe.boundingBox();
-  const resultBox = await result.boundingBox();
-  assert(canvasBox && globeBox && resultBox, 'capture regions are unavailable');
+  assert(canvasBox, 'capture regions are unavailable');
 
   const previewSize = Math.min(
     canvasBox.height * 0.9,
@@ -276,7 +367,7 @@ try {
     'homepage preview contains visible interface elements',
   );
   await page.screenshot({
-    path: captures[0].png,
+    path: retainedCaptures[0].png,
     animations: 'disabled',
     clip: {
       x: Math.round(canvasBox.x + (canvasBox.width - previewSize) / 2),
@@ -295,111 +386,133 @@ try {
   });
   await result.waitFor({ state: 'visible' });
   await page.screenshot({
-    path: captures[1].png,
+    path: retainedCaptures[1].png,
     fullPage: false,
     animations: 'disabled',
   });
 
-  const dragStart = await canvas.evaluate((element) => {
-    const bounds = element.getBoundingClientRect();
-    const offsets = [
-      [0, 0],
-      [0.05, 0],
-      [-0.05, 0],
-      [0, -0.05],
-      [0, 0.05],
-    ];
-    for (const [xOffset, yOffset] of offsets) {
-      const x = bounds.left + bounds.width * (0.5 + xOffset);
-      const y = bounds.top + bounds.height * (0.5 + yOffset);
-      if (document.elementFromPoint(x, y) === element) return { x, y };
-    }
-    return null;
-  });
-  assert(dragStart, 'globe canvas center is covered by page UI');
-  await page.mouse.move(dragStart.x, dragStart.y);
-  await page.mouse.down();
-  await page.mouse.move(dragStart.x + globeBox.width * 0.05, dragStart.y, {
-    steps: 8,
-  });
-  await page.waitForFunction(() => {
-    const element = document.querySelector(
-      '[role="region"][aria-label="交互式三维地球"]',
+  const storyOverflows = {};
+  await page.setViewportSize(storyViewport);
+  for (const capture of storyCaptures) {
+    await waitForHealthyPage(page, capture.url, capture.mode);
+    assert.equal(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth > window.innerWidth,
+      ),
+      false,
+      `${capture.mode} page has horizontal overflow`,
     );
-    return element?.getAttribute('data-antipode-drag-state') === 'active';
-  });
-  await page.waitForTimeout(250);
-
-  const detailLeft = Math.max(0, globeBox.x + globeBox.width * 0.28);
-  const detailTop = Math.max(0, resultBox.y - 100);
-  const detailRight = Math.min(
-    viewport.width,
-    Math.max(globeBox.x + globeBox.width, resultBox.x + resultBox.width),
-  );
-  const detailBottom = Math.min(
-    viewport.height - 120,
-    Math.max(
-      resultBox.y + resultBox.height + 100,
-      dragStart.y + globeBox.height * 0.32,
-    ),
-  );
-  await page.screenshot({
-    path: captures[2].png,
-    animations: 'disabled',
-    clip: {
-      x: Math.floor(detailLeft),
-      y: Math.floor(detailTop),
-      width: Math.floor(detailRight - detailLeft),
-      height: Math.floor(detailBottom - detailTop),
-    },
-  });
-  await page.mouse.up();
+    const overflows = await visiblePanelOverflows(page);
+    storyOverflows[capture.mode] = overflows;
+    assert.deepEqual(overflows, [], `${capture.mode} content is clipped`);
+    await page.screenshot({
+      path: capture.png,
+      fullPage: false,
+      animations: 'disabled',
+    });
+  }
 
   assert.deepEqual(consoleErrors, []);
   assert.deepEqual(pageErrors, []);
   assert.deepEqual(requestFailures, []);
 
   const images = [];
-  for (const capture of captures) {
-    const target = path.join(mediaRoot, capture.target);
-    execFileSync(ffmpeg, [
-      '-loglevel',
-      'error',
-      '-y',
-      '-i',
-      capture.png,
-      '-c:v',
-      'libwebp',
-      '-q:v',
-      '86',
-      target,
-    ]);
-    const data = await fs.readFile(target);
-    images.push({
-      role: capture.role,
-      path: capture.target,
-      ...webpDimensions(data),
-      sha256: crypto.createHash('sha256').update(data).digest('hex'),
-    });
+  const stagingRoot = await fs.mkdtemp(
+    path.join(portfolioRoot, '.mundus-media-'),
+  );
+  let preserveStagingRoot = false;
+  try {
+    for (const capture of retainedCaptures) {
+      const data = await fs.readFile(path.join(mediaRoot, capture.target));
+      images.push({
+        role: capture.role,
+        path: capture.target,
+        ...webpDimensions(data),
+        sha256: crypto.createHash('sha256').update(data).digest('hex'),
+      });
+    }
+    for (const capture of storyCaptures) {
+      const stagedTarget = path.join(stagingRoot, capture.target);
+      execFileSync(ffmpeg, [
+        '-loglevel',
+        'error',
+        '-y',
+        '-i',
+        capture.png,
+        '-c:v',
+        'libwebp',
+        '-q:v',
+        '86',
+        stagedTarget,
+      ]);
+      const data = await fs.readFile(stagedTarget);
+      images.push({
+        role: capture.role,
+        path: capture.target,
+        ...webpDimensions(data),
+        sha256: crypto.createHash('sha256').update(data).digest('hex'),
+      });
+    }
+
+    assert(images[1].width >= 1920, 'hero capture is too narrow');
+    assert.deepEqual(
+      images
+        .filter((image) => image.role.startsWith('story-'))
+        .map(({ width, height }) => ({ width, height })),
+      storyCaptures.map(() => storyViewport),
+    );
+    assert.equal(new Set(images.map((image) => image.sha256)).size, 5);
+
+    const storyPanelOverflowCount = Object.values(storyOverflows).reduce(
+      (count, overflows) => count + overflows.length,
+      0,
+    );
+    const manifest = {
+      schemaVersion: 1,
+      sourceUrl: liveUrl,
+      sourceRevision: revision,
+      captureLocale: 'zh-CN',
+      capturedViewport: viewport,
+      storyViewport,
+      previewVisibleUiCount,
+      panelOverflowCount: panelOverflows.length,
+      storyPanelOverflowCount,
+      consoleErrorCount: consoleErrors.length,
+      pageErrorCount: pageErrors.length,
+      failedRequestCount: requestFailures.length,
+      images,
+    };
+    const stagedManifestPath = path.join(stagingRoot, 'mundus-media.json');
+    await fs.writeFile(
+      stagedManifestPath,
+      `${JSON.stringify(manifest, null, 2)}\n`,
+    );
+
+    const backupRoot = path.join(stagingRoot, 'backup');
+    await fs.mkdir(backupRoot);
+    const publicationArtifacts = [
+      ...storyCaptures.map((capture) => ({
+        staged: path.join(stagingRoot, capture.target),
+        target: path.join(mediaRoot, capture.target),
+        backup: path.join(backupRoot, capture.target),
+      })),
+      {
+        staged: stagedManifestPath,
+        target: evidencePath,
+        backup: path.join(backupRoot, 'mundus-media.json'),
+      },
+    ];
+    try {
+      await publishArtifacts(publicationArtifacts);
+    } catch (error) {
+      preserveStagingRoot = error.rollbackIncomplete === true;
+      throw error;
+    }
+  } finally {
+    if (!preserveStagingRoot) {
+      await fs.rm(stagingRoot, { recursive: true, force: true });
+    }
   }
-
-  assert(images[1].width >= 1920, 'hero capture is too narrow');
-  assert.equal(new Set(images.map((image) => image.sha256)).size, 3);
-
-  const manifest = {
-    schemaVersion: 1,
-    sourceUrl: liveUrl,
-    sourceRevision: revision,
-    captureLocale: 'zh-CN',
-    capturedViewport: viewport,
-    previewVisibleUiCount,
-    panelOverflowCount: panelOverflows.length,
-    consoleErrorCount: consoleErrors.length,
-    pageErrorCount: pageErrors.length,
-    failedRequestCount: requestFailures.length,
-    images,
-  };
-  await fs.writeFile(evidencePath, `${JSON.stringify(manifest, null, 2)}\n`);
 } finally {
   await browser.close();
 }

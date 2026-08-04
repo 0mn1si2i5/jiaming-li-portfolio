@@ -488,6 +488,7 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             {(1920, 1080)},
         )
         self.assertEqual(manifest["panelOverflowCount"], 0)
+        self.assertEqual(manifest["storyPanelOverflowCount"], 0)
         self.assertEqual(manifest["consoleErrorCount"], 0)
         self.assertEqual(manifest["pageErrorCount"], 0)
         self.assertEqual(manifest["failedRequestCount"], 0)
@@ -537,10 +538,10 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertRegex(
             script,
             r"(?s)async function visiblePanelOverflows\(page\) \{.*?"
-            r"page\.locator\("
+            r"page\s*\.locator\(\s*"
             r"'\[role=\"complementary\"\], "
-            r"\[role=\"complementary\"\] \*'\)"
-            r"\.evaluateAll\(\(elements\) =>.*?"
+            r"\[role=\"complementary\"\] \*'\s*\)"
+            r"\s*\.evaluateAll\(\(elements\) =>.*?"
             r"element\.scrollWidth > element\.clientWidth \+ 1.*?"
             r"element\.scrollHeight > element\.clientHeight \+ 1",
         )
@@ -552,6 +553,24 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             r"assert\.deepEqual\("
             r"overflows, \[\], `\$\{capture\.mode\} content is clipped`\);",
         )
+        self.assertRegex(
+            script,
+            r"(?s)async function publishArtifacts\(artifacts\) \{.*?"
+            r"await fs\.copyFile\(artifact\.target, artifact\.backup\);.*?"
+            r"await fs\.rename\(artifact\.staged, artifact\.target\);.*?"
+            r"catch \(publicationError\) \{.*?"
+            r"const rollbackErrors = \[\];.*?"
+            r"await fs\.rename\(artifact\.backup, artifact\.target\);.*?"
+            r"await fs\.rm\(artifact\.target, \{ force: true \}\);.*?"
+            r"rollbackErrors\.push\(rollbackError\);.*?"
+            r"const rollbackFailure = new AggregateError\(\s*"
+            r"\[publicationError, \.\.\.rollbackErrors\]",
+        )
+        self.assertIn("rollbackFailure.rollbackIncomplete = true;", script)
+        self.assertIn(
+            "preserveStagingRoot = error.rollbackIncomplete === true;",
+            script,
+        )
 
         gates = (
             script.index("assert.deepEqual(consoleErrors, []);"),
@@ -560,10 +579,15 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             script.index("assert.deepEqual(overflows, []"),
         )
         public_media_write = script.index("const images = [];")
-        manifest_write = script.index("await fs.writeFile(evidencePath")
+        manifest_write = script.index("await fs.writeFile(")
+        publication_start = script.index(
+            "await publishArtifacts(publicationArtifacts)"
+        )
         for gate in gates:
             self.assertLess(gate, public_media_write)
             self.assertLess(gate, manifest_write)
+            self.assertLess(gate, publication_start)
+
 
 class TestStructuredFacts(unittest.TestCase):
     def test_mundus_uses_live_v11_deployed_revision(self) -> None:
