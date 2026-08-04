@@ -46,31 +46,30 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertEqual(
             headings_by_locale["en"],
             [
-                "A globe I can keep extending",
-                "One place, several ways to read it",
-                "Three lenses in use today",
-                "The current release",
-                "Built for continued maintenance",
+                "A personal globe in use today",
+                "Three ways to read the same place",
+                "One system beneath the views",
+                "Chronorbis: time, events, and place",
             ],
         )
         self.assertEqual(
             headings_by_locale["zh"],
             [
-                "一颗持续生长的个人数字地球",
-                "同一地点，几种观察方式",
-                "目前使用的三个视角",
-                "当前公开版本",
-                "为长期维护做出的选择",
+                "一颗正在使用的个人数字地球",
+                "从同一地点进入三种观察方式",
+                "三种视角下的同一套空间系统",
+                "Chronorbis：让时间、事件与地点共存",
             ],
         )
-        self.assertEqual(len(all_headings), 10)
+        self.assertEqual(len(all_headings), 8)
 
         for phrase in (
+            "a globe i can keep extending",
+            "built for continued maintenance",
+            "how it grows",
+            "product governance",
             "not a final",
             "not a candidate",
-            "not street navigation",
-            "not a plugin",
-            "not runtime plugins",
             "rather than",
             "instead of",
             "ghsl",
@@ -79,16 +78,108 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             self.assertNotIn(phrase, visitor_copy.casefold())
 
         for phrase in (
+            "一颗持续生长",
+            "为长期维护做出的选择",
+            "如何继续生长",
+            "产品治理",
             "不是最终",
             "不是候选",
-            "不是街道",
-            "不是插件",
             "而不是",
             "不代表",
         ):
             self.assertNotIn(phrase, visitor_copy)
 
         self.assertEqual(story.count("<img"), 1)
+
+    def test_chronorbis_is_personal_unfinished_and_not_a_mundus_capability(
+        self,
+    ) -> None:
+        case = (
+            self.project / "src/content/projects/mundus.mdx"
+        ).read_text(encoding="utf-8")
+
+        for phrase in (
+            "Chronorbis / Not built or released",
+            "alternate-history authoring simulator",
+            "persistent, editable knowledge base",
+            "built-in multi-agent roles",
+            "specific times and places",
+            "Chronorbis / 尚未实现或发布",
+            "架空历史创作模拟器",
+            "长期保存、随时编辑的知识库",
+            "内置 multi-agent 分工",
+            "具体的时间与空间",
+        ):
+            self.assertIn(phrase, case)
+
+        for false_claim in (
+            "Mundus includes multi-agent",
+            "Mundus includes built-in multi-agent roles",
+            "Mundus provides a knowledge base",
+            "Mundus will soon provide a knowledge base",
+            "Mundus simulates historical events",
+            "Chronorbis is on the Mundus roadmap",
+            "Mundus 内置 multi-agent",
+            "Mundus 包含内置 multi-agent 分工",
+            "Mundus 提供世界观知识库",
+            "Mundus 即将提供世界观知识库",
+            "Mundus 模拟历史事件",
+            "Chronorbis 已列入 Mundus 路线图",
+            "coming to Mundus",
+            "即将加入 Mundus",
+        ):
+            self.assertNotIn(false_claim, case)
+
+    def test_mundus_story_defines_three_accessible_linked_previews(self) -> None:
+        story = (
+            self.project / "src/components/MundusStory.astro"
+        ).read_text(encoding="utf-8")
+
+        mode_ids = re.findall(
+            r"id: '(antipodes|development|sunline)'",
+            story,
+        )
+        self.assertEqual(len(mode_ids), 3)
+        self.assertEqual(
+            set(mode_ids),
+            {"antipodes", "development", "sunline"},
+        )
+        self.assertEqual(story.count("<img"), 1)
+        self.assertIn('role="tablist"', story)
+        self.assertIn('role="tab"', story)
+        self.assertIn('role="tabpanel"', story)
+        self.assertIn('target="_blank"', story)
+        self.assertIn('rel="noopener noreferrer"', story)
+        self.assertIn(
+            'aria-selected={index === 0 ? "true" : "false"}',
+            story,
+        )
+        self.assertIn('tabindex={index === 0 ? 0 : -1}', story)
+        self.assertIn("new Image()", story)
+        self.assertIn("ArrowLeft", story)
+        self.assertIn("ArrowRight", story)
+        self.assertIn("ArrowUp", story)
+        self.assertIn("ArrowDown", story)
+        self.assertIn("Home", story)
+        self.assertIn("End", story)
+        self.assertIn("MutationObserver", story)
+
+        expected = {
+            "https://0mn1si2i5.github.io/Mundus/?mode=antipodes&v=1",
+            "https://0mn1si2i5.github.io/Mundus/"
+            "?mode=development&indicator=hdi&year=2023&v=1",
+            "https://0mn1si2i5.github.io/Mundus/?mode=sunline&v=1",
+        }
+        self.assertEqual(
+            {
+                value.replace("&amp;", "&")
+                for value in re.findall(
+                    r"https://0mn1si2i5\.github\.io/Mundus/[^\"']+",
+                    story,
+                )
+            },
+            expected,
+        )
 
     def test_mundus_media_has_three_distinct_roles(self) -> None:
         case = (
@@ -107,10 +198,12 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             case,
         )
         self.assertIn("previewAlt:", case)
-        self.assertIn(
+        for path in (
             "/media/mundus/other-side-detail.webp",
-            story,
-        )
+            "/media/mundus/development.webp",
+            "/media/mundus/sunline.webp",
+        ):
+            self.assertIn(path, story)
         self.assertNotIn(
             "/media/mundus/modes-overview.webp",
             story,
@@ -137,8 +230,18 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             [
                 "homepage-globe",
                 "project-full-interface",
-                "story-other-side-detail",
+                "story-other-side",
+                "story-development",
+                "story-sunline",
             ],
+        )
+        self.assertEqual(
+            {
+                (item["width"], item["height"])
+                for item in manifest["images"]
+                if item["role"].startswith("story-")
+            },
+            {(1920, 1080)},
         )
         self.assertEqual(manifest["panelOverflowCount"], 0)
         self.assertEqual(manifest["consoleErrorCount"], 0)
@@ -147,7 +250,7 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertGreaterEqual(manifest["images"][1]["width"], 1920)
         self.assertEqual(
             len({item["sha256"] for item in manifest["images"]}),
-            3,
+            5,
         )
 
         for item in manifest["images"]:
@@ -691,6 +794,36 @@ class TestBrowserEvidence(unittest.TestCase):
         errors = browser.validate_matrix(matrix)
 
         self.assertIn("pagesBaseCorrect", " ".join(errors))
+
+    def test_matrix_rejects_missing_or_incorrect_mundus_preview_evidence(
+        self,
+    ) -> None:
+        project = Path(__file__).parents[1]
+        matrix = json.loads(
+            (
+                project / "docs/verification/evidence/browser-matrix.json"
+            ).read_text(encoding="utf-8")
+        )
+        index = next(
+            i
+            for i, item in enumerate(matrix["scenarios"])
+            if item["scenario"] == "mundus-en-light-1440"
+        )
+        mutations = {
+            "previewDefaultMode": "development",
+            "previewPointerModes": ["antipodes"],
+            "previewKeyboardModes": ["antipodes", "development"],
+            "previewLinkTargetsCorrect": False,
+            "previewSelectionSynchronized": False,
+            "previewLayout": "vertical",
+            "previewMinTargetHeight": 20,
+            "previewTransitionDurationMs": 100,
+        }
+        for field, value in mutations.items():
+            with self.subTest(field=field):
+                changed = json.loads(json.dumps(matrix))
+                changed["scenarios"][index][field] = value
+                self.assertIn(field, " ".join(browser.validate_matrix(changed)))
 
     def write_json(self, root: Path, name: str, value: object) -> None:
         (root / name).write_text(json.dumps(value), encoding="utf-8")
