@@ -3,7 +3,7 @@
 ## Authority
 
 - Branch: `feat/mundus-next`
-- Current HEAD: `fdbd093`
+- Current HEAD: `9504b26`
 - Public Mundus SHA:
   `378fe528ca1c8f83f0280f83383b5e785e851285`
 - Approved spec commit: `89ab2d8`
@@ -19,7 +19,7 @@
 - [x] Task 4: verified three-mode media capture.
 - [x] Task 5: narrow immutable facts.
 - [x] Task 6: browser evidence contract.
-- [ ] Task 7: regenerate browser evidence.
+- [x] Task 7: regenerate browser evidence.
 - [ ] Task 8: release record, full gates, push, and Draft PR CI.
 - [ ] Final independent review and verification-before-completion.
 
@@ -59,11 +59,21 @@
 - Task 6 specification review: compliant.
 - Task 6 quality review: approved after rejecting malformed viewports,
   non-finite measurements, and boolean durations.
+- Task 7 browser-evidence commit: `9504b26`.
+- Task 7 build: six exact HTML pages.
+- Task 7 browser evidence: eight scenarios and eight bound WebP captures.
+- Task 7 network/console evidence: 220 requests, zero failures, and zero
+  console messages.
+- Task 7 browser tests: 14 passed.
+- Task 7 release verifier: `facts=4/4 browser=pass privacy=pass`.
+- Task 7 specification review: compliant.
+- Task 7 quality review: approved.
+- Task 7 preview service and temporary capture script: stopped and removed.
 
 ## Active Slice
 
-Task 7: rebuild the exact Portfolio output and regenerate all eight browser
-evidence scenarios.
+Task 8: update release evidence, run the complete local gate, push the existing
+branch, and verify exact-head CI without merging or deploying.
 
 ## Resume State Hint
 
@@ -82,9 +92,9 @@ Verify current branch, HEAD, and worktree before editing.
 - Compatibility boundary intact: yes.
 - New owner/fallback introduced: no.
 - Authority migration documented: yes.
-- Evidence sufficient for Task 6: yes.
+- Evidence sufficient for Task 7: yes.
 - Task 1 RED contract preserved: yes.
 - New product owner or fallback introduced: no.
 - Unsupported complex Astro syntax remains fail-closed: yes.
-- Stale browser evidence is isolated to Task 7: yes.
+- Browser evidence is current: yes.
 - Decision: `continue`.
