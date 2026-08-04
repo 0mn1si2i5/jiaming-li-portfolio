@@ -288,6 +288,16 @@ const mode = { category: "spatial" };
         self.assertNotIn("category: temporal", semantic)
         self.assertIn('category: "spatial"', semantic)
 
+    def test_source_semantics_normalize_wrapped_evidence(self) -> None:
+        semantic = facts.extract_source_semantics(
+            "preserved the intended\n  selected point while switching modes"
+        )
+
+        self.assertIn(
+            "preserved the intended selected point while switching modes",
+            semantic,
+        )
+
     def test_json_path_checks_structure_not_unrelated_literal(self) -> None:
         document = {"note": '"spriteVersionNumber": 2', "spriteVersionNumber": 1}
         rule = {"type": "json_path", "path": ["spriteVersionNumber"], "equals": 2}
@@ -305,7 +315,13 @@ const mode = { category: "spatial" };
                 for rule in rules
             )
         )
-        self.assertTrue(all(rule["evidence"]["rules"] for rule in rules))
+        self.assertTrue(
+            all(
+                evidence["rules"]
+                for rule in rules
+                for evidence in rule["evidence"]
+            )
+        )
         rule_ids = {rule["id"] for rule in rules}
         self.assertEqual(
             rule_ids,
@@ -318,6 +334,183 @@ const mode = { category: "spatial" };
             },
         )
 
+    def test_each_public_statement_has_claim_and_evidence_coverage(self) -> None:
+        rules = {
+            rule["id"]: rule
+            for rule in facts.load_rules(Path("scripts/verification/facts.json"))
+        }
+        expected = {
+            "mundus-maintained-globe": {
+                "claims": {
+                    "one geographic workspace",
+                    "long-running personal globe",
+                    "reads the result with its source and method",
+                    "shares the current view",
+                    "Changing lenses keeps the same geographic context",
+                    "同一个地理空间",
+                    "长期维护这颗个人数字地球",
+                    "阅读结果及其来源与方法",
+                    "再分享当前画面",
+                    "切换视角时，地理上下文会保留下来",
+                    "One place stays in view",
+                    "地点始终留在视野中",
+                },
+                "evidence": {
+                    "long-lived personal digital globe",
+                    "different scientific lenses",
+                    "explicit about its methods",
+                    "preserved the intended selected point while switching modes",
+                    "restores shareable state and browser history",
+                },
+            },
+            "mundus-current-lenses": {
+                "claims": {
+                    "follows a point through Earth to its antipode",
+                    "represented major cities",
+                    "reported HDI",
+                    "health, education, and income dimensions",
+                    "year, history, source, and missing states",
+                    "UTC time into solar position",
+                    "daylight, twilight",
+                    "approximate sunrise and sunset",
+                    "沿地心找到对跖点",
+                    "收录主要城市",
+                    "已发布 HDI",
+                    "健康、教育、收入维度",
+                    "年份、历史变化、来源与缺失状态",
+                    "UTC 时间转换",
+                    "白昼、曙暮光",
+                    "近似日出日落",
+                },
+                "evidence": {
+                    "calculates exact antipodal endpoints",
+                    "nearest eligible major city to each endpoint",
+                    "compares reported HDI",
+                    "health, education, and income dimension indices",
+                    "visualizes the day-night boundary",
+                    "estimates solar position, sunrise, and sunset in UTC",
+                },
+            },
+            "mundus-parchment-atlas": {
+                "claims": {
+                    "Parchment Atlas",
+                    "Natural Earth vector geometry",
+                    "bilingual GeoNames search",
+                    "endpoint city relationships",
+                    "draggable through-Earth section",
+                    "Natural Earth 矢量几何",
+                    "GeoNames 中英文城市搜索",
+                    "两端城市关系",
+                    "可拖拽的穿地剖面",
+                    "endpoint city relationship",
+                    "两端城市关系的细节画面",
+                },
+                "evidence": {
+                    "Parchment Atlas",
+                    "draggable Other Side cross-section",
+                    "bilingual city search",
+                    "bilateral city relations",
+                    "Natural Earth vector globe",
+                },
+            },
+            "mundus-interaction-and-sharing": {
+                "claims": {
+                    "supports closer inspection",
+                    "preserves the globe's color",
+                    "consistent Twilight label and definition",
+                    "restores the selected location and observation mode",
+                    "exact selected location is included",
+                    "retain the displayed UTC time",
+                    "支持更近距离的观察",
+                    "地球颜色保持稳定",
+                    "统一使用“曙暮光”名称与定义",
+                    "恢复所选地点与观察视角",
+                    "链接包含精确地点",
+                    "保留画面中的 UTC 时间",
+                    "stable through-Earth section",
+                    "explicit privacy notice",
+                    "稳定拖动穿地剖面",
+                    "隐私提示",
+                },
+                "evidence": {
+                    "data-camera-distance', '1.55'",
+                    "data-vector-drag-effective-alpha",
+                    "data-vector-drag-render-order",
+                    "data-vector-palette-version",
+                    "labels and defines civil twilight consistently in both languages",
+                    "复制前请确认你愿意分享这一位置与时间",
+                    "copiedShareUrl",
+                    "await page.goto(preview)",
+                    "await expect(page).toHaveURL(preview)",
+                    "await page.reload()",
+                    "30.2500°, 120.7500°",
+                },
+            },
+            "mundus-maintainable-delivery": {
+                "claims": {
+                    "One globe kernel carries place, camera behavior, controls, and sharing",
+                    "Reviewed data snapshots and hashes",
+                    "Larger assets load when their lens needs them",
+                    "static client",
+                    "bilingual copy",
+                    "keyboard access",
+                    "visible focus",
+                    "reduced motion",
+                    "WebGL fallback",
+                    "Pages subpath checks and artifact verification",
+                    "单一地球内核承载所有视角的地点、相机行为、控件与分享方式",
+                    "经过审核的数据快照和哈希",
+                    "较大的资源只在对应视角使用时加载",
+                    "静态客户端",
+                    "中英文",
+                    "键盘操作",
+                    "可见焦点",
+                    "reduced motion",
+                    "WebGL fallback",
+                    "Pages 子路径检查和制品验证",
+                    "pins its data and method",
+                    "reuses the existing place and controls",
+                    "passes the public-build gate",
+                    "固定数据与方法",
+                    "复用既有地点与控件",
+                    "通过公开构建门禁",
+                },
+                "evidence": {
+                    "static, one-Canvas architecture",
+                    "SHA-256",
+                    "Data identities, licenses, methods",
+                    "Development data was absent before first entry",
+                    "selected point while switching modes",
+                    "Verify Chinese/English title, language, core meaning",
+                    "keeps all observation modes keyboard accessible",
+                    "uses the accent focus ring for keyboard form and disclosure controls only",
+                    "uses static reduced-motion glow",
+                    "keeps country semantics when WebGL2 is unavailable",
+                    "Confirm all assets resolve below `/Mundus/`",
+                    "build/artifact verification",
+                },
+            },
+        }
+
+        for fact_id, coverage in expected.items():
+            with self.subTest(fact_id=fact_id):
+                assertion = rules[fact_id]
+                self.assertIsInstance(assertion["evidence"], list)
+                claim_values = {
+                    value
+                    for claim in assertion["claims"]
+                    for rule in claim["rules"]
+                    for value in rule.get("values", [])
+                }
+                evidence_values = {
+                    value
+                    for evidence in assertion["evidence"]
+                    for rule in evidence["rules"]
+                    for value in rule.get("values", [])
+                }
+                self.assertTrue(coverage["claims"].issubset(claim_values))
+                self.assertTrue(coverage["evidence"].issubset(evidence_values))
+
     def test_interaction_fact_evidence_covers_each_public_claim(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
         interaction = next(
@@ -327,8 +520,9 @@ const mode = { category: "spatial" };
         )
         evidence_values = {
             value
-            for rule in interaction["evidence"]["rules"]
-            for value in rule.get("values", [])
+            for evidence in interaction["evidence"]
+            for evidence_rule in evidence["rules"]
+            for value in evidence_rule.get("values", [])
         }
 
         self.assertTrue(
