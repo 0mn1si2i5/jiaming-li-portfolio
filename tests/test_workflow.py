@@ -15,6 +15,7 @@ class TestPullRequestWorkflow(unittest.TestCase):
         self.assertIn("pull_request:", self.workflow)
         for command in (
             "npm ci",
+            "npm run check:hygiene",
             "npm test",
             "npm run build",
             "npm run verify --",

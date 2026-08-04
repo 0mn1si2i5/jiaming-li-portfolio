@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:hygiene": "python3 scripts/check_repository_hygiene.py",
     "test": "python3 -m unittest discover -s tests -p 'test_*.py' -v",
     "verify": "python3 scripts/verify-release.py",
     "preview": "astro preview",

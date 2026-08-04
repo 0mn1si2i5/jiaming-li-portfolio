@@ -10,6 +10,9 @@ __pycache__/
 # local git worktrees
 .worktrees/
 
+# temporary agent plans, checkpoints, and work logs
+.agent-work/
+
 # dependencies
 node_modules/
 
