@@ -318,6 +318,35 @@ const mode = { category: "spatial" };
             },
         )
 
+    def test_interaction_fact_evidence_covers_each_public_claim(self) -> None:
+        rules = facts.load_rules(Path("scripts/verification/facts.json"))
+        interaction = next(
+            rule
+            for rule in rules
+            if rule["id"] == "mundus-interaction-and-sharing"
+        )
+        evidence_values = {
+            value
+            for rule in interaction["evidence"]["rules"]
+            for value in rule.get("values", [])
+        }
+
+        self.assertTrue(
+            {
+                "data-camera-distance', '1.55'",
+                "data-vector-drag-effective-alpha",
+                "oceanAlpha:0.52,landLayerAlpha:0.48,"
+                "effectiveCompositeAlpha:0.7504",
+                "data-vector-drag-render-order",
+                "innerWall:1,ocean:2,land:2.5,highlight:3,markers:5",
+                "data-vector-palette-version",
+                "labels and defines civil twilight consistently in both languages",
+                "分享链接会编码并恢复当前所选位置与观察方式，并固定当前显示的 "
+                "UTC 时间；复制前请确认你愿意分享这一位置与时间。",
+                "copiedShareUrl",
+            }.issubset(evidence_values)
+        )
+
     def test_fact_catalog_rejects_missing_story_claim(self) -> None:
         catalog = {
             "schemaVersion": 2,
