@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: 0mn1si2i5/Mundus
-          ref: c6e625fa68879f9771debffebdaf32e295d56769
+          ref: 378fe528ca1c8f83f0280f83383b5e785e851285
           path: sources/Mundus
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:

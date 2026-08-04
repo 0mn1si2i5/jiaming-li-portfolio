@@ -1,10 +1,10 @@
 {
   "assertions": [
-    {"id": "mundus-personal-globe-first-lenses", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
-    {"id": "mundus-observation-workflow", "passed": true, "evidence": {"repository": "Mundus", "source": "docs/PROJECT_PLAN.md", "passed": true}},
-    {"id": "mundus-v11-parchment-atlas", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
-    {"id": "mundus-maintainable-release", "passed": true, "evidence": {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-publication-packet.md", "passed": true}},
-    {"id": "mundus-boundaries-ghsl", "passed": true, "evidence": {"repository": "Mundus", "source": "docs/ROADMAP_HANDOFF.md", "passed": true}}
+    {"id": "mundus-maintained-globe", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
+    {"id": "mundus-current-lenses", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
+    {"id": "mundus-parchment-atlas", "passed": true, "evidence": {"repository": "Mundus", "source": "README.md", "passed": true}},
+    {"id": "mundus-interaction-and-sharing", "passed": true, "evidence": {"repository": "Mundus", "source": "tests/e2e/app.spec.ts", "passed": true}},
+    {"id": "mundus-maintainable-delivery", "passed": true, "evidence": {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-publication-packet.md", "passed": true}}
   ],
   "passed": 5,
   "privateBoundaryHitCount": 0,

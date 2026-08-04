@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 EXPECTED_REVISIONS = {
-    "Mundus": "c6e625fa68879f9771debffebdaf32e295d56769",
+    "Mundus": "378fe528ca1c8f83f0280f83383b5e785e851285",
 }
 
 def extract_mdx_visible_text(text: str) -> str:

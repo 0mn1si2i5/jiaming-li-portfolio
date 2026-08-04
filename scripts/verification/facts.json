@@ -2,73 +2,73 @@
   "schemaVersion": 2,
   "assertions": [
     {
-      "id": "mundus-personal-globe-first-lenses",
-      "description": "Mundus is a maintained personal globe whose current modes are its first shipped lenses.",
+      "id": "mundus-maintained-globe",
+      "description": "Mundus is maintained as one personal globe with a shared geographic context.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Mundus is a personal digital globe I maintain over time", "The current modes are the first three observation lenses"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Mundus 是我长期维护的一颗个人数字地球", "当前模式是最早落地的三个观察视角"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["The first shipped lenses share one place", "首批上线视角共享同一地点"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Mundus brings those materials into one geographic workspace", "long-running personal globe"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Mundus 把这些材料放进同一个地理空间", "长期维护这颗个人数字地球"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["One place stays in view", "地点始终留在视野中"]}]}
       ],
       "evidence": {
         "repository": "Mundus",
         "source": "README.md",
-        "rules": [{"type": "contains_all", "values": ["long-lived personal digital globe", "The current public product begins with three modes", "Other Side", "Development, Unpacked", "Sunline"]}]
+        "rules": [{"type": "contains_all", "values": ["long-lived personal digital globe", "The current public product begins with three modes"]}]
       }
     },
     {
-      "id": "mundus-observation-workflow",
-      "description": "Every current lens follows one inspectable and shareable observation loop.",
+      "id": "mundus-current-lenses",
+      "description": "The public product currently provides Other Side, Development, and Sunline.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "A visitor chooses a lens, manipulates the same globe and place, receives a specific result, opens its method, source, year, and limits"}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains", "value": "访客先选择一个观察视角，再操作同一颗地球和地点，得到一个明确结果，查看方法、来源、年份与限制"}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Frame one question", "Reuse one globe and place", "Verify the public release"]}]}
-      ],
-      "evidence": {
-        "repository": "Mundus",
-        "source": "docs/PROJECT_PLAN.md",
-        "rules": [{"type": "contains_all", "values": ["核心体验循环：选择一种观察方式，操纵地球，获得一个清晰发现，查看解释与来源，分享当前状态，再进入下一个模式", "地球另一端 / Other Side", "发展的不同侧面 / Development, Unpacked", "日照线 / Sunline"]}]
-      }
-    },
-    {
-      "id": "mundus-v11-parchment-atlas",
-      "description": "The live V1.1 product contains the Parchment Atlas interaction and data updates.",
-      "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas moved the public product", "draggable through-Earth cross-section", "GeoNames supports English and Chinese major-city search", "Natural Earth 110m/50m vector geometry"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas 将公开产品", "拖拽穿过地球的剖面", "GeoNames 支持中英文主要城市搜索", "Natural Earth 110m/50m 矢量几何"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["V1.1 Parchment Atlas", "V1.1 羊皮纸地图集"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Three lenses in use today", "Other Side", "Development, Unpacked", "Sunline"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["目前使用的三个视角", "地球另一端", "发展的不同侧面", "日照线"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Other Side", "Development, Unpacked", "Sunline"]}]}
       ],
       "evidence": {
         "repository": "Mundus",
         "source": "README.md",
-        "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "draggable Other Side cross-section", "bilingual city search", "bilateral city relations", "Natural Earth vector"]}]
+        "rules": [{"type": "contains_all", "values": ["Other Side", "Development, Unpacked", "Sunline"]}]
       }
     },
     {
-      "id": "mundus-maintainable-release",
-      "description": "Static delivery, pinned data, accessibility, and artifact gates support long-term maintenance.",
+      "id": "mundus-parchment-atlas",
+      "description": "Parchment Atlas ships vector geography, bilingual city search, and the Other Side section.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Static delivery avoids accounts, telemetry, and server maintenance", "Reviewed data snapshots and hashes", "Pages subpath checks and artifact verification"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["静态交付避免账号、遥测和服务器维护", "经过审核的数据快照与哈希", "Pages 子路径检查与制品验证"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Pin data and method", "Verify the public release"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "Natural Earth vector geometry", "bilingual GeoNames search", "draggable through-Earth section"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "Natural Earth 矢量几何", "GeoNames 中英文城市搜索", "可拖拽的穿地剖面"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Parchment Atlas · Current product", "Parchment Atlas · 当前产品", "through-Earth section", "穿地剖面"]}]}
+      ],
+      "evidence": {
+        "repository": "Mundus",
+        "source": "README.md",
+        "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "draggable Other Side cross-section", "bilingual city search", "Natural Earth vector"]}]
+      }
+    },
+    {
+      "id": "mundus-interaction-and-sharing",
+      "description": "The current deployment supports closer inspection, clear twilight language, and restorable sharing.",
+      "claims": [
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["supports closer inspection", "preserves the globe's color", "consistent Twilight label", "exact selected location"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["支持更近距离的观察", "地球颜色保持稳定", "统一使用“曙暮光”", "链接包含精确地点"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["closer globe inspection", "clear Twilight language", "exact-location sharing", "更近距离观察地球", "分享精确地点"]}]}
+      ],
+      "evidence": {
+        "repository": "Mundus",
+        "source": "tests/e2e/app.spec.ts",
+        "rules": [{"type": "contains_all", "values": ["data-camera-distance', '1.55'", "labels and defines civil twilight consistently in both languages", "copiedShareUrl"]}]
+      }
+    },
+    {
+      "id": "mundus-maintainable-delivery",
+      "description": "Pinned data, static delivery, accessibility, and artifact verification support continued maintenance.",
+      "claims": [
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Reviewed data snapshots and hashes", "static client", "Pages subpath checks and artifact verification"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["经过审核的数据快照和哈希", "静态客户端", "Pages 子路径检查和制品验证"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Pin data and method", "Verify the public build", "固定数据与方法", "验证公开构建"]}]}
       ],
       "evidence": {
         "repository": "Mundus",
         "source": "docs/2026-08-01-v1.1-publication-packet.md",
-        "rules": [{"type": "contains_all", "values": ["static, one-Canvas architecture", "SHA-256", "accessible fallbacks", "pages-artifact", "desktop/mobile"]}]
-      }
-    },
-    {
-      "id": "mundus-boundaries-ghsl",
-      "description": "The case distinguishes current product limits from governed future work.",
-      "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["not street navigation, a professional GIS, or an authoritative scientific service", "It is not a plugin platform", "GHSL Human Morphology did not pass global validation and is not a public feature"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["不是街道导航、专业 GIS 或权威科学服务", "它现在不是插件平台", "GHSL Human Morphology 尚未通过全球验证，不是公开功能"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["not runtime plugins", "不是运行时插件"]}]}
-      ],
-      "evidence": {
-        "repository": "Mundus",
-        "source": "docs/ROADMAP_HANDOFF.md",
-        "rules": [{"type": "contains_all", "values": ["no backend, general GIS, tile platform, plugin system, or fourth mode", "STOP_GLOBAL_MORPHOLOGY", "Plans 2 through 7", "frozen and blocked"]}]
+        "rules": [{"type": "contains_all", "values": ["static, one-Canvas architecture", "SHA-256", "accessible fallbacks", "pages-artifact"]}]
       }
     }
   ]
