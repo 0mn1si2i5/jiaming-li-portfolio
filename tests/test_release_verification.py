@@ -97,72 +97,258 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         case = (
             self.project / "src/content/projects/mundus.mdx"
         ).read_text(encoding="utf-8")
+        locale_sections = re.findall(
+            r"<section\b([^>]*)>(.*?)</section>",
+            case,
+            flags=re.DOTALL,
+        )
+        chronorbis_sections: dict[str, str] = {}
+        mundus_sections: dict[str, list[str]] = {"en": [], "zh": []}
+        for attributes, section in locale_sections:
+            locale_match = re.search(
+                r'\bdata-locale-content="(en|zh)"',
+                attributes,
+            )
+            if locale_match is None:
+                continue
+            locale = locale_match.group(1)
+            visible = facts.extract_mdx_visible_text(section)
+            class_match = re.search(r'\bclass="([^"]*)"', attributes)
+            if (
+                class_match
+                and "chronorbis-vision" in class_match.group(1).split()
+            ):
+                self.assertNotIn(
+                    locale,
+                    chronorbis_sections,
+                    f"multiple Chronorbis sections found for {locale}",
+                )
+                chronorbis_sections[locale] = visible
+            else:
+                mundus_sections[locale].append(visible)
 
-        for phrase in (
-            "Chronorbis / Not built or released",
-            "alternate-history authoring simulator",
-            "persistent, editable knowledge base",
-            "built-in multi-agent roles",
-            "specific times and places",
-            "Chronorbis / 尚未实现或发布",
-            "架空历史创作模拟器",
-            "长期保存、随时编辑的知识库",
-            "内置 multi-agent 分工",
-            "具体的时间与空间",
-        ):
-            self.assertIn(phrase, case)
+        self.assertEqual(set(chronorbis_sections), {"en", "zh"})
+        self.assertTrue(all(mundus_sections.values()))
 
-        for false_claim in (
-            "Mundus includes multi-agent",
-            "Mundus includes built-in multi-agent roles",
-            "Mundus provides a knowledge base",
-            "Mundus will soon provide a knowledge base",
-            "Mundus simulates historical events",
-            "Chronorbis is on the Mundus roadmap",
-            "Mundus 内置 multi-agent",
-            "Mundus 包含内置 multi-agent 分工",
-            "Mundus 提供世界观知识库",
-            "Mundus 即将提供世界观知识库",
-            "Mundus 模拟历史事件",
-            "Chronorbis 已列入 Mundus 路线图",
-            "coming to Mundus",
-            "即将加入 Mundus",
-        ):
-            self.assertNotIn(false_claim, case)
+        required_by_locale = {
+            "en": (
+                ("Chronorbis", "Not built", "released"),
+                ("alternate-history", "authoring simulator"),
+                ("specific", "times", "places"),
+                ("persistent", "editable", "knowledge base"),
+                ("built-in", "multi-agent", "roles"),
+                ("technically unresolved",),
+                ("separate", "unfinished", "direction"),
+            ),
+            "zh": (
+                ("Chronorbis", "尚未实现", "发布"),
+                ("架空历史", "创作模拟器"),
+                ("具体", "时间", "空间"),
+                ("长期保存", "随时编辑", "知识库"),
+                ("内置", "multi-agent", "分工"),
+                ("技术条件", "未解决"),
+                ("独立", "尚未实现", "方向"),
+            ),
+        }
+        for locale, semantic_groups in required_by_locale.items():
+            with self.subTest(locale=locale):
+                visible = chronorbis_sections[locale]
+                for tokens in semantic_groups:
+                    with self.subTest(locale=locale, tokens=tokens):
+                        for token in tokens:
+                            self.assertIn(token, visible)
+
+        forbidden_mundus_mechanisms = {
+            "en": (
+                "alternate-history",
+                "authoring simulator",
+                "knowledge base",
+                "multi-agent",
+                "history simulation",
+                "historical simulation",
+                "historical event simulation",
+                "simulates historical events",
+            ),
+            "zh": (
+                "架空历史",
+                "创作模拟器",
+                "知识库",
+                "multi-agent",
+                "历史模拟",
+                "历史事件模拟",
+                "模拟历史事件",
+            ),
+        }
+        for locale, sections in mundus_sections.items():
+            for section_index, visible in enumerate(sections):
+                for token in forbidden_mundus_mechanisms[locale]:
+                    with self.subTest(
+                        locale=locale,
+                        section=section_index,
+                        forbidden_mundus_token=token,
+                    ):
+                        self.assertNotIn(token, visible.casefold())
 
     def test_mundus_story_defines_three_accessible_linked_previews(self) -> None:
         story = (
             self.project / "src/components/MundusStory.astro"
         ).read_text(encoding="utf-8")
 
-        mode_ids = re.findall(
-            r"id: '(antipodes|development|sunline)'",
-            story,
+        modes_start = story.find("const modes = [")
+        self.assertNotEqual(modes_start, -1)
+        modes_end = story.find("] as const", modes_start)
+        self.assertNotEqual(modes_end, -1)
+        modes_source = story[modes_start:modes_end]
+        mode_matches = list(
+            re.finditer(r"\bid:\s*'([^']+)'", modes_source)
         )
-        self.assertEqual(len(mode_ids), 3)
+        mode_ids = [match.group(1) for match in mode_matches]
         self.assertEqual(
-            set(mode_ids),
-            {"antipodes", "development", "sunline"},
+            mode_ids,
+            ["antipodes", "development", "sunline"],
         )
+        self.assertEqual(len(mode_ids), len(mode_matches))
+        mode_blocks = {
+            mode_id: modes_source[
+                match.start() : (
+                    mode_matches[index + 1].start()
+                    if index + 1 < len(mode_matches)
+                    else len(modes_source)
+                )
+            ]
+            for index, (mode_id, match) in enumerate(
+                zip(mode_ids, mode_matches)
+            )
+        }
+        expected_modes = {
+            "antipodes": (
+                "title: { en: 'Other Side', zh: '地球另一端' }",
+                "description: { en: 'Spherical relationships', "
+                "zh: '球面空间关系' }",
+                "image: '/media/mundus/other-side-detail.webp'",
+                "The Mundus Other Side mode showing the through-Earth "
+                "relationship between two endpoints.",
+                "Mundus“地球另一端”模式，展示穿过地球的两端空间关系。",
+                "https://0mn1si2i5.github.io/Mundus/?mode=antipodes&v=1",
+            ),
+            "development": (
+                "title: { en: 'Development, Unpacked', zh: '发展的不同侧面' }",
+                "description: { en: 'Development structure over time', "
+                "zh: '发展结构与时间变化' }",
+                "image: '/media/mundus/development.webp'",
+                "The Mundus Development mode comparing published development "
+                "indicators on the globe.",
+                "Mundus“发展的不同侧面”模式，在地球上比较已发布的发展指标。",
+                "https://0mn1si2i5.github.io/Mundus/?mode=development"
+                "&indicator=hdi&year=2023&v=1",
+            ),
+            "sunline": (
+                "title: { en: 'Sunline', zh: '日照线' }",
+                "description: { en: 'Time and sunlight', zh: '时间与日照变化' }",
+                "image: '/media/mundus/sunline.webp'",
+                "The Mundus Sunline mode showing sunlight and the day-night "
+                "boundary on the globe.",
+                "Mundus“日照线”模式，展示地球上的日照与昼夜边界。",
+                "https://0mn1si2i5.github.io/Mundus/?mode=sunline&v=1",
+            ),
+        }
+        for mode_id, block in mode_blocks.items():
+            for token in expected_modes[mode_id]:
+                with self.subTest(mode=mode_id, token=token):
+                    self.assertIn(token, block)
+
         self.assertEqual(story.count("<img"), 1)
-        self.assertIn('role="tablist"', story)
-        self.assertIn('role="tab"', story)
-        self.assertIn('role="tabpanel"', story)
-        self.assertIn('target="_blank"', story)
-        self.assertIn('rel="noopener noreferrer"', story)
-        self.assertIn(
+        for token in (
+            "const defaultMode = modes[0]",
+            'id="mundus-preview-panel"',
+            'role="tabpanel"',
+            "href={defaultMode.href}",
+            "src={asset(defaultMode.image)}",
+            "alt={defaultMode.alt.en}",
+            'aria-labelledby="mundus-preview-antipodes"',
+            'role="tablist"',
+            'role="tab"',
+            'aria-controls="mundus-preview-panel"',
             'aria-selected={index === 0 ? "true" : "false"}',
+            "tabindex={index === 0 ? 0 : -1}",
+            "data-src={asset(mode.image)}",
+            "data-href={mode.href}",
+            "data-alt-en={mode.alt.en}",
+            "data-alt-zh={mode.alt.zh}",
+            "data-label-en={`${mode.title.en}. Open this Mundus mode "
+            "in a new tab.`}",
+            "data-label-zh={`${mode.title.zh}。在新标签页打开这个 Mundus "
+            "模式。`}",
+            'target="_blank"',
+            'rel="noopener noreferrer"',
+            "const candidate = new Image()",
+            "candidate.onload = () => {",
+            "const syncLocale = (tab: HTMLButtonElement) => {",
+            "new MutationObserver",
+            "syncLocale(tabs[0]);",
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "ArrowDown",
+            "Home",
+            "End",
+        ):
+            self.assertIn(token, story)
+
+        onload_match = re.search(
+            r"candidate\.onload = \(\) => \{(?P<body>.*?)"
+            r"^\s*\};",
             story,
+            flags=re.DOTALL | re.MULTILINE,
         )
-        self.assertIn('tabindex={index === 0 ? 0 : -1}', story)
-        self.assertIn("new Image()", story)
-        self.assertIn("ArrowLeft", story)
-        self.assertIn("ArrowRight", story)
-        self.assertIn("ArrowUp", story)
-        self.assertIn("ArrowDown", story)
-        self.assertIn("Home", story)
-        self.assertIn("End", story)
-        self.assertIn("MutationObserver", story)
+        self.assertIsNotNone(onload_match)
+        src_assignment = story.find(
+            "candidate.src = src;",
+            onload_match.end(),
+        )
+        self.assertNotEqual(src_assignment, -1)
+        self.assertLess(onload_match.start(), src_assignment)
+        onload = onload_match.group("body")
+        update_tokens = (
+            "image.src = src;",
+            "link.href = href;",
+            "item.setAttribute('aria-selected', String(selected));",
+            "item.tabIndex = selected ? 0 : -1;",
+            "link.setAttribute('aria-labelledby', tab.id);",
+            "syncLocale(tab);",
+            "if (moveFocus) tab.focus();",
+        )
+        for token in update_tokens:
+            self.assertIn(token, onload)
+        self.assertRegex(
+            story,
+            r"(?s)const syncLocale = \(tab: HTMLButtonElement\) => \{.*?"
+            r"image\.alt = tab\.dataset\[`alt\$\{suffix\}`\] \?\? '';.*?"
+            r"link\.setAttribute\("
+            r"'aria-label', tab\.dataset\[`label\$\{suffix\}`\] \?\? ''\);",
+        )
+        observer_match = re.search(
+            r"new MutationObserver\(\(\) => \{(?P<callback>.*?)"
+            r"\}\)\.observe\((?P<options>.*?)\);",
+            story,
+            flags=re.DOTALL,
+        )
+        self.assertIsNotNone(observer_match)
+        self.assertRegex(
+            observer_match.group("callback"),
+            r"(?s)tab\.getAttribute\('aria-selected'\) === 'true'.*?"
+            r"if \(selected\) syncLocale\(selected\);",
+        )
+        self.assertRegex(
+            observer_match.group("options"),
+            r"attributeFilter: \['data-locale'\]",
+        )
+        self.assertIn("syncLocale(tabs[0]);", story)
+        self.assertRegex(
+            story,
+            r"(?s)@media \(prefers-reduced-motion: reduce\) \{.*?"
+            r"\.preview-link img\s*\{\s*transition: none;",
+        )
 
         expected = {
             "https://0mn1si2i5.github.io/Mundus/?mode=antipodes&v=1",
@@ -290,12 +476,36 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             r"image\.naturalWidth > 0\s*&&\s*"
             r"image\.naturalHeight > 0",
         )
+        self.assertRegex(
+            script,
+            r"(?s)async function visiblePanelOverflows\(page\) \{.*?"
+            r"page\.locator\("
+            r"'\[role=\"complementary\"\], "
+            r"\[role=\"complementary\"\] \*'\)"
+            r"\.evaluateAll\(\(elements\) =>.*?"
+            r"element\.scrollWidth > element\.clientWidth \+ 1.*?"
+            r"element\.scrollHeight > element\.clientHeight \+ 1",
+        )
+        self.assertRegex(
+            script,
+            r"(?s)for \(const capture of storyCaptures\) \{.*?"
+            r"const overflows = await visiblePanelOverflows\(page\);.*?"
+            r"storyOverflows\[capture\.mode\] = overflows;.*?"
+            r"assert\.deepEqual\("
+            r"overflows, \[\], `\$\{capture\.mode\} content is clipped`\);",
+        )
 
-        failure_gate = script.index("assert.deepEqual(requestFailures, []);")
+        gates = (
+            script.index("assert.deepEqual(consoleErrors, []);"),
+            script.index("assert.deepEqual(pageErrors, []);"),
+            script.index("assert.deepEqual(requestFailures, []);"),
+            script.index("assert.deepEqual(overflows, []"),
+        )
         public_media_write = script.index("const images = [];")
         manifest_write = script.index("await fs.writeFile(evidencePath")
-        self.assertLess(failure_gate, public_media_write)
-        self.assertLess(failure_gate, manifest_write)
+        for gate in gates:
+            self.assertLess(gate, public_media_write)
+            self.assertLess(gate, manifest_write)
 
 class TestStructuredFacts(unittest.TestCase):
     def test_mundus_uses_live_v11_deployed_revision(self) -> None:
@@ -804,23 +1014,99 @@ class TestBrowserEvidence(unittest.TestCase):
                 project / "docs/verification/evidence/browser-matrix.json"
             ).read_text(encoding="utf-8")
         )
-        index = next(
+        preview_fields = (
+            "previewDefaultMode",
+            "previewPointerModes",
+            "previewKeyboardModes",
+            "previewLinkTargetsCorrect",
+            "previewSelectionSynchronized",
+            "previewLayout",
+            "previewMinTargetHeight",
+            "previewTransitionDurationMs",
+        )
+        for item in matrix["scenarios"]:
+            if not item["scenario"].startswith("mundus-"):
+                continue
+            item.update(
+                {
+                    "previewDefaultMode": "antipodes",
+                    "previewPointerModes": [
+                        "antipodes",
+                        "development",
+                        "sunline",
+                    ],
+                    "previewKeyboardModes": [
+                        "antipodes",
+                        "development",
+                        "sunline",
+                    ],
+                    "previewLinkTargetsCorrect": True,
+                    "previewSelectionSynchronized": True,
+                    "previewLayout": (
+                        "vertical"
+                        if item["viewport"]["width"] <= 760
+                        else "columns"
+                    ),
+                    "previewMinTargetHeight": 44,
+                    "previewTransitionDurationMs": (
+                        0 if item["reducedMotion"] else 100
+                    ),
+                }
+            )
+
+        self.assertEqual(browser.validate_matrix(matrix), [])
+
+        mundus_indexes = [
             i
             for i, item in enumerate(matrix["scenarios"])
-            if item["scenario"] == "mundus-en-light-1440"
-        )
-        mutations = {
-            "previewDefaultMode": "development",
-            "previewPointerModes": ["antipodes"],
-            "previewKeyboardModes": ["antipodes", "development"],
-            "previewLinkTargetsCorrect": False,
-            "previewSelectionSynchronized": False,
-            "previewLayout": "vertical",
-            "previewMinTargetHeight": 20,
-            "previewTransitionDurationMs": 100,
+            if item["scenario"].startswith("mundus-")
+        ]
+        scenario_indexes = {
+            item["scenario"]: i
+            for i, item in enumerate(matrix["scenarios"])
         }
-        for field, value in mutations.items():
-            with self.subTest(field=field):
+        desktop_index = scenario_indexes["mundus-en-light-1440"]
+        mobile_index = next(
+            i
+            for i, item in enumerate(matrix["scenarios"])
+            if item["scenario"] == "mundus-en-light-390"
+        )
+        reduced_index = scenario_indexes["mundus-zh-dark-desktop"]
+
+        for index in mundus_indexes:
+            scenario = matrix["scenarios"][index]["scenario"]
+            for field in preview_fields:
+                with self.subTest(
+                    scenario=scenario,
+                    field=field,
+                    mutation="missing",
+                ):
+                    changed = json.loads(json.dumps(matrix))
+                    del changed["scenarios"][index][field]
+                    errors = " ".join(browser.validate_matrix(changed))
+                    self.assertIn(field, errors)
+
+        mutations = (
+            (desktop_index, "previewDefaultMode", "development"),
+            (desktop_index, "previewPointerModes", ["antipodes"]),
+            (
+                desktop_index,
+                "previewKeyboardModes",
+                ["antipodes", "development"],
+            ),
+            (desktop_index, "previewLinkTargetsCorrect", False),
+            (desktop_index, "previewSelectionSynchronized", False),
+            (mobile_index, "previewLayout", "columns"),
+            (mobile_index, "previewMinTargetHeight", 43),
+            (reduced_index, "previewTransitionDurationMs", 100),
+        )
+        for index, field, value in mutations:
+            scenario = matrix["scenarios"][index]["scenario"]
+            with self.subTest(
+                scenario=scenario,
+                field=field,
+                mutation="invalid",
+            ):
                 changed = json.loads(json.dumps(matrix))
                 changed["scenarios"][index][field] = value
                 self.assertIn(field, " ".join(browser.validate_matrix(changed)))
