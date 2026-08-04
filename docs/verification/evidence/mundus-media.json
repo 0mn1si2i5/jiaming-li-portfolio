@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "sourceUrl": "https://0mn1si2i5.github.io/Mundus/",
+  "sourceRevision": "378fe528ca1c8f83f0280f83383b5e785e851285",
+  "captureLocale": "zh-CN",
+  "capturedViewport": {
+    "width": 2160,
+    "height": 1350
+  },
+  "previewVisibleUiCount": 0,
+  "panelOverflowCount": 0,
+  "consoleErrorCount": 0,
+  "pageErrorCount": 0,
+  "failedRequestCount": 0,
+  "images": [
+    {
+      "role": "homepage-globe",
+      "path": "globe-preview.webp",
+      "width": 1215,
+      "height": 1215,
+      "sha256": "8b61e8b3f2e8a7bf49b614da6ba7c87be78d23152094dee610e66054d5b1f427"
+    },
+    {
+      "role": "project-full-interface",
+      "path": "other-side-full.webp",
+      "width": 2160,
+      "height": 1350,
+      "sha256": "7bceebd2d6d4d3a7c6b0a0cf086dfbe01bda8ea412ef32cf9c39af01b009477d"
+    },
+    {
+      "role": "story-other-side-detail",
+      "path": "other-side-detail.webp",
+      "width": 1555,
+      "height": 815,
+      "sha256": "9213cffeed11ad38a57a2eb6f8226302b431fdf763fcf891c323510a81e60cde"
+    }
+  ]
+}

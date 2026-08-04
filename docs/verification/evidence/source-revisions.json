@@ -1,0 +1,15 @@
+{
+  "gatePassed": true,
+  "repositories": [
+    {
+      "failures": [],
+      "objectVerified": true,
+      "repository": "Mundus",
+      "reviewStatus": "reviewed",
+      "revision": "378fe528ca1c8f83f0280f83383b5e785e851285",
+      "revisionType": "immutable-commit",
+      "verificationMethod": "git show"
+    }
+  ],
+  "schemaVersion": 3
+}

@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "scenarios": [
+    {
+      "scenario": "home-en-light-1440",
+      "route": "/",
+      "locale": "en",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "reducedMotion": false,
+      "focusableCount": 17,
+      "focusVisible": true,
+      "visibleTextLength": 1154,
+      "pagesBaseCorrect": true,
+      "selected": [
+        "DialogTree",
+        "Mundus",
+        "NBTI"
+      ],
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ]
+    },
+    {
+      "scenario": "home-en-light-1024",
+      "route": "/",
+      "locale": "en",
+      "theme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "reducedMotion": false,
+      "focusableCount": 17,
+      "focusVisible": true,
+      "visibleTextLength": 1154,
+      "pagesBaseCorrect": true,
+      "selected": [
+        "DialogTree",
+        "Mundus",
+        "NBTI"
+      ],
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ]
+    },
+    {
+      "scenario": "home-zh-dark-768",
+      "route": "/",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "reducedMotion": true,
+      "focusableCount": 17,
+      "focusVisible": true,
+      "visibleTextLength": 556,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "selected": [
+        "DialogTree",
+        "Mundus",
+        "NBTI"
+      ],
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ]
+    },
+    {
+      "scenario": "home-zh-dark-390",
+      "route": "/",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "reducedMotion": true,
+      "focusableCount": 17,
+      "focusVisible": true,
+      "visibleTextLength": 553,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "selected": [
+        "DialogTree",
+        "Mundus",
+        "NBTI"
+      ],
+      "other": [
+        "Side B",
+        "RSZ Namelist"
+      ]
+    },
+    {
+      "scenario": "mundus-en-light-1440",
+      "route": "/projects/mundus",
+      "locale": "en",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 2,
+      "totalImageCount": 2,
+      "reducedMotion": false,
+      "focusableCount": 10,
+      "focusVisible": true,
+      "visibleTextLength": 3160,
+      "pagesBaseCorrect": true,
+      "productVisualCount": 1
+    },
+    {
+      "scenario": "mundus-zh-dark-desktop",
+      "route": "/projects/mundus",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 2,
+      "totalImageCount": 2,
+      "reducedMotion": true,
+      "focusableCount": 10,
+      "focusVisible": true,
+      "visibleTextLength": 1196,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "productVisualCount": 1
+    },
+    {
+      "scenario": "mundus-en-light-390",
+      "route": "/projects/mundus",
+      "locale": "en",
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 2,
+      "totalImageCount": 2,
+      "reducedMotion": false,
+      "focusableCount": 10,
+      "focusVisible": true,
+      "visibleTextLength": 3155,
+      "pagesBaseCorrect": true,
+      "productVisualCount": 1
+    },
+    {
+      "scenario": "mundus-zh-dark-mobile",
+      "route": "/projects/mundus",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 2,
+      "totalImageCount": 2,
+      "reducedMotion": true,
+      "focusableCount": 10,
+      "focusVisible": true,
+      "visibleTextLength": 1193,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "productVisualCount": 1
+    }
+  ]
+}

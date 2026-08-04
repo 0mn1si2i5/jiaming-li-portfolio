@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "html": [
+    {
+      "path": "index.html",
+      "sha256": "0d827588dbab72cfca8d4540144413d50fb059291df00fc2a7caa97b1bf56a4e"
+    },
+    {
+      "path": "about/index.html",
+      "sha256": "123887f4797937ed2890988171e95f6dc40be327ac2497c95320b45cad49d927"
+    },
+    {
+      "path": "projects/dialogtree/index.html",
+      "sha256": "db2d20af8eaec94bbbe5c1e46043444e56f30728f5cb796834a79a14cf7bd2e7"
+    },
+    {
+      "path": "projects/mundus/index.html",
+      "sha256": "c04884158695372e155393402a2daacca4fcfc4dda71e42f31d96d482cddff9d"
+    },
+    {
+      "path": "projects/nbti/index.html",
+      "sha256": "682b28a1ad54171334a93f0b22e6e415e00c67e97716af520b55e453c24e7b48"
+    },
+    {
+      "path": "projects/side-b/index.html",
+      "sha256": "886ea81a50393f543fb0ef5be7516431935bf1fd1e496a85285fa972087c62cd"
+    }
+  ]
+}
