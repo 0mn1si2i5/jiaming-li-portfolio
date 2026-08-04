@@ -600,11 +600,10 @@ class TestStructuredFacts(unittest.TestCase):
         self.assertEqual(
             [rule["id"] for rule in rules],
             [
-                "mundus-maintained-globe",
-                "mundus-current-lenses",
+                "mundus-personal-globe",
+                "mundus-current-modes",
                 "mundus-parchment-atlas",
-                "mundus-interaction-and-sharing",
-                "mundus-maintainable-delivery",
+                "mundus-shared-experience",
             ],
         )
 
@@ -687,6 +686,203 @@ Visible claim.
         self.assertNotIn("secret claim", visible)
         self.assertNotIn("import Demo", visible)
 
+    def test_astro_semantics_include_only_rendered_model_fields(self) -> None:
+        source = """---
+const modes = [
+  {
+    title: { en: 'Rendered title', zh: '已渲染标题' },
+    unused: 'unused object field',
+  },
+];
+const dead = { title: { en: 'dead constant' } };
+---
+{modes.map((mode) => (
+  <Localized {...mode.title} />
+))}
+"""
+        self.assertTrue(
+            hasattr(facts, "extract_astro_rendered_semantics"),
+            "Astro rendered-semantics extractor is required",
+        )
+
+        semantic = facts.extract_astro_rendered_semantics(source)
+
+        self.assertIn("Rendered title", semantic)
+        self.assertIn("已渲染标题", semantic)
+        self.assertNotIn("unused object field", semantic)
+        self.assertNotIn("dead constant", semantic)
+
+    def test_astro_frontmatter_scanner_ignores_commented_const(self) -> None:
+        source = """---
+const modes = [
+  { title: { en: 'Real // title', zh: 'Real /* title */' } },
+];
+// const modes = [{ title: { en: 'Line-comment fake' } }];
+/*
+const modes = [{ title: { en: 'Block-comment fake' } }];
+*/
+---
+{modes.map((mode) => (
+  <Localized {...mode.title} />
+))}
+"""
+
+        semantic = facts.extract_astro_rendered_semantics(source)
+
+        self.assertIn("Real // title", semantic)
+        self.assertIn("Real /* title */", semantic)
+        self.assertNotIn("Line-comment fake", semantic)
+        self.assertNotIn("Block-comment fake", semantic)
+
+    def test_astro_literal_parser_rejects_unknown_and_trailing_tokens(
+        self,
+    ) -> None:
+        for literal in (
+            "{ title: 'accepted' } @",
+            "{ title: 'accepted' } false",
+        ):
+            with self.subTest(literal=literal):
+                with self.assertRaises(ValueError):
+                    facts._AstroLiteralParser(literal).parse()
+
+    def test_astro_literal_parser_accepts_only_supported_identifiers(
+        self,
+    ) -> None:
+        self.assertEqual(
+            facts._AstroLiteralParser("[true, false, null]").parse(),
+            [True, False, None],
+        )
+        with self.assertRaises(ValueError):
+            facts._AstroLiteralParser(
+                "{ title: unknownIdentifier }"
+            ).parse()
+
+    def test_astro_models_reject_trailing_declaration_syntax(self) -> None:
+        source = """---
+const model = { title: 'Trailing declaration token' } unexpected();
+---
+<h2>{model.title}</h2>
+"""
+
+        semantic = facts.extract_astro_rendered_semantics(source)
+
+        self.assertNotIn("Trailing declaration token", semantic)
+
+    def test_astro_semantics_include_only_consumed_alt_fields(self) -> None:
+        source = """---
+const modes = [
+  {
+    alt: { en: 'First alt', zh: '第一条替代文本' },
+    href: 'https://invalid.example/first',
+  },
+  {
+    alt: { en: 'Second alt', zh: '第二条替代文本' },
+    href: 'https://invalid.example/second',
+  },
+];
+const defaultMode = modes[0];
+---
+<img alt={defaultMode.alt.en} />
+{modes.map((mode) => (
+  <button data-alt-en={mode.alt.en} data-alt-zh={mode.alt.zh} />
+))}
+"""
+        self.assertTrue(
+            hasattr(facts, "extract_astro_rendered_semantics"),
+            "Astro rendered-semantics extractor is required",
+        )
+
+        semantic = facts.extract_astro_rendered_semantics(source)
+
+        for value in (
+            "First alt",
+            "第一条替代文本",
+            "Second alt",
+            "第二条替代文本",
+        ):
+            self.assertIn(value, semantic)
+        self.assertNotIn("https://invalid.example", semantic)
+
+    def test_astro_semantics_exclude_hidden_content_and_hidden_references(
+        self,
+    ) -> None:
+        source = """---
+const content = {
+  visible: 'Visible model value',
+  hidden: 'Hidden model value',
+};
+---
+<p>{content.visible}</p>
+<div hidden>{content.hidden} hidden literal</div>
+<section aria-hidden="true">aria hidden literal</section>
+<aside style={{ display: "none" }}>display hidden literal</aside>
+"""
+        self.assertTrue(
+            hasattr(facts, "extract_astro_rendered_semantics"),
+            "Astro rendered-semantics extractor is required",
+        )
+
+        semantic = facts.extract_astro_rendered_semantics(source)
+
+        self.assertIn("Visible model value", semantic)
+        for value in (
+            "Hidden model value",
+            "hidden literal",
+            "aria hidden literal",
+            "display hidden literal",
+        ):
+            self.assertNotIn(value, semantic)
+
+    def test_astro_semantics_exclude_hidden_self_closing_references(
+        self,
+    ) -> None:
+        source = """---
+const model = {
+  hiddenLocalized: 'Hidden localized token',
+  hiddenImage: 'Hidden image token',
+  hiddenInput: 'Hidden input token',
+  visible: 'Visible sibling token',
+};
+---
+<Localized hidden {...model.hiddenLocalized} />
+<img aria-hidden="true" alt={model.hiddenImage} />
+<input style={{ display: 'none' }} data-alt={model.hiddenInput} />
+<p>{model.visible}</p>
+"""
+
+        semantic = facts.extract_astro_rendered_semantics(source)
+
+        self.assertIn("Visible sibling token", semantic)
+        for value in (
+            "Hidden localized token",
+            "Hidden image token",
+            "Hidden input token",
+        ):
+            self.assertNotIn(value, semantic)
+
+    def test_claim_semantics_routes_mdx_and_astro_sources(self) -> None:
+        mdx = """---
+title: hidden frontmatter
+---
+Visible MDX claim.
+"""
+        astro = """---
+const model = { title: 'Rendered Astro claim' };
+---
+<h2>{model.title}</h2>
+"""
+        self.assertTrue(
+            hasattr(facts, "extract_claim_semantics"),
+            "Claim source routing is required",
+        )
+
+        mdx_semantic = facts.extract_claim_semantics("project.mdx", mdx)
+        astro_semantic = facts.extract_claim_semantics("story.astro", astro)
+
+        self.assertIn("Visible MDX claim", mdx_semantic)
+        self.assertNotIn("hidden frontmatter", mdx_semantic)
+        self.assertIn("Rendered Astro claim", astro_semantic)
+
     def test_source_semantics_exclude_comments_and_unrelated_strings(self) -> None:
         source = """
 // category: temporal
@@ -715,7 +911,7 @@ const mode = { category: "spatial" };
     def test_fact_catalog_uses_fewer_atomic_product_claims(self) -> None:
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
 
-        self.assertEqual(len(rules), 5)
+        self.assertEqual(len(rules), 4)
         self.assertTrue(
             all(
                 len(rule["claims"]) == 3
@@ -735,12 +931,15 @@ const mode = { category: "spatial" };
         self.assertEqual(
             rule_ids,
             {
-                "mundus-maintained-globe",
-                "mundus-current-lenses",
+                "mundus-personal-globe",
+                "mundus-current-modes",
                 "mundus-parchment-atlas",
-                "mundus-interaction-and-sharing",
-                "mundus-maintainable-delivery",
+                "mundus-shared-experience",
             },
+        )
+        self.assertNotIn(
+            "Chronorbis",
+            json.dumps(rules, ensure_ascii=False),
         )
 
     def test_each_public_statement_has_claim_and_evidence_coverage(self) -> None:
@@ -749,158 +948,87 @@ const mode = { category: "spatial" };
             for rule in facts.load_rules(Path("scripts/verification/facts.json"))
         }
         expected = {
-            "mundus-maintained-globe": {
+            "mundus-personal-globe": {
                 "claims": {
-                    "one geographic workspace",
-                    "long-running personal globe",
-                    "reads the result with its source and method",
-                    "shares the current view",
-                    "Changing lenses keeps the same geographic context",
-                    "同一个地理空间",
-                    "长期维护这颗个人数字地球",
+                    "public personal globe",
+                    "same geographic context",
+                    "read the result with its source and method",
+                    "share that state",
+                    "已经公开的个人数字地球",
+                    "同一个地理上下文",
                     "阅读结果及其来源与方法",
-                    "再分享当前画面",
-                    "切换视角时，地理上下文会保留下来",
-                    "One place stays in view",
-                    "地点始终留在视野中",
+                    "分享当前状态",
+                    "Three views of the same globe",
+                    "同一颗地球上的三种观察方式",
                 },
                 "evidence": {
                     "long-lived personal digital globe",
                     "different scientific lenses",
                     "explicit about its methods",
-                    "preserved the intended selected point while switching modes",
-                    "restores shareable state and browser history",
                 },
             },
-            "mundus-current-lenses": {
+            "mundus-current-modes": {
                 "claims": {
-                    "follows a point through Earth to its antipode",
-                    "represented major cities",
-                    "reported HDI",
-                    "health, education, and income dimensions",
-                    "year, history, source, and missing states",
-                    "UTC time into solar position",
-                    "daylight, twilight",
-                    "approximate sunrise and sunset",
-                    "沿地心找到对跖点",
-                    "收录主要城市",
+                    "Other Side",
+                    "selected point through Earth to its antipode",
+                    "Development, Unpacked",
+                    "published HDI",
+                    "Sunline",
+                    "day-night boundary",
+                    "地球另一端",
+                    "沿地心找到所选地点的对跖点",
+                    "发展的不同侧面",
                     "已发布 HDI",
-                    "健康、教育、收入维度",
-                    "年份、历史变化、来源与缺失状态",
-                    "UTC 时间转换",
-                    "白昼、曙暮光",
-                    "近似日出日落",
+                    "日照线",
+                    "昼夜边界",
                 },
                 "evidence": {
                     "calculates exact antipodal endpoints",
-                    "nearest eligible major city to each endpoint",
                     "compares reported HDI",
-                    "health, education, and income dimension indices",
                     "visualizes the day-night boundary",
-                    "estimates solar position, sunrise, and sunset in UTC",
                 },
             },
             "mundus-parchment-atlas": {
                 "claims": {
-                    "Parchment Atlas",
-                    "Natural Earth vector geometry",
-                    "bilingual GeoNames search",
-                    "endpoint city relationships",
-                    "draggable through-Earth section",
-                    "Natural Earth 矢量几何",
-                    "GeoNames 中英文城市搜索",
-                    "两端城市关系",
-                    "可拖拽的穿地剖面",
-                    "endpoint city relationship",
-                    "两端城市关系的细节画面",
+                    "represented cities at both ends",
+                    "shared globe and location state",
+                    "两端收录城市之间的关系",
+                    "共享的地球与地点状态",
+                    "Parchment Atlas · Preview",
+                    "Parchment Atlas · 预览",
+                    "through-Earth relationship",
+                    "穿过地球的两端空间关系",
                 },
                 "evidence": {
                     "Parchment Atlas",
-                    "draggable Other Side cross-section",
-                    "bilingual city search",
                     "bilateral city relations",
                     "Natural Earth vector globe",
                 },
             },
-            "mundus-interaction-and-sharing": {
+            "mundus-shared-experience": {
                 "claims": {
-                    "supports closer inspection",
-                    "preserves the globe's color",
-                    "consistent Twilight label and definition",
-                    "restores the selected location and observation mode",
-                    "exact selected location is included",
-                    "retain the displayed UTC time",
-                    "支持更近距离的观察",
-                    "地球颜色保持稳定",
-                    "统一使用“曙暮光”名称与定义",
-                    "恢复所选地点与观察视角",
-                    "链接包含精确地点",
-                    "保留画面中的 UTC 时间",
-                    "stable through-Earth section",
-                    "explicit privacy notice",
-                    "稳定拖动穿地剖面",
-                    "隐私提示",
-                },
-                "evidence": {
-                    "data-camera-distance', '1.55'",
-                    "data-vector-drag-effective-alpha",
-                    "data-vector-drag-render-order",
-                    "data-vector-palette-version",
-                    "labels and defines civil twilight consistently in both languages",
-                    "复制前请确认你愿意分享这一位置与时间",
-                    "copiedShareUrl",
-                    "await page.goto(preview)",
-                    "await expect(page).toHaveURL(preview)",
-                    "await page.reload()",
-                    "30.2500°, 120.7500°",
-                },
-            },
-            "mundus-maintainable-delivery": {
-                "claims": {
-                    "One globe kernel carries place, camera behavior, controls, and sharing",
+                    "same globe and location context",
                     "Reviewed data snapshots and hashes",
-                    "Larger assets load when their lens needs them",
-                    "static client",
-                    "bilingual copy",
-                    "keyboard access",
-                    "visible focus",
-                    "reduced motion",
-                    "WebGL fallback",
-                    "Pages subpath checks and artifact verification",
-                    "单一地球内核承载所有视角的地点、相机行为、控件与分享方式",
+                    "static delivery",
+                    "public build reproducible",
+                    "共用同一颗地球和地点上下文",
                     "经过审核的数据快照和哈希",
-                    "较大的资源只在对应视角使用时加载",
-                    "静态客户端",
-                    "中英文",
-                    "键盘操作",
-                    "可见焦点",
-                    "reduced motion",
-                    "WebGL fallback",
-                    "Pages 子路径检查和制品验证",
-                    "pins its data and method",
-                    "reuses the existing place and controls",
-                    "passes the public-build gate",
-                    "固定数据与方法",
-                    "复用既有地点与控件",
-                    "通过公开构建门禁",
+                    "静态交付",
+                    "线上构建可以复现",
+                    "current public views",
+                    "当前公开界面",
                 },
                 "evidence": {
                     "static, one-Canvas architecture",
                     "SHA-256",
-                    "Data identities, licenses, methods",
-                    "Development data was absent before first entry",
                     "selected point while switching modes",
-                    "Verify Chinese/English title, language, core meaning",
-                    "keeps all observation modes keyboard accessible",
-                    "uses the accent focus ring for keyboard form and disclosure controls only",
-                    "uses static reduced-motion glow",
-                    "keeps country semantics when WebGL2 is unavailable",
-                    "Confirm all assets resolve below `/Mundus/`",
                     "build/artifact verification",
+                    "literal subpath gate is closed",
                 },
             },
         }
 
+        self.assertEqual(set(rules), set(expected))
         for fact_id, coverage in expected.items():
             with self.subTest(fact_id=fact_id):
                 assertion = rules[fact_id]
@@ -917,38 +1045,8 @@ const mode = { category: "spatial" };
                     for rule in evidence["rules"]
                     for value in rule.get("values", [])
                 }
-                self.assertTrue(coverage["claims"].issubset(claim_values))
-                self.assertTrue(coverage["evidence"].issubset(evidence_values))
-
-    def test_interaction_fact_evidence_covers_each_public_claim(self) -> None:
-        rules = facts.load_rules(Path("scripts/verification/facts.json"))
-        interaction = next(
-            rule
-            for rule in rules
-            if rule["id"] == "mundus-interaction-and-sharing"
-        )
-        evidence_values = {
-            value
-            for evidence in interaction["evidence"]
-            for evidence_rule in evidence["rules"]
-            for value in evidence_rule.get("values", [])
-        }
-
-        self.assertTrue(
-            {
-                "data-camera-distance', '1.55'",
-                "data-vector-drag-effective-alpha",
-                "oceanAlpha:0.52,landLayerAlpha:0.48,"
-                "effectiveCompositeAlpha:0.7504",
-                "data-vector-drag-render-order",
-                "innerWall:1,ocean:2,land:2.5,highlight:3,markers:5",
-                "data-vector-palette-version",
-                "labels and defines civil twilight consistently in both languages",
-                "分享链接会编码并恢复当前所选位置与观察方式，并固定当前显示的 "
-                "UTC 时间；复制前请确认你愿意分享这一位置与时间。",
-                "copiedShareUrl",
-            }.issubset(evidence_values)
-        )
+                self.assertEqual(claim_values, coverage["claims"])
+                self.assertEqual(evidence_values, coverage["evidence"])
 
     def test_fact_catalog_rejects_missing_story_claim(self) -> None:
         catalog = {
