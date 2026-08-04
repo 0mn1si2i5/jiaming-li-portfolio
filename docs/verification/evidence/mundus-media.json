@@ -10,6 +10,7 @@
   "previewVisibleUiCount": 0,
   "panelOverflowCount": 0,
   "consoleErrorCount": 0,
+  "pageErrorCount": 0,
   "failedRequestCount": 0,
   "images": [
     {
@@ -17,21 +18,21 @@
       "path": "globe-preview.webp",
       "width": 1215,
       "height": 1215,
-      "sha256": "f5d5ea32303b888f3290a842d5ec279c050405013340c3205742c48464ce5414"
+      "sha256": "8b61e8b3f2e8a7bf49b614da6ba7c87be78d23152094dee610e66054d5b1f427"
     },
     {
       "role": "project-full-interface",
       "path": "other-side-full.webp",
       "width": 2160,
       "height": 1350,
-      "sha256": "d70bd145a08318df0df6cea3ff3928884014cf056ed2a4f210b4c10aca3c62d5"
+      "sha256": "7bceebd2d6d4d3a7c6b0a0cf086dfbe01bda8ea412ef32cf9c39af01b009477d"
     },
     {
       "role": "story-other-side-detail",
       "path": "other-side-detail.webp",
       "width": 1555,
       "height": 815,
-      "sha256": "1871df3c5bed81f7696c52b7afc04947bb3a5f56e3b04c3ab425b01faf6f5bd6"
+      "sha256": "9213cffeed11ad38a57a2eb6f8226302b431fdf763fcf891c323510a81e60cde"
     }
   ]
 }

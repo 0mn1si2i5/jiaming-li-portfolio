@@ -72,6 +72,49 @@ function webpDimensions(data) {
   };
 }
 
+execFileSync('git', ['-C', mundusRoot, 'fetch', 'origin', 'main'], {
+  stdio: 'inherit',
+});
+const originMain = execFileSync(
+  'git',
+  ['-C', mundusRoot, 'rev-parse', 'origin/main'],
+  { encoding: 'utf8' },
+).trim();
+assert.equal(
+  originMain,
+  revision,
+  `Mundus origin/main drifted to ${originMain}`,
+);
+
+const deploymentEndpoint =
+  'repos/0mn1si2i5/Mundus/deployments?environment=github-pages&per_page=1';
+const deployment = JSON.parse(
+  execFileSync('gh', ['api', deploymentEndpoint, '--jq', '.[0]'], {
+    encoding: 'utf8',
+  }),
+);
+assert(deployment?.id, 'latest github-pages deployment is unavailable');
+assert.equal(
+  deployment.sha,
+  revision,
+  `Mundus Pages deployment drifted to ${deployment.sha}`,
+);
+const deploymentState = execFileSync(
+  'gh',
+  [
+    'api',
+    `repos/0mn1si2i5/Mundus/deployments/${deployment.id}/statuses?per_page=1`,
+    '--jq',
+    '.[0].state',
+  ],
+  { encoding: 'utf8' },
+).trim();
+assert.equal(
+  deploymentState,
+  'success',
+  `Mundus Pages deployment is ${deploymentState}`,
+);
+
 await fs.mkdir(mediaRoot, { recursive: true });
 
 const consoleErrors = [];
@@ -330,6 +373,7 @@ try {
     previewVisibleUiCount,
     panelOverflowCount: panelOverflows.length,
     consoleErrorCount: consoleErrors.length,
+    pageErrorCount: pageErrors.length,
     failedRequestCount: requestFailures.length,
     images,
   };

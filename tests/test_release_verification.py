@@ -141,6 +141,9 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             ],
         )
         self.assertEqual(manifest["panelOverflowCount"], 0)
+        self.assertEqual(manifest["consoleErrorCount"], 0)
+        self.assertEqual(manifest["pageErrorCount"], 0)
+        self.assertEqual(manifest["failedRequestCount"], 0)
         self.assertGreaterEqual(manifest["images"][1]["width"], 1920)
         self.assertEqual(
             len({item["sha256"] for item in manifest["images"]}),
