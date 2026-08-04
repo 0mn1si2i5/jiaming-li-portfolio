@@ -258,4 +258,41 @@ const defaultMode = modes[0];
   @media (prefers-reduced-motion: reduce) {
     .preview-link img { transition: none; }
   }
+  :global(.chronorbis-vision) {
+    box-sizing: border-box;
+    width: 100%;
+    margin: clamp(4rem, 9vw, 8rem) 0;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    color: #28251f;
+    background: #ece3ce;
+    border: 1px solid #c8b994;
+    border-radius: 14px;
+  }
+  :global(.chronorbis-status) {
+    color: #725632;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  :global(.chronorbis-structure) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+    margin-top: 2rem;
+  }
+  :global(.chronorbis-structure span) {
+    padding: .85rem 1rem;
+    color: #4f493d;
+    background: rgb(255 255 255 / .28);
+    border-left: 2px solid #8d6d3f;
+  }
+  @media (max-width: 560px) {
+    :global(.chronorbis-vision) {
+      padding: 1rem;
+    }
+    :global(.chronorbis-structure) {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
