@@ -3,7 +3,7 @@
 ## Authority
 
 - Branch: `feat/mundus-next`
-- Current HEAD: `9504b26`
+- Current HEAD: `f25ba5b`
 - Public Mundus SHA:
   `378fe528ca1c8f83f0280f83383b5e785e851285`
 - Approved spec commit: `89ab2d8`
@@ -69,11 +69,20 @@
 - Task 7 specification review: compliant.
 - Task 7 quality review: approved.
 - Task 7 preview service and temporary capture script: stopped and removed.
+- Task 8 local release-record commit: `f25ba5b`.
+- Task 8 local gate: audit 0 vulnerabilities, 62 tests passed, six pages
+  built, and `facts=4/4 browser=pass privacy=pass`.
+- Task 8 local release record specification review: compliant.
+- Task 8 local release record quality review: approved.
+- Remote blocker: PR #1 is closed on the retired
+  `feat/mundus-omnipet-portfolio` head; `feat/mundus-next` has no associated
+  pull request, and creating a second PR is prohibited without a new decision.
 
 ## Active Slice
 
 Task 8: update release evidence, run the complete local gate, push the existing
-branch, and verify exact-head CI without merging or deploying.
+branch, then stop at the pull-request decision because exact-head PR CI has no
+authorized target.
 
 ## Resume State Hint
 
@@ -97,4 +106,6 @@ Verify current branch, HEAD, and worktree before editing.
 - New product owner or fallback introduced: no.
 - Unsupported complex Astro syntax remains fail-closed: yes.
 - Browser evidence is current: yes.
+- Task 8 local evidence is sufficient: yes.
+- Exact-head pull-request CI is blocked by remote PR drift: yes.
 - Decision: `continue`.
