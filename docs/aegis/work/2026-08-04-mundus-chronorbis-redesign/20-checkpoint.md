@@ -3,7 +3,7 @@
 ## Authority
 
 - Branch: `feat/mundus-next`
-- Current HEAD: `98bee4c`
+- Current HEAD: `d092eab`
 - Public Mundus SHA:
   `378fe528ca1c8f83f0280f83383b5e785e851285`
 - Approved spec commit: `89ab2d8`
@@ -17,7 +17,7 @@
 - [x] Task 2: accessible three-mode preview.
 - [x] Task 3: bilingual Mundus and Chronorbis narrative.
 - [x] Task 4: verified three-mode media capture.
-- [ ] Task 5: narrow immutable facts.
+- [x] Task 5: narrow immutable facts.
 - [ ] Task 6: browser evidence contract.
 - [ ] Task 7: regenerate browser evidence.
 - [ ] Task 8: release record, full gates, push, and Draft PR CI.
@@ -42,10 +42,20 @@
 - Task 4 media evidence: three `1920x1080` Story assets, five distinct
   SHA-256 values, and zero error, failed-request, or panel-overflow counts.
 - Task 4 `git diff --check`: pass.
+- Task 5 fact-contract commit: `d092eab`.
+- Task 5 strict TDD: old five-fact catalog produced the expected RED.
+- Task 5 structured-fact tests: 22 passed under Python 3.9.6.
+- Task 5 immutable evidence verifier: `[]`.
+- Task 5 specification review: compliant.
+- Task 5 quality review: approved after closing four Astro false-positive
+  paths.
+- Task 5 plan correction: claim extraction now routes `.astro` sources
+  through a bounded rendered-semantics parser instead of treating them as
+  MDX. The Story UI and approved fact tokens were not changed.
 
 ## Active Slice
 
-Task 5: narrow immutable facts to the four approved current Mundus claims.
+Task 6: extend the browser evidence validator contract for the preview fields.
 
 ## Resume State Hint
 
@@ -64,7 +74,8 @@ Verify current branch, HEAD, and worktree before editing.
 - Compatibility boundary intact: yes.
 - New owner/fallback introduced: no.
 - Authority migration documented: yes.
-- Evidence sufficient for Task 4: yes.
+- Evidence sufficient for Task 5: yes.
 - Task 1 RED contract preserved: yes.
-- Task 5 not started: yes.
+- New product owner or fallback introduced: no.
+- Unsupported complex Astro syntax remains fail-closed: yes.
 - Decision: `continue`.
