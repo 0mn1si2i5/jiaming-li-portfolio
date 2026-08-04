@@ -2,103 +2,52 @@
   "schemaVersion": 2,
   "assertions": [
     {
-      "id": "mundus-maintained-globe",
-      "description": "Mundus is maintained as one personal globe with a shared geographic context.",
+      "id": "mundus-personal-globe",
+      "description": "Mundus is a public personal globe organized around geographic context.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["one geographic workspace", "long-running personal globe", "reads the result with its source and method", "shares the current view", "Changing lenses keeps the same geographic context"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["同一个地理空间", "长期维护这颗个人数字地球", "阅读结果及其来源与方法", "再分享当前画面", "切换视角时，地理上下文会保留下来"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["One place stays in view", "地点始终留在视野中"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["public personal globe", "same geographic context", "read the result with its source and method", "share that state"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["已经公开的个人数字地球", "同一个地理上下文", "阅读结果及其来源与方法", "分享当前状态"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Three views of the same globe", "同一颗地球上的三种观察方式"]}]}
       ],
       "evidence": [
-        {
-          "repository": "Mundus",
-          "source": "README.md",
-          "rules": [{"type": "contains_all", "values": ["long-lived personal digital globe", "different scientific lenses", "explicit about its methods"]}]
-        },
-        {
-          "repository": "Mundus",
-          "source": "docs/2026-08-01-v1.1-parchment-atlas-candidate.md",
-          "rules": [{"type": "contains_all", "values": ["preserved the intended selected point while switching modes"]}]
-        },
-        {
-          "repository": "Mundus",
-          "source": "tests/e2e/app.spec.ts",
-          "rules": [{"type": "contains_all", "values": ["restores shareable state and browser history"]}]
-        }
+        {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["long-lived personal digital globe", "different scientific lenses", "explicit about its methods"]}]}
       ]
     },
     {
-      "id": "mundus-current-lenses",
-      "description": "The public product currently provides Other Side, Development, and Sunline.",
+      "id": "mundus-current-modes",
+      "description": "The public product provides Other Side, Development, and Sunline.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Three lenses in use today", "Other Side", "follows a point through Earth to its antipode", "represented major cities", "Development, Unpacked", "reported HDI", "health, education, and income dimensions", "year, history, source, and missing states", "Sunline", "UTC time into solar position", "daylight, twilight", "approximate sunrise and sunset"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["目前使用的三个视角", "地球另一端", "沿地心找到对跖点", "收录主要城市", "发展的不同侧面", "已发布 HDI", "健康、教育、收入维度", "年份、历史变化、来源与缺失状态", "日照线", "UTC 时间转换", "白昼、曙暮光", "近似日出日落"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Other Side", "Development, Unpacked", "Sunline"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Other Side", "selected point through Earth to its antipode", "Development, Unpacked", "published HDI", "Sunline", "day-night boundary"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["地球另一端", "沿地心找到所选地点的对跖点", "发展的不同侧面", "已发布 HDI", "日照线", "昼夜边界"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Other Side", "Development, Unpacked", "Sunline", "地球另一端", "发展的不同侧面", "日照线"]}]}
       ],
       "evidence": [
-        {
-          "repository": "Mundus",
-          "source": "README.md",
-          "rules": [{"type": "contains_all", "values": ["Other Side", "calculates exact antipodal endpoints", "nearest eligible major city to each endpoint", "Development, Unpacked", "compares reported HDI", "health, education, and income dimension indices", "Sunline", "visualizes the day-night boundary", "estimates solar position, sunrise, and sunset in UTC"]}]
-        }
+        {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["calculates exact antipodal endpoints", "compares reported HDI", "visualizes the day-night boundary"]}]}
       ]
     },
     {
       "id": "mundus-parchment-atlas",
-      "description": "Parchment Atlas ships vector geography, bilingual city search, and the Other Side section.",
+      "description": "The public Parchment Atlas presentation includes vector geography and bilingual city relationships.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "Natural Earth vector geometry", "bilingual GeoNames search", "endpoint city relationships", "draggable through-Earth section"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "Natural Earth 矢量几何", "GeoNames 中英文城市搜索", "两端城市关系", "可拖拽的穿地剖面"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Parchment Atlas · Current product", "Parchment Atlas · 当前产品", "through-Earth section", "穿地剖面", "endpoint city relationship", "两端城市关系的细节画面"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["represented cities at both ends", "shared globe and location state"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["两端收录城市之间的关系", "共享的地球与地点状态"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Parchment Atlas · Preview", "Parchment Atlas · 预览", "through-Earth relationship", "穿过地球的两端空间关系"]}]}
       ],
       "evidence": [
-        {
-          "repository": "Mundus",
-          "source": "README.md",
-          "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "draggable Other Side cross-section", "bilingual city search", "bilateral city relations", "Natural Earth vector globe"]}]
-        }
+        {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "bilateral city relations", "Natural Earth vector globe"]}]}
       ]
     },
     {
-      "id": "mundus-interaction-and-sharing",
-      "description": "The current deployment supports closer inspection, clear twilight language, and restorable sharing.",
+      "id": "mundus-shared-experience",
+      "description": "Shared state, pinned data, and static delivery support the public experience.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["supports closer inspection", "preserves the globe's color", "consistent Twilight label and definition", "restores the selected location and observation mode", "exact selected location is included", "retain the displayed UTC time"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["支持更近距离的观察", "地球颜色保持稳定", "统一使用“曙暮光”名称与定义", "恢复所选地点与观察视角", "链接包含精确地点", "保留画面中的 UTC 时间"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["closer globe inspection", "stable through-Earth section", "clear Twilight language", "exact-location sharing", "explicit privacy notice", "更近距离观察地球", "稳定拖动穿地剖面", "分享精确地点", "隐私提示"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["same globe and location context", "Reviewed data snapshots and hashes", "static delivery", "public build reproducible"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["共用同一颗地球和地点上下文", "经过审核的数据快照和哈希", "静态交付", "线上构建可以复现"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["current public views", "当前公开界面"]}]}
       ],
       "evidence": [
-        {
-          "repository": "Mundus",
-          "source": "tests/e2e/app.spec.ts",
-          "rules": [{"type": "contains_all", "values": ["data-camera-distance', '1.55'", "data-vector-drag-effective-alpha", "oceanAlpha:0.52,landLayerAlpha:0.48,effectiveCompositeAlpha:0.7504", "data-vector-drag-render-order", "innerWall:1,ocean:2,land:2.5,highlight:3,markers:5", "data-vector-palette-version", "labels and defines civil twilight consistently in both languages", "分享链接会编码并恢复当前所选位置与观察方式，并固定当前显示的 UTC 时间；复制前请确认你愿意分享这一位置与时间。", "复制前请确认你愿意分享这一位置与时间", "copiedShareUrl", "await page.goto(preview)", "await expect(page).toHaveURL(preview)", "await page.reload()", "30.2500°, 120.7500°"]}]
-        }
-      ]
-    },
-    {
-      "id": "mundus-maintainable-delivery",
-      "description": "Pinned data, static delivery, accessibility, and artifact verification support continued maintenance.",
-      "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["One globe kernel carries place, camera behavior, controls, and sharing", "Reviewed data snapshots and hashes", "Larger assets load when their lens needs them", "static client", "bilingual copy", "keyboard access", "visible focus", "reduced motion", "WebGL fallback", "Pages subpath checks and artifact verification"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["单一地球内核承载所有视角的地点、相机行为、控件与分享方式", "经过审核的数据快照和哈希", "较大的资源只在对应视角使用时加载", "静态客户端", "中英文", "键盘操作", "可见焦点", "reduced motion", "WebGL fallback", "Pages 子路径检查和制品验证"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["pins its data and method", "reuses the existing place and controls", "passes the public-build gate", "固定数据与方法", "复用既有地点与控件", "通过公开构建门禁"]}]}
-      ],
-      "evidence": [
-        {
-          "repository": "Mundus",
-          "source": "docs/2026-08-01-v1.1-publication-packet.md",
-          "rules": [{"type": "contains_all", "values": ["static, one-Canvas architecture", "SHA-256", "Data identities, licenses, methods", "Verify Chinese/English title, language, core meaning", "Confirm all assets resolve below `/Mundus/`", "build/artifact verification"]}]
-        },
-        {
-          "repository": "Mundus",
-          "source": "tests/e2e/app.spec.ts",
-          "rules": [{"type": "contains_all", "values": ["keeps Development data lazy and cached across mode switches", "keeps all observation modes keyboard accessible", "uses the accent focus ring for keyboard form and disclosure controls only", "uses static reduced-motion glow", "keeps country semantics when WebGL2 is unavailable", "matches the document language to an English browser"]}]
-        },
-        {
-          "repository": "Mundus",
-          "source": "docs/2026-08-01-v1.1-parchment-atlas-candidate.md",
-          "rules": [{"type": "contains_all", "values": ["Development data was absent before first entry", "selected point while switching modes", "Chinese and English preserved core meaning", "Primary keyboard controls worked", "focus restoration remained correct", "Reduced motion, WebGL unavailability", "literal subpath gate is closed"]}]
-        }
+        {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-publication-packet.md", "rules": [{"type": "contains_all", "values": ["static, one-Canvas architecture", "SHA-256", "build/artifact verification"]}]},
+        {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-parchment-atlas-candidate.md", "rules": [{"type": "contains_all", "values": ["selected point while switching modes", "literal subpath gate is closed"]}]}
       ]
     }
   ]

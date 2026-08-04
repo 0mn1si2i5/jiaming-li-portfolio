@@ -7,43 +7,17 @@ import re
 import subprocess
 from pathlib import Path
 
+from .claim_semantics import (
+    _AstroLiteralParser,
+    extract_astro_rendered_semantics,
+    extract_claim_semantics,
+    extract_mdx_visible_text,
+)
+
 
 EXPECTED_REVISIONS = {
     "Mundus": "378fe528ca1c8f83f0280f83383b5e785e851285",
 }
-
-def extract_mdx_visible_text(text: str) -> str:
-    text = re.sub(r"\A---\n.*?\n---\n", "", text, flags=re.DOTALL)
-    text = re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
-    text = re.sub(r"\{/\*.*?\*/\}", "", text, flags=re.DOTALL)
-    hidden_attributes = (
-        r"(?:\bhidden(?:\s|>|=)|\baria-hidden\s*=\s*(?:[\"']true[\"']|\{true\})|"
-        r"\bstyle\s*=\s*(?:[\"'][^\"']*(?:display\s*:\s*none|visibility\s*:\s*hidden)"
-        r"[^\"']*[\"']|\{\{.*?(?:display\s*:\s*[\"']none[\"']|"
-        r"visibility\s*:\s*[\"']hidden[\"']).*?\}\}))"
-    )
-    element = re.compile(
-        rf"<(?P<tag>[A-Za-z][\w.-]*)\b(?=[^>]*{hidden_attributes})[^>]*>"
-        rf".*?</(?P=tag)\s*>",
-        flags=re.DOTALL | re.IGNORECASE,
-    )
-    previous = None
-    while previous != text:
-        previous = text
-        text = element.sub("", text)
-    text = re.sub(r"(?m)^\s*import\b.*$", "", text)
-    text = re.sub(
-        r"(?ms)^\s*export\s+(?:default\s+)?(?:const|let|var)\b.*?;\s*$",
-        "",
-        text,
-    )
-    text = re.sub(
-        r"(?ms)^\s*export\s+(?:default\s+)?(?:async\s+)?function\b.*?^}\s*;?\s*$",
-        "",
-        text,
-    )
-    text = re.sub(r"(?m)^\s*export\b.*$", "", text)
-    return text
 
 
 def extract_source_semantics(text: str) -> str:
@@ -153,10 +127,11 @@ def verify(
     for assertion in load_rules(catalog):
         assertion_id = str(assertion["id"])
         for claim in assertion["claims"]:
-            claim_text = (portfolio / str(claim["source"])).read_text(
+            claim_source = str(claim["source"])
+            claim_text = (portfolio / claim_source).read_text(
                 encoding="utf-8"
             )
-            claim_text = extract_mdx_visible_text(claim_text)
+            claim_text = extract_claim_semantics(claim_source, claim_text)
             if not match_rules(claim_text, claim["rules"]):
                 errors.append(
                     f"{assertion_id}: {claim['locale']} portfolio claim mismatch"
