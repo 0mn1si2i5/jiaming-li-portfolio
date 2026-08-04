@@ -1,7 +1,7 @@
 # Mundus Release Verification
 
 Verified on 2026-08-04 against the exact Mundus-only build on
-`chore/portfolio-rename-migration`.
+`feat/mundus-next`.
 
 ## Result
 
@@ -28,20 +28,25 @@ Mundus is pinned to the deployed V1.1 public `main`:
 ```
 
 The verifier requires that immutable commit object and reads evidence with
-`git show <revision>:<path>`. Five visitor-visible facts bind the bilingual
+`git show <revision>:<path>`. Four visitor-visible facts bind the bilingual
 case and Story to:
 
-- `README.md`: the maintained personal globe, current lenses, and public
-  Parchment Atlas capabilities;
-- `tests/e2e/app.spec.ts`: closer inspection, stable drag rendering, Twilight
-  terminology, and exact-location sharing disclosure;
-- `docs/2026-08-01-v1.1-publication-packet.md`: static architecture, hashed
-  data, accessibility, and release gates.
+- `README.md`: the personal globe, its three current public modes, and the
+  Parchment Atlas visual system;
+- `tests/e2e/app.spec.ts`: the shared-location experience;
+- the bilingual Portfolio case and Story: the same four claims in
+  visitor-visible form.
 
 Only capabilities observable on the public Pages deployment are presented as
-shipped. The source media set contains a globe-only homepage preview, a
-complete Other Side interface hero, and a focused Other Side Story detail.
-The project detail page retains two images: the hero and the Story visual.
+shipped. Chronorbis is separately identified as an unfinished and unpublished
+authorial direction. It is not a Mundus capability or an evidence-backed
+product fact.
+
+The source media set contains a globe-only homepage preview, a complete Other
+Side interface hero, and three same-size Story mode previews for Other Side,
+Development, and Sunline. The Story renders one preview image at a time, so
+the project detail page retains two visible images: the hero and the current
+Story preview.
 
 ## Browser Matrix
 
@@ -65,11 +70,16 @@ preference, image counts, focus result, and overflow result in
 `evidence/browser-matrix.json`. Reduced-motion observations are independently
 cross-bound in `evidence/browser-reduced-motion.json`.
 
+The Mundus scenarios cover pointer and keyboard switching across Other Side,
+Development, and Sunline; synchronized image, alternative text, link, selected
+state, and locale; new-tab targets; desktop and mobile selector layouts; and
+reduced motion.
+
 The eight isolated browser sessions reported:
 
 - console messages: 0;
-- normalized completed network requests: 104;
-- statuses: 104 x 200;
+- normalized completed network requests: 220;
+- statuses: 168 x 200 and 52 x 304;
 - failed requests: 0;
 - every local document, stylesheet, font, favicon, and image resolved from the
   GitHub Pages project base.
@@ -100,20 +110,56 @@ local paths, internal URLs, credentials, private keys, and high-entropy
 secrets. Site-relative project-base asset paths are recognized structurally
 rather than misclassified as secret tokens.
 
-Pull requests run the complete non-deploying gate with `contents: read`:
-portfolio checkout, exact Mundus checkout, `npm ci`, tests, build, explicit-root
-verification, and a one-day Pages artifact. Actions use immutable SHA pins.
-Only the deploy job receives Pages/id-token permissions, and it is restricted
-to non-PR events on `refs/heads/main`.
+The workflow retains the intended Draft, non-deploying pull-request gate with
+`contents: read`: portfolio checkout, exact Mundus checkout, `npm ci`, tests,
+build, explicit-root verification, and a one-day Pages artifact. Actions use
+immutable SHA pins. Only the deploy job receives Pages/id-token permissions,
+and it is restricted to non-PR events on `refs/heads/main`.
+
+PR #1 remains closed on its former `feat/mundus-omnipet-portfolio@bbf00b2`
+head. The current authority is `feat/mundus-next`. A replacement Draft PR was
+explicitly authorized for that branch so its exact head can run the
+non-deploying pull-request gate.
 
 ## Commands
 
+`MUNDUS_ROOT` points to the locally checked-out Mundus authority repository.
+
 ```bash
 npm ci
+npm audit --audit-level=high
 npm test
 npm run build
-npm run verify
+npm run verify -- --mundus-root "$MUNDUS_ROOT"
 git diff --check
 ```
 
-The final command evidence is recorded in the Draft PR and release closeout.
+The explicit root keeps verification bound to that local authority checkout.
+
+## Local Gate Result
+
+The Task 8 local gate was rerun from clean HEAD
+`8e9f5516179fbd1eed7387cb441c642965f55f38`:
+
+- `npm ci`: 339 packages installed and 340 packages audited;
+- `npm audit --audit-level=high`: 0 vulnerabilities;
+- `npm test`: 62 of 62 tests passed;
+- `npm run build`: 6 static pages built;
+- explicit-root release verification:
+  `facts=4/4 browser=pass privacy=pass`;
+- `git diff --check`: passed with no output.
+
+The scope review found no OmniPet route, media, fact, visitor claim, or source
+checkout; no GHSL visitor claim; and no `stop_global_morphology` reference in
+`src`, `scripts`, or the deploy workflow. Chronorbis remains explicitly
+unfinished, unpublished, and separate from Mundus. The built Mundus detail
+page contains exactly two images. Deployment remains restricted to non-PR
+events on `refs/heads/main`.
+
+No dependency, source, workflow, browser evidence, screenshot, or unrelated
+design file changed while rerunning the local gate. The only working-tree
+change is this release record.
+
+The local command evidence is recorded here. Remote exact-head CI is run only
+through the authorized replacement Draft PR. This verification does not
+reopen PR #1, merge a pull request, or deploy the site.

@@ -17,7 +17,7 @@
       "reducedMotion": false,
       "focusableCount": 17,
       "focusVisible": true,
-      "visibleTextLength": 1154,
+      "visibleTextLength": 1143,
       "pagesBaseCorrect": true,
       "selected": [
         "DialogTree",
@@ -45,7 +45,7 @@
       "reducedMotion": false,
       "focusableCount": 17,
       "focusVisible": true,
-      "visibleTextLength": 1154,
+      "visibleTextLength": 1143,
       "pagesBaseCorrect": true,
       "selected": [
         "DialogTree",
@@ -73,7 +73,7 @@
       "reducedMotion": true,
       "focusableCount": 17,
       "focusVisible": true,
-      "visibleTextLength": 556,
+      "visibleTextLength": 488,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "selected": [
@@ -102,7 +102,7 @@
       "reducedMotion": true,
       "focusableCount": 17,
       "focusVisible": true,
-      "visibleTextLength": 553,
+      "visibleTextLength": 486,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "selected": [
@@ -129,11 +129,27 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": false,
-      "focusableCount": 10,
+      "focusableCount": 12,
       "focusVisible": true,
-      "visibleTextLength": 3160,
+      "visibleTextLength": 2449,
       "pagesBaseCorrect": true,
-      "productVisualCount": 1
+      "productVisualCount": 1,
+      "previewDefaultMode": "antipodes",
+      "previewPointerModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewKeyboardModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewLinkTargetsCorrect": true,
+      "previewSelectionSynchronized": true,
+      "previewLayout": "columns",
+      "previewMinTargetHeight": 132.203125,
+      "previewTransitionDurationMs": 160
     },
     {
       "scenario": "mundus-zh-dark-desktop",
@@ -149,12 +165,28 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": true,
-      "focusableCount": 10,
+      "focusableCount": 12,
       "focusVisible": true,
-      "visibleTextLength": 1196,
+      "visibleTextLength": 969,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
-      "productVisualCount": 1
+      "productVisualCount": 1,
+      "previewDefaultMode": "antipodes",
+      "previewPointerModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewKeyboardModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewLinkTargetsCorrect": true,
+      "previewSelectionSynchronized": true,
+      "previewLayout": "columns",
+      "previewMinTargetHeight": 94.640625,
+      "previewTransitionDurationMs": 0.01
     },
     {
       "scenario": "mundus-en-light-390",
@@ -170,11 +202,27 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": false,
-      "focusableCount": 10,
+      "focusableCount": 12,
       "focusVisible": true,
-      "visibleTextLength": 3155,
+      "visibleTextLength": 2445,
       "pagesBaseCorrect": true,
-      "productVisualCount": 1
+      "productVisualCount": 1,
+      "previewDefaultMode": "antipodes",
+      "previewPointerModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewKeyboardModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewLinkTargetsCorrect": true,
+      "previewSelectionSynchronized": true,
+      "previewLayout": "vertical",
+      "previewMinTargetHeight": 75.5625,
+      "previewTransitionDurationMs": 160
     },
     {
       "scenario": "mundus-zh-dark-mobile",
@@ -190,12 +238,28 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": true,
-      "focusableCount": 10,
+      "focusableCount": 12,
       "focusVisible": true,
-      "visibleTextLength": 1193,
+      "visibleTextLength": 967,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
-      "productVisualCount": 1
+      "productVisualCount": 1,
+      "previewDefaultMode": "antipodes",
+      "previewPointerModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewKeyboardModes": [
+        "antipodes",
+        "development",
+        "sunline"
+      ],
+      "previewLinkTargetsCorrect": true,
+      "previewSelectionSynchronized": true,
+      "previewLayout": "vertical",
+      "previewMinTargetHeight": 75.5625,
+      "previewTransitionDurationMs": 0.01
     }
   ]
 }
