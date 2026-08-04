@@ -145,11 +145,32 @@ try {
       reason: request.failure()?.errorText ?? 'unknown',
     });
   });
+  page.on('response', (response) => {
+    const responseUrl = response.url();
+    if (
+      response.request().resourceType() === 'document' ||
+      (!responseUrl.startsWith('http://') &&
+        !responseUrl.startsWith('https://'))
+    ) {
+      return;
+    }
+    if (!response.ok()) {
+      requestFailures.push({
+        url: responseUrl,
+        status: response.status(),
+      });
+    }
+  });
 
   const response = await page.goto(liveUrl, { waitUntil: 'networkidle' });
   assert(response?.ok(), `Mundus returned ${response?.status()}`);
   await page.waitForFunction(() =>
-    [...document.images].every((image) => image.complete),
+    [...document.images].every(
+      (image) =>
+        image.complete &&
+        image.naturalWidth > 0 &&
+        image.naturalHeight > 0,
+    ),
   );
 
   const globe = page.getByRole('region', {
@@ -334,6 +355,10 @@ try {
   });
   await page.mouse.up();
 
+  assert.deepEqual(consoleErrors, []);
+  assert.deepEqual(pageErrors, []);
+  assert.deepEqual(requestFailures, []);
+
   const images = [];
   for (const capture of captures) {
     const target = path.join(mediaRoot, capture.target);
@@ -360,9 +385,6 @@ try {
 
   assert(images[1].width >= 1920, 'hero capture is too narrow');
   assert.equal(new Set(images.map((image) => image.sha256)).size, 3);
-  assert.deepEqual(consoleErrors, []);
-  assert.deepEqual(pageErrors, []);
-  assert.deepEqual(requestFailures, []);
 
   const manifest = {
     schemaVersion: 1,

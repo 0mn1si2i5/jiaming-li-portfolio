@@ -162,6 +162,38 @@ class TestProductCaseStudyFocus(unittest.TestCase):
                 (item["width"], item["height"]),
             )
 
+    def test_mundus_media_capture_rejects_failed_responses_before_writes(
+        self,
+    ) -> None:
+        script = (
+            self.project / "scripts/capture-mundus-media.mjs"
+        ).read_text(encoding="utf-8")
+
+        self.assertRegex(
+            script,
+            r"(?s)page\.on\('response', \(response\) => \{.*?"
+            r"const responseUrl = response\.url\(\);.*?"
+            r"response\.request\(\)\.resourceType\(\) === 'document'.*?"
+            r"responseUrl\.startsWith\('http://'\).*?"
+            r"responseUrl\.startsWith\('https://'\).*?"
+            r"if \(!response\.ok\(\)\) \{.*?"
+            r"requestFailures\.push\(\{\s*url: responseUrl,\s*"
+            r"status: response\.status\(\),\s*\}\);",
+        )
+        self.assertRegex(
+            script,
+            r"\[\.\.\.document\.images\]\.every\(\s*"
+            r"\(image\) =>\s*image\.complete\s*&&\s*"
+            r"image\.naturalWidth > 0\s*&&\s*"
+            r"image\.naturalHeight > 0",
+        )
+
+        failure_gate = script.index("assert.deepEqual(requestFailures, []);")
+        public_media_write = script.index("const images = [];")
+        manifest_write = script.index("await fs.writeFile(evidencePath")
+        self.assertLess(failure_gate, public_media_write)
+        self.assertLess(failure_gate, manifest_write)
+
     def test_deferred_omnipet_case_study_is_absent(self) -> None:
         for path in (
             "src/content/projects/omnipet.mdx",
