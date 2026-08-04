@@ -3,7 +3,7 @@
   "html": [
     {
       "path": "index.html",
-      "sha256": "0d827588dbab72cfca8d4540144413d50fb059291df00fc2a7caa97b1bf56a4e"
+      "sha256": "f51cb4d7422f5704b959307eeae13d360b5a1eca4c90f138a15d66de7a0d2b32"
     },
     {
       "path": "about/index.html",
@@ -15,7 +15,7 @@
     },
     {
       "path": "projects/mundus/index.html",
-      "sha256": "c04884158695372e155393402a2daacca4fcfc4dda71e42f31d96d482cddff9d"
+      "sha256": "9d285880c1e33c6c30f95efc21ff628efdaeb65316342cca5b68951e7426b526"
     },
     {
       "path": "projects/nbti/index.html",
