@@ -1,0 +1,48 @@
+---
+import Localized from './Localized.astro';
+
+interface LocalizedText { en: string; zh: string }
+interface Column { heading: LocalizedText; steps: LocalizedText[] }
+interface Props { title: LocalizedText; before: Column; after: Column; note?: LocalizedText }
+
+const { title, before, after, note } = Astro.props;
+---
+
+<figure class="before-after-flow">
+  <figcaption><Localized {...title} /></figcaption>
+  <div class="flow-columns">
+    <div class="flow-col before">
+      <span class="col-heading"><Localized {...before.heading} /></span>
+      <ul>
+        {before.steps.map((step) => <li><Localized {...step} /></li>)}
+      </ul>
+    </div>
+    <div class="flow-transition" aria-hidden="true"><span>→</span></div>
+    <div class="flow-col after">
+      <span class="col-heading"><Localized {...after.heading} /></span>
+      <ul>
+        {after.steps.map((step) => <li><Localized {...step} /></li>)}
+      </ul>
+    </div>
+  </div>
+  {note && <p class="flow-note"><Localized {...note} /></p>}
+</figure>
+
+<style>
+  .before-after-flow { margin: 0 0 3.3rem; }
+  .before-after-flow figcaption { margin-bottom: 1.25rem; color: var(--ink); font-family: var(--font-editorial); font-weight: 500; font-size: 1.15rem; }
+  .flow-columns { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem; align-items: stretch; }
+  .flow-col { padding: 1.1rem 1.25rem; border-radius: 14px; }
+  .flow-col.before { background: var(--surface); border: 1px solid var(--line); }
+  .flow-col.after { background: color-mix(in srgb, var(--ink) 4%, var(--paper)); border: 1px solid color-mix(in srgb, var(--ink) 26%, var(--line)); }
+  .col-heading { display: block; margin-bottom: .7rem; color: var(--ink); font-weight: 650; font-size: .82rem; letter-spacing: .05em; text-transform: uppercase; }
+  .flow-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+  .flow-col li { color: var(--muted); font-size: .9rem; line-height: 1.5; }
+  .flow-col.after li { color: var(--ink); }
+  .flow-transition { display: flex; align-items: center; color: var(--muted); font-size: 1.2rem; }
+  .flow-note { margin: 1rem 0 0; color: var(--muted); font-size: .88rem; }
+  @media (max-width: 640px) {
+    .flow-columns { grid-template-columns: 1fr; }
+    .flow-transition { justify-content: center; transform: rotate(90deg); padding: .25rem 0; }
+  }
+</style>

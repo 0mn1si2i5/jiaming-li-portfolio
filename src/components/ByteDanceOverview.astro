@@ -1,0 +1,35 @@
+---
+import Localized from './Localized.astro';
+
+interface Props { compact?: boolean }
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['byte-overview', { compact }]}>
+  <div class="overview-stream">
+    <span class="stream-index" aria-hidden="true">01</span>
+    <div class="stream-copy">
+      <span class="stream-label"><Localized en="Speech evaluation" zh="语音评测集迭代" /></span>
+      {!compact && <span class="stream-desc"><Localized en="Capability taxonomy, question design, and a quality loop." zh="能力分类、题目设计与质量流程。" /></span>}
+    </div>
+  </div>
+  <div class="overview-stream">
+    <span class="stream-index" aria-hidden="true">02</span>
+    <div class="stream-copy">
+      <span class="stream-label"><Localized en="Data tooling" zh="语音数据生产工具" /></span>
+      {!compact && <span class="stream-desc"><Localized en="A two-entry internal tool with automatic QC." zh="双入口内部工具与自动质检。" /></span>}
+    </div>
+  </div>
+</div>
+
+<style>
+  .byte-overview { display: flex; flex-direction: column; justify-content: center; gap: .7rem; height: 100%; }
+  .overview-stream { display: flex; gap: .9rem; align-items: flex-start; padding: .9rem 1rem; background: color-mix(in srgb, var(--paper) 58%, transparent); border: 1px solid var(--line); border-radius: 12px; }
+  .stream-index { color: var(--ink); font-weight: 650; font-size: .72rem; letter-spacing: .12em; line-height: 1.6; }
+  .stream-copy { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+  .stream-label { color: var(--ink); font-weight: 650; font-size: .98rem; line-height: 1.35; }
+  .stream-desc { color: var(--muted); font-size: .84rem; line-height: 1.45; }
+  .byte-overview.compact .overview-stream { padding: .7rem .85rem; }
+  .byte-overview.compact .stream-label { font-size: .88rem; }
+</style>
