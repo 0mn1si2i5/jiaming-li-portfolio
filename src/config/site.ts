@@ -1,6 +1,8 @@
 export const site = {
   name: 'Jiaming Li',
-  description: 'Explorations in AI, tools, interaction, and culture by Jiaming Li.',
+  description: 'Jiaming Li builds AI evaluation systems, data tools, and interaction products.',
+  email: 'nomisomnis@gmail.com',
+  resumePath: 'resume/jiaming-li-resume-zh.pdf',
   github: 'https://github.com/0mn1si2i5',
   links: {
     dialogTreeDemo: 'https://chat.golir.top/',
@@ -11,5 +13,19 @@ export const site = {
     nbtiWebsite: 'https://0mn1si2i5.github.io/NBTI/',
     nbtiGithub: 'https://github.com/0mn1si2i5/NBTI',
     rsz: 'https://steamcommunity.com/sharedfiles/filedetails/?id=2804107924',
+    dshHandoff: 'https://github.com/0mn1si2i5/dsh-handoff',
   },
+  externalWork: [
+    {
+      id: 'dsh-handoff',
+      year: { en: 'Aug 2026', zh: '2026 年 8 月' },
+      kind: { en: 'DeepSeek Harness plugin', zh: 'DeepSeek Harness 插件' },
+      title: { en: 'dsh-handoff', zh: 'dsh-handoff' },
+      summary: {
+        en: 'After joining the early developer beta, I built dsh-handoff to save and restore redacted, Git-aware context between DeepSeek Harness sessions.',
+        zh: '作为 DeepSeek Harness 首批内测开发者，我开发了跨会话交接插件 dsh-handoff。插件可生成经过脱敏、带有 Git 状态的交接记录，并在新会话中恢复上下文。',
+      },
+      href: 'https://github.com/0mn1si2i5/dsh-handoff',
+    },
+  ],
 } as const;

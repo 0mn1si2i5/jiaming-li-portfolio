@@ -5,12 +5,19 @@ import '../styles/fonts.css';
 
 interface Props {
   title?: string;
-  description?: string;
+  description?: string | { en: string; zh: string };
+  image?: string;
 }
 
-const { title = site.name, description = site.description } = Astro.props;
+const { title = site.name, description = site.description, image } = Astro.props;
 const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
+const descriptionText = typeof description === 'string' ? description : description?.en ?? site.description;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(
+  image ? `${base}${image.replace(/^\//, '')}` : `${base}og/portfolio.png`,
+  Astro.site,
+).href;
 ---
 
 <!doctype html>
@@ -18,10 +25,21 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
+    <meta name="description" content={descriptionText} />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <title>{pageTitle}</title>
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={descriptionText} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={descriptionText} />
+    <meta name="twitter:image" content={ogImage} />
     <script is:inline>
       (() => {
         const savedTheme = localStorage.getItem('theme');
@@ -30,7 +48,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           : 'light';
         document.documentElement.dataset.theme = theme;
         const savedLocale = localStorage.getItem('locale');
-        const locale = savedLocale === 'zh' ? 'zh' : 'en';
+        const locale = (savedLocale === 'en' || savedLocale === 'zh')
+          ? savedLocale
+          : ((navigator.languages || [navigator.language || '']).some((lang) => lang.toLowerCase().startsWith('zh')) ? 'zh' : 'en');
         document.documentElement.dataset.locale = locale;
         document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
       })();
@@ -55,10 +75,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <footer class="site-footer">
       <span>© {new Date().getFullYear()} {site.name}</span>
     </footer>
-    <a class="back-to-top" href="#top"><Localized en="Back to top" zh="返回顶部" /> <span aria-hidden="true">↑</span></a>
+    <a class="back-to-top" href="#top" tabindex="-1" aria-hidden="true"><Localized en="Back to top" zh="返回顶部" /> <span aria-hidden="true">↑</span></a>
     <script>
       const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
       const localeButton = document.querySelector<HTMLButtonElement>('.locale-toggle');
+      const backToTop = document.querySelector<HTMLAnchorElement>('.back-to-top');
       const setLocale = (locale: 'en' | 'zh') => {
         document.documentElement.dataset.locale = locale;
         document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
@@ -79,6 +100,18 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         if (button) button.querySelector('.theme-label')!.textContent = locale === 'zh' ? (isDark ? '浅色' : '深色') : (isDark ? 'Light' : 'Dark');
         button?.setAttribute('aria-label', locale === 'zh' ? '切换颜色主题' : 'Switch color theme');
       };
+      const updateBackToTop = () => {
+        if (!backToTop) return;
+        const show = window.scrollY > 480;
+        backToTop.classList.toggle('visible', show);
+        if (show) {
+          backToTop.removeAttribute('tabindex');
+          backToTop.removeAttribute('aria-hidden');
+        } else {
+          backToTop.setAttribute('tabindex', '-1');
+          backToTop.setAttribute('aria-hidden', 'true');
+        }
+      };
       setLocale(document.documentElement.dataset.locale === 'zh' ? 'zh' : 'en');
       button?.addEventListener('click', () => {
         const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -87,6 +120,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         updateButton();
       });
       localeButton?.addEventListener('click', () => setLocale(document.documentElement.dataset.locale === 'zh' ? 'en' : 'zh'));
+      window.addEventListener('scroll', updateBackToTop, { passive: true });
+      updateBackToTop();
     </script>
   </body>
 </html>
@@ -145,7 +180,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .theme-toggle, .locale-toggle { display: inline-flex; align-items: center; gap: .38rem; min-height: 2.25rem; padding: .45rem .65rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
   .locale-toggle { margin-right: .45rem; }
   .site-footer { justify-content: flex-start; min-height: 94px; color: var(--muted); border-top: 1px solid var(--rule-strong); }
-  .back-to-top { position: fixed; right: max(1rem, calc((100vw - var(--page-width)) / 2)); bottom: 1rem; z-index: 20; padding: .55rem .75rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 88%, transparent); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 4px 18px rgb(0 0 0 / .08); font-size: .7rem; font-weight: 650; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; backdrop-filter: blur(8px); }
+  .back-to-top { position: fixed; right: max(1rem, calc((100vw - var(--page-width)) / 2)); bottom: 1rem; z-index: 20; padding: .55rem .75rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 88%, transparent); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 4px 18px rgb(0 0 0 / .08); font-size: .7rem; font-weight: 650; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; backdrop-filter: blur(8px); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease; }
+  .back-to-top.visible { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
   .back-to-top:hover { color: var(--paper); background: var(--ink); border-color: var(--ink); }
   @media (max-width: 560px) {
     .page-width { width: min(100% - 2rem, var(--page-width)); }

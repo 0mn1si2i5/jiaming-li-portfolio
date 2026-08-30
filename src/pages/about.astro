@@ -2,27 +2,31 @@
 import BaseLayout from '../components/BaseLayout.astro';
 import Localized from '../components/Localized.astro';
 import { site } from '../config/site';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
-<BaseLayout title="About" description="About Jiaming Li's product and research practice.">
+<BaseLayout title="About" description="About Jiaming Li's practice across model evaluation, data tooling, and interaction products.">
   <section class="about page-width" aria-labelledby="about-title">
     <div>
       <p class="eyebrow"><Localized en="About" zh="关于" /></p>
       <h1 id="about-title"><Localized en="A practice of making things clear." zh="研究、产品与实现。" /></h1>
     </div>
     <div class="about-copy">
-      <p><Localized en="I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes." zh="我目前在新加坡国立大学计算机系攻读硕士，师从 Yi-Chieh Lee 教授，并在校内 AI4SG Lab 开展人机协作研究。我的工作覆盖研究设计、产品决策与原型实现。" /></p>
-      <p><Localized en="I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious." zh="我通常从具体的问题出发：难以回溯的对话、失去上下文的音乐链接，或不符合中文语境的游戏命名。随后通过产品设计和工程实现，把问题转化为可验证的解决方案。" /></p>
-      <a class="external-link" href={site.github} target="_blank" rel="noreferrer">
-        <Localized en="Find more on GitHub" zh="在 GitHub 查看更多" />
-        <span aria-hidden="true">↗</span>
-      </a>
+      <p><Localized en="I'm pursuing a master's in Computer Science at the National University of Singapore, where I conduct research on human–AI collaboration at AI4SG Lab. My work spans model evaluation, data tools, and interaction products, along with user research and HCI." zh="我目前在新加坡国立大学计算机系攻读硕士，并在 AI4SG Lab 开展人机协作研究。此前的项目包括模型评测、数据工具和交互产品，也延伸到用户研究与 HCI。" /></p>
+      <p><Localized en="I start with a concrete problem, define the goal and boundaries, then test the approach through data, research, or a working product." zh="我通常从具体问题入手：先确认目标和边界，再通过数据、研究或产品实现验证方案。" /></p>
+      <div class="contact-actions">
+        <a class="external-link" href={`mailto:${site.email}`}><Localized en="Email" zh="邮件" /> <span aria-hidden="true">↗</span></a>
+        <a class="external-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="GitHub" zh="GitHub" /> <span aria-hidden="true">↗</span></a>
+        <a class="external-link" href={`${base}${site.resumePath}`}><Localized en="Download résumé" zh="下载简历" /> <span aria-hidden="true">↓</span></a>
+      </div>
     </div>
   </section>
 
-  <section class="notes page-width" aria-labelledby="notes-title">
-    <p class="eyebrow"><Localized en="Notes" zh="随笔" /></p>
-    <h2 id="notes-title"><Localized en="Notes" zh="随笔" /></h2>
+  <section class="education page-width" aria-labelledby="education-title">
+    <p class="eyebrow"><Localized en="Education" zh="教育" /></p>
+    <h2 id="education-title"><Localized en="Background" zh="教育背景" /></h2>
+    <p><Localized en="NUS M.S. in Computer Science (in progress) · PKU B.A. in Russian Language and Literature." zh="新加坡国立大学计算机硕士（在读）· 北京大学俄语语言文学学士。" /></p>
   </section>
 </BaseLayout>
 
@@ -54,15 +58,14 @@ import { site } from '../config/site';
     line-height: 1.45;
   }
   .about-copy p + p { color: var(--muted); }
-  .about-copy .external-link {
-    display: inline-block;
-    margin-top: 1.5rem;
-  }
-  .notes {
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
+  .education {
     padding: var(--space-section) 0;
     border-top: 1px solid var(--rule-strong);
   }
-  .notes .eyebrow { margin-bottom: 1.5rem; }
+  .education .eyebrow { margin-bottom: 1.5rem; }
+  .education h2 { margin-bottom: 1.25rem; }
+  .education p { max-width: 560px; color: var(--muted); font-size: 1.15rem; }
   :global(:root[data-locale='zh']) h1,
   :global(:root[data-locale='zh']) h2 {
     font-size: clamp(2.1rem, 4.2vw, 3.75rem);
@@ -74,7 +77,7 @@ import { site } from '../config/site';
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }
-    .about, .notes { padding: 5rem 0; }
+    .about, .education { padding: 5rem 0; }
   }
   @media (max-width: 560px) {
     :global(:root[data-locale='zh']) h1,
