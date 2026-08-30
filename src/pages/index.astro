@@ -18,15 +18,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <BaseLayout>
   <section class="hero page-width">
     <p class="eyebrow">Jiaming Li · 李佳鸣</p>
-    <h1><Localized en="I make tools for thinking, exploring, and connecting." zh="我设计并开发 AI 与交互产品。" /></h1>
+    <h1><Localized en="I build AI evaluation systems, data tools, and interaction products." zh="我做 AI 评测、数据工具和交互产品。" /></h1>
     <div class="hero-bottom">
-      <p><Localized en="I am a product builder and researcher interested in how people work with AI, understand information, and turn a small curiosity into something shareable." zh="我关注人们如何使用 AI、理解复杂信息，以及如何将一个想法转化为可用、可分享的产品。" /></p>
+      <p><Localized en="My work covers problem framing, evaluation design, quality standards, user research, and delivery. I also turn complex workflows into reusable products and automated tools." zh="我的工作涵盖问题定义、评测方案、质量标准、用户研究与上线交付，也包括将复杂流程做成可复用的产品和自动化工具。" /></p>
       <a class="quiet-link" href="#work"><Localized en="Selected explorations" zh="精选探索" /> <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
   <section id="work" class="work-section page-width" aria-labelledby="work-title">
-    <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Things I have been following closely." zh="持续推进的项目。" /></h2></div>
+    <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Main projects" zh="主要项目" /></h2></div>
     <div class="project-list">
       {featuredProjects.map((project, index) => (
         <article class:list={['project-card', `accent-${project.data.accent}`]}>
@@ -60,6 +60,16 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
             </div>
           </article>
         ))}
+        {site.externalWork.map((item) => (
+          <article class="other-card external-card">
+            <div class="other-copy">
+              <p class="meta"><span><Localized {...item.year} /></span><span><Localized {...item.kind} /></span></p>
+              <h3><Localized {...item.title} /></h3>
+              <p><Localized {...item.summary} /></p>
+              <a class="external-link" href={item.href} target="_blank" rel="noreferrer"><Localized en="View on GitHub" zh="在 GitHub 查看" /> <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        ))}
         <article class="other-card external-card"><div class="other-copy"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="为《群星》提供更符合中文语境的舰船、星球与人物默认名称，改善中文玩家的沉浸体验。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a class="external-link" href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></div></article>
       </div>
     </div>
@@ -69,7 +79,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
 <style>
   .eyebrow, .meta { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
-  .hero { min-height: min(700px, calc(100vh - 84px)); padding: clamp(5rem, 11vw, 10rem) 0 4rem; display: flex; flex-direction: column; justify-content: space-between; }
+  .hero { min-height: clamp(520px, 72vh, 660px); padding: clamp(5rem, 11vw, 10rem) 0 4rem; display: flex; flex-direction: column; justify-content: space-between; }
   h1, h2, h3, p { margin-top: 0; } h1, h2, h3 { letter-spacing: var(--display-tracking); line-height: .98; }
   h1 { max-width: 1000px; margin: 3rem 0; font-size: clamp(3.35rem, 7.1vw, 7.1rem); } h1 em { font-family: Georgia, serif; font-weight: 400; }
   .hero-bottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; } .hero-bottom p { max-width: 430px; margin: 0; color: var(--muted); font-size: 1.08rem; }
