@@ -66,6 +66,7 @@ class TestBrowserEvidence(unittest.TestCase):
             (
                 "index.html",
                 "about/index.html",
+                "projects/bytedance-ai-data/index.html",
                 "projects/dialogtree/index.html",
                 "projects/mundus/index.html",
                 "projects/nbti/index.html",

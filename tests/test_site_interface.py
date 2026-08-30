@@ -63,11 +63,13 @@ class TestSiteInterface(unittest.TestCase):
             config,
         )
 
-    def test_about_page_owns_about_copy_and_empty_notes_section(self) -> None:
+    def test_about_page_has_positioning_contact_and_no_empty_notes(self) -> None:
         about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
         self.assertIn('id="about-title"', about)
-        self.assertIn('id="notes-title"', about)
+        self.assertNotIn('id="notes-title"', about)
         self.assertIn('href={site.github}', about)
+        self.assertIn('site.email', about)
+        self.assertIn('site.resumePath', about)
         self.assertNotIn('class="note"', about)
         self.assertFalse((self.root / "src/pages/notes.astro").exists())
         self.assertNotIn('id="about"', self.home)

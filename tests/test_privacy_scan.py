@@ -69,6 +69,20 @@ class TestPrivacyScan(unittest.TestCase):
 
             self.assertEqual(privacy.scan_dist(root), [])
 
+    def test_scan_rejects_byte_internal_evidence(self) -> None:
+        samples = {
+            "byte-internal-host": "https://botts-web.bytedance.net",
+            "private-repository": "bytedance-202608-archive",
+            "internal-code-host": "https://code.byted.org/speech/example",
+            "internal-package-host": "https://bytedpypi.byted.org/simple",
+        }
+        for name, text in samples.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / "index.html").write_text(text, encoding="utf-8")
+
+                self.assertTrue(privacy.scan_dist(root))
+
 
 if __name__ == "__main__":
     unittest.main()
