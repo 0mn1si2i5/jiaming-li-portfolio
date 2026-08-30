@@ -48,6 +48,18 @@
       "overflow": false,
       "brokenImageCount": 0,
       "activeAnimationCount": 0
+    },
+    {
+      "scenario": "bytedance-zh-dark-390",
+      "route": "/projects/bytedance-ai-data",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "matches": true,
+      "overflow": false,
+      "brokenImageCount": 0,
+      "activeAnimationCount": 0
     }
   ]
 }

@@ -18,12 +18,15 @@ REQUIRED_SCENARIOS = (
     "mundus-zh-dark-desktop",
     "mundus-en-light-390",
     "mundus-zh-dark-mobile",
+    "bytedance-en-light-1440",
+    "bytedance-zh-dark-390",
 )
 REDUCED_SCENARIOS = (
     "home-zh-dark-768",
     "home-zh-dark-390",
     "mundus-zh-dark-desktop",
     "mundus-zh-dark-mobile",
+    "bytedance-zh-dark-390",
 )
 SCENARIO_EXPECTATIONS = {
     "home-en-light-1440": {
@@ -58,6 +61,14 @@ SCENARIO_EXPECTATIONS = {
         "route": "/projects/mundus", "locale": "zh", "theme": "dark",
         "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
     },
+    "bytedance-en-light-1440": {
+        "route": "/projects/bytedance-ai-data", "locale": "en", "theme": "light",
+        "viewport": {"width": 1440, "height": 900}, "reducedMotion": False,
+    },
+    "bytedance-zh-dark-390": {
+        "route": "/projects/bytedance-ai-data", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
+    },
 }
 SCREENSHOT_FILES = {
     "home-en-light-1440": "task7-home-en-light-1440x900.webp",
@@ -68,17 +79,20 @@ SCREENSHOT_FILES = {
     "mundus-zh-dark-desktop": "task7-mundus-zh-dark-reduced-1440x900.webp",
     "mundus-en-light-390": "task7-mundus-en-light-390x844.webp",
     "mundus-zh-dark-mobile": "task7-mundus-zh-dark-reduced-390x844.webp",
+    "bytedance-en-light-1440": "task7-bytedance-en-light-1440x900.webp",
+    "bytedance-zh-dark-390": "task7-bytedance-zh-dark-reduced-390x844.webp",
 }
 DIST_HTML_FILES = (
     "index.html",
     "about/index.html",
+    "projects/bytedance-ai-data/index.html",
     "projects/dialogtree/index.html",
     "projects/mundus/index.html",
     "projects/nbti/index.html",
     "projects/side-b/index.html",
 )
-PROJECT_ORDER = ["DialogTree", "Mundus", "NBTI"]
-OTHER_ORDER = ["Side B", "RSZ Namelist"]
+PROJECT_ORDER = ["AI Evaluation & Data Tooling at ByteDance", "DialogTree", "Mundus"]
+OTHER_ORDER = ["NBTI", "Side B", "dsh-handoff", "RSZ Namelist"]
 
 
 def is_finite_number(value: object) -> bool:

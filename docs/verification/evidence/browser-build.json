@@ -3,27 +3,31 @@
   "html": [
     {
       "path": "index.html",
-      "sha256": "f51cb4d7422f5704b959307eeae13d360b5a1eca4c90f138a15d66de7a0d2b32"
+      "sha256": "72c1786e7533fbf134ab6f5d0932f1cebf259e07ac2e0f2831feb23f0d033087"
     },
     {
       "path": "about/index.html",
-      "sha256": "123887f4797937ed2890988171e95f6dc40be327ac2497c95320b45cad49d927"
+      "sha256": "0d8003ebc81820d91ab1ed035cf30aab29d60d52561a7c31ca23319360e0721d"
+    },
+    {
+      "path": "projects/bytedance-ai-data/index.html",
+      "sha256": "458ce588d16a60821cf5e8a01e9a4900ecc241ce51c567af440dc1b61f6045f4"
     },
     {
       "path": "projects/dialogtree/index.html",
-      "sha256": "db2d20af8eaec94bbbe5c1e46043444e56f30728f5cb796834a79a14cf7bd2e7"
+      "sha256": "f1c8fdedba2c292bf1113773e488ab81302e3709b10b406bed98a87b33782a08"
     },
     {
       "path": "projects/mundus/index.html",
-      "sha256": "9d285880c1e33c6c30f95efc21ff628efdaeb65316342cca5b68951e7426b526"
+      "sha256": "e5bd7f7136ddc3c5123988d2e75c3ed2655955bb282cf96ff0978a4b793ce07a"
     },
     {
       "path": "projects/nbti/index.html",
-      "sha256": "682b28a1ad54171334a93f0b22e6e415e00c67e97716af520b55e453c24e7b48"
+      "sha256": "1054b6f3a86c0e9594338181f57508dd552b54ed3a98b94b5845dab4b69b39f1"
     },
     {
       "path": "projects/side-b/index.html",
-      "sha256": "886ea81a50393f543fb0ef5be7516431935bf1fd1e496a85285fa972087c62cd"
+      "sha256": "b70b4d433676b2b825d760d6511c61ec6da9a9fb620e157ed17f69f38679674b"
     }
   ]
 }

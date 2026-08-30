@@ -5,29 +5,29 @@
       "scenario": "home-en-light-1440",
       "path": "task7-home-en-light-1440x900.webp",
       "width": 1440,
-      "height": 4091,
-      "sha256": "6bf86e03a0e132a87a6516b5ac48c76c12fd878c720d189b242287aac582b30a"
+      "height": 4745,
+      "sha256": "63f59ce88395af753775214dadbabe2d31565cf19b366339009e3e0008083143"
     },
     {
       "scenario": "home-en-light-1024",
       "path": "task7-home-en-light-1024x768.webp",
       "width": 1024,
-      "height": 3587,
-      "sha256": "a1c067a63a578650f20e41fe7cfac6bcf4785a983e1a50c69cc414dd43181b8c"
+      "height": 4070,
+      "sha256": "4200ce2e20d2af058e87fc62485fd727182e18f0dca08f0a878e08f8e4564905"
     },
     {
       "scenario": "home-zh-dark-768",
       "path": "task7-home-zh-dark-reduced-768x1024.webp",
       "width": 768,
-      "height": 3125,
-      "sha256": "5ef73bb95dcbf3ba4f0921f0a82fc9ca2f9aa10a17a47cc3409efcfa75d16e0a"
+      "height": 3722,
+      "sha256": "4a023930b9abea4c4494b6ca816eb0e322ba9af156768df334287fb91152c838"
     },
     {
       "scenario": "home-zh-dark-390",
       "path": "task7-home-zh-dark-reduced-390x844.webp",
       "width": 390,
-      "height": 3928,
-      "sha256": "581b4950d8406583fed47a5415937392e643fca3f03a05815a8d114a60c110d5"
+      "height": 4799,
+      "sha256": "a5a333eb52ef2f43335bcd0f99d8c7bf0bd24ff511257d19fbab5e920c655e39"
     },
     {
       "scenario": "mundus-en-light-1440",
@@ -56,6 +56,20 @@
       "width": 390,
       "height": 4828,
       "sha256": "7b03631ed5c3d54ceac77b5f118a481dac6ead09457bc6250d249e8848a4a354"
+    },
+    {
+      "scenario": "bytedance-en-light-1440",
+      "path": "task7-bytedance-en-light-1440x900.webp",
+      "width": 1440,
+      "height": 4565,
+      "sha256": "4597330c7cfad56ac09b85b1fdf78f031e314d700192c18622863de0271e0337"
+    },
+    {
+      "scenario": "bytedance-zh-dark-390",
+      "path": "task7-bytedance-zh-dark-reduced-390x844.webp",
+      "width": 390,
+      "height": 4197,
+      "sha256": "3edbe76ff9dd1644548084e88a8b9d8a68053651259fcd175e08acb5a6f1342e"
     }
   ]
 }
