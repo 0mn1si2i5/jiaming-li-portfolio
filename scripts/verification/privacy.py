@@ -18,6 +18,13 @@ PATTERNS = {
         r"https?://(?:localhost|127\.0\.0\.1|0\.0\.0\.0|10\.\d+\.\d+\.\d+|"
         r"192\.168\.\d+\.\d+|172\.(?:1[6-9]|2\d|3[01])\.\d+\.\d+)"
         r"|https?://[A-Za-z0-9.-]+\.(?:internal|local|corp)(?=[:/])"
+        r"|https?://[A-Za-z0-9.-]+\.(?:bytedance\.net|byted\.org)"
+    ),
+    "private evidence": re.compile(
+        r"botts-web\.bytedance\.net|code\.byted\.org|bytedpypi\.byted\.org|"
+        r"bytedance-202608-archive|lark-comment-tts|icl-tts-voice-stability|"
+        r"seed-eval-publisher|omni-tts-delivery",
+        re.IGNORECASE,
     ),
     "credential": re.compile(
         r"(?:Bearer\s+[A-Za-z0-9._~+/=-]{20,}|"

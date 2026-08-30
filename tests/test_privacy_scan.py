@@ -83,6 +83,15 @@ class TestPrivacyScan(unittest.TestCase):
 
                 self.assertTrue(privacy.scan_dist(root))
 
+    def test_scan_allows_public_company_description(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "index.html").write_text(
+                "AI Evaluation & Data Tooling at ByteDance",
+                encoding="utf-8",
+            )
+            self.assertEqual(privacy.scan_dist(root), [])
+
 
 if __name__ == "__main__":
     unittest.main()
