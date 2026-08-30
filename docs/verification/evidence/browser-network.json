@@ -63,25 +63,85 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/index.CzvIuJ1i.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
       "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/cormorant-garamond-latin-500-normal.BsRWmXhO.woff2",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-500-normal.JVPArRf3.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-500-normal.z_irmif2.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-600-normal.D5ts6k_I.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-latin-500-normal.ZcXeFfWF.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-500-normal.DL_A5r9p.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-latin-600-normal.B99s59ZT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-600-normal.BogBFFgE.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -99,86 +159,26 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
       "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-500-normal.z_irmif2.woff2",
+      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/cormorant-garamond-latin-500-normal.BsRWmXhO.woff2",
       "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
-      "resourceType": "Font",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-500-normal.JVPArRf3.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-600-normal.D5ts6k_I.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-500-normal.DL_A5r9p.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-600-normal.BogBFFgE.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-latin-500-normal.ZcXeFfWF.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/jiaming-li-portfolio/_astro/noto-serif-sc-latin-600-normal.B99s59ZT.woff2",
-      "resourceType": "Font",
+      "path": "/jiaming-li-portfolio/_astro/index.CTEJjk6e.css",
+      "resourceType": "Stylesheet",
       "status": 200
     },
     {
