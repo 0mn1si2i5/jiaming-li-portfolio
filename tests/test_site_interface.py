@@ -61,6 +61,20 @@ class TestSiteInterface(unittest.TestCase):
     def test_non_featured_project_index_localizes_archive(self) -> None:
         self.assertIn('<Localized en="Archive" zh="其他项目" />', self.project)
 
+    def test_project_breadcrumbs_use_global_labels(self) -> None:
+        self.assertIn(
+            "en={project.data.featured ? 'Work' : 'More projects'}",
+            self.project,
+        )
+        self.assertIn(
+            "zh={project.data.featured ? '项目' : '更多项目'}",
+            self.project,
+        )
+        self.assertNotIn("'Selected work'", self.project)
+        self.assertNotIn("'Other work'", self.project)
+        self.assertNotIn("精选项目", self.project)
+        self.assertNotIn("其他作品", self.project)
+
     def test_dialogtree_capcut_credit_is_removed(self) -> None:
         self.assertNotIn("视频由 CapCut 剪辑", self.project)
         self.assertNotIn("Video edited in CapCut", self.project)

@@ -23,7 +23,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 <BaseLayout title={project.data.title.en} description={project.data.summary}>
   <article class:list={['project-page', `accent-${project.data.accent}`]}>
     <header class="project-hero page-width">
-      <p class="eyebrow"><a href={`${base}#work`}><Localized en={project.data.featured ? 'Selected work' : 'Other work'} zh={project.data.featured ? '精选项目' : '其他作品'} /></a> <span aria-hidden="true">/</span> <Localized {...project.data.year} /></p>
+      <p class="eyebrow"><a href={`${base}#work`}><Localized en={project.data.featured ? 'Work' : 'More projects'} zh={project.data.featured ? '项目' : '更多项目'} /></a> <span aria-hidden="true">/</span> <Localized {...project.data.year} /></p>
       <div class="hero-classification">
         <span class="project-index">{displayIndex || <Localized en="Archive" zh="其他项目" />}</span>
         <span><Localized {...project.data.kind} /></span>
