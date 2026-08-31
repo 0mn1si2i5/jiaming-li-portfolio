@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -198,10 +199,11 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('公开流程概念图', component)
         self.assertIn('data-workspace-region="files"', component)
         self.assertIn('data-workspace-region="sheet"', component)
-        self.assertIn('data-workspace-region="botts"', component)
+        self.assertIn('data-workspace-region="workbench"', component)
         self.assertIn('File hierarchy', component)
         self.assertIn('Lark sheet workspace', component)
-        self.assertIn('Botts floating workbench', component)
+        self.assertIn('Floating speech workbench', component)
+        self.assertIn('浮动语音工作台', component)
         for stage in (
             "Table and sheet",
             "Source range and result columns",
@@ -210,6 +212,32 @@ class TestSiteInterface(unittest.TestCase):
             "Progress and status feedback",
         ):
             self.assertIn(stage, component)
+
+    def test_public_output_does_not_contain_botts_name(self) -> None:
+        pattern = re.compile(r"\bbotts\b", re.IGNORECASE)
+        for path in (self.root / "src").rglob("*"):
+            if not path.is_file():
+                continue
+            try:
+                text = path.read_text(encoding="utf-8")
+            except (UnicodeDecodeError, OSError):
+                continue
+            self.assertIsNone(pattern.search(text), f"Botts leaked in {path}")
+        dist = self.root / "dist"
+        if dist.is_dir():
+            for path in dist.rglob("*"):
+                if (
+                    not path.is_file()
+                    or path.suffix not in (".html", ".css", ".js")
+                ):
+                    continue
+                try:
+                    text = path.read_text(encoding="utf-8")
+                except (UnicodeDecodeError, OSError):
+                    continue
+                self.assertIsNone(
+                    pattern.search(text), f"Botts leaked in {path}"
+                )
 
     def test_footer_keeps_copyright_without_github(self) -> None:
         footer = self.layout.split('<footer class="site-footer">', 1)[1].split(

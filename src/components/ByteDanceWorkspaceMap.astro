@@ -13,7 +13,7 @@ const { compact = false } = Astro.props;
   </figcaption>
 
   <div class="workspace-canvas">
-    <span class="sr-only"><Localized en="Concept diagram: a file-hierarchy rail sits inside the Lark sheet workspace, with a Botts floating workbench panel overlaid on its left." zh="概念图：文件层级区位于飞书表格工作区内部，Botts 浮动工作台覆盖在工作区左侧。" /></span>
+    <span class="sr-only"><Localized en="Concept diagram: a file-hierarchy rail sits inside the Lark sheet workspace, with a floating speech workbench panel overlaid on its left." zh="概念图：文件层级区位于飞书表格工作区内部，浮动语音工作台覆盖在工作区左侧。" /></span>
 
     <div class="map-region sheet-region" data-workspace-region="sheet">
       <span class="region-label"><Localized en="Lark sheet workspace" zh="飞书表格工作区" /></span>
@@ -26,9 +26,9 @@ const { compact = false } = Astro.props;
       <div class="sheet-body" aria-hidden="true"></div>
     </div>
 
-    <div class="map-region botts-region" data-workspace-region="botts">
-      <span class="region-label"><Localized en="Botts floating workbench" zh="Botts 浮动工作台" /></span>
-      <ul class="botts-stages">
+    <div class="map-region workbench-region" data-workspace-region="workbench">
+      <span class="region-label"><Localized en="Floating speech workbench" zh="浮动语音工作台" /></span>
+      <ul class="workbench-stages">
         <li><Localized en="Table and sheet" zh="表格与 Sheet" /></li>
         <li><Localized en="Source range and result columns" zh="来源范围与结果列" /></li>
         <li><Localized en="Voice candidate pool and conflict policy" zh="音色候选池与冲突策略" /></li>
@@ -93,7 +93,7 @@ const { compact = false } = Astro.props;
     background-size: 22% 30%;
   }
 
-  .botts-region {
+  .workbench-region {
     position: absolute;
     left: 10%;
     top: 14%;
@@ -110,12 +110,12 @@ const { compact = false } = Astro.props;
     box-shadow: 0 8px 22px rgb(0 0 0 / .14);
     z-index: 2;
   }
-  .botts-stages { display: flex; flex-direction: column; gap: .28rem; margin: 0; padding: 0; list-style: none; }
-  .botts-stages li { padding: .18rem .4rem; color: var(--ink); font-size: .7rem; line-height: 1.25; background: color-mix(in srgb, var(--surface) 60%, transparent); border: 1px solid color-mix(in srgb, var(--ink) 10%, var(--line)); border-radius: 5px; }
+  .workbench-stages { display: flex; flex-direction: column; gap: .28rem; margin: 0; padding: 0; list-style: none; }
+  .workbench-stages li { padding: .18rem .4rem; color: var(--ink); font-size: .7rem; line-height: 1.25; background: color-mix(in srgb, var(--surface) 60%, transparent); border: 1px solid color-mix(in srgb, var(--ink) 10%, var(--line)); border-radius: 5px; }
 
   .workspace-map.compact { gap: .35rem; }
   .workspace-map.compact .concept-badge { font-size: .58rem; padding: .12rem .42rem; }
-  .workspace-map.compact .botts-stages { display: none; }
+  .workspace-map.compact .workbench-stages { display: none; }
   .workspace-map.compact .sheet-region { padding: .5rem; gap: .4rem; }
   .workspace-map.compact .files-region { padding-top: 1.15rem; gap: .22rem; }
   .workspace-map.compact .file-rail { gap: .2rem; }
