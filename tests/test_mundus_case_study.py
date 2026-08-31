@@ -43,19 +43,19 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertEqual(
             headings_by_locale["en"],
             [
-                "A personal globe in use today",
-                "Three ways to read the same place",
-                "One system beneath the views",
-                "Chronorbis: time, events, and place",
+                "An evolving personal globe",
+                "Three released modes",
+                "The shared spatial base",
+                "Chronorbis",
             ],
         )
         self.assertEqual(
             headings_by_locale["zh"],
             [
-                "一颗正在使用的个人数字地球",
-                "从同一地点进入三种观察方式",
-                "三种视角下的同一套空间系统",
-                "Chronorbis：让时间、事件与地点共存",
+                "一颗持续扩展的个人数字地球",
+                "三种已上线模式",
+                "共用的空间基座",
+                "Chronorbis",
             ],
         )
         self.assertEqual(len(all_headings), 8)

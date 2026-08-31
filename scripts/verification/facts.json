@@ -31,7 +31,7 @@
       "claims": [
         {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["represented cities at both ends", "shared globe and location state"]}]},
         {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["两端收录城市之间的关系", "共享的地球与地点状态"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Parchment Atlas · Preview", "Parchment Atlas · 预览", "through-Earth relationship", "穿过地球的两端空间关系"]}]}
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Preview", "预览", "through-Earth relationship", "穿过地球的两端空间关系"]}]}
       ],
       "evidence": [
         {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "bilateral city relations", "Natural Earth vector globe"]}]}
@@ -43,7 +43,7 @@
       "claims": [
         {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["same globe and location context", "Reviewed data snapshots and hashes", "static delivery", "public build reproducible"]}]},
         {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["共用同一颗地球和地点上下文", "经过审核的数据快照和哈希", "静态交付", "线上构建可以复现"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["current public views", "当前公开界面"]}]}
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["three public views", "三种公开视角"]}]}
       ],
       "evidence": [
         {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-publication-packet.md", "rules": [{"type": "contains_all", "values": ["static, one-Canvas architecture", "SHA-256", "build/artifact verification"]}]},
