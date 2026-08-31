@@ -100,11 +100,44 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('id="about-title"', about)
         self.assertNotIn('id="notes-title"', about)
         self.assertIn('href={site.github}', about)
-        self.assertIn('site.email', about)
+        self.assertIn('site.emails', about)
+        self.assertNotIn('${site.email}', about)
         self.assertIn('site.resumePath', about)
         self.assertNotIn('class="note"', about)
         self.assertFalse((self.root / "src/pages/notes.astro").exists())
         self.assertNotIn('id="about"', self.home)
+
+    def test_about_has_complete_intro_and_two_education_entries(self) -> None:
+        about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
+        site = (self.root / "src/config/site.ts").read_text(encoding="utf-8")
+        self.assertIn(
+            "目前在新加坡国立大学攻读计算机硕士，在 AI4SG Lab 研究人机协作与生成式 AI 创作",
+            about,
+        )
+        for token in (
+            "National University of Singapore",
+            "AI4SG Lab",
+            "human–AI collaboration",
+            "generative-AI creation",
+            "ByteDance",
+            "HCI",
+            "DialogTree",
+            "Mundus",
+        ):
+            self.assertIn(token, about)
+        self.assertNotIn("项目类型虽然不同", about)
+        self.assertNotIn("The projects differ", about)
+        self.assertIn("emails: [", site)
+        self.assertIn("nomisomnis@gmail.com", site)
+        self.assertIn("E1442419@u.nus.edu", site)
+        self.assertNotIn("email: 'nomisomnis@gmail.com'", site)
+        self.assertIn("新加坡国立大学", about)
+        self.assertIn("北京大学", about)
+        self.assertIn("俄语语言文学", about)
+        self.assertIn("北京大学社会工作奖", about)
+        for banned in ("GPA", "GRE", "IELTS"):
+            self.assertNotIn(banned, about)
+            self.assertNotIn(banned, site)
 
     def test_footer_keeps_copyright_without_github(self) -> None:
         footer = self.layout.split('<footer class="site-footer">', 1)[1].split(

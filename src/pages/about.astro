@@ -13,10 +13,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <h1 id="about-title"><Localized en="Research, products, and personal projects." zh="研究、产品与个人项目。" /></h1>
     </div>
     <div class="about-copy">
-      <p><Localized en="I'm pursuing a master's in Computer Science at the National University of Singapore, where I research human–AI collaboration at AI4SG Lab. I've worked on speech-model evaluation and data tools, taken part in HCI research, and continue to build my own interaction products." zh="目前在新加坡国立大学计算机系攻读硕士，并在 AI4SG Lab 研究人机协作。此前做过语音模型评测与数据工具，也参与过 HCI 研究，并持续开发自己的交互产品。" /></p>
-      <p><Localized en="The projects differ, but the approach is broadly the same: understand the problem and its boundaries first, then test through research, data, or a working prototype." zh="项目类型虽然不同，做法大体一致：先弄清问题和边界，再用调研、数据或可运行原型验证。" /></p>
+      <p><Localized en="I'm pursuing an M.S. in Computer Science at the National University of Singapore, where I study human–AI collaboration and generative-AI creation at AI4SG Lab. I previously worked with speech data in ByteDance's AI Data & Security team, contributed to HCI research, and continue to develop independent projects including DialogTree and Mundus." zh="目前在新加坡国立大学攻读计算机硕士，在 AI4SG Lab 研究人机协作与生成式 AI 创作。曾在字节跳动 AI 数据与安全部门从事语音数据相关工作，也参与过 HCI 研究，并持续开发 DialogTree、Mundus 等个人项目。" /></p>
       <div class="contact-actions">
-        <a class="external-link" href={`mailto:${site.email}`}><Localized en="Email" zh="邮件" /> <span aria-hidden="true">↗</span></a>
+        {site.emails.map((email) => (
+          <a class="external-link" href={`mailto:${email.address}`}><Localized {...email.label} />: {email.address} <span aria-hidden="true">↗</span></a>
+        ))}
         <a class="external-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="GitHub" zh="GitHub" /> <span aria-hidden="true">↗</span></a>
         <a class="external-link" href={`${base}${site.resumePath}`}><Localized en="Download résumé" zh="下载简历" /> <span aria-hidden="true">↓</span></a>
       </div>
@@ -26,7 +27,18 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   <section class="education page-width" aria-labelledby="education-title">
     <p class="eyebrow"><Localized en="Education" zh="教育" /></p>
     <h2 id="education-title"><Localized en="Background" zh="教育背景" /></h2>
-    <p><Localized en="NUS M.S. in Computer Science (in progress) · PKU B.A. in Russian Language and Literature." zh="新加坡国立大学计算机硕士（在读）· 北京大学俄语语言文学学士。" /></p>
+    <div class="education-list">
+      <article class="education-entry">
+        <h3><Localized en="National University of Singapore" zh="新加坡国立大学" /></h3>
+        <p class="edu-line"><Localized en="M.S. in Computer Science (General Track) · Jan 2025–present" zh="计算机硕士（通用分支）｜2025.01—至今" /></p>
+        <p class="edu-line"><Localized en="AI4SG Lab · human–computer interaction, human–AI collaboration, and generative-AI creation" zh="AI4SG Lab｜人机交互、人机协作与生成式 AI 创作" /></p>
+      </article>
+      <article class="education-entry">
+        <h3><Localized en="Peking University" zh="北京大学" /></h3>
+        <p class="edu-line"><Localized en="B.A. in Russian Language and Literature · Sep 2020–Jul 2024" zh="俄语语言文学学士｜2020.09—2024.07" /></p>
+        <p class="edu-line"><Localized en="Major rank 2 · Peking University Social Work Award (2021)" zh="专业第二｜北京大学社会工作奖（2021）" /></p>
+      </article>
+    </div>
   </section>
 </BaseLayout>
 
@@ -64,8 +76,10 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     border-top: 1px solid var(--rule-strong);
   }
   .education .eyebrow { margin-bottom: 1.5rem; }
-  .education h2 { margin-bottom: 1.25rem; }
-  .education p { max-width: 560px; color: var(--muted); font-size: 1.15rem; }
+  .education h2 { margin-bottom: 1.5rem; }
+  .education-list { display: grid; gap: 2.5rem; }
+  .education-entry h3 { margin: 0 0 .7rem; font-size: 1.35rem; letter-spacing: -.01em; }
+  .education-entry .edu-line { margin: 0 0 .35rem; max-width: 560px; color: var(--muted); font-size: 1.1rem; }
   :global(:root[data-locale='zh']) h1,
   :global(:root[data-locale='zh']) h2 {
     font-size: clamp(2.1rem, 4.2vw, 3.75rem);

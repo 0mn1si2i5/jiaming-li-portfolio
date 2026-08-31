@@ -1,7 +1,18 @@
 export const site = {
   name: 'Jiaming Li',
   description: 'Jiaming Li works across product development, research, and independent projects.',
-  email: 'nomisomnis@gmail.com',
+  emails: [
+    {
+      id: 'personal',
+      label: { en: 'Personal email', zh: '个人邮箱' },
+      address: 'nomisomnis@gmail.com',
+    },
+    {
+      id: 'school',
+      label: { en: 'University email', zh: '学校邮箱' },
+      address: 'E1442419@u.nus.edu',
+    },
+  ],
   resumePath: 'resume/jiaming-li-resume-zh.pdf',
   github: 'https://github.com/0mn1si2i5',
   links: {
