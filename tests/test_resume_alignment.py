@@ -43,6 +43,32 @@ class TestResumeAlignment(unittest.TestCase):
         for metric in ("88.6%", "82%", "97%", "20%", "三倍", "约 30"):
             self.assertIn(metric, source)
 
+    def test_bytedance_responsibility_uses_personal_work_modules(self) -> None:
+        source = (
+            self.root / "src/content/projects/bytedance-ai-data.mdx"
+        ).read_text(encoding="utf-8")
+        component = (
+            self.root / "src/components/ResponsibilityMap.astro"
+        ).read_text(encoding="utf-8")
+        self.assertIn("我负责的模块", source)
+        self.assertIn("My work modules", source)
+        for module in ("评测集设计", "数据生产与交付", "标注与质量控制"):
+            self.assertIn(module, source)
+        for banned in (
+            "项目负责人",
+            "Project lead",
+            "I led the project",
+            "产品与算法",
+            "owner",
+            "emphasis",
+        ):
+            self.assertNotIn(banned, source)
+        self.assertNotIn("owner", component)
+        self.assertNotIn("emphasis", component)
+        self.assertIn("modules", component)
+        self.assertIn("共同完善", source)
+        self.assertIn("协作完成", source)
+
     def test_bytedance_disclosure_and_alt_say_concept_diagram(self) -> None:
         source = (
             self.root / "src/content/projects/bytedance-ai-data.mdx"

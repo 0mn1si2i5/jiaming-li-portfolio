@@ -1,0 +1,59 @@
+---
+import Localized from './Localized.astro';
+
+interface LocalizedText { en: string; zh: string }
+interface ComparisonRow { audience: 'internal' | 'external'; audienceLabel: LocalizedText; before: LocalizedText[]; after: LocalizedText[] }
+interface Props { title: LocalizedText; rows: ComparisonRow[]; sharedQcLabel: LocalizedText; sharedQcItems: LocalizedText[] }
+
+const { title, rows, sharedQcLabel, sharedQcItems } = Astro.props;
+---
+
+<figure class="before-after-matrix">
+  <figcaption><Localized {...title} /></figcaption>
+  <div class="matrix">
+    <div class="matrix-head corner" aria-hidden="true"></div>
+    <div class="matrix-head"><Localized en="Before" zh="之前" /></div>
+    <div class="matrix-head"><Localized en="After" zh="之后" /></div>
+    {rows.map((row) => (
+      <>
+        <div class="matrix-row-label" data-audience={row.audience}>
+          <Localized {...row.audienceLabel} />
+        </div>
+        <div class="matrix-cell before" data-audience={row.audience} data-state="before">
+          <ul>{row.before.map((item) => <li><Localized {...item} /></li>)}</ul>
+        </div>
+        <div class="matrix-cell after" data-audience={row.audience} data-state="after">
+          <ul>{row.after.map((item) => <li><Localized {...item} /></li>)}</ul>
+        </div>
+      </>
+    ))}
+  </div>
+  <div class="shared-qc">
+    <span class="shared-qc-label"><Localized {...sharedQcLabel} /></span>
+    <ul>{sharedQcItems.map((item) => <li><Localized {...item} /></li>)}</ul>
+  </div>
+</figure>
+
+<style>
+  .before-after-matrix { margin: 0 0 3.3rem; }
+  .before-after-matrix figcaption { margin-bottom: 1.25rem; color: var(--ink); font-family: var(--font-editorial); font-weight: 500; font-size: 1.15rem; }
+  .matrix { display: grid; grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr) minmax(0, 1fr); gap: .6rem; align-items: stretch; }
+  .matrix-head { display: flex; align-items: center; color: var(--ink); font-weight: 650; font-size: .8rem; letter-spacing: .05em; text-transform: uppercase; padding: 0 .25rem; }
+  .matrix-head.corner { padding: 0; }
+  .matrix-row-label { display: flex; align-items: center; color: var(--ink); font-weight: 650; font-size: .82rem; padding: 0 .25rem; }
+  .matrix-cell { padding: 1rem 1.15rem; border-radius: 14px; }
+  .matrix-cell.before { background: var(--surface); border: 1px solid var(--line); }
+  .matrix-cell.after { background: color-mix(in srgb, var(--ink) 4%, var(--paper)); border: 1px solid color-mix(in srgb, var(--ink) 26%, var(--line)); }
+  .matrix-cell ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+  .matrix-cell li { color: var(--muted); font-size: .88rem; line-height: 1.5; }
+  .matrix-cell.after li { color: var(--ink); }
+  .shared-qc { margin-top: 1.1rem; padding: 1rem 1.15rem; background: color-mix(in srgb, var(--ink) 4%, var(--paper)); border: 1px dashed color-mix(in srgb, var(--ink) 26%, var(--line)); border-radius: 14px; }
+  .shared-qc-label { display: block; margin-bottom: .55rem; color: var(--ink); font-weight: 650; font-size: .82rem; }
+  .shared-qc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem 1rem; }
+  .shared-qc li { color: var(--muted); font-size: .88rem; line-height: 1.5; }
+  @media (max-width: 640px) {
+    .matrix { grid-template-columns: 1fr 1fr; }
+    .matrix-head.corner { display: none; }
+    .matrix-row-label { grid-column: 1 / -1; margin-top: .5rem; }
+  }
+</style>

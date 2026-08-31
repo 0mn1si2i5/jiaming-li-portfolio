@@ -213,6 +213,37 @@ class TestSiteInterface(unittest.TestCase):
         ):
             self.assertIn(stage, component)
 
+    def test_bytedance_before_after_uses_four_quadrant_matrix(self) -> None:
+        source = (
+            self.root / "src/content/projects/bytedance-ai-data.mdx"
+        ).read_text(encoding="utf-8")
+        component = (
+            self.root / "src/components/BeforeAfterMatrix.astro"
+        ).read_text(encoding="utf-8")
+        self.assertIn('BeforeAfterMatrix', source)
+        self.assertNotIn('BeforeAfterFlow', source)
+        self.assertNotIn('before={', source)
+        self.assertNotIn('after={', source)
+        self.assertFalse(
+            (self.root / "src/components/BeforeAfterFlow.astro").exists()
+        )
+        self.assertIn('comment bot', source)
+        self.assertIn('评论机器人', source)
+        self.assertIn('floating speech workbench', source)
+        self.assertIn('浮动语音工作台', source)
+        for token in (
+            'audience',
+            'audienceLabel',
+            'data-audience',
+            'data-state',
+            'rows',
+            'sharedQcLabel',
+            'sharedQcItems',
+        ):
+            self.assertIn(token, component)
+        self.assertIn('internal', component)
+        self.assertIn('external', component)
+
     def test_public_output_does_not_contain_botts_name(self) -> None:
         pattern = re.compile(r"\bbotts\b", re.IGNORECASE)
         for path in (self.root / "src").rglob("*"):
