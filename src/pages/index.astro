@@ -52,7 +52,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   </section>
 
   <section id="internship" class="internship-section page-width" aria-labelledby="internship-title">
-    <div class="section-heading"><p class="eyebrow"><Localized en="Internship" zh="实习项目" /></p><h2 id="internship-title"><Localized en="Internship project" zh="实习项目" /></h2></div>
+    <div class="section-heading"><p class="eyebrow"><Localized en="Experience" zh="经历" /></p><h2 id="internship-title"><Localized en="Internship project" zh="实习项目" /></h2></div>
     <div class="project-list">
       {internshipProjects.map((project) => (
         <article class:list={['project-card', 'internship-card', `accent-${project.data.accent}`]}>

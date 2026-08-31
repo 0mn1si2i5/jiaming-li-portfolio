@@ -161,6 +161,26 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('import EmailContact', about)
         self.assertIn('<EmailContact', about)
 
+    def test_internship_section_titles_use_distinct_two_level_text(self) -> None:
+        self.assertIn('zh="经历"', self.home)
+        self.assertIn('en="Experience"', self.home)
+        self.assertIn('en="Internship project"', self.home)
+        # the eyebrow (before the heading) must not reuse the heading's Chinese text
+        self.assertNotIn('zh="实习项目"', self.home.split('id="internship-title"')[0])
+
+    def test_email_copy_buttons_have_distinct_accessible_names(self) -> None:
+        component = (
+            self.root / "src/components/EmailContact.astro"
+        ).read_text(encoding="utf-8")
+        site = (self.root / "src/config/site.ts").read_text(encoding="utf-8")
+        self.assertIn('label.en', component)
+        self.assertIn('label.zh', component)
+        self.assertIn('aria-hidden="true"', component)
+        self.assertIn("'Personal email'", site)
+        self.assertIn("'University email'", site)
+        self.assertIn('个人邮箱', site)
+        self.assertIn('学校邮箱', site)
+
     def test_footer_keeps_copyright_without_github(self) -> None:
         footer = self.layout.split('<footer class="site-footer">', 1)[1].split(
             "</footer>", 1
