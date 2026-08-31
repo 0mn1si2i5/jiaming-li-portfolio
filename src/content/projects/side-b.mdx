@@ -5,7 +5,7 @@ status: { en: Working iOS prototype, zh: 可运行的 iOS 原型 }
 order: 2
 featured: false
 kind: { en: Mobile product prototype, zh: 移动产品原型 }
-summary: { en: A cross-platform music-sharing prototype that resolves song links and retrieves platform links before people save, share, open, or discuss a track., zh: 一个跨平台音乐分享原型：解析歌曲链接并获取全平台链接，再收藏、分享、跳转，或在聊天室里继续讨论。 }
+summary: { en: A cross-platform music-sharing prototype that resolves links from four music services and retrieves available links for the same track before people save, share, open, or discuss it., zh: 一个跨平台音乐分享原型：解析四家音乐平台的歌曲链接，获取可用的平台链接，再收藏、分享、跳转，或在聊天室里继续讨论。 }
 role: { en: Product concept, interaction design, SwiftUI, and service prototyping, zh: 产品概念、交互设计、SwiftUI 与服务原型开发 }
 accent: coral
 media:
@@ -22,7 +22,7 @@ import SideBGallery from '../../components/SideBGallery.astro';
 
 <section lang="en" data-locale-content="en">
 
-## Why sharing a song still breaks down
+## The problem
 
 Your friend listens on NetEase; you use Spotify. Most of the time, sharing becomes sending a title and asking the other person to search again. That is merely annoying until it is a track in another language, a live cut, or a reissue—then it is easy to land on the wrong version. A small recommendation can stall before either person hits play.
 
@@ -34,7 +34,7 @@ Side B parses Spotify, Apple Music, NetEase Cloud Music, and QQ Music links, the
 
 I built the core “parse — gather — share” flow as a SwiftUI iOS prototype with a FastAPI service behind it. The app keeps recent resolutions and personal playlists locally, routes people to their preferred platforms, and lets a room hold song cards, replies, and reactions in one place.
 
-The hero above shows the songs home, Sandy Lam’s Reset track page, and a real room conversation. The screens below then unpack link parsing, platform handoff, saved playlists, and room discussion.
+The hero above shows the songs home, Sandy Lam’s Reset track page, and a sample room conversation. The screens below then unpack link parsing, platform handoff, saved playlists, and room discussion.
 
 ## What I would test next
 
@@ -44,21 +44,21 @@ Side B also raises a harder product question: will people install another app ju
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 为什么分享一首歌，常常还是很麻烦
+## 问题
 
 朋友用网易云，你用 Spotify。大多数时候，分享一首歌最后会变成：他把歌名发给你，你再自己搜一遍。平时只是多几步；碰上小语种、现场版或重制版，就很容易搜到另一首。原本一句“你听听这个”，可能还没开始播放就断在了中间。
 
-## Side B 怎么处理这件事
+## Side B 的处理方式
 
-Side B 可以解析 Spotify、Apple Music、网易云音乐和 QQ 音乐的歌曲链接，返回歌曲信息和可用的全平台链接。解析完成后，用户可以收藏、分享、跳转到常用平台，或在聊天室里继续讨论。
+Side B 可以解析 Spotify、Apple Music、网易云音乐和 QQ 音乐的歌曲链接，返回歌曲信息和可用的平台链接。解析完成后，用户可以收藏、分享、跳转到常用平台，或在聊天室里继续讨论。
 
-## 我做了什么
+## 原型实现
 
 我把“解析 — 获取链接 — 分享”的核心流程做成了 SwiftUI iOS 原型，后端由 FastAPI 支撑。App 会在本地保留最近解析和个人歌单，支持跳转到常用平台；房间里则把歌曲卡片、回复和表情回应放在同一处。
 
-上面的首屏展示歌曲首页、林忆莲《归零》的详情页和实际聊天室中的一段对话；下面的截图再分别展开链接解析、全平台跳转、收藏歌单和房间讨论。
+上面的首屏展示歌曲首页、林忆莲《归零》的详情页和一段演示对话；下面的截图再分别展开链接解析、平台跳转、收藏歌单和房间讨论。
 
-## 下一步要验证什么
+## 下一步验证
 
 但 Side B 也绕不开一个更现实的问题：为了分享一首歌，用户为什么要多装一个 App？下一步我会验证两种不同的回答。第一种是把解析能力做得几乎无感：迁到小程序或网页，用更顺的跳转把人直接带回常用平台。第二种是把房间做成值得再打开的地方：让共同收藏、主题房间和熟人互动慢慢积累起来。前者降低单次使用的成本，后者给用户一个留下来的理由。
 

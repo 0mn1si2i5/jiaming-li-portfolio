@@ -152,6 +152,64 @@ class TestSiteInterface(unittest.TestCase):
             2,
         )
 
+    def test_nbti_uses_play_matching_boundaries_sections(self) -> None:
+        nbti = (self.root / "src/content/projects/nbti.mdx").read_text(
+            encoding="utf-8"
+        )
+        for heading in ("## 玩法", "## 如何匹配", "## 使用边界"):
+            self.assertIn(heading, nbti)
+        for old in ("## 起点", "## 体验", "## 背后的系统", "## 谨慎地使用历史"):
+            self.assertNotIn(old, nbti)
+        self.assertNotIn(
+            "人格测试为人们提供了一种理解自身选择的语言",
+            nbti,
+        )
+        for token in (
+            "18",
+            "6",
+            "32",
+            "六种行动倾向",
+            "确定性",
+            "本地",
+            "不要求账户",
+            "不使用 Cookie",
+            "分析追踪",
+            "不保存回答",
+            "不是心理测评",
+            "科学诊断",
+        ):
+            self.assertIn(token, nbti)
+        self.assertIn("How it plays", nbti)
+        self.assertIn("How matching works", nbti)
+        self.assertIn("Boundaries", nbti)
+
+    def test_side_b_uses_prototype_flow_and_available_links(self) -> None:
+        side_b = (self.root / "src/content/projects/side-b.mdx").read_text(
+            encoding="utf-8"
+        )
+        gallery = (
+            self.root / "src/components/SideBGallery.astro"
+        ).read_text(encoding="utf-8")
+        for heading in (
+            "## 问题",
+            "## Side B 的处理方式",
+            "## 原型实现",
+            "## 下一步验证",
+        ):
+            self.assertIn(heading, side_b)
+        for platform in ("Spotify", "Apple Music", "网易云音乐", "QQ 音乐"):
+            self.assertIn(platform, side_b)
+        self.assertIn("可用的平台链接", side_b)
+        self.assertIn("四家音乐平台", side_b)
+        self.assertIn("four music services", side_b)
+        self.assertIn("原型流程", gallery)
+        self.assertIn("一段演示对话", side_b)
+        self.assertIn("sample room conversation", side_b)
+        self.assertNotIn("全平台链接", side_b)
+        self.assertNotIn("全平台跳转", side_b)
+        self.assertNotIn("实际使用", gallery)
+        self.assertNotIn("实际聊天室中的一段对话", side_b)
+
     def test_side_b_uses_dedicated_homepage_preview(self) -> None:
         self.assertIn(
             "preview: /media/side-b/side-b-journey-preview.webp",

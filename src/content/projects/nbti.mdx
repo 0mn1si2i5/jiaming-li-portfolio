@@ -5,7 +5,7 @@ status: { en: Live independent product, zh: 已上线的独立作品 }
 order: 1
 featured: false
 kind: { en: Cultural interactive product, zh: 文化互动产品 }
-summary: { en: A playful personality test that uses 24 everyday situations to reflect your choices through 32 figures from the Wei–Jin and Northern–Southern Dynasties., zh: 一场魏晋南北朝人格趣味测试：通过 24 个日常情境，以 32 位历史人物映照你的选择。 }
+summary: { en: A playful personality test that uses 18 scenarios and 6 calibration questions to reflect your choices through 32 figures from the Wei–Jin and Northern–Southern Dynasties., zh: 一场魏晋南北朝人格趣味测试：通过 18 个情境与 6 道校准题，以 32 位历史人物映照你的选择。 }
 role: { en: Product concept, interaction design, content system, and front-end development, zh: 产品概念、交互设计、内容系统与前端开发 }
 accent: blue
 media:
@@ -21,19 +21,15 @@ links:
 
 <section lang="en" data-locale-content="en">
 
-## The premise
+## How it plays
 
-Personality tests are engaging because they give people a language for noticing themselves. NBTI asks whether that reflection can feel less like a diagnosis and more like looking into a set of historical mirrors: complex people, imperfect evidence, and no single answer that settles who someone was.
+NBTI is a playful test that uses historical figures as a reference rather than as a personality diagnosis. It is mobile-first and direct: people move through 18 concrete scenarios and six calibration questions, then receive a result built from six action tendencies—a primary historical counterpart, nearby and contrasting matches, a short reading, and links to the source material behind the historical notes.
 
-## The experience
-
-The experience is mobile-first and intentionally direct. People move through 18 concrete scenarios and six calibration questions, then receive a result built from six action tendencies: a primary historical counterpart, nearby and contrasting matches, a short reading, and links to the source material behind the historical notes.
-
-## The system behind it
+## How matching works
 
 I designed the product, interaction flow, visual direction, and the matching system, then built it as a static React site. A deterministic distance model compares each response vector with 32 character profiles, so every result is generated locally and repeatably—without an account, cookies, analytics, or saved answers.
 
-## A careful use of history
+## Boundaries
 
 NBTI is a playful cultural experience, not a psychological or scientific assessment. The historical figures are loose points of comparison rather than proof of a personality label; the result writing keeps the user’s present choices in focus and treats the past as material for reflection, not a verdict.
 
@@ -41,19 +37,15 @@ NBTI is a playful cultural experience, not a psychological or scientific assessm
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 起点
+## 玩法
 
-人格测试为人们提供了一种理解自身选择的语言。NBTI 尝试将这种反思与历史人物结合：把复杂的人物、有限的史料和多种可能性作为参照，而非将结果视为对人格的诊断。
+NBTI 是一场把历史人物当作参照的趣味测试，而非对人格的诊断。产品以移动端体验为核心：用户完成 18 个具体情境与 6 道校准题后，会得到基于六种行动倾向生成的结果，包括主要历史人物参照、相近与对照人物、简短解读和史料来源链接。
 
-## 体验
-
-产品以移动端体验为核心。用户完成 18 个具体情境与 6 个校准问题后，将获得基于六种行动倾向生成的结果，包括主要历史人物参照、相近与对照人物、简短解读和史料来源链接。
-
-## 背后的系统
+## 如何匹配
 
 我负责产品概念、交互流程、视觉方向和匹配系统，并将其实现为静态 React 网站。确定性距离模型会将回答向量与 32 个人物档案比较，因此结果可在本地重复生成；产品不要求账户、不使用 Cookie 或分析追踪，也不保存回答。
 
-## 谨慎地使用历史
+## 使用边界
 
 NBTI 是文化与历史导向的互动体验，不是心理测评或科学诊断。历史人物仅作为理解选择的参照；结果应被视为反思材料，而非人格结论。
 
