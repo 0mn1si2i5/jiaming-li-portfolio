@@ -56,7 +56,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <div class="project-list">
       {internshipProjects.map((project) => (
         <article class:list={['project-card', 'internship-card', `accent-${project.data.accent}`]}>
-          <a class="media-link" href={`${base}projects/${project.id}`}><ProjectMedia project={project} compact /></a>
           <div class="project-copy">
             <div class="meta project-meta">
               <span class="kind"><Localized {...project.data.kind} /></span>
@@ -110,7 +109,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .hero-bottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; } .hero-bottom p { max-width: 430px; margin: 0; color: var(--muted); font-size: 1.08rem; }
   .quiet-link { font-weight: 620; text-decoration: none; }.quiet-link:hover { text-decoration: underline; }
   .work-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.section-heading { display: flex; justify-content: space-between; margin-bottom: clamp(4rem, 7vw, 7rem); }.section-heading h2, .other-section h2 { margin-bottom: 0; font-size: clamp(2.4rem, 5vw, 4.6rem); }
-  .internship-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.internship-section .section-heading { margin-bottom: clamp(3rem, 5vw, 5rem); }.internship-card .project-copy h3 { font-size: clamp(2.4rem, 4vw, 4rem); }
+  .internship-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.internship-section .section-heading { margin-bottom: clamp(3rem, 5vw, 5rem); }.internship-card .project-copy h3 { font-size: clamp(2.4rem, 4vw, 4rem); }.internship-card { grid-template-columns: minmax(0, 1fr); }.internship-card .project-copy > p { max-width: 640px; }
   .project-list { display: grid; gap: clamp(5rem, 10vw, 10rem); }
   .project-card { position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .72fr); align-items: center; gap: clamp(2.5rem, 6vw, 6.5rem); padding-top: 2.25rem; border-top: 1px solid var(--rule-strong); }
   .project-card:nth-child(even) { grid-template-columns: minmax(260px, .72fr) minmax(0, 1.55fr); }

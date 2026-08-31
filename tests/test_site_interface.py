@@ -182,36 +182,30 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('个人邮箱', site)
         self.assertIn('学校邮箱', site)
 
-    def test_bytedance_media_uses_public_workspace_concept_map(self) -> None:
+    def test_bytedance_renders_no_media_or_placeholder(self) -> None:
         media = (
             self.root / "src/components/ProjectMedia.astro"
         ).read_text(encoding="utf-8")
-        component = (
-            self.root / "src/components/ByteDanceWorkspaceMap.astro"
-        ).read_text(encoding="utf-8")
-        self.assertIn('ByteDanceWorkspaceMap', media)
-        self.assertNotIn('ByteDanceOverview', media)
+        self.assertFalse(
+            (self.root / "src/components/ByteDanceWorkspaceMap.astro").exists()
+        )
         self.assertFalse(
             (self.root / "src/components/ByteDanceOverview.astro").exists()
         )
-        self.assertIn('data-public-concept', component)
-        self.assertIn('Public workflow concept', component)
-        self.assertIn('公开流程概念图', component)
-        self.assertIn('data-workspace-region="files"', component)
-        self.assertIn('data-workspace-region="sheet"', component)
-        self.assertIn('data-workspace-region="workbench"', component)
-        self.assertIn('File hierarchy', component)
-        self.assertIn('Lark sheet workspace', component)
-        self.assertIn('Floating speech workbench', component)
-        self.assertIn('浮动语音工作台', component)
-        for stage in (
-            "Table and sheet",
-            "Source range and result columns",
-            "Voice candidate pool and conflict policy",
-            "Start preflight",
-            "Progress and status feedback",
-        ):
-            self.assertIn(stage, component)
+        self.assertNotIn('ByteDanceWorkspaceMap', media)
+        self.assertNotIn('ByteDanceOverview', media)
+        self.assertNotIn('byte-media', media)
+        self.assertNotIn('bytedance-ai-data', media)
+        internship = self.home.split('id="internship"')[1].split("</section>")[0]
+        self.assertNotIn('media-link', internship)
+        self.assertNotIn('ProjectMedia', internship)
+        self.assertIn('project-copy', internship)
+        self.assertIn('project.data.kind', internship)
+        self.assertIn('project.data.year', internship)
+        self.assertIn('project.data.title', internship)
+        self.assertIn('project.data.summary', internship)
+        self.assertIn("project.id !== 'bytedance-ai-data'", self.project)
+        self.assertIn('media-section', self.project)
 
     def test_bytedance_before_after_uses_four_quadrant_matrix(self) -> None:
         source = (

@@ -30,7 +30,9 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
       </div>
       <div class="hero-grid"><div><h1><Localized {...project.data.title} /></h1><p class="summary"><Localized {...project.data.summary} /></p></div><dl><div><dt><Localized en="Status" zh="状态" /></dt><dd><Localized {...project.data.status} /></dd></div><div><dt><Localized en="My work" zh="我的工作" /></dt><dd><Localized {...project.data.role} /></dd></div></dl></div>
     </header>
-    <section class="media-section page-width"><ProjectMedia project={project} /></section>
+    {project.id !== 'bytedance-ai-data' && (
+      <section class="media-section page-width"><ProjectMedia project={project} /></section>
+    )}
     {project.data.media.walkthrough && (
       <section class="walkthrough-section page-width" aria-labelledby="walkthrough-title">
         <p class="eyebrow"><Localized en="Demo" zh="演示" /></p>

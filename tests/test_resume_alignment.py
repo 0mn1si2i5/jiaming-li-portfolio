@@ -69,12 +69,25 @@ class TestResumeAlignment(unittest.TestCase):
         self.assertIn("共同完善", source)
         self.assertIn("协作完成", source)
 
-    def test_bytedance_disclosure_and_alt_say_concept_diagram(self) -> None:
+    def test_bytedance_disclosure_omits_internal_artifacts_and_concept_diagram(
+        self,
+    ) -> None:
         source = (
             self.root / "src/content/projects/bytedance-ai-data.mdx"
         ).read_text(encoding="utf-8")
-        self.assertIn("公开概念图", source)
-        self.assertIn("concept diagram", source)
+        self.assertIn(
+            "本案例以通用方式描述工作流程，不展示内部界面、真实业务数据或具体实现。",
+            source,
+        )
+        self.assertIn(
+            "This case describes the workflow in general terms and does not show "
+            "internal interfaces, real business data, or implementation details.",
+            source,
+        )
+        self.assertNotIn("公开概念图", source)
+        self.assertNotIn("concept diagram", source)
+        self.assertNotIn("不是内部产品截图", source)
+        self.assertNotIn("not an internal screenshot", source)
         self.assertNotIn("Botts", source)
 
     def test_home_positioning_and_external_work_are_bilingual(self) -> None:

@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Localized from './Localized.astro';
-import ByteDanceWorkspaceMap from './ByteDanceWorkspaceMap.astro';
 
 interface Props { project: CollectionEntry<'projects'>; compact?: boolean; }
 const { project, compact = false } = Astro.props;
@@ -12,11 +11,7 @@ const imageSource = compact && media.preview ? media.preview : media.src;
 const imageAlt = compact && media.preview && media.previewAlt ? media.previewAlt : media.alt;
 ---
 
-{project.id === 'bytedance-ai-data' ? (
-  <div class:list={['project-media', 'byte-media', `accent-${accent}`, { compact }]}>
-    <ByteDanceWorkspaceMap compact={compact} />
-  </div>
-) : media.type === 'video' && media.src ? (
+{media.type === 'video' && media.src ? (
   <div class:list={['project-media', `accent-${accent}`, { compact }]}>
     {compact ? (
       <img src={asset(media.poster)} alt={media.alt.en} data-alt-en={media.alt.en} data-alt-zh={media.alt.zh} loading="lazy" />
