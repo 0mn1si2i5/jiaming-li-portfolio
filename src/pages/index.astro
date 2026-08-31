@@ -18,15 +18,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <BaseLayout>
   <section class="hero page-width">
     <p class="eyebrow">Jiaming Li · 李佳鸣</p>
-    <h1><Localized en="I build AI evaluation systems, data tools, and interaction products." zh="我做 AI 评测、数据工具和交互产品。" /></h1>
+    <h1><Localized en="I work across product development, research, and independent projects." zh="产品、研究与独立开发。" /></h1>
     <div class="hero-bottom">
-      <p><Localized en="My work covers problem framing, evaluation design, quality standards, user research, and delivery. I also turn complex workflows into reusable products and automated tools." zh="我的工作涵盖问题定义、评测方案、质量标准、用户研究与上线交付，也包括将复杂流程做成可复用的产品和自动化工具。" /></p>
-      <a class="quiet-link" href="#work"><Localized en="Selected explorations" zh="精选探索" /> <span aria-hidden="true">↓</span></a>
+      <p><Localized en="This portfolio brings together interaction products, research prototypes, and evaluation work—from internship tools to collaborative research and independent projects I continue to maintain." zh="这里收录了我做过的交互产品、研究原型和数据评测工作。项目形态不同：有实习期间交付的内部工具，也有合作研究和持续维护的个人作品。" /></p>
+      <a class="quiet-link" href="#work"><Localized en="View projects" zh="查看项目" /> <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
   <section id="work" class="work-section page-width" aria-labelledby="work-title">
-    <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Main projects" zh="主要项目" /></h2></div>
+    <div class="section-heading"><p class="eyebrow"><Localized en="Work" zh="项目" /></p><h2 id="work-title"><Localized en="Featured projects" zh="重点项目" /></h2></div>
     <div class="project-list">
       {featuredProjects.map((project, index) => (
         <article class:list={['project-card', `accent-${project.data.accent}`]}>
@@ -46,9 +46,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   </section>
 
   <section class="other-section page-width" aria-labelledby="other-title">
-    <p class="eyebrow"><Localized en="Other work" zh="其他作品" /></p>
+    <p class="eyebrow"><Localized en="More projects" zh="更多项目" /></p>
     <div class="other-grid">
-      <h2 id="other-title"><Localized en="Small things with a longer life." zh="同样值得记录的项目。" /></h2>
+      <h2 id="other-title"><Localized en="Independent work and experiments" zh="独立作品与实验" /></h2>
       <div class="other-list">
         {otherProjects.map((project) => (
           <article class="other-card">

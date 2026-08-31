@@ -6,15 +6,15 @@ import { site } from '../config/site';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
-<BaseLayout title="About" description="About Jiaming Li's practice across model evaluation, data tooling, and interaction products.">
+<BaseLayout title="About" description="About Jiaming Li's work across product development, research, and independent projects.">
   <section class="about page-width" aria-labelledby="about-title">
     <div>
       <p class="eyebrow"><Localized en="About" zh="关于" /></p>
-      <h1 id="about-title"><Localized en="A practice of making things clear." zh="研究、产品与实现。" /></h1>
+      <h1 id="about-title"><Localized en="Research, products, and personal projects." zh="研究、产品与个人项目。" /></h1>
     </div>
     <div class="about-copy">
-      <p><Localized en="I'm pursuing a master's in Computer Science at the National University of Singapore, where I conduct research on human–AI collaboration at AI4SG Lab. My work spans model evaluation, data tools, and interaction products, along with user research and HCI." zh="我目前在新加坡国立大学计算机系攻读硕士，并在 AI4SG Lab 开展人机协作研究。此前的项目包括模型评测、数据工具和交互产品，也延伸到用户研究与 HCI。" /></p>
-      <p><Localized en="I start with a concrete problem, define the goal and boundaries, then test the approach through data, research, or a working product." zh="我通常从具体问题入手：先确认目标和边界，再通过数据、研究或产品实现验证方案。" /></p>
+      <p><Localized en="I'm pursuing a master's in Computer Science at the National University of Singapore, where I research human–AI collaboration at AI4SG Lab. I've worked on speech-model evaluation and data tools, taken part in HCI research, and continue to build my own interaction products." zh="目前在新加坡国立大学计算机系攻读硕士，并在 AI4SG Lab 研究人机协作。此前做过语音模型评测与数据工具，也参与过 HCI 研究，并持续开发自己的交互产品。" /></p>
+      <p><Localized en="The projects differ, but the approach is broadly the same: understand the problem and its boundaries first, then test through research, data, or a working prototype." zh="项目类型虽然不同，做法大体一致：先弄清问题和边界，再用调研、数据或可运行原型验证。" /></p>
       <div class="contact-actions">
         <a class="external-link" href={`mailto:${site.email}`}><Localized en="Email" zh="邮件" /> <span aria-hidden="true">↗</span></a>
         <a class="external-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="GitHub" zh="GitHub" /> <span aria-hidden="true">↗</span></a>

@@ -1,6 +1,6 @@
 export const site = {
   name: 'Jiaming Li',
-  description: 'Jiaming Li builds AI evaluation systems, data tools, and interaction products.',
+  description: 'Jiaming Li works across product development, research, and independent projects.',
   email: 'nomisomnis@gmail.com',
   resumePath: 'resume/jiaming-li-resume-zh.pdf',
   github: 'https://github.com/0mn1si2i5',
@@ -23,7 +23,7 @@ export const site = {
       title: { en: 'dsh-handoff', zh: 'dsh-handoff' },
       summary: {
         en: 'After joining the early developer beta, I built dsh-handoff to save and restore redacted, Git-aware context between DeepSeek Harness sessions.',
-        zh: '作为 DeepSeek Harness 首批内测开发者，我开发了跨会话交接插件 dsh-handoff。插件可生成经过脱敏、带有 Git 状态的交接记录，并在新会话中恢复上下文。',
+        zh: '作为 DeepSeek Harness 早期内测开发者，我开发了跨会话交接插件 dsh-handoff：在会话之间保存并恢复经过脱敏、带 Git 状态的交接记录。',
       },
       href: 'https://github.com/0mn1si2i5/dsh-handoff',
     },
