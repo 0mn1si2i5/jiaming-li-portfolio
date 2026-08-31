@@ -30,10 +30,16 @@ class TestResumeAlignment(unittest.TestCase):
         self.assertNotIn("AI Evaluation & Data Tooling", source)
         self.assertIn("实习项目（内容已脱敏）", source)
         self.assertIn("语音评测与内部工具", source)
-        self.assertIn("## 项目说明", source)
+        self.assertNotIn("## Project overview", source)
+        self.assertNotIn("## 项目说明", source)
         self.assertIn("## 语音评测集迭代", source)
         self.assertIn("## 语音数据生产工具", source)
         self.assertNotIn("语音数据生产平台（内部工具）", source)
+        self.assertIn("本案例以通用方式描述工作流程", source)
+        self.assertIn(
+            "This case describes the workflow in general terms",
+            source,
+        )
         for metric in ("88.6%", "82%", "97%", "20%", "三倍", "约 30"):
             self.assertIn(metric, source)
 
