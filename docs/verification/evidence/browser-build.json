@@ -3,31 +3,31 @@
   "html": [
     {
       "path": "index.html",
-      "sha256": "c6e215c97736fdfdfab365f22f129c3701762c0cf24597917c5c3692c2751925"
+      "sha256": "0ae7c1558df96128896e04fc9e5b7543e6c1d49266e7e19da6a47db0583bd00d"
     },
     {
       "path": "about/index.html",
-      "sha256": "b0dc42d96c663e7df1bfc91e3953b0879a98e3873485b7d3c3aa0eda7ee31cbc"
+      "sha256": "d8fa36358f7e1977c38c8fde9fda8ec6f1542f18b908c7bec5d7001407533dcc"
     },
     {
       "path": "projects/bytedance-ai-data/index.html",
-      "sha256": "a1fd778cfe2f6fcf37ff051d5c0861c85c280b2ae953e5382f4d4ef87be9b576"
+      "sha256": "b3725602ea209cb189a7fe76d3acbe41678a686edbbcacf19633e17d53e1b00d"
     },
     {
       "path": "projects/dialogtree/index.html",
-      "sha256": "e8b6151b0711474bb36ec1700d34a4f8966b0529526e3664e5f21cfcfa7e0e8b"
+      "sha256": "62e50643aa4af65a471617fb027926732372e6e817e5f1896fa7011f2fe368c7"
     },
     {
       "path": "projects/mundus/index.html",
-      "sha256": "3b716cd3e53dc178810fbc5e8ec4f2baf3d8046aaf8161096f53c8e941429203"
+      "sha256": "f0586e20c854a85d55da06908bc67428b50c5721d4062415f04a7310a5934e1e"
     },
     {
       "path": "projects/nbti/index.html",
-      "sha256": "4cbfebe4ac65f0c0ed086251dec7ad9e20c9644cfd429a0e6825e2378fd659b6"
+      "sha256": "0cc0c666ff8f58c1a440c1707da652973eaaee5ed1b87bc3725aab2492ad6b48"
     },
     {
       "path": "projects/side-b/index.html",
-      "sha256": "535d7098409c1f41417e2e6a62fef045fb4b44819db0b7e4ca94130c1644b75c"
+      "sha256": "15ec505687afb966ce6240cc25192a995decd4acc1c34613e26346f457552973"
     }
   ]
 }

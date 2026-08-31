@@ -10,26 +10,30 @@
         "width": 1440,
         "height": 900
       },
+      "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": false,
-      "focusableCount": 20,
-      "focusVisible": true,
-      "visibleTextLength": 1840,
+      "focusableCount": 18,
+      "visibleTextLength": 1868,
       "pagesBaseCorrect": true,
-      "selected": [
-        "Speech Evaluation & Data Tooling at ByteDance",
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
         "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
         "NBTI",
         "Side B",
         "dsh-handoff",
         "RSZ Namelist"
-      ]
+      ],
+      "mediaCount": 0
     },
     {
       "scenario": "home-en-light-1024",
@@ -40,26 +44,30 @@
         "width": 1024,
         "height": 768
       },
+      "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": false,
-      "focusableCount": 20,
-      "focusVisible": true,
-      "visibleTextLength": 1840,
+      "focusableCount": 18,
+      "visibleTextLength": 1868,
       "pagesBaseCorrect": true,
-      "selected": [
-        "Speech Evaluation & Data Tooling at ByteDance",
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
         "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
         "NBTI",
         "Side B",
         "dsh-handoff",
         "RSZ Namelist"
-      ]
+      ],
+      "mediaCount": 0
     },
     {
       "scenario": "home-zh-dark-768",
@@ -70,19 +78,22 @@
         "width": 768,
         "height": 1024
       },
+      "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": true,
-      "focusableCount": 20,
-      "focusVisible": true,
-      "visibleTextLength": 840,
+      "focusableCount": 18,
+      "visibleTextLength": 820,
       "pagesBaseCorrect": true,
-      "selected": [
-        "Speech Evaluation & Data Tooling at ByteDance",
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
         "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
         "NBTI",
@@ -90,7 +101,7 @@
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "activeAnimationCount": 0
+      "mediaCount": 0
     },
     {
       "scenario": "home-zh-dark-390",
@@ -101,19 +112,22 @@
         "width": 390,
         "height": 844
       },
+      "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": true,
-      "focusableCount": 20,
-      "focusVisible": true,
-      "visibleTextLength": 837,
+      "focusableCount": 18,
+      "visibleTextLength": 817,
       "pagesBaseCorrect": true,
-      "selected": [
-        "Speech Evaluation & Data Tooling at ByteDance",
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
         "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
         "NBTI",
@@ -121,7 +135,57 @@
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "activeAnimationCount": 0
+      "mediaCount": 0
+    },
+    {
+      "scenario": "about-en-light-1440",
+      "route": "/about",
+      "locale": "en",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reducedMotion": false,
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 0,
+      "totalImageCount": 0,
+      "focusableCount": 12,
+      "visibleTextLength": 956,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "emailAddressCount": 2,
+      "emailCopyButtonCount": 2,
+      "educationEntryCount": 2,
+      "emailCopySuccessVisible": true,
+      "emailCopyFallbackVisible": true
+    },
+    {
+      "scenario": "about-zh-dark-390",
+      "route": "/about",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "reducedMotion": true,
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 0,
+      "totalImageCount": 0,
+      "focusableCount": 12,
+      "visibleTextLength": 389,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "emailAddressCount": 2,
+      "emailCopyButtonCount": 2,
+      "educationEntryCount": 2,
+      "emailCopySuccessVisible": true,
+      "emailCopyFallbackVisible": true
     },
     {
       "scenario": "mundus-en-light-1440",
@@ -278,15 +342,20 @@
         "width": 1440,
         "height": 900
       },
+      "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 0,
       "totalImageCount": 0,
-      "reducedMotion": false,
-      "focusableCount": 8,
+      "focusableCount": 7,
+      "visibleTextLength": 3504,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
       "focusVisible": true,
-      "visibleTextLength": 3529,
-      "pagesBaseCorrect": true
+      "responsibilityModuleCount": 3,
+      "comparisonCellCount": 4,
+      "sharedQcGroupCount": 1,
+      "mediaSectionCount": 0
     },
     {
       "scenario": "bytedance-zh-dark-390",
@@ -297,16 +366,20 @@
         "width": 390,
         "height": 844
       },
+      "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 0,
       "totalImageCount": 0,
-      "reducedMotion": true,
-      "focusableCount": 8,
-      "focusVisible": true,
-      "visibleTextLength": 1135,
+      "focusableCount": 7,
+      "visibleTextLength": 1108,
       "pagesBaseCorrect": true,
-      "activeAnimationCount": 0
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "responsibilityModuleCount": 3,
+      "comparisonCellCount": 4,
+      "sharedQcGroupCount": 1,
+      "mediaSectionCount": 0
     }
   ]
 }
