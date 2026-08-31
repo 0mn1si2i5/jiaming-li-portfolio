@@ -121,6 +121,15 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('<h3><a href={`${base}projects/${project.id}`}>', self.home)
         self.assertIn('class="other-media"', self.home)
 
+    def test_homepage_sections_order_featured_internship_more(self) -> None:
+        self.assertIn('id="internship"', self.home)
+        self.assertIn('zh="实习项目"', self.home)
+        featured = self.home.index('id="work"')
+        internship = self.home.index('id="internship"')
+        more = self.home.index('id="other-title"')
+        self.assertLess(featured, internship)
+        self.assertLess(internship, more)
+
     def test_external_links_are_blue_and_use_external_arrow(self) -> None:
         about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
         self.assertIn('class="external-link"', about)

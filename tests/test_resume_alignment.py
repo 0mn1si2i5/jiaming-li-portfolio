@@ -47,10 +47,20 @@ class TestResumeAlignment(unittest.TestCase):
         home = (self.root / "src/pages/index.astro").read_text(encoding="utf-8")
         site = (self.root / "src/config/site.ts").read_text(encoding="utf-8")
         self.assertIn("产品、研究与独立开发。", home)
-        self.assertIn("项目形态不同", home)
+        self.assertIn("这里收录了我持续维护的个人作品", home)
+        self.assertIn("independent projects I continue to maintain", home)
+        self.assertNotIn("项目形态不同", home)
+        self.assertNotIn("有实习期间交付的内部工具", home)
         self.assertNotIn("我做 AI 评测、数据工具和交互产品。", home)
         self.assertIn("dsh-handoff", site)
         self.assertIn("resume", site)
+
+    def test_homepage_uses_explicit_featured_and_internship_groups(self) -> None:
+        home = (self.root / "src/pages/index.astro").read_text(encoding="utf-8")
+        self.assertIn("['dialogtree', 'mundus']", home)
+        self.assertIn("['bytedance-ai-data']", home)
+        self.assertIn("实习项目", home)
+        self.assertIn("Internship", home)
 
     def test_dialogtree_date_matches_resume(self) -> None:
         source = (
