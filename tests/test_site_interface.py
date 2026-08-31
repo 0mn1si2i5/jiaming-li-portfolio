@@ -43,9 +43,27 @@ class TestSiteInterface(unittest.TestCase):
         self.assertNotIn('class="status"', self.home)
         self.assertNotIn(".project-copy .status", self.home)
         self.assertIn(
-            '<dt><Localized en="Status" zh="项目状态" /></dt>',
+            '<dt><Localized en="Status" zh="状态" /></dt>',
             self.project,
         )
+
+    def test_project_details_use_natural_shared_labels(self) -> None:
+        self.assertIn('<Localized en="Status" zh="状态" />', self.project)
+        self.assertIn('<Localized en="My work" zh="我的工作" />', self.project)
+        self.assertIn(
+            '<Localized en="About this project" zh="项目说明" />',
+            self.project,
+        )
+        self.assertNotIn('zh="项目状态"', self.project)
+        self.assertNotIn('zh="负责内容"', self.project)
+        self.assertNotIn('zh="探索"', self.project)
+
+    def test_non_featured_project_index_localizes_archive(self) -> None:
+        self.assertIn('<Localized en="Archive" zh="其他项目" />', self.project)
+
+    def test_dialogtree_capcut_credit_is_removed(self) -> None:
+        self.assertNotIn("视频由 CapCut 剪辑", self.project)
+        self.assertNotIn("Video edited in CapCut", self.project)
 
     def test_package_and_local_pages_base_use_canonical_repository_name(self) -> None:
         package = json.loads(

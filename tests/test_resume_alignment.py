@@ -21,7 +21,9 @@ class TestResumeAlignment(unittest.TestCase):
     def test_home_positioning_and_external_work_are_bilingual(self) -> None:
         home = (self.root / "src/pages/index.astro").read_text(encoding="utf-8")
         site = (self.root / "src/config/site.ts").read_text(encoding="utf-8")
-        self.assertIn("我做 AI 评测、数据工具和交互产品。", home)
+        self.assertIn("产品、研究与独立开发。", home)
+        self.assertIn("项目形态不同", home)
+        self.assertNotIn("我做 AI 评测、数据工具和交互产品。", home)
         self.assertIn("dsh-handoff", site)
         self.assertIn("resume", site)
 
