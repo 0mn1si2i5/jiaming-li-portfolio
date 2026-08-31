@@ -1,0 +1,124 @@
+---
+import Localized from './Localized.astro';
+
+interface Props { compact?: boolean }
+
+const { compact = false } = Astro.props;
+---
+
+<figure class:list={['workspace-map', { compact }]} data-public-concept>
+  <figcaption class="map-caption">
+    <span class="concept-badge"><Localized en="Public workflow concept" zh="公开流程概念图" /></span>
+    {!compact && <span class="concept-note"><Localized en="Generalized from the actual workflow; not an internal screenshot." zh="由实际工作流程概括而来，不是内部产品截图。" /></span>}
+  </figcaption>
+
+  <div class="workspace-canvas">
+    <span class="sr-only"><Localized en="Concept diagram: a file-hierarchy rail sits inside the Lark sheet workspace, with a Botts floating workbench panel overlaid on its left." zh="概念图：文件层级区位于飞书表格工作区内部，Botts 浮动工作台覆盖在工作区左侧。" /></span>
+
+    <div class="map-region sheet-region" data-workspace-region="sheet">
+      <span class="region-label"><Localized en="Lark sheet workspace" zh="飞书表格工作区" /></span>
+      <div class="map-region files-region" data-workspace-region="files">
+        <span class="region-label"><Localized en="File hierarchy" zh="文件层级区" /></span>
+        <ul class="file-rail" aria-hidden="true">
+          <li></li><li></li><li></li><li></li>
+        </ul>
+      </div>
+      <div class="sheet-body" aria-hidden="true"></div>
+    </div>
+
+    <div class="map-region botts-region" data-workspace-region="botts">
+      <span class="region-label"><Localized en="Botts floating workbench" zh="Botts 浮动工作台" /></span>
+      <ul class="botts-stages">
+        <li><Localized en="Table and sheet" zh="表格与 Sheet" /></li>
+        <li><Localized en="Source range and result columns" zh="来源范围与结果列" /></li>
+        <li><Localized en="Voice candidate pool and conflict policy" zh="音色候选池与冲突策略" /></li>
+        <li><Localized en="Start preflight" zh="开始预检" /></li>
+        <li><Localized en="Progress and status feedback" zh="任务进度与状态反馈" /></li>
+      </ul>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .workspace-map { height: 100%; display: flex; flex-direction: column; gap: .55rem; margin: 0; }
+  .map-caption { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .concept-badge { display: inline-flex; align-items: center; padding: .18rem .55rem; color: var(--ink); background: color-mix(in srgb, var(--surface) 60%, var(--paper)); border: 1px solid var(--line); border-radius: 999px; font-size: .68rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+  .concept-note { color: var(--muted); font-size: .74rem; line-height: 1.4; }
+
+  .workspace-canvas { position: relative; flex: 1 1 auto; min-height: 0; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+  .region-label { display: block; font-size: .66rem; font-weight: 650; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+
+  .sheet-region {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.2fr;
+    gap: .55rem;
+    padding: .7rem;
+    background: color-mix(in srgb, var(--paper) 90%, var(--surface));
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .sheet-region > .region-label { position: absolute; top: .35rem; left: .65rem; }
+
+  .files-region {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: 1.5rem .5rem .5rem;
+    min-width: 0;
+    background: color-mix(in srgb, var(--surface) 88%, var(--paper));
+    border: 1px solid color-mix(in srgb, var(--ink) 14%, var(--line));
+    border-radius: 7px;
+  }
+  .file-rail { display: flex; flex-direction: column; gap: .32rem; margin: 0; padding: 0; list-style: none; }
+  .file-rail li { height: 7px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 16%, transparent); }
+  .file-rail li:nth-child(1) { width: 62%; }
+  .file-rail li:nth-child(2) { width: 84%; margin-left: .4rem; }
+  .file-rail li:nth-child(3) { width: 74%; margin-left: .8rem; }
+  .file-rail li:nth-child(4) { width: 90%; margin-left: 1.2rem; }
+
+  .sheet-body {
+    align-self: start;
+    height: 100%;
+    min-height: 0;
+    border: 1px solid color-mix(in srgb, var(--ink) 12%, var(--line));
+    border-radius: 7px;
+    background:
+      linear-gradient(color-mix(in srgb, var(--ink) 9%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--ink) 9%, transparent) 1px, transparent 1px);
+    background-size: 22% 30%;
+  }
+
+  .botts-region {
+    position: absolute;
+    left: 10%;
+    top: 14%;
+    bottom: 12%;
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    padding: .6rem;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--paper) 96%, var(--violet) 5%);
+    border: 1px solid color-mix(in srgb, var(--ink) 20%, var(--line));
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgb(0 0 0 / .14);
+    z-index: 2;
+  }
+  .botts-stages { display: flex; flex-direction: column; gap: .28rem; margin: 0; padding: 0; list-style: none; }
+  .botts-stages li { padding: .18rem .4rem; color: var(--ink); font-size: .7rem; line-height: 1.25; background: color-mix(in srgb, var(--surface) 60%, transparent); border: 1px solid color-mix(in srgb, var(--ink) 10%, var(--line)); border-radius: 5px; }
+
+  .workspace-map.compact { gap: .35rem; }
+  .workspace-map.compact .concept-badge { font-size: .58rem; padding: .12rem .42rem; }
+  .workspace-map.compact .botts-stages { display: none; }
+  .workspace-map.compact .sheet-region { padding: .5rem; gap: .4rem; }
+  .workspace-map.compact .files-region { padding-top: 1.15rem; gap: .22rem; }
+  .workspace-map.compact .file-rail { gap: .2rem; }
+  .workspace-map.compact .file-rail li { height: 5px; }
+  .workspace-map.compact .region-label { font-size: .56rem; }
+</style>

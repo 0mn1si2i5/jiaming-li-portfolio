@@ -43,6 +43,14 @@ class TestResumeAlignment(unittest.TestCase):
         for metric in ("88.6%", "82%", "97%", "20%", "三倍", "约 30"):
             self.assertIn(metric, source)
 
+    def test_bytedance_disclosure_and_alt_say_concept_diagram(self) -> None:
+        source = (
+            self.root / "src/content/projects/bytedance-ai-data.mdx"
+        ).read_text(encoding="utf-8")
+        self.assertIn("公开概念图", source)
+        self.assertIn("concept diagram", source)
+        self.assertNotIn("Botts", source)
+
     def test_home_positioning_and_external_work_are_bilingual(self) -> None:
         home = (self.root / "src/pages/index.astro").read_text(encoding="utf-8")
         site = (self.root / "src/config/site.ts").read_text(encoding="utf-8")

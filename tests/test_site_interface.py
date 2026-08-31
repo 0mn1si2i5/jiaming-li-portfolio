@@ -181,6 +181,36 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('个人邮箱', site)
         self.assertIn('学校邮箱', site)
 
+    def test_bytedance_media_uses_public_workspace_concept_map(self) -> None:
+        media = (
+            self.root / "src/components/ProjectMedia.astro"
+        ).read_text(encoding="utf-8")
+        component = (
+            self.root / "src/components/ByteDanceWorkspaceMap.astro"
+        ).read_text(encoding="utf-8")
+        self.assertIn('ByteDanceWorkspaceMap', media)
+        self.assertNotIn('ByteDanceOverview', media)
+        self.assertFalse(
+            (self.root / "src/components/ByteDanceOverview.astro").exists()
+        )
+        self.assertIn('data-public-concept', component)
+        self.assertIn('Public workflow concept', component)
+        self.assertIn('公开流程概念图', component)
+        self.assertIn('data-workspace-region="files"', component)
+        self.assertIn('data-workspace-region="sheet"', component)
+        self.assertIn('data-workspace-region="botts"', component)
+        self.assertIn('File hierarchy', component)
+        self.assertIn('Lark sheet workspace', component)
+        self.assertIn('Botts floating workbench', component)
+        for stage in (
+            "Table and sheet",
+            "Source range and result columns",
+            "Voice candidate pool and conflict policy",
+            "Start preflight",
+            "Progress and status feedback",
+        ):
+            self.assertIn(stage, component)
+
     def test_footer_keeps_copyright_without_github(self) -> None:
         footer = self.layout.split('<footer class="site-footer">', 1)[1].split(
             "</footer>", 1
