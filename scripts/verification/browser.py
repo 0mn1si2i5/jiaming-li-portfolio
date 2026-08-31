@@ -91,7 +91,7 @@ DIST_HTML_FILES = (
     "projects/nbti/index.html",
     "projects/side-b/index.html",
 )
-PROJECT_ORDER = ["AI Evaluation & Data Tooling at ByteDance", "DialogTree", "Mundus"]
+PROJECT_ORDER = ["Speech Evaluation & Data Tooling at ByteDance", "DialogTree", "Mundus"]
 OTHER_ORDER = ["NBTI", "Side B", "dsh-handoff", "RSZ Namelist"]
 
 

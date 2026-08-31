@@ -1,10 +1,10 @@
 ---
-title: { en: 'AI Evaluation & Data Tooling at ByteDance', zh: '字节跳动 AI 评测与数据工具' }
+title: { en: 'Speech Evaluation & Data Tooling at ByteDance', zh: '字节跳动语音评测与数据工具' }
 year: { en: 'May–Aug 2026', zh: '2026 年 5–8 月' }
-status: { en: 'Internship work · public-safe case study', zh: '实习项目 · 公开脱敏案例' }
+status: { en: 'Internship work · redacted case study', zh: '实习项目（内容已脱敏）' }
 order: 1
 featured: true
-kind: { en: 'Model evaluation and internal tools', zh: '模型评测与内部工具' }
+kind: { en: 'Speech evaluation and internal tools', zh: '语音评测与内部工具' }
 summary:
   en: 'During the internship I led an iteration of the primary speech evaluation set, and independently designed and built a speech-data production tool.'
   zh: '实习期间，我负责主力语音评测集的迭代，并独立设计和开发一套语音数据生产工具。'
@@ -26,10 +26,18 @@ import BeforeAfterFlow from '../../components/BeforeAfterFlow.astro';
 
 <section class="case-disclosure">
   <section lang="en" data-locale-content="en">
-    <p>This case describes the workflow in general terms. Diagrams and details are generalized from the actual process; no internal interface or implementation is reproduced.</p>
+
+  ## Project overview
+
+  This case describes the workflow in general terms. Diagrams and details are generalized from the actual process; no internal interface or implementation is reproduced.
+
   </section>
   <section lang="zh-CN" data-locale-content="zh">
-    <p>本案例以通用方式描述工作流程。示意图与细节均由实际流程概括而来，不还原任何内部界面或实现。</p>
+
+  ## 项目说明
+
+  本案例以通用方式描述工作流程。示意图与细节均由实际流程概括而来，不还原任何内部界面或实现。
+
   </section>
 </section>
 
@@ -111,7 +119,7 @@ import BeforeAfterFlow from '../../components/BeforeAfterFlow.astro';
 
   <section lang="zh-CN" data-locale-content="zh">
 
-  ## 语音数据生产平台（内部工具）
+  ## 语音数据生产工具
 
   内部语音数据生产过去依赖脚本或内网页面逐条操作，难以融入以飞书表格为中心的工作流。外部标注团队缺少便捷、统一的合成入口，难以试听与实际生产环境一致的结果，也不易判断模型能力边界。
 

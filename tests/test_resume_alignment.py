@@ -18,6 +18,25 @@ class TestResumeAlignment(unittest.TestCase):
         self.assertNotIn("lark-comment-tts", source.lower())
         self.assertNotIn("bytedance-202608-archive", source.lower())
 
+    def test_bytedance_uses_speech_evaluation_positioning_and_metrics(
+        self,
+    ) -> None:
+        source = (
+            self.root / "src/content/projects/bytedance-ai-data.mdx"
+        ).read_text(encoding="utf-8")
+        self.assertIn("字节跳动语音评测与数据工具", source)
+        self.assertIn("Speech Evaluation & Data Tooling at ByteDance", source)
+        self.assertNotIn("字节跳动 AI 评测与数据工具", source)
+        self.assertNotIn("AI Evaluation & Data Tooling", source)
+        self.assertIn("实习项目（内容已脱敏）", source)
+        self.assertIn("语音评测与内部工具", source)
+        self.assertIn("## 项目说明", source)
+        self.assertIn("## 语音评测集迭代", source)
+        self.assertIn("## 语音数据生产工具", source)
+        self.assertNotIn("语音数据生产平台（内部工具）", source)
+        for metric in ("88.6%", "82%", "97%", "20%", "三倍", "约 30"):
+            self.assertIn(metric, source)
+
     def test_home_positioning_and_external_work_are_bilingual(self) -> None:
         home = (self.root / "src/pages/index.astro").read_text(encoding="utf-8")
         site = (self.root / "src/config/site.ts").read_text(encoding="utf-8")
