@@ -53,6 +53,23 @@ class TestResumeAlignment(unittest.TestCase):
         self.assertIn("Sep–Nov 2025", source)
         self.assertIn("2025 年 9–11 月", source)
 
+    def test_dialogtree_uses_direct_chinese_headings(self) -> None:
+        source = (
+            self.root / "src/content/projects/dialogtree.mdx"
+        ).read_text(encoding="utf-8")
+        for heading in (
+            "## 问题",
+            "## 设计思路",
+            "## DialogTree",
+            "## 交互方式",
+            "## 从原型到 Branchat",
+        ):
+            self.assertIn(heading, source)
+        for old in ("我们观察到的问题", "我们探索的方向", "我们实现的产品"):
+            self.assertNotIn(old, source)
+        self.assertIn("我和李然想把对话从线性记录变成可导航的知识结构。", source)
+        self.assertNotIn("我和李然关注的是：能否", source)
+
 
 if __name__ == "__main__":
     unittest.main()
