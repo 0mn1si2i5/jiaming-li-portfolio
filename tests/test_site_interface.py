@@ -139,6 +139,28 @@ class TestSiteInterface(unittest.TestCase):
             self.assertNotIn(banned, about)
             self.assertNotIn(banned, site)
 
+    def test_email_contact_component_is_accessible_and_copyable(self) -> None:
+        component = (
+            self.root / "src/components/EmailContact.astro"
+        ).read_text(encoding="utf-8")
+        self.assertIn('mailto:${address}', component)
+        self.assertIn('class="email-address"', component)
+        self.assertIn('type="button"', component)
+        self.assertIn('data-copy-email', component)
+        self.assertIn('data-address={address}', component)
+        self.assertIn('role="status"', component)
+        self.assertIn('aria-live="polite"', component)
+        self.assertIn('Copy', component)
+        self.assertIn('复制', component)
+        self.assertIn('Copied', component)
+        self.assertIn('已复制', component)
+        self.assertIn('Select and copy the address manually.', component)
+        self.assertIn('请选中邮箱地址手动复制', component)
+        self.assertIn('navigator.clipboard.writeText', component)
+        about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
+        self.assertIn('import EmailContact', about)
+        self.assertIn('<EmailContact', about)
+
     def test_footer_keeps_copyright_without_github(self) -> None:
         footer = self.layout.split('<footer class="site-footer">', 1)[1].split(
             "</footer>", 1

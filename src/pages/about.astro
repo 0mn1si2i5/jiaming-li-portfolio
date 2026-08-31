@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro';
 import Localized from '../components/Localized.astro';
+import EmailContact from '../components/EmailContact.astro';
 import { site } from '../config/site';
 
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
@@ -14,12 +15,16 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </div>
     <div class="about-copy">
       <p><Localized en="I'm pursuing an M.S. in Computer Science at the National University of Singapore, where I study human–AI collaboration and generative-AI creation at AI4SG Lab. I previously worked with speech data in ByteDance's AI Data & Security team, contributed to HCI research, and continue to develop independent projects including DialogTree and Mundus." zh="目前在新加坡国立大学攻读计算机硕士，在 AI4SG Lab 研究人机协作与生成式 AI 创作。曾在字节跳动 AI 数据与安全部门从事语音数据相关工作，也参与过 HCI 研究，并持续开发 DialogTree、Mundus 等个人项目。" /></p>
-      <div class="contact-actions">
-        {site.emails.map((email) => (
-          <a class="external-link" href={`mailto:${email.address}`}><Localized {...email.label} />: {email.address} <span aria-hidden="true">↗</span></a>
-        ))}
-        <a class="external-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="GitHub" zh="GitHub" /> <span aria-hidden="true">↗</span></a>
-        <a class="external-link" href={`${base}${site.resumePath}`}><Localized en="Download résumé" zh="下载简历" /> <span aria-hidden="true">↓</span></a>
+      <div class="contact-block">
+        <div class="email-list">
+          {site.emails.map((email) => (
+            <EmailContact {...email} />
+          ))}
+        </div>
+        <div class="contact-actions">
+          <a class="external-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="GitHub" zh="GitHub" /> <span aria-hidden="true">↗</span></a>
+          <a class="external-link" href={`${base}${site.resumePath}`}><Localized en="Download résumé" zh="下载简历" /> <span aria-hidden="true">↓</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -70,7 +75,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     line-height: 1.45;
   }
   .about-copy p + p { color: var(--muted); }
-  .contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
+  .contact-block { margin-top: 1.75rem; }
+  .email-list { display: grid; gap: 1.1rem; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
   .education {
     padding: var(--space-section) 0;
     border-top: 1px solid var(--rule-strong);
