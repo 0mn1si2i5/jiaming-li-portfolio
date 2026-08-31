@@ -14,6 +14,8 @@ REQUIRED_SCENARIOS = (
     "home-en-light-1024",
     "home-zh-dark-768",
     "home-zh-dark-390",
+    "about-en-light-1440",
+    "about-zh-dark-390",
     "mundus-en-light-1440",
     "mundus-zh-dark-desktop",
     "mundus-en-light-390",
@@ -24,6 +26,7 @@ REQUIRED_SCENARIOS = (
 REDUCED_SCENARIOS = (
     "home-zh-dark-768",
     "home-zh-dark-390",
+    "about-zh-dark-390",
     "mundus-zh-dark-desktop",
     "mundus-zh-dark-mobile",
     "bytedance-zh-dark-390",
@@ -43,6 +46,14 @@ SCENARIO_EXPECTATIONS = {
     },
     "home-zh-dark-390": {
         "route": "/", "locale": "zh", "theme": "dark",
+        "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
+    },
+    "about-en-light-1440": {
+        "route": "/about", "locale": "en", "theme": "light",
+        "viewport": {"width": 1440, "height": 900}, "reducedMotion": False,
+    },
+    "about-zh-dark-390": {
+        "route": "/about", "locale": "zh", "theme": "dark",
         "viewport": {"width": 390, "height": 844}, "reducedMotion": True,
     },
     "mundus-en-light-1440": {
@@ -75,6 +86,8 @@ SCREENSHOT_FILES = {
     "home-en-light-1024": "task7-home-en-light-1024x768.webp",
     "home-zh-dark-768": "task7-home-zh-dark-reduced-768x1024.webp",
     "home-zh-dark-390": "task7-home-zh-dark-reduced-390x844.webp",
+    "about-en-light-1440": "task8-about-en-light-1440x900.webp",
+    "about-zh-dark-390": "task8-about-zh-dark-reduced-390x844.webp",
     "mundus-en-light-1440": "task7-mundus-en-light-1440x900.webp",
     "mundus-zh-dark-desktop": "task7-mundus-zh-dark-reduced-1440x900.webp",
     "mundus-en-light-390": "task7-mundus-en-light-390x844.webp",
@@ -91,7 +104,8 @@ DIST_HTML_FILES = (
     "projects/nbti/index.html",
     "projects/side-b/index.html",
 )
-PROJECT_ORDER = ["Speech Evaluation & Data Tooling at ByteDance", "DialogTree", "Mundus"]
+FEATURED_ORDER = ["DialogTree", "Mundus"]
+INTERNSHIP_ORDER = ["Speech Evaluation & Data Tooling at ByteDance"]
 OTHER_ORDER = ["NBTI", "Side B", "dsh-handoff", "RSZ Namelist"]
 
 
@@ -176,10 +190,25 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
         if name.startswith("home-"):
             if item.get("totalImageCount") != 4:
                 errors.append(f"{name}: homepage image count is not four")
-            if item.get("selected") != PROJECT_ORDER:
-                errors.append(f"{name}: selected project order is invalid")
+            if item.get("featured") != FEATURED_ORDER:
+                errors.append(f"{name}: featured project order is invalid")
+            if item.get("internship") != INTERNSHIP_ORDER:
+                errors.append(f"{name}: internship project order is invalid")
             if item.get("other") != OTHER_ORDER:
                 errors.append(f"{name}: other project order is invalid")
+            if item.get("mediaCount") != 0:
+                errors.append(f"{name}: internship media count is not zero")
+        if name.startswith("about-"):
+            if item.get("emailAddressCount") != 2:
+                errors.append(f"{name}: emailAddressCount is not two")
+            if item.get("emailCopyButtonCount") != 2:
+                errors.append(f"{name}: emailCopyButtonCount is not two")
+            if item.get("emailCopySuccessVisible") is not True:
+                errors.append(f"{name}: emailCopySuccessVisible is not true")
+            if item.get("emailCopyFallbackVisible") is not True:
+                errors.append(f"{name}: emailCopyFallbackVisible is not true")
+            if item.get("educationEntryCount") != 2:
+                errors.append(f"{name}: educationEntryCount is not two")
         if name.startswith("mundus-"):
             preview_required = (
                 "previewDefaultMode",
@@ -250,6 +279,15 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
                     errors.append(
                         f"{name}: previewTransitionDurationMs is not reduced"
                     )
+        if name.startswith("bytedance-"):
+            if item.get("responsibilityModuleCount") != 3:
+                errors.append(f"{name}: responsibilityModuleCount is not three")
+            if item.get("comparisonCellCount") != 4:
+                errors.append(f"{name}: comparisonCellCount is not four")
+            if item.get("sharedQcGroupCount") != 1:
+                errors.append(f"{name}: sharedQcGroupCount is not one")
+            if item.get("mediaSectionCount") != 0:
+                errors.append(f"{name}: mediaSectionCount is not zero")
     return errors
 
 
