@@ -1,11 +1,11 @@
 ---
 title: { en: DialogTree, zh: DialogTree }
-year: { en: 'December 2025', zh: '2025 年 12 月' }
+year: { en: 'Sep–Nov 2025', zh: '2025 年 9–11 月' }
 status: { en: Closed-source collaborative product & research, zh: 闭源合作产品与研究 }
-order: 1
+order: 2
 featured: true
 kind: { en: Human–AI research product, zh: 人机协作研究产品 }
-summary: { en: A tree-shaped workspace for revisiting, organizing, and understanding long-running LLM conversations., zh: 用于重新访问、组织与理解长程 LLM 对话的树状工作区。 }
+summary: { en: A tree-shaped workspace for revisiting and organizing long-running LLM conversations; the interface became Branchat, an ACM CHI 2026 Poster., zh: 用于回溯与整理长程 LLM 对话的树状工作区；其界面发展为 CHI 2026 海报论文 Branchat。 }
 role: { en: Co-creator · product direction, interaction design, and full-stack development, zh: 共同创作者 · 产品方向、交互设计与全栈开发 }
 accent: violet
 media:
@@ -31,19 +31,19 @@ export const dialogTreeAsset = (file) =>
 
 <section lang="en" data-locale-content="en">
 
-## What we noticed
+## The problem
 
 An LLM conversation starts out feeling light: ask, answer, continue. But as a task develops, it becomes a long hallway. Alternatives disappear behind the newest message; returning to an earlier decision means scrolling, reconstructing context, and hoping the right thread is still there.
 
-## What we explored
+## Design approach
 
 Li Ran and I asked a simple question: what if a conversation behaved less like a transcript and more like a workspace? We treated revisitation as a first-class interaction—something people should be able to see, navigate, compare, and branch from without first rebuilding the past in their heads.
 
-## What we made
+## DialogTree
 
 DialogTree is the product expression of that idea. It turns a conversation into an interactive tree: follow a path, fork from any node, mark what matters, and retrieve earlier material through text or semantic search. Underneath are a D3-based workspace, streaming chat, persistent history, and retrieval-aware search; on the surface, the goal is simply to make a long conversation feel inhabitable again.
 
-## How the interaction works
+## Interaction
 
 **1. Start a new root conversation—or select an existing node.** Selecting a node makes it the active point of departure; a new message there becomes a child conversation. Earlier work remains intact, so an alternative can grow without overwriting the original path.
 
@@ -59,7 +59,7 @@ DialogTree is the product expression of that idea. It turns a conversation into 
   <figcaption>Choosing a different node switches the working path—and the chat context—without losing the rest of the tree.</figcaption>
 </figure>
 
-## From DialogTree to Branchat
+## From prototype to Branchat
 
 The product also became the research prototype for _Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_, an ACM CHI 2026 Poster co-authored by Jiaming Li, Peinuan Qin, and Yi-Chieh Lee. We designed information-revisitation tasks, instrumented the prototype, and ran a 12-participant within-subject study with a Latin-square A/B design. Across complex retrieval tasks, the tree interface supported faster completion and a lower reported cognitive burden—evidence that interface structure can change how people keep hold of context while working with an LLM.
 
@@ -67,19 +67,19 @@ The product also became the research prototype for _Branchat: A Tree-Structured 
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 我们观察到的问题
+## 问题
 
-随着 LLM 对话不断延长，线性聊天界面会使早期讨论逐渐被新消息淹没。用户若要回看某个决策、比较不同思路或复用既有上下文，往往只能反复滚动并手动重建对话脉络。
+随着 LLM 对话延长，线性聊天界面会把早期讨论越推越远。用户若要回看某个决策、比较不同思路或复用既有上下文，往往只能反复滚动并手动重建对话脉络。
 
-## 我们探索的方向
+## 设计思路
 
-我和李然关注的是：能否将对话从线性记录转化为可导航的知识结构。重点不只是展示更多消息，而是让用户能够定位上下文、比较分支，并从任意节点继续展开新的探索。
+我和李然想把对话从线性记录变成可导航的知识结构。重点不只是展示更多消息，而是让用户能够定位上下文、比较分支，并从任意节点继续展开新的探索。
 
-## 我们实现的产品
+## DialogTree
 
 DialogTree 将对话组织为可交互的树状结构。用户可以沿路径浏览、从任意节点创建分支、标注关键节点，并通过文本或语义检索找回历史内容。产品结合 D3 树状工作区、流式聊天、持久化对话记录和检索感知搜索，用于支持长对话中的回溯与管理。
 
-## 一段对话如何长成一棵树
+## 交互方式
 
 **1. 创建一个新的根对话，或选择已有节点继续。** 选中节点后，它就是当前的出发点；新的输入会生成它的子对话。原有路径不会被改写，因此不同思路可以同时保留、继续生长。
 
@@ -95,7 +95,7 @@ DialogTree 将对话组织为可交互的树状结构。用户可以沿路径浏
   <figcaption>选中另一节点，就切换到另一条工作路径与对应聊天上下文；其余分支不会丢失。</figcaption>
 </figure>
 
-## 从 DialogTree 到 Branchat
+## 从原型到 Branchat
 
 2026 年，DialogTree 的核心交互发展为研究原型 _Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_。该工作由 Jiaming Li、Peinuan Qin 和 Yi-Chieh Lee 共同完成，并以 ACM CHI 2026 海报论文形式发表。我们围绕信息回溯设计实验任务，在原型中记录交互行为，并以拉丁方 A/B 设计完成 12 人组内实验。结果显示，在需要反复检索和整合信息的复杂任务中，树状界面能够提升完成效率，并降低参与者报告的认知负担。
 

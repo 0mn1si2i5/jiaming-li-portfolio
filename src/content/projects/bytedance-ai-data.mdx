@@ -1,0 +1,170 @@
+---
+title: { en: 'Speech Evaluation & Data Tooling at ByteDance', zh: '字节跳动语音评测与数据工具' }
+year: { en: 'May–Aug 2026', zh: '2026 年 5–8 月' }
+status: { en: 'Internship work · redacted case study', zh: '实习项目（内容已脱敏）' }
+order: 1
+featured: true
+kind: { en: 'Speech evaluation and internal tools', zh: '语音评测与内部工具' }
+summary:
+  en: 'During the internship I led an iteration of the primary speech evaluation set, and independently designed and built a speech-data production tool.'
+  zh: '实习期间，我负责主力语音评测集的迭代，并独立设计和开发一套语音数据生产工具。'
+role:
+  en: 'Speech evaluation-set design, data production, and quality control; independent product design and AI-assisted development for the data tool'
+  zh: '语音评测集设计、数据生产与质量控制；独立完成数据工具的产品设计与 AI 辅助开发'
+accent: violet
+media:
+  type: placeholder
+  alt:
+    en: ''
+    zh: ''
+links: []
+---
+
+import CaseFlow from '../../components/CaseFlow.astro';
+import ResponsibilityMap from '../../components/ResponsibilityMap.astro';
+import BeforeAfterMatrix from '../../components/BeforeAfterMatrix.astro';
+
+<section class="case-disclosure">
+  <section lang="en" data-locale-content="en">
+
+  This case describes the workflow in general terms and does not show internal interfaces, real business data, or implementation details.
+
+  </section>
+  <section lang="zh-CN" data-locale-content="zh">
+
+  本案例以通用方式描述工作流程，不展示内部界面、真实业务数据或具体实现。
+
+  </section>
+</section>
+
+<section id="speech-evaluation" class="case-chapter">
+  <section lang="en" data-locale-content="en">
+
+  ## Speech evaluation set iteration
+
+  Speech evaluation sets need to evolve with model capabilities and real-world use. For this release, we redesigned the capability taxonomy and questions, adding complex scenarios and recurring Bad Cases. The set grew to three times the size of the previous release.
+
+  I owned question selection, adaptation for speech, audio synthesis, and delivery review. I also designed a quality workflow combining automatic pre-labeling (PE), human annotation, automated checks, and manual sampling. I worked with product and algorithm colleagues on the foundational and applied capability taxonomy, and with engineering on evaluation runs.
+
+  Automatic pre-labeling was evaluated on hundreds of stratified samples and reached about 88.6% overall agreement with human labels. Agreement was about 82% on difficult Bad Cases and up to 97% on regular sets. Despite tripling the volume, we reduced the build cycle by 20%.
+
+  </section>
+
+  <section lang="zh-CN" data-locale-content="zh">
+
+  ## 语音评测集迭代
+
+  语音评测集需要随模型能力和使用场景持续迭代。这一版重构了能力分类和题目设计，新增复杂场景与高频 Bad Case，题量扩展到上一版的三倍。
+
+  我负责题目筛选与语音化改造、音频合成和交付验收，并搭建「自动预标（PE）—人工标注—自动质检—人工抽检」质量流程。我与产品、算法同事共同完善「基础能力 + 应用能力」分类框架，并与工程同事协作完成评测执行。
+
+  在数百条分层样本上验证自动预标，与人工标签总体一致率约 88.6%；高难 Bad Case 约 82%，常规集最高约 97%。在题量扩为三倍的前提下，建设周期缩短 20%。
+
+  </section>
+
+  <CaseFlow
+    title={{ en: 'Evaluation build process', zh: '评测集建设流程' }}
+    steps={[
+      { label: { en: 'Select and adapt candidate questions', zh: '筛选并语音化改造候选题目' } },
+      { label: { en: 'Synthesize and validate audio', zh: '合成并校验音频' } },
+      { label: { en: 'Automatic pre-labeling (PE)', zh: '自动预标（PE）' } },
+      { label: { en: 'Human annotation', zh: '人工标注' } },
+      { label: { en: 'Automated QC and human sampling', zh: '自动质检 + 人工抽检' } },
+      { label: { en: 'Evaluation runs with engineering', zh: '与工程协同完成评测执行' } },
+    ]}
+  />
+
+  <ResponsibilityMap
+    title={{ en: 'My work modules', zh: '我负责的模块' }}
+    modules={[
+      {
+        title: { en: 'Evaluation-set design', zh: '评测集设计' },
+        items: [
+          { en: 'Selection and adaptation', zh: '题目筛选与语音化改造' },
+          { en: 'Adaptation rules', zh: '适配规则' },
+          { en: 'Capability taxonomy collaboration', zh: '协同完善能力分类' },
+        ],
+      },
+      {
+        title: { en: 'Data production and delivery', zh: '数据生产与交付' },
+        items: [
+          { en: 'Audio synthesis', zh: '音频合成' },
+          { en: 'Supplier specification and management', zh: '供应商规范与管理' },
+          { en: 'Delivery review', zh: '交付验收' },
+        ],
+      },
+      {
+        title: { en: 'Annotation and quality control', zh: '标注与质量控制' },
+        items: [
+          { en: 'Automatic pre-labeling (PE)', zh: '自动预标（PE）' },
+          { en: 'Human annotation process', zh: '人工标注流程' },
+          { en: 'Automated QC', zh: '自动质检' },
+          { en: 'Manual sampling', zh: '人工抽检' },
+        ],
+      },
+    ]}
+  />
+</section>
+
+<section id="data-tooling" class="case-chapter">
+  <section lang="en" data-locale-content="en">
+
+  ## Speech-data production tool
+
+  Previously, internal speech-data production relied on scripts or one-at-a-time operations on internal pages, which did not fit workflows centered on Lark sheets. External annotation teams lacked a convenient, unified way to audition production-aligned outputs, making it difficult to judge the model's practical limits.
+
+  I independently defined the requirements, designed the product, and delivered it with AI-assisted development. The tool offered two access points: a batch workspace built around Lark sheets for internal users, and a comment bot that gave external annotators access to production-aligned synthesis. Speech recognition, VAD, timestamps, and source-text comparison were used to check generated audio automatically.
+
+  The initial rollout covered about 30 internal and external collaborators.
+
+  </section>
+
+  <section lang="zh-CN" data-locale-content="zh">
+
+  ## 语音数据生产工具
+
+  内部语音数据生产过去依赖脚本或内网页面逐条操作，难以融入以飞书表格为中心的工作流。外部标注团队缺少便捷、统一的合成入口，难以试听与实际生产环境一致的结果，也不易判断模型能力边界。
+
+  我独立完成需求定义、产品设计和 AI 辅助开发，将分散的生产流程整合为一个内部工具。工具包含两个入口：内部同事通过面向飞书表格的批量工作台生成音频，外部标注团队通过评论机器人使用与生产一致的合成能力。系统结合语音识别、VAD、时间戳和原文对照，对合成结果进行自动质检。
+
+  首批覆盖约 30 名内外部协作者。
+
+  </section>
+
+  <BeforeAfterMatrix
+    title={{ en: 'Before and after the tool', zh: '数据生产流程前后对比' }}
+    rows={[
+      {
+        audience: 'internal',
+        audienceLabel: { en: 'Internal', zh: '内部' },
+        before: [
+          { en: 'Scripts or one-at-a-time internal-page operations', zh: '脚本或内网页面逐条操作' },
+          { en: 'Work detached from Lark sheets', zh: '工作与飞书表格脱节' },
+        ],
+        after: [
+          { en: 'Open the floating speech workbench in the sheet workspace', zh: '在表格工作区内展开浮动语音工作台' },
+          { en: 'Batch configure, preflight, execute, and view progress', zh: '批量配置、预检、执行并查看进度' },
+        ],
+      },
+      {
+        audience: 'external',
+        audienceLabel: { en: 'External', zh: '外部' },
+        before: [
+          { en: 'Text-only review makes audio quality hard to judge', zh: '纯文字审阅难以判断音频质量' },
+          { en: 'Audition model differs from production', zh: '试听能力与生产环境不一致' },
+        ],
+        after: [
+          { en: 'Call the comment bot in comments and view parameters', zh: '在评论区调用评论机器人并查看参数' },
+          { en: 'Audition with production-aligned synthesis', zh: '使用与生产一致的合成能力完成试听' },
+        ],
+      },
+    ]}
+    sharedQcLabel={{ en: 'Shared quality control', zh: '共享的质量控制' }}
+    sharedQcItems={[
+      { en: 'Speech recognition', zh: '语音识别' },
+      { en: 'VAD', zh: 'VAD' },
+      { en: 'Timestamps', zh: '时间戳' },
+      { en: 'Source-text comparison', zh: '原文对照' },
+    ]}
+  />
+</section>

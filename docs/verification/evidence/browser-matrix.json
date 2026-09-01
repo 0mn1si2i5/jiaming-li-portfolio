@@ -10,24 +10,30 @@
         "width": 1440,
         "height": 900
       },
+      "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": false,
-      "focusableCount": 17,
-      "focusVisible": true,
-      "visibleTextLength": 1143,
+      "focusableCount": 18,
+      "visibleTextLength": 1868,
       "pagesBaseCorrect": true,
-      "selected": [
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
-        "Mundus",
-        "NBTI"
+        "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
+        "NBTI",
         "Side B",
+        "dsh-handoff",
         "RSZ Namelist"
-      ]
+      ],
+      "mediaCount": 0
     },
     {
       "scenario": "home-en-light-1024",
@@ -38,24 +44,30 @@
         "width": 1024,
         "height": 768
       },
+      "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": false,
-      "focusableCount": 17,
-      "focusVisible": true,
-      "visibleTextLength": 1143,
+      "focusableCount": 18,
+      "visibleTextLength": 1868,
       "pagesBaseCorrect": true,
-      "selected": [
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
-        "Mundus",
-        "NBTI"
+        "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
+        "NBTI",
         "Side B",
+        "dsh-handoff",
         "RSZ Namelist"
-      ]
+      ],
+      "mediaCount": 0
     },
     {
       "scenario": "home-zh-dark-768",
@@ -66,25 +78,30 @@
         "width": 768,
         "height": 1024
       },
+      "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": true,
-      "focusableCount": 17,
-      "focusVisible": true,
-      "visibleTextLength": 488,
+      "focusableCount": 18,
+      "visibleTextLength": 820,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
-      "selected": [
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
-        "Mundus",
-        "NBTI"
+        "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
+        "NBTI",
         "Side B",
+        "dsh-handoff",
         "RSZ Namelist"
-      ]
+      ],
+      "mediaCount": 0
     },
     {
       "scenario": "home-zh-dark-390",
@@ -95,25 +112,80 @@
         "width": 390,
         "height": 844
       },
+      "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "reducedMotion": true,
-      "focusableCount": 17,
-      "focusVisible": true,
-      "visibleTextLength": 486,
+      "focusableCount": 18,
+      "visibleTextLength": 817,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
-      "selected": [
+      "focusVisible": true,
+      "featured": [
         "DialogTree",
-        "Mundus",
-        "NBTI"
+        "Mundus"
+      ],
+      "internship": [
+        "Speech Evaluation & Data Tooling at ByteDance"
       ],
       "other": [
+        "NBTI",
         "Side B",
+        "dsh-handoff",
         "RSZ Namelist"
-      ]
+      ],
+      "mediaCount": 0
+    },
+    {
+      "scenario": "about-en-light-1440",
+      "route": "/about",
+      "locale": "en",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reducedMotion": false,
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 0,
+      "totalImageCount": 0,
+      "focusableCount": 12,
+      "visibleTextLength": 956,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "emailAddressCount": 2,
+      "emailCopyButtonCount": 2,
+      "educationEntryCount": 2,
+      "emailCopySuccessVisible": true,
+      "emailCopyFallbackVisible": true
+    },
+    {
+      "scenario": "about-zh-dark-390",
+      "route": "/about",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "reducedMotion": true,
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 0,
+      "totalImageCount": 0,
+      "focusableCount": 12,
+      "visibleTextLength": 389,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "emailAddressCount": 2,
+      "emailCopyButtonCount": 2,
+      "educationEntryCount": 2,
+      "emailCopySuccessVisible": true,
+      "emailCopyFallbackVisible": true
     },
     {
       "scenario": "mundus-en-light-1440",
@@ -129,9 +201,9 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": false,
-      "focusableCount": 12,
+      "focusableCount": 14,
       "focusVisible": true,
-      "visibleTextLength": 2449,
+      "visibleTextLength": 2731,
       "pagesBaseCorrect": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
@@ -165,9 +237,9 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": true,
-      "focusableCount": 12,
+      "focusableCount": 14,
       "focusVisible": true,
-      "visibleTextLength": 969,
+      "visibleTextLength": 1099,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "productVisualCount": 1,
@@ -202,9 +274,9 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": false,
-      "focusableCount": 12,
+      "focusableCount": 14,
       "focusVisible": true,
-      "visibleTextLength": 2445,
+      "visibleTextLength": 2726,
       "pagesBaseCorrect": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
@@ -238,9 +310,9 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "reducedMotion": true,
-      "focusableCount": 12,
+      "focusableCount": 14,
       "focusVisible": true,
-      "visibleTextLength": 967,
+      "visibleTextLength": 1096,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "productVisualCount": 1,
@@ -260,6 +332,54 @@
       "previewLayout": "vertical",
       "previewMinTargetHeight": 75.5625,
       "previewTransitionDurationMs": 0.01
+    },
+    {
+      "scenario": "bytedance-en-light-1440",
+      "route": "/projects/bytedance-ai-data",
+      "locale": "en",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "reducedMotion": false,
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 0,
+      "totalImageCount": 0,
+      "focusableCount": 7,
+      "visibleTextLength": 3504,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "responsibilityModuleCount": 3,
+      "comparisonCellCount": 4,
+      "sharedQcGroupCount": 1,
+      "mediaSectionCount": 0
+    },
+    {
+      "scenario": "bytedance-zh-dark-390",
+      "route": "/projects/bytedance-ai-data",
+      "locale": "zh",
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "reducedMotion": true,
+      "overflow": false,
+      "brokenImageCount": 0,
+      "decodedImageCount": 0,
+      "totalImageCount": 0,
+      "focusableCount": 7,
+      "visibleTextLength": 1108,
+      "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "responsibilityModuleCount": 3,
+      "comparisonCellCount": 4,
+      "sharedQcGroupCount": 1,
+      "mediaSectionCount": 0
     }
   ]
 }

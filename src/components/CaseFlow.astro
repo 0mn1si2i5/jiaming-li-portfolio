@@ -1,0 +1,40 @@
+---
+import Localized from './Localized.astro';
+
+interface LocalizedText { en: string; zh: string }
+interface Step { label: LocalizedText; detail?: LocalizedText }
+interface Props { title: LocalizedText; steps: Step[]; note?: LocalizedText }
+
+const { title, steps, note } = Astro.props;
+---
+
+<figure class="case-flow">
+  <figcaption><Localized {...title} /></figcaption>
+  <ol>
+    {steps.map((step, index) => (
+      <li>
+        <span class="step-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <div class="step-copy">
+          <span class="step-label"><Localized {...step.label} /></span>
+          {step.detail && <span class="step-detail"><Localized {...step.detail} /></span>}
+        </div>
+      </li>
+    ))}
+  </ol>
+  {note && <p class="flow-note"><Localized {...note} /></p>}
+</figure>
+
+<style>
+  .case-flow { margin: 0 0 3.3rem; }
+  .case-flow figcaption { margin-bottom: 1.25rem; color: var(--ink); font-family: var(--font-editorial); font-weight: 500; font-size: 1.15rem; }
+  .case-flow ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .8rem; }
+  .case-flow li { display: flex; gap: .85rem; align-items: flex-start; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+  .step-index { color: var(--ink); font-weight: 650; font-size: .72rem; letter-spacing: .12em; line-height: 1.6; }
+  .step-copy { display: flex; flex-direction: column; gap: .3rem; }
+  .step-label { color: var(--ink); font-weight: 600; font-size: .95rem; line-height: 1.35; }
+  .step-detail { color: var(--muted); font-size: .82rem; line-height: 1.45; }
+  .flow-note { margin: 1rem 0 0; color: var(--muted); font-size: .88rem; }
+  @media (max-width: 560px) {
+    .case-flow ol { grid-template-columns: 1fr; }
+  }
+</style>

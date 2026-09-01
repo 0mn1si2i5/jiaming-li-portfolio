@@ -10,6 +10,88 @@ from pathlib import Path
 from scripts.verification import browser
 
 
+_SCENARIO_META = {
+    "home-en-light-1440": ("/", "en", "light", 1440, 900, False),
+    "home-en-light-1024": ("/", "en", "light", 1024, 768, False),
+    "home-zh-dark-768": ("/", "zh", "dark", 768, 1024, True),
+    "home-zh-dark-390": ("/", "zh", "dark", 390, 844, True),
+    "about-en-light-1440": ("/about", "en", "light", 1440, 900, False),
+    "about-zh-dark-390": ("/about", "zh", "dark", 390, 844, True),
+    "mundus-en-light-1440": ("/projects/mundus", "en", "light", 1440, 900, False),
+    "mundus-zh-dark-desktop": ("/projects/mundus", "zh", "dark", 1440, 900, True),
+    "mundus-en-light-390": ("/projects/mundus", "en", "light", 390, 844, False),
+    "mundus-zh-dark-mobile": ("/projects/mundus", "zh", "dark", 390, 844, True),
+    "bytedance-en-light-1440": (
+        "/projects/bytedance-ai-data", "en", "light", 1440, 900, False,
+    ),
+    "bytedance-zh-dark-390": (
+        "/projects/bytedance-ai-data", "zh", "dark", 390, 844, True,
+    ),
+}
+
+
+def _build_scenario(name: str) -> dict[str, object]:
+    route, locale, theme, width, height, reduced = _SCENARIO_META[name]
+    scenario: dict[str, object] = {
+        "scenario": name,
+        "route": route,
+        "locale": locale,
+        "theme": theme,
+        "viewport": {"width": width, "height": height},
+        "overflow": False,
+        "brokenImageCount": 0,
+        "decodedImageCount": 0,
+        "totalImageCount": 0,
+        "focusableCount": 1,
+        "focusVisible": True,
+        "visibleTextLength": 100,
+        "reducedMotion": reduced,
+        "pagesBaseCorrect": True,
+    }
+    if name.startswith("home-"):
+        scenario["totalImageCount"] = 4
+        scenario["decodedImageCount"] = 4
+        scenario["featured"] = ["DialogTree", "Mundus"]
+        scenario["internship"] = ["Speech Evaluation & Data Tooling at ByteDance"]
+        scenario["other"] = ["NBTI", "Side B", "dsh-handoff", "RSZ Namelist"]
+        scenario["mediaCount"] = 0
+    elif name.startswith("about-"):
+        scenario["emailAddressCount"] = 2
+        scenario["emailCopyButtonCount"] = 2
+        scenario["emailCopySuccessVisible"] = True
+        scenario["emailCopyFallbackVisible"] = True
+        scenario["educationEntryCount"] = 2
+    elif name.startswith("mundus-"):
+        scenario["totalImageCount"] = 2
+        scenario["decodedImageCount"] = 2
+        scenario["productVisualCount"] = 1
+        scenario["previewDefaultMode"] = "antipodes"
+        scenario["previewPointerModes"] = ["antipodes", "development", "sunline"]
+        scenario["previewKeyboardModes"] = ["antipodes", "development", "sunline"]
+        scenario["previewLinkTargetsCorrect"] = True
+        scenario["previewSelectionSynchronized"] = True
+        scenario["previewLayout"] = "vertical" if width <= 760 else "columns"
+        scenario["previewMinTargetHeight"] = 44
+        scenario["previewTransitionDurationMs"] = 0 if reduced else 160
+    elif name.startswith("bytedance-"):
+        scenario["responsibilityModuleCount"] = 3
+        scenario["comparisonCellCount"] = 4
+        scenario["sharedQcGroupCount"] = 1
+        scenario["mediaSectionCount"] = 0
+    if reduced:
+        scenario["activeAnimationCount"] = 0
+    return scenario
+
+
+def _build_valid_matrix() -> dict[str, object]:
+    return {
+        "schemaVersion": 1,
+        "scenarios": [
+            _build_scenario(name) for name in browser.REQUIRED_SCENARIOS
+        ],
+    }
+
+
 class TestBrowserEvidence(unittest.TestCase):
     def load_matrix_with_preview_evidence(self) -> dict[str, object]:
         project = Path(__file__).parents[1]
@@ -66,6 +148,7 @@ class TestBrowserEvidence(unittest.TestCase):
             (
                 "index.html",
                 "about/index.html",
+                "projects/bytedance-ai-data/index.html",
                 "projects/dialogtree/index.html",
                 "projects/mundus/index.html",
                 "projects/nbti/index.html",
@@ -485,13 +568,58 @@ class TestBrowserEvidence(unittest.TestCase):
             matrix["scenarios"][0],
         )
         matrix["scenarios"][0]["brokenImageCount"] = 1
-        matrix["scenarios"][4]["totalImageCount"] = 3
-        matrix["scenarios"][4]["productVisualCount"] = 2
+        mundus_index = next(
+            i
+            for i, item in enumerate(matrix["scenarios"])
+            if item["scenario"] == "mundus-en-light-1440"
+        )
+        matrix["scenarios"][mundus_index]["totalImageCount"] = 3
+        matrix["scenarios"][mundus_index]["productVisualCount"] = 2
         errors = browser.validate_matrix(matrix)
         self.assertIn("order", " ".join(errors))
         self.assertIn("brokenImageCount", " ".join(errors))
         self.assertIn("image count", " ".join(errors))
         self.assertIn("productVisualCount", " ".join(errors))
+
+    def test_matrix_validates_new_homepage_about_and_bytedance_fields(
+        self,
+    ) -> None:
+        valid = _build_valid_matrix()
+        self.assertEqual(browser.validate_matrix(valid), [])
+
+        def mutate(scenario_name: str, field: str, value: object) -> dict:
+            changed = json.loads(json.dumps(valid))
+            for item in changed["scenarios"]:
+                if item["scenario"] == scenario_name:
+                    item[field] = value
+            return changed
+
+        cases = (
+            ("home-en-light-1440", "featured", ["Mundus", "DialogTree"]),
+            ("home-en-light-1440", "internship", []),
+            ("home-en-light-1440", "other", ["NBTI"]),
+            ("home-en-light-1440", "mediaCount", 1),
+            ("about-en-light-1440", "emailAddressCount", 1),
+            ("about-en-light-1440", "emailCopyButtonCount", 1),
+            ("about-en-light-1440", "emailCopySuccessVisible", False),
+            ("about-en-light-1440", "emailCopyFallbackVisible", False),
+            ("about-en-light-1440", "educationEntryCount", 1),
+            ("bytedance-en-light-1440", "responsibilityModuleCount", 2),
+            ("bytedance-en-light-1440", "comparisonCellCount", 3),
+            ("bytedance-en-light-1440", "sharedQcGroupCount", 2),
+            ("bytedance-en-light-1440", "mediaSectionCount", 1),
+        )
+        for scenario, field, value in cases:
+            with self.subTest(scenario=scenario, field=field):
+                errors = browser.validate_matrix(mutate(scenario, field, value))
+                self.assertTrue(errors, f"{field} mutation was not rejected")
+
+    def test_matrix_requires_about_scenarios_in_order(self) -> None:
+        valid = _build_valid_matrix()
+        self.assertEqual(browser.validate_matrix(valid), [])
+        changed = json.loads(json.dumps(valid))
+        changed["scenarios"].pop(4)  # drop about-en-light-1440
+        self.assertIn("order", " ".join(browser.validate_matrix(changed)))
 
     def test_console_requires_structured_levels_and_no_failures(self) -> None:
         console = {

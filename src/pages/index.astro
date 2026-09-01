@@ -6,11 +6,17 @@ import Localized from '../components/Localized.astro';
 import { site } from '../config/site';
 
 const projects = await getCollection('projects');
-const featuredProjects = projects
-  .filter((project) => project.data.featured)
-  .sort((a, b) => a.data.order - b.data.order);
+const featuredProjectIds = ['dialogtree', 'mundus'] as const;
+const internshipProjectIds = ['bytedance-ai-data'] as const;
+const projectById = (id: string) => projects.find((project) => project.id === id)!;
+const featuredProjects = featuredProjectIds.map(projectById);
+const internshipProjects = internshipProjectIds.map(projectById);
 const otherProjects = projects
-  .filter((project) => !project.data.featured)
+  .filter(
+    (project) =>
+      !(featuredProjectIds as readonly string[]).includes(project.id) &&
+      !(internshipProjectIds as readonly string[]).includes(project.id),
+  )
   .sort((a, b) => a.data.order - b.data.order);
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
@@ -18,15 +24,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <BaseLayout>
   <section class="hero page-width">
     <p class="eyebrow">Jiaming Li · 李佳鸣</p>
-    <h1><Localized en="I make tools for thinking, exploring, and connecting." zh="我设计并开发 AI 与交互产品。" /></h1>
+    <h1><Localized en="I work across product development, research, and independent projects." zh="产品、研究与独立开发。" /></h1>
     <div class="hero-bottom">
-      <p><Localized en="I am a product builder and researcher interested in how people work with AI, understand information, and turn a small curiosity into something shareable." zh="我关注人们如何使用 AI、理解复杂信息，以及如何将一个想法转化为可用、可分享的产品。" /></p>
-      <a class="quiet-link" href="#work"><Localized en="Selected explorations" zh="精选探索" /> <span aria-hidden="true">↓</span></a>
+      <p><Localized en="This portfolio brings together independent projects I continue to maintain, collaborative research, and work completed during internships, spanning interaction products, research prototypes, speech evaluation, and data tooling." zh="这里收录了我持续维护的个人作品、参与的合作研究，以及实习期间完成的项目，内容包括交互产品、研究原型、语音评测与数据工具。" /></p>
+      <a class="quiet-link" href="#work"><Localized en="View projects" zh="查看项目" /> <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
   <section id="work" class="work-section page-width" aria-labelledby="work-title">
-    <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Things I have been following closely." zh="持续推进的项目。" /></h2></div>
+    <div class="section-heading"><p class="eyebrow"><Localized en="Work" zh="项目" /></p><h2 id="work-title"><Localized en="Featured projects" zh="重点项目" /></h2></div>
     <div class="project-list">
       {featuredProjects.map((project, index) => (
         <article class:list={['project-card', `accent-${project.data.accent}`]}>
@@ -45,10 +51,28 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </div>
   </section>
 
+  <section id="internship" class="internship-section page-width" aria-labelledby="internship-title">
+    <div class="section-heading"><p class="eyebrow"><Localized en="Experience" zh="经历" /></p><h2 id="internship-title"><Localized en="Internship project" zh="实习项目" /></h2></div>
+    <div class="project-list">
+      {internshipProjects.map((project) => (
+        <article class:list={['project-card', 'internship-card', `accent-${project.data.accent}`]}>
+          <div class="project-copy">
+            <div class="meta project-meta">
+              <span class="kind"><Localized {...project.data.kind} /></span>
+              <span><Localized {...project.data.year} /></span>
+            </div>
+            <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
+            <p><Localized {...project.data.summary} /></p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
   <section class="other-section page-width" aria-labelledby="other-title">
-    <p class="eyebrow"><Localized en="Other work" zh="其他作品" /></p>
+    <p class="eyebrow"><Localized en="More projects" zh="更多项目" /></p>
     <div class="other-grid">
-      <h2 id="other-title"><Localized en="Small things with a longer life." zh="同样值得记录的项目。" /></h2>
+      <h2 id="other-title"><Localized en="Independent work and experiments" zh="独立作品与实验" /></h2>
       <div class="other-list">
         {otherProjects.map((project) => (
           <article class="other-card">
@@ -57,6 +81,16 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
               <p class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.kind} /></span></p>
               <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
               <p><Localized {...project.data.summary} /></p>
+            </div>
+          </article>
+        ))}
+        {site.externalWork.map((item) => (
+          <article class="other-card external-card">
+            <div class="other-copy">
+              <p class="meta"><span><Localized {...item.year} /></span><span><Localized {...item.kind} /></span></p>
+              <h3><Localized {...item.title} /></h3>
+              <p><Localized {...item.summary} /></p>
+              <a class="external-link" href={item.href} target="_blank" rel="noreferrer"><Localized en="View on GitHub" zh="在 GitHub 查看" /> <span aria-hidden="true">↗</span></a>
             </div>
           </article>
         ))}
@@ -69,12 +103,13 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
 <style>
   .eyebrow, .meta { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
-  .hero { min-height: min(700px, calc(100vh - 84px)); padding: clamp(5rem, 11vw, 10rem) 0 4rem; display: flex; flex-direction: column; justify-content: space-between; }
+  .hero { min-height: clamp(520px, 72vh, 660px); padding: clamp(5rem, 11vw, 10rem) 0 4rem; display: flex; flex-direction: column; justify-content: space-between; }
   h1, h2, h3, p { margin-top: 0; } h1, h2, h3 { letter-spacing: var(--display-tracking); line-height: .98; }
   h1 { max-width: 1000px; margin: 3rem 0; font-size: clamp(3.35rem, 7.1vw, 7.1rem); } h1 em { font-family: Georgia, serif; font-weight: 400; }
   .hero-bottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; } .hero-bottom p { max-width: 430px; margin: 0; color: var(--muted); font-size: 1.08rem; }
   .quiet-link { font-weight: 620; text-decoration: none; }.quiet-link:hover { text-decoration: underline; }
   .work-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.section-heading { display: flex; justify-content: space-between; margin-bottom: clamp(4rem, 7vw, 7rem); }.section-heading h2, .other-section h2 { margin-bottom: 0; font-size: clamp(2.4rem, 5vw, 4.6rem); }
+  .internship-section { padding: var(--space-section) 0; border-top: 1px solid var(--rule-strong); }.internship-section .section-heading { margin-bottom: clamp(3rem, 5vw, 5rem); }.internship-card .project-copy h3 { font-size: clamp(2.4rem, 4vw, 4rem); }.internship-card { grid-template-columns: minmax(0, 1fr); }.internship-card .project-copy > p { max-width: 640px; }
   .project-list { display: grid; gap: clamp(5rem, 10vw, 10rem); }
   .project-card { position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .72fr); align-items: center; gap: clamp(2.5rem, 6vw, 6.5rem); padding-top: 2.25rem; border-top: 1px solid var(--rule-strong); }
   .project-card:nth-child(even) { grid-template-columns: minmax(260px, .72fr) minmax(0, 1.55fr); }
@@ -96,6 +131,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   :global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2.1rem, 4.2vw, 3.75rem); line-height: 1.2; letter-spacing: -.04em; }
   :global(:root[data-locale='zh']) .project-copy h3 { font-family: var(--font-display-zh); font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1.18; letter-spacing: -.04em; }
   :global(:root[data-locale='zh']) .other-card h3 { font-family: var(--font-display-zh); letter-spacing: -.025em; }
-  @media (max-width: 760px) { .hero { min-height: 620px; }.hero-bottom, .section-heading, .project-card, .project-card:nth-child(even), .other-grid { grid-template-columns: 1fr; display: grid; }.hero-bottom { align-items: start; }.project-card:nth-child(even) .media-link, .project-card:nth-child(even) .project-copy { order: initial; }.project-card:nth-child(even) .project-index { right: auto; left: 0; padding: 0 .75rem 0 0; }.project-list { gap: 5rem; }.work-section, .other-section { padding: 5rem 0; }.section-heading { gap: 1.3rem; }.external-card { margin-left: 0; } }
+  @media (max-width: 760px) { .hero { min-height: 620px; }.hero-bottom, .section-heading, .project-card, .project-card:nth-child(even), .other-grid { grid-template-columns: 1fr; display: grid; }.hero-bottom { align-items: start; }.project-card:nth-child(even) .media-link, .project-card:nth-child(even) .project-copy { order: initial; }.project-card:nth-child(even) .project-index { right: auto; left: 0; padding: 0 .75rem 0 0; }.project-list { gap: 5rem; }.work-section, .internship-section, .other-section { padding: 5rem 0; }.section-heading { gap: 1.3rem; }.external-card { margin-left: 0; } }
   @media (max-width: 560px) { h1 { font-size: clamp(3rem, 15vw, 4.6rem); }.hero { min-height: calc(100svh - 116px); padding-top: 4rem; }.project-card { gap: 1.5rem; }.project-copy h3 { font-size: clamp(3rem, 15vw, 4.4rem); }.other-card { grid-template-columns: 1fr; }.other-media :global(.project-media) { height: auto; aspect-ratio: 16 / 9; border-right: 0; border-bottom: 1px solid var(--line); }:global(:root[data-locale='zh']) .hero h1 { max-width: none; font-size: clamp(2.45rem, 10.2vw, 3.75rem); }:global(:root[data-locale='zh']) .section-heading h2, :global(:root[data-locale='zh']) .other-section h2 { font-size: clamp(2rem, 8vw, 2.8rem); } }
+  @media (max-height: 720px) and (min-width: 1000px) { .hero { padding-top: 2.5rem; } }
 </style>

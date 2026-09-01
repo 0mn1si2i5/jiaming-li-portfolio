@@ -1,0 +1,33 @@
+---
+import Localized from './Localized.astro';
+
+interface LocalizedText { en: string; zh: string }
+interface Module { title: LocalizedText; items: LocalizedText[] }
+interface Props { title: LocalizedText; modules: Module[] }
+
+const { title, modules } = Astro.props;
+---
+
+<figure class="responsibility-map">
+  <figcaption><Localized {...title} /></figcaption>
+  <div class="modules">
+    {modules.map((mod) => (
+      <div class="module">
+        <span class="module-title"><Localized {...mod.title} /></span>
+        <ul>
+          {mod.items.map((item) => <li><Localized {...item} /></li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</figure>
+
+<style>
+  .responsibility-map { margin: 0 0 3.3rem; }
+  .responsibility-map figcaption { margin-bottom: 1.25rem; color: var(--ink); font-family: var(--font-editorial); font-weight: 500; font-size: 1.15rem; }
+  .modules { display: grid; gap: .8rem; }
+  .module { padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+  .module-title { display: block; margin-bottom: .55rem; color: var(--ink); font-weight: 650; font-size: .9rem; }
+  .module ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem .9rem; }
+  .module li { color: var(--muted); font-size: .88rem; line-height: 1.5; }
+</style>

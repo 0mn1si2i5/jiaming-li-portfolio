@@ -1,17 +1,20 @@
 {
   "schemaVersion": 1,
-  "requestCount": 220,
+  "requestCount": 290,
   "failureCount": 0,
   "failures": [],
   "statusCounts": {
-    "200": 168,
-    "304": 52
+    "200": 222,
+    "206": 1,
+    "304": 67
   },
   "resourceTypeCounts": {
-    "Document": 16,
-    "Font": 116,
-    "Image": 56,
-    "Stylesheet": 32
+    "Document": 20,
+    "Stylesheet": 40,
+    "Font": 161,
+    "Image": 48,
+    "Other": 20,
+    "Media": 1
   },
   "requests": [
     {
@@ -22,19 +25,31 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/index.CQLlHilS.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -52,31 +67,7 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/nbti-home.png",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -88,8 +79,14 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
       "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
       "status": 200
     },
     {
@@ -100,14 +97,38 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/index.CQLlHilS.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
@@ -118,38 +139,26 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
       "resourceType": "Font",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
       "resourceType": "Font",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
       "resourceType": "Font",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
-      "resourceType": "Image",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
       "status": 200
     },
     {
@@ -160,14 +169,8 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
+      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
+      "resourceType": "Image",
       "status": 200
     },
     {
@@ -178,61 +181,49 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/index.CQLlHilS.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
-      "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
       "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
+      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
+      "resourceType": "Image",
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/media/nbti-home.png",
       "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
       "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
       "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -244,8 +235,26 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
       "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
       "status": 200
     },
     {
@@ -256,61 +265,49 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/index.CQLlHilS.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
       "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
       "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/media/nbti-home.png",
       "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
       "resourceType": "Image",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
       "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -322,126 +319,6 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
-      "resourceType": "Stylesheet",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
       "resourceType": "Font",
       "status": 200
@@ -460,51 +337,51 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 304
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
+      "path": "/jiaming-li-portfolio/",
       "resourceType": "Document",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
       "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
       "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
+      "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/nbti-home.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
+      "resourceType": "Image",
+      "status": 304
     },
     {
       "method": "GET",
@@ -515,102 +392,6 @@
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -622,57 +403,105 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
       "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/",
       "resourceType": "Document",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
-      "status": 200
+      "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
+      "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
       "resourceType": "Image",
       "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
+      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
       "resourceType": "Image",
       "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/nbti-home.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
       "resourceType": "Font",
-      "status": 304
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
     },
     {
       "method": "GET",
@@ -688,81 +517,51 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-500-normal.DL_A5r9p.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
+      "path": "/jiaming-li-portfolio/",
       "resourceType": "Document",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
       "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
       "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
+      "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/nbti-home.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
+      "resourceType": "Image",
+      "status": 304
     },
     {
       "method": "GET",
@@ -796,12 +595,6 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-500-normal.DL_A5r9p.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
       "resourceType": "Font",
       "status": 200
@@ -820,117 +613,51 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 304
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
+      "path": "/jiaming-li-portfolio/",
       "resourceType": "Document",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
       "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "path": "/jiaming-li-portfolio/_astro/index.Jdrc9DZb.css",
       "resourceType": "Stylesheet",
       "status": 304
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
+      "path": "/jiaming-li-portfolio/media/dialogtree-tree-preview.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/mundus/globe-preview.webp",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/nbti-home.png",
+      "resourceType": "Image",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-preview.webp",
+      "resourceType": "Image",
+      "status": 304
     },
     {
       "method": "GET",
@@ -941,180 +668,6 @@
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
-      "resourceType": "Stylesheet",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -1126,111 +679,27 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
-      "resourceType": "Document",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
-      "resourceType": "Stylesheet",
-      "status": 200
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
       "resourceType": "Font",
-      "status": 304
+      "status": 200
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
       "resourceType": "Font",
-      "status": 304
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
     },
     {
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
       "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
-      "resourceType": "Font",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/development.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/sunline.webp",
-      "resourceType": "Image",
-      "status": 304
+      "status": 200
     },
     {
       "method": "GET",
@@ -1240,19 +709,283 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-500-normal.DL_A5r9p.woff2",
-      "resourceType": "Font",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/projects/mundus",
+      "path": "/jiaming-li-portfolio/about",
       "resourceType": "Document",
       "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/BaseLayout.kX0dL1KM.css",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/about",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/about",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/about",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/bytedance-ai-data",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
       "resourceType": "Stylesheet",
       "status": 304
     },
@@ -1260,18 +993,12 @@
       "method": "GET",
       "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
       "resourceType": "Stylesheet",
-      "status": 304
+      "status": 200
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
-      "resourceType": "Image",
-      "status": 304
-    },
-    {
-      "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
-      "resourceType": "Font",
+      "path": "/jiaming-li-portfolio/_astro/bytedance-ai-data.C-MB70NQ.css",
+      "resourceType": "Stylesheet",
       "status": 200
     },
     {
@@ -1306,7 +1033,91 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-500-normal.DL_A5r9p.woff2",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/bytedance-ai-data",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/bytedance-ai-data.C-MB70NQ.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
       "resourceType": "Font",
       "status": 200
     },
@@ -1330,9 +1141,621 @@
     },
     {
       "method": "GET",
-      "path": "/jiaming-li-portfolio/media/mundus/other-side-detail.webp",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/bytedance-ai-data",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/bytedance-ai-data.C-MB70NQ.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/bytedance-ai-data",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/bytedance-ai-data.C-MB70NQ.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/dialogtree",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/dialogtree-workspace.png",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/dialogtree-video-poster.jpg",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/dialogtree-live-tree.png",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/dialogtree-live-node-switch.png",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/dialogtree-preview.mp4",
+      "resourceType": "Media",
+      "status": 206
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIGZpbGw9IiNmZmZmZmYiIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05OCw0OXY0Yy0yNC45LDAtNDUsMjAuMS00NSw0NQoJYzAsMTgsMTAuNiwzMy42LDI1LjksNDAuOGwtMS43LDMuNmMwLjEsMCwwLjIsMC4xLDAuMywwLjFjLTAuMSwwLTAuMi0wLjEtMC4zLTAuMWwwLDBDNjAuNSwxMzQuNSw0OSwxMTcuNiw0OSw5OAoJQzQ5LDcwLjksNzAuOSw0OSw5OCw0OXoiLz4KPC9zdmc+Cg==",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIGZpbGw9IiNmZmZmZmYiIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOTYgMTk2IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOTYgMTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDcsOThjMCwxOS42LTExLjUsMzYuNS0yOC4yLDQ0LjRsMCwwYy0wLjEsMC0wLjIsMC4xLTAuMywwLjEKCWMwLjEsMCwwLjItMC4xLDAuMy0wLjFsLTEuNy0zLjZDMTMyLjQsMTMxLjYsMTQzLDExNiwxNDMsOThjMC0yNC45LTIwLjEtNDUtNDUtNDV2LTRDMTI1LjEsNDksMTQ3LDcwLjksMTQ3LDk4eiIvPgo8L3N2Zz4K",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI1NSAyNTU7IiB4bWw6c3BhY2U9InByZXNlcnZlIiBmaWxsPSJXaW5kb3ciPgo8Zz4KCTxjaXJjbGUgY3g9IjEyIiBjeT0iNiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPgoJPGNpcmNsZSBjeD0iMTIiIGN5PSIxOCIgcj0iMiIvPgo8L2c+Cjwvc3ZnPgo=",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTggNXYxNGwxMS03eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgOXY2aDRsNSA1VjRMNyA5SDN6bTEzLjUgM2MwLTEuNzctMS4wMi0zLjI5LTIuNS00LjAzdjguMDVjMS40OC0uNzMgMi41LTIuMjUgMi41LTQuMDJ6TTE0IDMuMjN2Mi4wNmMyLjg5Ljg2IDUgMy41NCA1IDYuNzFzLTIuMTEgNS44NS01IDYuNzF2Mi4wNmM0LjAxLS45MSA3LTQuNDkgNy04Ljc3cy0yLjk5LTcuODYtNy04Ljc3eiIvPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "image/svg+xml;base64,PHN2ZyBmaWxsPSJXaW5kb3ciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPgogICAgPHBhdGggZD0iTTcgMTRINXY1aDV2LTJIN3YtM3ptLTItNGgyVjdoM1Y1SDV2NXptMTIgN2gtM3YyaDV2LTVoLTJ2M3pNMTQgNXYyaDN2M2gyVjVoLTV6Ii8+Cjwvc3ZnPgo=",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/mundus",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/mundus/other-side-full.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/nbti",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/nbti-home.png",
       "resourceType": "Image",
       "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/projects/side-b",
+      "resourceType": "Document",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/BaseLayout.DMIzm-_S.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/_..ZCOylJpv.css",
+      "resourceType": "Stylesheet",
+      "status": 304
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/side-b-journey-hero.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/01-parse-link.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/02-platform-links.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/03-favorites-playlist.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/04-rooms-list.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/media/side-b/05-room-conversation.webp",
+      "resourceType": "Image",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-400-normal.C8q2FS1w.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-400-normal.Ba7eOkfT.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-600-normal.CI4uXaOp.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-latin-700-normal.BzR54Sjf.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-sans-sc-chinese-simplified-700-normal.DoUziBww.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-latin-400-normal.bWtu-bD9.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/noto-serif-sc-chinese-simplified-400-normal.hudUdRP0.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/instrument-sans-latin-wght-normal.BbzFLZTg.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/newsreader-latin-wght-normal.CCVVNp6i.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/_astro/cormorant-garamond-latin-400-normal.B-1hWBU7.woff2",
+      "resourceType": "Font",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/jiaming-li-portfolio/favicon.svg",
+      "resourceType": "Other",
+      "status": 200
     }
   ]
 }
