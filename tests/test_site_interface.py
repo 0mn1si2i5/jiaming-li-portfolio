@@ -22,9 +22,6 @@ class TestSiteInterface(unittest.TestCase):
         self.dialogtree = (
             self.root / "src/content/projects/dialogtree.mdx"
         ).read_text(encoding="utf-8")
-        self.side_b = (
-            self.root / "src/content/projects/side-b.mdx"
-        ).read_text(encoding="utf-8")
 
     def test_navigation_uses_home_work_and_about(self) -> None:
         self.assertIn('<Localized en="Home" zh="主页" />', self.layout)
@@ -350,51 +347,13 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn("How matching works", nbti)
         self.assertIn("Boundaries", nbti)
 
-    def test_side_b_uses_prototype_flow_and_available_links(self) -> None:
-        side_b = (self.root / "src/content/projects/side-b.mdx").read_text(
-            encoding="utf-8"
+    def test_side_b_is_not_listed(self) -> None:
+        self.assertFalse(
+            (self.root / "src/content/projects/side-b.mdx").exists()
         )
-        gallery = (
-            self.root / "src/components/SideBGallery.astro"
-        ).read_text(encoding="utf-8")
-        for heading in (
-            "## 问题",
-            "## Side B 的处理方式",
-            "## 原型实现",
-            "## 下一步验证",
-        ):
-            self.assertIn(heading, side_b)
-        for platform in ("Spotify", "Apple Music", "网易云音乐", "QQ 音乐"):
-            self.assertIn(platform, side_b)
-        self.assertIn("可用的平台链接", side_b)
-        self.assertIn("四家音乐平台", side_b)
-        self.assertIn("four music services", side_b)
-        self.assertIn("原型流程", gallery)
-        self.assertIn("一段演示对话", side_b)
-        self.assertIn("sample room conversation", side_b)
-        self.assertNotIn("全平台链接", side_b)
-        self.assertNotIn("全平台跳转", side_b)
-        self.assertNotIn("实际使用", gallery)
-        self.assertNotIn("实际聊天室中的一段对话", side_b)
+        self.assertFalse((self.root / "public/media/side-b").exists())
 
-    def test_side_b_uses_dedicated_homepage_preview(self) -> None:
-        self.assertIn(
-            "preview: /media/side-b/side-b-journey-preview.webp",
-            self.side_b,
-        )
-        self.assertIn(
-            "src: /media/side-b/side-b-journey-hero.webp",
-            self.side_b,
-        )
-        preview = (
-            self.root
-            / "public/media/side-b/side-b-journey-preview.webp"
-        )
-        self.assertTrue(preview.is_file())
-        self.assertEqual(
-            hashlib.sha256(preview.read_bytes()).hexdigest(),
-            "079260c356eee7df46dc21eecb8f96ec0fbd26bf833b74678d65b390ac649d26",
-        )
+    def test_other_cards_contain_preview_media(self) -> None:
         self.assertIn(
             ".other-media :global(.project-media) { width: 100%; height: 100%; "
             "aspect-ratio: auto;",

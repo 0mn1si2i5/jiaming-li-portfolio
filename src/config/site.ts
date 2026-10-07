@@ -20,7 +20,6 @@ export const site = {
     dialogTreePaper: 'https://doi.org/10.1145/3772363.3798792',
     mundusWebsite: 'https://0mn1si2i5.github.io/Mundus/',
     mundusGithub: 'https://github.com/0mn1si2i5/Mundus',
-    sideB: 'https://github.com/0mn1si2i5/Side-B',
     nbtiWebsite: 'https://0mn1si2i5.github.io/NBTI/',
     nbtiGithub: 'https://github.com/0mn1si2i5/NBTI',
     rsz: 'https://steamcommunity.com/sharedfiles/filedetails/?id=2804107924',
