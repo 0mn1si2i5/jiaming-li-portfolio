@@ -3,7 +3,7 @@
   "html": [
     {
       "path": "index.html",
-      "sha256": "0ae7c1558df96128896e04fc9e5b7543e6c1d49266e7e19da6a47db0583bd00d"
+      "sha256": "c7450466d47c3b21301741c9f6c6c2408f8b838214375c58a1c23a30f1a7b6f9"
     },
     {
       "path": "about/index.html",
@@ -24,10 +24,6 @@
     {
       "path": "projects/nbti/index.html",
       "sha256": "0cc0c666ff8f58c1a440c1707da652973eaaee5ed1b87bc3725aab2492ad6b48"
-    },
-    {
-      "path": "projects/side-b/index.html",
-      "sha256": "15ec505687afb966ce6240cc25192a995decd4acc1c34613e26346f457552973"
     }
   ]
 }

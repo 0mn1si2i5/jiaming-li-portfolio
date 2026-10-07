@@ -102,11 +102,10 @@ DIST_HTML_FILES = (
     "projects/dialogtree/index.html",
     "projects/mundus/index.html",
     "projects/nbti/index.html",
-    "projects/side-b/index.html",
 )
 FEATURED_ORDER = ["DialogTree", "Mundus"]
 INTERNSHIP_ORDER = ["Speech Evaluation & Data Tooling at ByteDance"]
-OTHER_ORDER = ["NBTI", "Side B", "dsh-handoff", "RSZ Namelist"]
+OTHER_ORDER = ["NBTI", "dsh-handoff", "RSZ Namelist"]
 
 
 def is_finite_number(value: object) -> bool:
@@ -188,8 +187,8 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             if not isinstance(item.get("visibleTextLength"), int) or item["visibleTextLength"] <= 0:
                 errors.append(f"{name}: visibleTextLength is not positive")
         if name.startswith("home-"):
-            if item.get("totalImageCount") != 4:
-                errors.append(f"{name}: homepage image count is not four")
+            if item.get("totalImageCount") != 3:
+                errors.append(f"{name}: homepage image count is not three")
             if item.get("featured") != FEATURED_ORDER:
                 errors.append(f"{name}: featured project order is invalid")
             if item.get("internship") != INTERNSHIP_ORDER:
