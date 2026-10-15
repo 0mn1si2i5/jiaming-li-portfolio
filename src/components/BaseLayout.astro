@@ -203,7 +203,8 @@ const ogImage = new URL(
     .page-width { width: min(100% - 2rem, var(--page-width)); }
     .site-header, .site-footer { width: min(100% - 2rem, var(--page-width)); }
     .site-header { display: grid; grid-template-columns: auto auto; justify-content: end; min-height: 0; padding: .9rem 0 0; }
-    nav { grid-column: 1 / -1; grid-row: 2; justify-content: space-between; width: 100%; margin: .8rem 0 0; padding: .72rem 0 .8rem; border-top: 1px solid var(--line); }
+    nav { grid-column: 1 / -1; grid-row: 2; flex-wrap: wrap; justify-content: space-between; gap: .45rem .6rem; width: 100%; min-width: 0; margin: .8rem 0 0; padding: .72rem 0 .8rem; border-top: 1px solid var(--line); }
+    nav a { letter-spacing: .07em; }
     .theme-label { display: none; }
     .locale-toggle, .theme-toggle { min-height: 2rem; padding: .38rem .5rem; }
     .locale-toggle { margin-right: .35rem; }
