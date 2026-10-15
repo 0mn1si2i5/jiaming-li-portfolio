@@ -120,6 +120,7 @@ class TestResumeAlignment(unittest.TestCase):
         self.assertIn("featured: true", source)
         self.assertIn("agent-desk", source)
         self.assertIn("shuqiang", source)
+        self.assertIn("https://github.com/shuqianglin1997/agent-desk", source)
         self.assertIn("macOS 1.1.0", source)
         for banned in ("agentdock", "AgentDock", "hupogames", "Hupo"):
             self.assertNotIn(banned, source)
