@@ -49,10 +49,14 @@ def _build_scenario(name: str) -> dict[str, object]:
         "pagesBaseCorrect": True,
     }
     if name.startswith("home-"):
-        scenario["totalImageCount"] = 3
+        scenario["totalImageCount"] = 4
         scenario["decodedImageCount"] = 4
-        scenario["featured"] = ["DialogTree", "Mundus"]
-        scenario["internship"] = ["Speech Evaluation & Data Tooling at ByteDance"]
+        scenario["featured"] = ["DialogTree", "Perch", "Mundus"]
+        scenario["experience"] = [
+            "Hupo Games",
+            "ByteDance · AI Data & Security",
+            "AI4SG Lab, National University of Singapore",
+        ]
         scenario["other"] = ["NBTI", "dsh-handoff", "RSZ Namelist"]
         scenario["mediaCount"] = 0
     elif name.startswith("about-"):
@@ -152,6 +156,8 @@ class TestBrowserEvidence(unittest.TestCase):
                 "projects/dialogtree/index.html",
                 "projects/mundus/index.html",
                 "projects/nbti/index.html",
+                "projects/perch/index.html",
+                "404.html",
             ),
         )
         self.assertNotIn("notes/index.html", browser.DIST_HTML_FILES)
@@ -595,7 +601,7 @@ class TestBrowserEvidence(unittest.TestCase):
 
         cases = (
             ("home-en-light-1440", "featured", ["Mundus", "DialogTree"]),
-            ("home-en-light-1440", "internship", []),
+            ("home-en-light-1440", "experience", []),
             ("home-en-light-1440", "other", ["NBTI"]),
             ("home-en-light-1440", "mediaCount", 1),
             ("about-en-light-1440", "emailAddressCount", 1),
