@@ -7,13 +7,16 @@ interface Props {
   title?: string;
   description?: string | { en: string; zh: string };
   image?: string;
+  navSection?: 'work' | 'experience';
 }
 
-const { title = site.name, description = site.description, image } = Astro.props;
+const { title = site.name, description = site.description, image, navSection } = Astro.props;
 const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
 const descriptionText = typeof description === 'string' ? description : description?.en ?? site.description;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const section = path === base ? 'home' : path.startsWith(`${base}about/`) ? 'about' : path.startsWith(`${base}projects/`) ? (navSection ?? 'work') : '';
 const ogImage = new URL(
   image ? `${base}${image.replace(/^\//, '')}` : `${base}og/portfolio.png`,
   Astro.site,
@@ -45,7 +48,7 @@ const ogImage = new URL(
         const savedTheme = localStorage.getItem('theme');
         const theme = savedTheme === 'dark' || savedTheme === 'light'
           ? savedTheme
-          : 'light';
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
         const savedLocale = localStorage.getItem('locale');
         const locale = (savedLocale === 'en' || savedLocale === 'zh')
@@ -60,9 +63,11 @@ const ogImage = new URL(
     <a class="skip-link" href="#main"><Localized en="Skip to content" zh="跳至主要内容" /></a>
     <header class="site-header">
       <nav aria-label="Primary navigation">
-        <a href={base}><Localized en="Home" zh="主页" /></a>
-        <a href={`${base}#work`}><Localized en="Work" zh="项目" /></a>
-        <a href={`${base}about`}><Localized en="About" zh="关于" /></a>
+        <a href={base} aria-current={section === 'home' ? 'page' : undefined}><Localized en="Home" zh="主页" /></a>
+        <a href={`${base}#work`} aria-current={section === 'work' ? 'true' : undefined}><Localized en="Work" zh="项目" /></a>
+        <a href={`${base}#experience`} aria-current={section === 'experience' ? 'true' : undefined}><Localized en="Experience" zh="经历" /></a>
+        <a href={`${base}about`} aria-current={section === 'about' ? 'page' : undefined}><Localized en="About" zh="关于" /></a>
+        <a href={`${base}${site.resumePath}`}><Localized en="Résumé" zh="简历" /></a>
       </nav>
       <button class="locale-toggle" type="button" aria-label="切换至中文">
         <span class="locale-label">中文</span>
@@ -117,6 +122,12 @@ const ogImage = new URL(
         const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = nextTheme;
         localStorage.setItem('theme', nextTheme);
+        updateButton();
+      });
+      matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') return;
+        document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
         updateButton();
       });
       localeButton?.addEventListener('click', () => setLocale(document.documentElement.dataset.locale === 'zh' ? 'en' : 'zh'));
@@ -176,7 +187,12 @@ const ogImage = new URL(
   nav { display: flex; gap: 1.35rem; margin-left: auto; margin-right: 1.35rem; }
   nav a, .theme-toggle, .locale-toggle, .site-footer { font-size: .7rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
   nav a { text-decoration: none; color: var(--muted); }
-  nav a:hover { color: var(--ink); }
+  nav a { transition: color 180ms ease; }
+  nav a:hover, nav a[aria-current] { color: var(--ink); }
+  nav a[aria-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .5em; }
+  .theme-toggle, .locale-toggle { transition: background-color 180ms ease, border-color 180ms ease; }
+  .theme-toggle:hover, .locale-toggle:hover { border-color: var(--rule-strong); background: var(--surface); }
+  .theme-toggle:active, .locale-toggle:active { transform: translateY(1px); }
   .theme-toggle, .locale-toggle { display: inline-flex; align-items: center; gap: .38rem; min-height: 2.25rem; padding: .45rem .65rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
   .locale-toggle { margin-right: .45rem; }
   .site-footer { justify-content: flex-start; min-height: 94px; color: var(--muted); border-top: 1px solid var(--rule-strong); }

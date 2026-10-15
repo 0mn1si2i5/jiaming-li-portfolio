@@ -159,12 +159,13 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('import EmailContact', about)
         self.assertIn('<EmailContact', about)
 
-    def test_internship_section_titles_use_distinct_two_level_text(self) -> None:
+    def test_experience_section_titles_use_distinct_two_level_text(self) -> None:
         self.assertIn('zh="经历"', self.home)
         self.assertIn('en="Experience"', self.home)
-        self.assertIn('en="Internship project"', self.home)
+        self.assertIn('en="Internships and research"', self.home)
+        self.assertIn('zh="实习与研究"', self.home)
         # the eyebrow (before the heading) must not reuse the heading's Chinese text
-        self.assertNotIn('zh="实习项目"', self.home.split('id="internship-title"')[0])
+        self.assertNotIn('zh="实习与研究"', self.home.split('id="experience-title"')[0])
 
     def test_email_copy_buttons_have_distinct_accessible_names(self) -> None:
         component = (
@@ -193,16 +194,26 @@ class TestSiteInterface(unittest.TestCase):
         self.assertNotIn('ByteDanceOverview', media)
         self.assertNotIn('byte-media', media)
         self.assertNotIn('bytedance-ai-data', media)
-        internship = self.home.split('id="internship"')[1].split("</section>")[0]
-        self.assertNotIn('media-link', internship)
-        self.assertNotIn('ProjectMedia', internship)
-        self.assertIn('project-copy', internship)
-        self.assertIn('project.data.kind', internship)
-        self.assertIn('project.data.year', internship)
-        self.assertIn('project.data.title', internship)
-        self.assertIn('project.data.summary', internship)
+        experience = self.home.split('id="experience"')[1].split("</section>")[0]
+        self.assertNotIn('media-link', experience)
+        self.assertNotIn('ProjectMedia', experience)
+        self.assertIn('site.experience', experience)
         self.assertIn("project.id !== 'bytedance-ai-data'", self.project)
         self.assertIn('media-section', self.project)
+
+    def test_experience_timeline_lists_hupo_bytedance_and_lab(self) -> None:
+        site = (self.root / "src/config/site.ts").read_text(encoding="utf-8")
+        timeline = site.split("experience: [", 1)[1].split("\n  ],", 1)[0]
+        ids = [line.split("'")[1] for line in timeline.splitlines() if line.strip().startswith("id: '")]
+        self.assertEqual(ids, ["hupo-games", "bytedance", "ai4sg-lab"])
+        self.assertIn("AI 技术策划实习生", timeline)
+        self.assertIn("project: 'bytedance-ai-data'", timeline)
+        self.assertIn("https://doi.org/10.1145/3772363.3798792", timeline)
+        bytedance = (
+            self.root / "src/content/projects/bytedance-ai-data.mdx"
+        ).read_text(encoding="utf-8")
+        self.assertIn("section: experience", bytedance)
+        self.assertIn("navSection={project.data.section}", self.project)
 
     def test_bytedance_before_after_uses_four_quadrant_matrix(self) -> None:
         source = (
@@ -276,14 +287,25 @@ class TestSiteInterface(unittest.TestCase):
         self.assertIn('<h3><a href={`${base}projects/${project.id}`}>', self.home)
         self.assertIn('class="other-media"', self.home)
 
-    def test_homepage_sections_order_featured_internship_more(self) -> None:
-        self.assertIn('id="internship"', self.home)
-        self.assertIn('zh="实习项目"', self.home)
+    def test_homepage_sections_order_featured_experience_more_contact(self) -> None:
         featured = self.home.index('id="work"')
-        internship = self.home.index('id="internship"')
+        experience = self.home.index('id="experience"')
         more = self.home.index('id="other-title"')
-        self.assertLess(featured, internship)
-        self.assertLess(internship, more)
+        contact = self.home.index('id="contact"')
+        self.assertLess(featured, experience)
+        self.assertLess(experience, more)
+        self.assertLess(more, contact)
+        contact_block = self.home[contact:]
+        self.assertIn('site.emails', contact_block)
+        self.assertIn('site.resumePath', contact_block)
+
+    def test_navigation_marks_current_section_and_follows_system_theme(self) -> None:
+        self.assertIn("aria-current={section === 'home' ? 'page' : undefined}", self.layout)
+        self.assertIn("aria-current={section === 'about' ? 'page' : undefined}", self.layout)
+        self.assertIn("href={`${base}#experience`}", self.layout)
+        self.assertIn("href={`${base}${site.resumePath}`}", self.layout)
+        self.assertIn("(prefers-color-scheme: dark)", self.layout)
+        self.assertTrue((self.root / "src/pages/404.astro").exists())
 
     def test_external_links_are_blue_and_use_external_arrow(self) -> None:
         about = (self.root / "src/pages/about.astro").read_text(encoding="utf-8")
