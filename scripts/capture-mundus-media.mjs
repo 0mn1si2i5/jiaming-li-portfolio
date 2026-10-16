@@ -6,8 +6,8 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 
-const revision = '378fe528ca1c8f83f0280f83383b5e785e851285';
-const liveUrl = 'https://0mn1si2i5.github.io/Mundus/';
+const revision = '67fdcf8f69fd34bf06f314b3b6d6f3f92f99b77d';
+const liveUrl = 'https://0mn1si2i5.github.io/mundus/';
 const viewport = { width: 2160, height: 1350 };
 const storyViewport = { width: 1920, height: 1080 };
 const mundusRoot = process.env.MUNDUS_ROOT;
@@ -206,7 +206,7 @@ assert.equal(
 );
 
 const deploymentEndpoint =
-  'repos/0mn1si2i5/Mundus/deployments?environment=github-pages&per_page=1';
+  'repos/0mn1si2i5/mundus/deployments?environment=github-pages&per_page=1';
 const deployment = JSON.parse(
   execFileSync('gh', ['api', deploymentEndpoint, '--jq', '.[0]'], {
     encoding: 'utf8',
@@ -222,7 +222,7 @@ const deploymentState = execFileSync(
   'gh',
   [
     'api',
-    `repos/0mn1si2i5/Mundus/deployments/${deployment.id}/statuses?per_page=1`,
+    `repos/0mn1si2i5/mundus/deployments/${deployment.id}/statuses?per_page=1`,
     '--jq',
     '.[0].state',
   ],
@@ -447,7 +447,10 @@ try {
         .map(({ width, height }) => ({ width, height })),
       storyCaptures.map(() => storyViewport),
     );
-    assert.equal(new Set(images.map((image) => image.sha256)).size, 5);
+    assert.equal(
+      new Set(images.map((image) => image.sha256)).size,
+      retainedCaptures.length + storyCaptures.length,
+    );
 
     const storyPanelOverflowCount = Object.values(storyOverflows).reduce(
       (count, overflows) => count + overflows.length,
