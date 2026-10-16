@@ -23,11 +23,42 @@ class TestSiteInterface(unittest.TestCase):
             self.root / "src/content/projects/dialogtree.mdx"
         ).read_text(encoding="utf-8")
 
-    def test_navigation_uses_home_work_and_about(self) -> None:
-        self.assertIn('<Localized en="Home" zh="主页" />', self.layout)
-        self.assertIn('href={`${base}#work`}', self.layout)
-        self.assertIn('href={`${base}about`}', self.layout)
+    def test_navigation_lists_only_pages(self) -> None:
+        nav = self.layout.split('<nav aria-label="Primary navigation">', 1)[1].split(
+            "</nav>", 1
+        )[0]
+        self.assertEqual(nav.count("<a "), 2)
+        self.assertIn('<Localized en="Home" zh="主页" />', nav)
+        self.assertIn('href={`${base}about`}', nav)
+        self.assertNotIn("#work", nav)
+        self.assertNotIn("#experience", nav)
+        self.assertNotIn("resumePath", nav)
         self.assertNotIn('href={`${base}notes`}', self.layout)
+
+    def test_resume_is_a_download_action_outside_navigation(self) -> None:
+        header = self.layout.split('<header class="site-header">', 1)[1].split(
+            "</header>", 1
+        )[0]
+        actions = header.split('<div class="header-actions">', 1)[1]
+        self.assertIn('class="resume-download"', actions)
+        self.assertIn("href={`${base}${site.resumePath}`} download", actions)
+        self.assertIn('<span class="file-type">PDF</span>', actions)
+        contact = self.home[self.home.index('id="contact"'):]
+        self.assertIn("href={`${base}${site.resumePath}`} download", contact)
+
+    def test_homepage_section_rail_follows_scroll_position(self) -> None:
+        rail = (self.root / "src/components/SectionRail.astro").read_text(
+            encoding="utf-8"
+        )
+        ids = re.findall(r"\{ id: '([a-z]+)', label:", self.home)
+        self.assertEqual(ids, ["work", "experience", "more", "contact"])
+        for section_id in ids:
+            self.assertIn(f'id="{section_id}"', self.home)
+        self.assertIn("<SectionRail sections={homeSections} />", self.home)
+        self.assertIn("setAttribute('aria-current', 'location')", rail)
+        self.assertIn('aria-expanded="false"', rail)
+        self.assertIn("event.key === 'Escape'", rail)
+        self.assertIn("@media (min-width: 1520px)", rail)
 
     def test_header_has_one_home_destination_without_monogram(self) -> None:
         header = self.layout.split('<header class="site-header">', 1)[1].split(
@@ -213,7 +244,8 @@ class TestSiteInterface(unittest.TestCase):
             self.root / "src/content/projects/bytedance-ai-data.mdx"
         ).read_text(encoding="utf-8")
         self.assertIn("section: experience", bytedance)
-        self.assertIn("navSection={project.data.section}", self.project)
+        self.assertIn("href={`${base}#experience`}", self.project)
+        self.assertIn("'#work' : '#more'", self.project)
 
     def test_bytedance_before_after_uses_four_quadrant_matrix(self) -> None:
         source = (
@@ -302,8 +334,7 @@ class TestSiteInterface(unittest.TestCase):
     def test_navigation_marks_current_section_and_follows_system_theme(self) -> None:
         self.assertIn("aria-current={section === 'home' ? 'page' : undefined}", self.layout)
         self.assertIn("aria-current={section === 'about' ? 'page' : undefined}", self.layout)
-        self.assertIn("href={`${base}#experience`}", self.layout)
-        self.assertIn("href={`${base}${site.resumePath}`}", self.layout)
+        self.assertNotIn("navSection", self.layout)
         self.assertIn("(prefers-color-scheme: dark)", self.layout)
         self.assertTrue((self.root / "src/pages/404.astro").exists())
 

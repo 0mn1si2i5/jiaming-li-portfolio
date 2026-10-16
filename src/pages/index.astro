@@ -4,6 +4,7 @@ import BaseLayout from '../components/BaseLayout.astro';
 import ProjectMedia from '../components/ProjectMedia.astro';
 import Localized from '../components/Localized.astro';
 import EmailContact from '../components/EmailContact.astro';
+import SectionRail from '../components/SectionRail.astro';
 import { site } from '../config/site';
 
 const projects = await getCollection('projects');
@@ -14,6 +15,12 @@ const otherProjects = projects
   .filter((project) => !project.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const homeSections = [
+  { id: 'work', label: { en: 'Work', zh: '项目' } },
+  { id: 'experience', label: { en: 'Experience', zh: '经历' } },
+  { id: 'more', label: { en: 'More projects', zh: '更多项目' } },
+  { id: 'contact', label: { en: 'Contact', zh: '联系' } },
+];
 ---
 
 <BaseLayout>
@@ -79,7 +86,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </ol>
   </section>
 
-  <section class="other-section page-width" aria-labelledby="other-title">
+  <section id="more" class="other-section page-width" aria-labelledby="other-title">
     <p class="eyebrow"><Localized en="More projects" zh="更多项目" /></p>
     <div class="other-grid">
       <h2 id="other-title"><Localized en="Independent work and experiments" zh="独立作品与实验" /></h2>
@@ -120,12 +127,14 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           ))}
         </div>
         <div class="contact-actions">
-          <a class="external-link" href={`${base}${site.resumePath}`}><Localized en="Download résumé (Chinese, PDF)" zh="下载简历（PDF）" /> <span aria-hidden="true">↓</span></a>
+          <a class="external-link" href={`${base}${site.resumePath}`} download type="application/pdf"><Localized en="Download résumé (Chinese, PDF)" zh="下载简历（PDF）" /> <span aria-hidden="true">↓</span></a>
           <a class="external-link" href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>
   </section>
+
+  <SectionRail sections={homeSections} />
 </BaseLayout>
 
 <style>
@@ -305,4 +314,5 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     :global(:root[data-locale='zh']) .contact-section h2 { font-size: clamp(2rem, 8vw, 2.8rem); }
   }
   @media (max-height: 720px) and (min-width: 1000px) { .hero { padding-top: 2.5rem; } }
+  @media (max-width: 1519px) { :global(.site-footer) { padding-bottom: 4rem; } }
 </style>
