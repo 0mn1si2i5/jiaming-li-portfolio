@@ -7,14 +7,14 @@ import { site } from '../config/site';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
-<BaseLayout title="About" description="About Jiaming Li's work across product development, research, and independent projects.">
+<BaseLayout title="About" description="About Jiaming Li: AI tools, interactive products, research, and current work.">
   <section class="about page-width" aria-labelledby="about-title">
     <div>
       <p class="eyebrow"><Localized en="About" zh="关于" /></p>
       <h1 id="about-title"><Localized en="Research, products, and personal projects." zh="研究、产品与个人项目。" /></h1>
     </div>
     <div class="about-copy">
-      <p><Localized en="I'm pursuing an M.S. in Computer Science at the National University of Singapore, where I study human–AI collaboration and generative-AI creation at AI4SG Lab. I previously worked with speech data in ByteDance's AI Data & Security team, contributed to HCI research, and continue to develop independent projects including DialogTree and Mundus." zh="目前在新加坡国立大学攻读计算机硕士，在 AI4SG Lab 研究人机协作与生成式 AI 创作。曾在字节跳动 AI 数据与安全部门从事语音数据相关工作，也参与过 HCI 研究，并持续开发 DialogTree、Mundus 等个人项目。" /></p>
+      <p><Localized en="I'm pursuing an M.S. in Computer Science at the National University of Singapore, where I study human–AI collaboration and generative-AI creation at AI4SG Lab. I'm currently an AI Technical Design Intern at Hupo Games, helping build an internal production platform and AI tools for production work. Before that, I worked with speech data in ByteDance's AI Data & Security team. I have also contributed to HCI research, and I keep developing independent projects including DialogTree, Perch, and Mundus." zh="目前在新加坡国立大学攻读计算机硕士，在 AI4SG Lab 研究人机协作与生成式 AI 创作。现在在 Hupo Games 担任 AI 技术策划实习生，参与搭建公司内部生产平台和 AI 提效工具。之前在字节跳动 AI 数据与安全部门做语音数据相关工作，也参与过 HCI 研究，并持续开发 DialogTree、Perch、Mundus 等个人项目。" /></p>
       <div class="contact-block">
         <div class="email-list">
           {site.emails.map((email) => (

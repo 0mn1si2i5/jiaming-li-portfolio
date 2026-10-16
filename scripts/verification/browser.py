@@ -102,10 +102,19 @@ DIST_HTML_FILES = (
     "projects/dialogtree/index.html",
     "projects/mundus/index.html",
     "projects/nbti/index.html",
+    "projects/perch/index.html",
+    "404.html",
 )
-FEATURED_ORDER = ["DialogTree", "Mundus"]
-INTERNSHIP_ORDER = ["Speech Evaluation & Data Tooling at ByteDance"]
+FEATURED_ORDER = ["DialogTree", "Perch", "Mundus"]
+EXPERIENCE_ORDER = [
+    "Hupo Games",
+    "ByteDance · AI Data & Security",
+    "AI4SG Lab, National University of Singapore",
+]
 OTHER_ORDER = ["NBTI", "dsh-handoff", "RSZ Namelist"]
+PRIMARY_NAV = ["Home", "About"]
+HOME_SECTIONS = ["work", "experience", "more", "contact"]
+SECTION_RAIL_SIDE_MIN_WIDTH = 1520
 
 
 def is_finite_number(value: object) -> bool:
@@ -161,7 +170,7 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             "route", "locale", "theme", "viewport", "overflow",
             "brokenImageCount", "decodedImageCount", "totalImageCount",
             "focusableCount", "focusVisible", "reducedMotion",
-            "pagesBaseCorrect",
+            "pagesBaseCorrect", "primaryNav", "resumeDownload",
         )
         for field in required:
             if field not in item:
@@ -177,6 +186,10 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             errors.append(f"{name}: keyboard focus is not visible")
         if item.get("pagesBaseCorrect") is not True:
             errors.append(f"{name}: pagesBaseCorrect is not true")
+        if item.get("primaryNav") != PRIMARY_NAV:
+            errors.append(f"{name}: primary navigation is not Home and About")
+        if item.get("resumeDownload") is not True:
+            errors.append(f"{name}: résumé is not a download action")
         if not isinstance(item.get("focusableCount"), int) or item["focusableCount"] <= 0:
             errors.append(f"{name}: focusableCount is not positive")
         if name in REDUCED_SCENARIOS:
@@ -187,16 +200,29 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             if not isinstance(item.get("visibleTextLength"), int) or item["visibleTextLength"] <= 0:
                 errors.append(f"{name}: visibleTextLength is not positive")
         if name.startswith("home-"):
-            if item.get("totalImageCount") != 3:
-                errors.append(f"{name}: homepage image count is not three")
+            if item.get("totalImageCount") != 4:
+                errors.append(f"{name}: homepage image count is not four")
             if item.get("featured") != FEATURED_ORDER:
                 errors.append(f"{name}: featured project order is invalid")
-            if item.get("internship") != INTERNSHIP_ORDER:
-                errors.append(f"{name}: internship project order is invalid")
+            if item.get("experience") != EXPERIENCE_ORDER:
+                errors.append(f"{name}: experience order is invalid")
             if item.get("other") != OTHER_ORDER:
                 errors.append(f"{name}: other project order is invalid")
             if item.get("mediaCount") != 0:
-                errors.append(f"{name}: internship media count is not zero")
+                errors.append(f"{name}: experience media count is not zero")
+            if item.get("sectionRailActive") != HOME_SECTIONS:
+                errors.append(f"{name}: section rail does not follow sections")
+            if item.get("sectionRailConsistent") is not True:
+                errors.append(f"{name}: section rail state is inconsistent")
+            viewport = item.get("viewport")
+            width = viewport.get("width") if isinstance(viewport, dict) else None
+            expected_rail = (
+                "side"
+                if is_finite_number(width) and width >= SECTION_RAIL_SIDE_MIN_WIDTH
+                else "compact"
+            )
+            if item.get("sectionRailLayout") != expected_rail:
+                errors.append(f"{name}: sectionRailLayout is invalid")
         if name.startswith("about-"):
             if item.get("emailAddressCount") != 2:
                 errors.append(f"{name}: emailAddressCount is not two")

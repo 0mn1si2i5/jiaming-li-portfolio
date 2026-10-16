@@ -5,85 +5,85 @@
       "scenario": "home-en-light-1440",
       "path": "task7-home-en-light-1440x900.webp",
       "width": 1440,
-      "height": 4532,
-      "sha256": "acecb4012cbee810bccbac1dc1e23c59195764a905ca9d2cfab77ea2565f791a"
+      "height": 5930,
+      "sha256": "4a9d5512507e69c5df7854b237d66646cfbcf01dc55df2405c5eff5c9b86fc48"
     },
     {
       "scenario": "home-en-light-1024",
       "path": "task7-home-en-light-1024x768.webp",
       "width": 1024,
-      "height": 3828,
-      "sha256": "5efd6fbff71655566da7cf5898a4bfef2b41832b92cdc01b1ff03bed8d64f78a"
+      "height": 5067,
+      "sha256": "da47b319f6af3d1c75aa1129155988ccf3e4433f3b26a7881175b3a43ab4a632"
     },
     {
       "scenario": "home-zh-dark-768",
       "path": "task7-home-zh-dark-reduced-768x1024.webp",
       "width": 768,
-      "height": 3538,
-      "sha256": "95b6a085a1ff4c0570b1941b0eb570b5635f76b6bd98f90336b94f37ea593409"
+      "height": 4842,
+      "sha256": "cb7da9f152cd1e62d8bd1ca41c93a9af069e1d12d5039d30ea53612a04b44d61"
     },
     {
       "scenario": "home-zh-dark-390",
       "path": "task7-home-zh-dark-reduced-390x844.webp",
       "width": 390,
-      "height": 4284,
-      "sha256": "4467b234dcdb7c2faebf453ea495f334df7705d5041bb03b0a1c644c8f642987"
+      "height": 5914,
+      "sha256": "41cdb54e5d4614cb8092e4d06b98923b453dc5e67e3d7eec6ebde56f30971a99"
     },
     {
       "scenario": "about-en-light-1440",
       "path": "task8-about-en-light-1440x900.webp",
       "width": 1440,
-      "height": 1557,
-      "sha256": "741869d9f9466e6693956cf9b90ab8b8b37f8f73803fbf671fa4623a7bac22f3"
+      "height": 1612,
+      "sha256": "6f1b042fc34644e80ab93a72b14a4459758fa6b2939ae0be0f2512f9a7142a89"
     },
     {
       "scenario": "about-zh-dark-390",
       "path": "task8-about-zh-dark-reduced-390x844.webp",
       "width": 390,
-      "height": 1456,
-      "sha256": "aba71dd2c2e1f0b68d65bf00db5f25f20e2facdf2676661ad90ba466f1117efd"
+      "height": 1429,
+      "sha256": "d34c75effad80098124860b0e41438b30efa6dbbadb68e8436ba7e66ef7e446b"
     },
     {
       "scenario": "mundus-en-light-1440",
       "path": "task7-mundus-en-light-1440x900.webp",
       "width": 1440,
       "height": 5629,
-      "sha256": "1c121b794a4eaee98b846129dd757f299fed84b9adf4683fee95803050af7212"
+      "sha256": "8714470d4d4fb7d4bebde84631708b9a92cc7fea4b6092fd2e187770a9301c14"
     },
     {
       "scenario": "mundus-zh-dark-desktop",
       "path": "task7-mundus-zh-dark-reduced-1440x900.webp",
       "width": 1440,
       "height": 5382,
-      "sha256": "5b70c1df1166d75419015693ca1561daf532a7509dfe94a782f463f1103b6cba"
+      "sha256": "8f36aba22c52b93f3b6edf322c061a640728c2842f0ef9db543c3a9f9429e2ca"
     },
     {
       "scenario": "mundus-en-light-390",
       "path": "task7-mundus-en-light-390x844.webp",
       "width": 390,
-      "height": 5110,
-      "sha256": "91979d8fc673bcab62376936c271e76b16670fdbc6174c4fc2ab4d858c3729c9"
+      "height": 5065,
+      "sha256": "2d7f2a38762e70d609903c7be744295b6740091abd8b7bb0ba55ffa9766b5733"
     },
     {
       "scenario": "mundus-zh-dark-mobile",
       "path": "task7-mundus-zh-dark-reduced-390x844.webp",
       "width": 390,
-      "height": 4745,
-      "sha256": "70973431e3f961a39f6b30ff268a940dd477b7458fdc076f7bd58c20f337739e"
+      "height": 4699,
+      "sha256": "22429f7c6795441d29e47e1bcc76af1446f2d21174dfa04130b298f485fa1f4e"
     },
     {
       "scenario": "bytedance-en-light-1440",
       "path": "task7-bytedance-en-light-1440x900.webp",
       "width": 1440,
       "height": 3807,
-      "sha256": "a7857f7073df660ed1c175efe2e0e90ff5c5fe98e018157f9a8fbaa49903af3d"
+      "sha256": "7f806e074d727ebb5c3ff6a7344c19b8731e49aa2c39eacd5f61714e2c11fa9c"
     },
     {
       "scenario": "bytedance-zh-dark-390",
       "path": "task7-bytedance-zh-dark-reduced-390x844.webp",
       "width": 390,
-      "height": 3829,
-      "sha256": "36b70e999fa1200c4f0d4a6e5e5141b1ee89c7c441b5156239d9e97e63112748"
+      "height": 3783,
+      "sha256": "85f51caac1aba8ec26e175b4d3268e5e3ddbdac46c141ea565ec2b031dc63f0c"
     }
   ]
 }

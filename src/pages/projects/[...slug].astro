@@ -12,8 +12,9 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 const projects = (await getCollection('projects'))
-  .filter((entry) => entry.data.featured)
+  .filter((entry) => entry.data.featured && entry.data.section === 'work')
   .sort((a, b) => a.data.order - b.data.order);
+const isExperience = project.data.section === 'experience';
 const projectIndex = projects.findIndex((entry) => entry.id === project.id);
 const displayIndex = projectIndex >= 0 ? String(projectIndex + 1).padStart(2, '0') : '';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
@@ -23,9 +24,13 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 <BaseLayout title={project.data.title.en} description={project.data.summary}>
   <article class:list={['project-page', `accent-${project.data.accent}`]}>
     <header class="project-hero page-width">
-      <p class="eyebrow"><a href={`${base}#work`}><Localized en={project.data.featured ? 'Work' : 'More projects'} zh={project.data.featured ? '项目' : '更多项目'} /></a> <span aria-hidden="true">/</span> <Localized {...project.data.year} /></p>
+      <p class="eyebrow">{isExperience ? (
+        <a href={`${base}#experience`}><Localized en="Experience" zh="经历" /></a>
+      ) : (
+        <a href={`${base}${project.data.featured ? '#work' : '#more'}`}><Localized en={project.data.featured ? 'Work' : 'More projects'} zh={project.data.featured ? '项目' : '更多项目'} /></a>
+      )} <span aria-hidden="true">/</span> <Localized {...project.data.year} /></p>
       <div class="hero-classification">
-        <span class="project-index">{displayIndex || <Localized en="Archive" zh="其他项目" />}</span>
+        <span class="project-index">{isExperience ? <Localized en="Internship" zh="实习" /> : displayIndex || <Localized en="Archive" zh="其他项目" />}</span>
         <span><Localized {...project.data.kind} /></span>
       </div>
       <div class="hero-grid"><div><h1><Localized {...project.data.title} /></h1><p class="summary"><Localized {...project.data.summary} /></p></div><dl><div><dt><Localized en="Status" zh="状态" /></dt><dd><Localized {...project.data.status} /></dd></div><div><dt><Localized en="My work" zh="我的工作" /></dt><dd><Localized {...project.data.role} /></dd></div></dl></div>

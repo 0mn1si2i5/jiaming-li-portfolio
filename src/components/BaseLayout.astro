@@ -14,6 +14,8 @@ const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
 const descriptionText = typeof description === 'string' ? description : description?.en ?? site.description;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const section = path === base ? 'home' : path.startsWith(`${base}about/`) ? 'about' : '';
 const ogImage = new URL(
   image ? `${base}${image.replace(/^\//, '')}` : `${base}og/portfolio.png`,
   Astro.site,
@@ -45,7 +47,7 @@ const ogImage = new URL(
         const savedTheme = localStorage.getItem('theme');
         const theme = savedTheme === 'dark' || savedTheme === 'light'
           ? savedTheme
-          : 'light';
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
         const savedLocale = localStorage.getItem('locale');
         const locale = (savedLocale === 'en' || savedLocale === 'zh')
@@ -60,16 +62,22 @@ const ogImage = new URL(
     <a class="skip-link" href="#main"><Localized en="Skip to content" zh="跳至主要内容" /></a>
     <header class="site-header">
       <nav aria-label="Primary navigation">
-        <a href={base}><Localized en="Home" zh="主页" /></a>
-        <a href={`${base}#work`}><Localized en="Work" zh="项目" /></a>
-        <a href={`${base}about`}><Localized en="About" zh="关于" /></a>
+        <a href={base} aria-current={section === 'home' ? 'page' : undefined}><Localized en="Home" zh="主页" /></a>
+        <a href={`${base}about`} aria-current={section === 'about' ? 'page' : undefined}><Localized en="About" zh="关于" /></a>
       </nav>
-      <button class="locale-toggle" type="button" aria-label="切换至中文">
-        <span class="locale-label">中文</span>
-      </button>
-      <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
-        <span aria-hidden="true">◐</span><span class="theme-label">Theme</span>
-      </button>
+      <div class="header-actions">
+        <button class="locale-toggle" type="button" aria-label="切换至中文">
+          <span class="locale-label">中文</span>
+        </button>
+        <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+          <span aria-hidden="true">◐</span><span class="theme-label">Theme</span>
+        </button>
+        <a class="resume-download" href={`${base}${site.resumePath}`} download type="application/pdf">
+          <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><path d="M8 2.5v7.5M4.75 6.9 8 10.1l3.25-3.2M3 13.25h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          <Localized en="Résumé" zh="简历" />
+          <span class="file-type">PDF</span>
+        </a>
+      </div>
     </header>
     <main id="main"><slot /></main>
     <footer class="site-footer">
@@ -117,6 +125,12 @@ const ogImage = new URL(
         const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = nextTheme;
         localStorage.setItem('theme', nextTheme);
+        updateButton();
+      });
+      matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') return;
+        document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
         updateButton();
       });
       localeButton?.addEventListener('click', () => setLocale(document.documentElement.dataset.locale === 'zh' ? 'en' : 'zh'));
@@ -173,12 +187,21 @@ const ogImage = new URL(
   .skip-link:focus { top: 1rem; }
   .site-header, .site-footer { width: min(var(--page-width), calc(100% - 3rem)); margin: 0 auto; display: flex; align-items: center; }
   .site-header { min-height: 84px; justify-content: space-between; border-bottom: 1px solid var(--rule-strong); }
-  nav { display: flex; gap: 1.35rem; margin-left: auto; margin-right: 1.35rem; }
-  nav a, .theme-toggle, .locale-toggle, .site-footer { font-size: .7rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
-  nav a { text-decoration: none; color: var(--muted); }
-  nav a:hover { color: var(--ink); }
-  .theme-toggle, .locale-toggle { display: inline-flex; align-items: center; gap: .38rem; min-height: 2.25rem; padding: .45rem .65rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
-  .locale-toggle { margin-right: .45rem; }
+  .site-header nav { display: flex; gap: 1.6rem; }
+  .site-header nav a, .theme-toggle, .locale-toggle, .resume-download, .site-footer { font-size: .7rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+  .site-header nav a { color: var(--muted); text-decoration: none; transition: color 180ms ease; }
+  .site-header nav a:hover, .site-header nav a[aria-current] { color: var(--ink); }
+  .site-header nav a[aria-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .5em; }
+  .theme-toggle, .locale-toggle { transition: background-color 180ms ease, border-color 180ms ease; }
+  .theme-toggle:hover, .locale-toggle:hover { border-color: var(--rule-strong); background: var(--surface); }
+  .theme-toggle:active, .locale-toggle:active { transform: translateY(1px); }
+  .theme-toggle, .locale-toggle { display: inline-flex; align-items: center; gap: .38rem; min-height: 2.25rem; padding: .45rem .65rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font-family: inherit; }
+  .header-actions { display: flex; flex: none; align-items: center; gap: .45rem; white-space: nowrap; }
+  .resume-download { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.25rem; margin-left: .55rem; padding: .45rem .55rem .45rem .7rem; color: var(--paper); background: var(--ink); border: 1px solid var(--ink); border-radius: 100px; text-decoration: none; transition: background-color 180ms ease, border-color 180ms ease; }
+  .resume-download:hover { background: color-mix(in srgb, var(--ink) 84%, var(--paper)); text-decoration: none; }
+  .resume-download:active { transform: translateY(1px); }
+  .resume-download svg { flex: none; }
+  .file-type { padding: .12rem .32rem; border: 1px solid color-mix(in srgb, var(--paper) 38%, transparent); border-radius: 5px; font-size: .58rem; letter-spacing: .06em; line-height: 1.2; }
   .site-footer { justify-content: flex-start; min-height: 94px; color: var(--muted); border-top: 1px solid var(--rule-strong); }
   .back-to-top { position: fixed; right: max(1rem, calc((100vw - var(--page-width)) / 2)); bottom: 1rem; z-index: 20; padding: .55rem .75rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 88%, transparent); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 4px 18px rgb(0 0 0 / .08); font-size: .7rem; font-weight: 650; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; backdrop-filter: blur(8px); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px); transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease; }
   .back-to-top.visible { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
@@ -186,12 +209,21 @@ const ogImage = new URL(
   @media (max-width: 560px) {
     .page-width { width: min(100% - 2rem, var(--page-width)); }
     .site-header, .site-footer { width: min(100% - 2rem, var(--page-width)); }
-    .site-header { display: grid; grid-template-columns: auto auto; justify-content: end; min-height: 0; padding: .9rem 0 0; }
-    nav { grid-column: 1 / -1; grid-row: 2; justify-content: space-between; width: 100%; margin: .8rem 0 0; padding: .72rem 0 .8rem; border-top: 1px solid var(--line); }
-    .theme-label { display: none; }
-    .locale-toggle, .theme-toggle { min-height: 2rem; padding: .38rem .5rem; }
-    .locale-toggle { margin-right: .35rem; }
+    .site-header { min-height: 68px; gap: .75rem; }
+    .site-header nav { gap: 1rem; }
+    .site-header nav a { letter-spacing: .07em; }
+    .header-actions { gap: .35rem; }
+    .theme-label, .file-type { display: none; }
+    .locale-toggle, .theme-toggle, .resume-download { min-height: 2rem; padding: .38rem .5rem; }
+    .resume-download { margin-left: .2rem; padding-right: .6rem; letter-spacing: .07em; }
     .back-to-top { right: 1rem; bottom: 1rem; }
+  }
+  @media (max-width: 359px) {
+    .site-header { gap: .5rem; }
+    .site-header nav { gap: .8rem; }
+    .header-actions { gap: .3rem; }
+    .locale-toggle, .theme-toggle { padding: .38rem .42rem; }
+    .resume-download { margin-left: 0; padding: .38rem .5rem .38rem .45rem; gap: .35rem; letter-spacing: .03em; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 </style>

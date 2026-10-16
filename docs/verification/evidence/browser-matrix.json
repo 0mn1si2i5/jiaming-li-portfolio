@@ -13,26 +13,42 @@
       "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
-      "decodedImageCount": 3,
-      "totalImageCount": 3,
-      "focusableCount": 16,
-      "visibleTextLength": 1670,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "focusableCount": 22,
+      "visibleTextLength": 2544,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
+        "Perch",
         "Mundus"
       ],
-      "internship": [
-        "Speech Evaluation & Data Tooling at ByteDance"
+      "experience": [
+        "Hupo Games",
+        "ByteDance · AI Data & Security",
+        "AI4SG Lab, National University of Singapore"
       ],
       "other": [
         "NBTI",
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "home-en-light-1024",
@@ -46,26 +62,42 @@
       "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
-      "decodedImageCount": 3,
-      "totalImageCount": 3,
-      "focusableCount": 16,
-      "visibleTextLength": 1670,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "focusableCount": 22,
+      "visibleTextLength": 2544,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
+        "Perch",
         "Mundus"
       ],
-      "internship": [
-        "Speech Evaluation & Data Tooling at ByteDance"
+      "experience": [
+        "Hupo Games",
+        "ByteDance · AI Data & Security",
+        "AI4SG Lab, National University of Singapore"
       ],
       "other": [
         "NBTI",
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "home-zh-dark-768",
@@ -79,26 +111,42 @@
       "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
-      "decodedImageCount": 3,
-      "totalImageCount": 3,
-      "focusableCount": 16,
-      "visibleTextLength": 734,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "focusableCount": 22,
+      "visibleTextLength": 1180,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
+        "Perch",
         "Mundus"
       ],
-      "internship": [
-        "Speech Evaluation & Data Tooling at ByteDance"
+      "experience": [
+        "Hupo Games",
+        "ByteDance · AI Data & Security",
+        "AI4SG Lab, National University of Singapore"
       ],
       "other": [
         "NBTI",
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "home-zh-dark-390",
@@ -112,26 +160,42 @@
       "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
-      "decodedImageCount": 3,
-      "totalImageCount": 3,
-      "focusableCount": 16,
-      "visibleTextLength": 731,
+      "decodedImageCount": 4,
+      "totalImageCount": 4,
+      "focusableCount": 22,
+      "visibleTextLength": 1173,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
+        "Perch",
         "Mundus"
       ],
-      "internship": [
-        "Speech Evaluation & Data Tooling at ByteDance"
+      "experience": [
+        "Hupo Games",
+        "ByteDance · AI Data & Security",
+        "AI4SG Lab, National University of Singapore"
       ],
       "other": [
         "NBTI",
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "about-en-light-1440",
@@ -148,10 +212,15 @@
       "decodedImageCount": 0,
       "totalImageCount": 0,
       "focusableCount": 12,
-      "visibleTextLength": 956,
+      "visibleTextLength": 1121,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "emailAddressCount": 2,
       "emailCopyButtonCount": 2,
       "educationEntryCount": 2,
@@ -173,10 +242,15 @@
       "decodedImageCount": 0,
       "totalImageCount": 0,
       "focusableCount": 12,
-      "visibleTextLength": 389,
+      "visibleTextLength": 446,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "emailAddressCount": 2,
       "emailCopyButtonCount": 2,
       "educationEntryCount": 2,
@@ -192,15 +266,21 @@
         "width": 1440,
         "height": 900
       },
+      "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "reducedMotion": false,
-      "focusableCount": 14,
-      "focusVisible": true,
-      "visibleTextLength": 2731,
+      "focusableCount": 11,
+      "visibleTextLength": 2737,
       "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -228,16 +308,21 @@
         "width": 1440,
         "height": 900
       },
+      "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "reducedMotion": true,
-      "focusableCount": 14,
-      "focusVisible": true,
-      "visibleTextLength": 1099,
+      "focusableCount": 11,
+      "visibleTextLength": 1103,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
+      "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -265,15 +350,21 @@
         "width": 390,
         "height": 844
       },
+      "reducedMotion": false,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "reducedMotion": false,
-      "focusableCount": 14,
-      "focusVisible": true,
-      "visibleTextLength": 2726,
+      "focusableCount": 11,
+      "visibleTextLength": 2728,
       "pagesBaseCorrect": true,
+      "activeAnimationCount": 0,
+      "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -301,16 +392,21 @@
         "width": 390,
         "height": 844
       },
+      "reducedMotion": true,
       "overflow": false,
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "reducedMotion": true,
-      "focusableCount": 14,
-      "focusVisible": true,
+      "focusableCount": 11,
       "visibleTextLength": 1096,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
+      "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -344,10 +440,15 @@
       "decodedImageCount": 0,
       "totalImageCount": 0,
       "focusableCount": 7,
-      "visibleTextLength": 3504,
+      "visibleTextLength": 3524,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "responsibilityModuleCount": 3,
       "comparisonCellCount": 4,
       "sharedQcGroupCount": 1,
@@ -372,6 +473,11 @@
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "responsibilityModuleCount": 3,
       "comparisonCellCount": 4,
       "sharedQcGroupCount": 1,

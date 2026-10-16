@@ -1,0 +1,198 @@
+---
+import Localized from './Localized.astro';
+
+interface Props {
+  sections: { id: string; label: { en: string; zh: string } }[];
+}
+
+const { sections } = Astro.props;
+const number = (index: number) => String(index + 1).padStart(2, '0');
+---
+
+<nav class="section-rail" aria-labelledby="section-rail-title" data-section-rail>
+  <span id="section-rail-title" class="sr-only"><Localized en="Sections on this page" zh="本页分区" /></span>
+  <button class="rail-toggle" type="button" aria-expanded="false" aria-controls="section-rail-list">
+    <span class="sr-only"><Localized en="Current section:" zh="当前分区：" /></span>
+    {sections.map((section, index) => (
+      <span class="rail-current" data-for={section.id} hidden>
+        <span class="rail-number">{number(index)}</span>
+        <Localized {...section.label} />
+      </span>
+    ))}
+    <svg class="rail-chevron" aria-hidden="true" viewBox="0 0 12 12" width="10" height="10"><path d="M2.5 7.5 6 4l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+  </button>
+  <ol class="rail-list" id="section-rail-list">
+    {sections.map((section, index) => (
+      <li>
+        <a href={`#${section.id}`} data-section={section.id}>
+          <span class="rail-number" aria-hidden="true">{number(index)}</span>
+          <span class="rail-label"><Localized {...section.label} /></span>
+          <span class="rail-tick" aria-hidden="true"></span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script>
+  const rail = document.querySelector<HTMLElement>('[data-section-rail]');
+  if (rail) {
+    const toggle = rail.querySelector<HTMLButtonElement>('.rail-toggle')!;
+    const links = [...rail.querySelectorAll<HTMLAnchorElement>('.rail-list a')];
+    const currents = [...rail.querySelectorAll<HTMLElement>('.rail-current')];
+    const targets = links
+      .map((link) => document.getElementById(link.dataset.section ?? ''))
+      .filter((target): target is HTMLElement => target !== null);
+    let frame = 0;
+
+    const setOpen = (open: boolean) => {
+      rail.dataset.open = String(open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    const update = () => {
+      frame = 0;
+      const line = window.innerHeight * 0.4;
+      let active = '';
+      for (const target of targets) {
+        if (target.getBoundingClientRect().top <= line) active = target.id;
+      }
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (active && atBottom) active = targets[targets.length - 1].id;
+      if (rail.dataset.active === active) return;
+      rail.dataset.active = active;
+      links.forEach((link) => {
+        if (link.dataset.section === active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      currents.forEach((current) => { current.hidden = current.dataset.for !== active; });
+      if (!active) setOpen(false);
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    toggle.addEventListener('click', () => setOpen(rail.dataset.open !== 'true'));
+    links.forEach((link) => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', (event) => {
+      if (rail.dataset.open === 'true' && !rail.contains(event.target as Node)) setOpen(false);
+    });
+    rail.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && rail.dataset.open === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+  }
+</script>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+  /* Compact: a capsule in the bottom-left corner that opens a section list */
+  .section-rail {
+    position: fixed;
+    left: max(1rem, calc((100vw - var(--page-width)) / 2));
+    bottom: 1rem;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+  }
+  .section-rail[data-active]:not([data-active='']) { opacity: 1; visibility: visible; transform: none; }
+  .rail-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    min-height: 2.5rem;
+    padding: .5rem .8rem .5rem .9rem;
+    color: var(--ink);
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    box-shadow: 0 4px 18px rgb(0 0 0 / .08);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    font: inherit;
+    font-size: .7rem;
+    font-weight: 650;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+  .rail-toggle:hover { border-color: var(--rule-strong); }
+  .rail-toggle:active { transform: translateY(1px); }
+  .rail-current { display: inline-flex; align-items: baseline; gap: .55rem; }
+  .rail-current[hidden] { display: none; }
+  .rail-number { color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: .08em; }
+  .rail-chevron { color: var(--muted); transition: transform 180ms ease; }
+  .section-rail[data-open='true'] .rail-chevron { transform: rotate(180deg); }
+  .rail-list {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + .5rem);
+    display: none;
+    min-width: 12.5rem;
+    margin: 0;
+    padding: .35rem;
+    list-style: none;
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgb(0 0 0 / .1);
+    backdrop-filter: blur(10px);
+  }
+  .section-rail[data-open='true'] .rail-list { display: grid; }
+  .rail-list a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: .75rem;
+    min-height: 44px;
+    padding: 0 .75rem;
+    color: var(--muted);
+    border-radius: 11px;
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 180ms ease, background-color 180ms ease;
+  }
+  .rail-list .rail-number { font-size: .7rem; font-weight: 650; }
+  .rail-list a:hover { color: var(--ink); background: var(--surface); }
+  .rail-list a[aria-current] { color: var(--ink); }
+  .rail-tick { display: flex; justify-content: flex-end; width: 1rem; }
+  .rail-tick::after { content: ''; width: .4rem; height: .4rem; background: var(--line); border-radius: 999px; transition: width 220ms cubic-bezier(.2, .7, .2, 1), background-color 180ms ease; }
+  .rail-list a[aria-current] .rail-tick::after { width: 1rem; background: var(--ink); }
+
+  /* Wide screens: the list stays open as a vertical capsule in the right margin */
+  @media (min-width: 1520px) {
+    .section-rail {
+      left: auto;
+      right: max(1rem, calc((100vw - var(--page-width)) / 4 - 4.125rem));
+      top: 50%;
+      bottom: auto;
+      transform: translate(6px, -50%);
+    }
+    .section-rail[data-active]:not([data-active='']) { transform: translate(0, -50%); }
+    .rail-toggle { display: none; }
+    .rail-list {
+      position: static;
+      display: grid;
+      gap: .1rem;
+      min-width: 0;
+      padding: .3rem;
+      background: color-mix(in srgb, var(--paper) 86%, transparent);
+      border-radius: 22px;
+      box-shadow: 0 4px 18px rgb(0 0 0 / .06);
+      backdrop-filter: blur(8px);
+    }
+    .rail-list a { grid-template-columns: 1fr auto; gap: .5rem; min-height: 34px; padding: 0 .6rem 0 .75rem; border-radius: 999px; font-size: .74rem; }
+    .rail-list .rail-number { display: none; }
+    .rail-list .rail-label { text-align: right; }
+  }
+</style>

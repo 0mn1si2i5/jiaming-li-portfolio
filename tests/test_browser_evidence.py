@@ -47,14 +47,23 @@ def _build_scenario(name: str) -> dict[str, object]:
         "visibleTextLength": 100,
         "reducedMotion": reduced,
         "pagesBaseCorrect": True,
+        "primaryNav": ["Home", "About"],
+        "resumeDownload": True,
     }
     if name.startswith("home-"):
-        scenario["totalImageCount"] = 3
+        scenario["totalImageCount"] = 4
         scenario["decodedImageCount"] = 4
-        scenario["featured"] = ["DialogTree", "Mundus"]
-        scenario["internship"] = ["Speech Evaluation & Data Tooling at ByteDance"]
+        scenario["featured"] = ["DialogTree", "Perch", "Mundus"]
+        scenario["experience"] = [
+            "Hupo Games",
+            "ByteDance · AI Data & Security",
+            "AI4SG Lab, National University of Singapore",
+        ]
         scenario["other"] = ["NBTI", "dsh-handoff", "RSZ Namelist"]
         scenario["mediaCount"] = 0
+        scenario["sectionRailActive"] = ["work", "experience", "more", "contact"]
+        scenario["sectionRailConsistent"] = True
+        scenario["sectionRailLayout"] = "compact"
     elif name.startswith("about-"):
         scenario["emailAddressCount"] = 2
         scenario["emailCopyButtonCount"] = 2
@@ -152,6 +161,8 @@ class TestBrowserEvidence(unittest.TestCase):
                 "projects/dialogtree/index.html",
                 "projects/mundus/index.html",
                 "projects/nbti/index.html",
+                "projects/perch/index.html",
+                "404.html",
             ),
         )
         self.assertNotIn("notes/index.html", browser.DIST_HTML_FILES)
@@ -595,9 +606,14 @@ class TestBrowserEvidence(unittest.TestCase):
 
         cases = (
             ("home-en-light-1440", "featured", ["Mundus", "DialogTree"]),
-            ("home-en-light-1440", "internship", []),
+            ("home-en-light-1440", "experience", []),
             ("home-en-light-1440", "other", ["NBTI"]),
             ("home-en-light-1440", "mediaCount", 1),
+            ("home-en-light-1440", "sectionRailActive", ["work", "contact"]),
+            ("home-en-light-1440", "sectionRailConsistent", False),
+            ("home-en-light-1440", "sectionRailLayout", "side"),
+            ("about-en-light-1440", "primaryNav", ["Home", "Work", "About"]),
+            ("bytedance-zh-dark-390", "resumeDownload", False),
             ("about-en-light-1440", "emailAddressCount", 1),
             ("about-en-light-1440", "emailCopyButtonCount", 1),
             ("about-en-light-1440", "emailCopySuccessVisible", False),

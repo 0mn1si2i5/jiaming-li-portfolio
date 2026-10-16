@@ -14,6 +14,7 @@ const projects = defineCollection({
     status: localized,
     order: z.number(),
     featured: z.boolean(),
+    section: z.enum(['work', 'experience']).default('work'),
     kind: localized,
     summary: localized,
     role: localized,
