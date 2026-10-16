@@ -5,49 +5,51 @@
       "id": "mundus-personal-globe",
       "description": "Mundus is a public personal globe organized around geographic context.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["public personal globe", "same geographic context", "read the result with its source and method", "share that state"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["已经公开的个人数字地球", "同一个地理上下文", "阅读结果及其来源与方法", "分享当前状态"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Three views of the same globe", "同一颗地球上的三种观察方式"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["public personal globe", "same geographic context", "reads the result with its source and method", "share that state as a link"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["已经公开的个人数字地球", "同一个地理上下文", "阅读结果及其来源与方法", "把当前状态作为链接分享出去"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Preview", "预览"]}]}
       ],
       "evidence": [
         {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["long-lived personal digital globe", "different scientific lenses", "explicit about its methods"]}]}
       ]
     },
     {
-      "id": "mundus-current-modes",
-      "description": "The public product provides Other Side, Development, and Sunline.",
+      "id": "mundus-shared-modes",
+      "description": "Every mode shares the globe, selected place, data policy, About dialog, and share links.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["Other Side", "selected point through Earth to its antipode", "Development, Unpacked", "published HDI", "Sunline", "day-night boundary"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["地球另一端", "沿地心找到所选地点的对跖点", "发展的不同侧面", "已发布 HDI", "日照线", "昼夜边界"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Other Side", "Development, Unpacked", "Sunline", "地球另一端", "发展的不同侧面", "日照线"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["One 3D globe and one selected place", "Switching modes keeps the place", "A missing value stays marked as missing", "One About dialog that lists the methods, data sources, and licences", "Share links that reopen the same mode, place, and settings"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["一颗三维地球和一个选中的地点", "切换模式时，地点保持不变", "缺失的数据标为缺失", "列出所有方法、数据来源和许可", "打开后回到同一个模式、地点和设置"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Main modes on the live site", "线上的主要模式"]}]}
       ],
       "evidence": [
-        {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["calculates exact antipodal endpoints", "compares reported HDI", "visualizes the day-night boundary"]}]}
+        {"repository": "Mundus", "source": "AGENTS.md", "rules": [{"type": "contains_all", "values": ["move to another observation while keeping the selected place", "share the state", "Methods, data sources, licences and software notices live in one About dialog", "turn missing values into zero"]}]},
+        {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["missing fields remain explicit"]}]}
       ]
     },
     {
-      "id": "mundus-parchment-atlas",
-      "description": "The public Parchment Atlas presentation includes vector geography and bilingual city relationships.",
+      "id": "mundus-live-preview",
+      "description": "The preview reads screenshots that Mundus publishes with each deploy.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["represented cities at both ends", "shared globe and location state"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["两端收录城市之间的关系", "共享的地球与地点状态"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Preview", "预览", "through-Earth relationship", "穿过地球的两端空间关系"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["I keep adding modes to it"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["我会继续给它增加模式"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["loaded from the live site", "replaced each time Mundus is deployed", "从线上版本读取", "每次部署后都会更新"]}]}
       ],
       "evidence": [
-        {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["Parchment Atlas", "bilateral city relations", "Natural Earth vector globe"]}]}
+        {"repository": "Mundus", "source": ".github/workflows/pages.yml", "rules": [{"type": "contains_all", "values": ["node scripts/capture-portfolio-previews.mjs dist", "--require-previews"]}]},
+        {"repository": "Mundus", "source": "AGENTS.md", "rules": [{"type": "contains_all", "values": ["previews/manifest.json", "follows the tier in `modeRegistry.ts`"]}]}
       ]
     },
     {
       "id": "mundus-shared-experience",
-      "description": "Shared state, pinned data, and static delivery support the public experience.",
+      "description": "Static delivery and hash-pinned data keep the public build reproducible.",
       "claims": [
-        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["same globe and location context", "Reviewed data snapshots and hashes", "static delivery", "public build reproducible"]}]},
-        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["共用同一颗地球和地点上下文", "经过审核的数据快照和哈希", "静态交付", "线上构建可以复现"]}]},
-        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["three public views", "三种公开视角"]}]}
+        {"locale": "en", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["static site with no backend or database", "pinned by SHA-256 hashes", "only change after I review a new version", "public build can be reproduced"]}]},
+        {"locale": "zh", "source": "src/content/projects/mundus.mdx", "rules": [{"type": "contains_all", "values": ["没有后端和数据库的静态网站", "SHA-256 哈希固定", "审核过新版本后才会更换", "线上构建可以从仓库复现"]}]},
+        {"locale": "story", "source": "src/components/MundusStory.astro", "rules": [{"type": "contains_all", "values": ["Opens Mundus in a new tab", "在新标签页打开 Mundus"]}]}
       ],
       "evidence": [
-        {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-publication-packet.md", "rules": [{"type": "contains_all", "values": ["static, one-Canvas architecture", "SHA-256", "build/artifact verification"]}]},
-        {"repository": "Mundus", "source": "docs/2026-08-01-v1.1-parchment-atlas-candidate.md", "rules": [{"type": "contains_all", "values": ["selected point while switching modes", "literal subpath gate is closed"]}]}
+        {"repository": "Mundus", "source": "README.md", "rules": [{"type": "contains_all", "values": ["static browser application with one shared 3D globe and no backend or database"]}]},
+        {"repository": "Mundus", "source": "AGENTS.md", "rules": [{"type": "contains_all", "values": ["pin upstream URLs and SHA-256 hashes", "fail-closed"]}]}
       ]
     }
   ]

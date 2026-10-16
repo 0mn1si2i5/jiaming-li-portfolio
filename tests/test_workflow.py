@@ -22,7 +22,7 @@ class TestPullRequestWorkflow(unittest.TestCase):
         ):
             self.assertIn(command, self.workflow)
         self.assertIn(
-            "ref: 378fe528ca1c8f83f0280f83383b5e785e851285",
+            "ref: 67fdcf8f69fd34bf06f314b3b6d6f3f92f99b77d",
             self.workflow,
         )
         self.assertIn(

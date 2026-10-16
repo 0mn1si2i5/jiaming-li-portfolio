@@ -10,10 +10,10 @@ from scripts.verification import facts
 
 
 class TestStructuredFacts(unittest.TestCase):
-    def test_mundus_uses_live_v11_deployed_revision(self) -> None:
+    def test_mundus_uses_the_pinned_deployed_revision(self) -> None:
         self.assertEqual(
             facts.EXPECTED_REVISIONS["Mundus"],
-            "378fe528ca1c8f83f0280f83383b5e785e851285",
+            "67fdcf8f69fd34bf06f314b3b6d6f3f92f99b77d",
         )
 
         rules = facts.load_rules(Path("scripts/verification/facts.json"))
@@ -21,8 +21,8 @@ class TestStructuredFacts(unittest.TestCase):
             [rule["id"] for rule in rules],
             [
                 "mundus-personal-globe",
-                "mundus-current-modes",
-                "mundus-parchment-atlas",
+                "mundus-shared-modes",
+                "mundus-live-preview",
                 "mundus-shared-experience",
             ],
         )
@@ -41,7 +41,7 @@ class TestStructuredFacts(unittest.TestCase):
         }
         self.assertEqual(
             revisions["Mundus"]["revision"],
-            "378fe528ca1c8f83f0280f83383b5e785e851285",
+            "67fdcf8f69fd34bf06f314b3b6d6f3f92f99b77d",
         )
         self.assertEqual(set(revisions), {"Mundus"})
         for item in revisions.values():
@@ -352,8 +352,8 @@ const mode = { category: "spatial" };
             rule_ids,
             {
                 "mundus-personal-globe",
-                "mundus-current-modes",
-                "mundus-parchment-atlas",
+                "mundus-shared-modes",
+                "mundus-live-preview",
                 "mundus-shared-experience",
             },
         )
@@ -372,14 +372,14 @@ const mode = { category: "spatial" };
                 "claims": {
                     "public personal globe",
                     "same geographic context",
-                    "read the result with its source and method",
-                    "share that state",
+                    "reads the result with its source and method",
+                    "share that state as a link",
                     "已经公开的个人数字地球",
                     "同一个地理上下文",
                     "阅读结果及其来源与方法",
-                    "分享当前状态",
-                    "Three views of the same globe",
-                    "同一颗地球上的三种观察方式",
+                    "把当前状态作为链接分享出去",
+                    "Preview",
+                    "预览",
                 },
                 "evidence": {
                     "long-lived personal digital globe",
@@ -387,63 +387,62 @@ const mode = { category: "spatial" };
                     "explicit about its methods",
                 },
             },
-            "mundus-current-modes": {
+            "mundus-shared-modes": {
                 "claims": {
-                    "Other Side",
-                    "selected point through Earth to its antipode",
-                    "Development, Unpacked",
-                    "published HDI",
-                    "Sunline",
-                    "day-night boundary",
-                    "地球另一端",
-                    "沿地心找到所选地点的对跖点",
-                    "发展的不同侧面",
-                    "已发布 HDI",
-                    "日照线",
-                    "昼夜边界",
+                    "One 3D globe and one selected place",
+                    "Switching modes keeps the place",
+                    "A missing value stays marked as missing",
+                    "One About dialog that lists the methods, data sources, and licences",
+                    "Share links that reopen the same mode, place, and settings",
+                    "一颗三维地球和一个选中的地点",
+                    "切换模式时，地点保持不变",
+                    "缺失的数据标为缺失",
+                    "列出所有方法、数据来源和许可",
+                    "打开后回到同一个模式、地点和设置",
+                    "Main modes on the live site",
+                    "线上的主要模式",
                 },
                 "evidence": {
-                    "calculates exact antipodal endpoints",
-                    "compares reported HDI",
-                    "visualizes the day-night boundary",
+                    "move to another observation while keeping the selected place",
+                    "share the state",
+                    "Methods, data sources, licences and software notices live in one About dialog",
+                    "turn missing values into zero",
+                    "missing fields remain explicit",
                 },
             },
-            "mundus-parchment-atlas": {
+            "mundus-live-preview": {
                 "claims": {
-                    "represented cities at both ends",
-                    "shared globe and location state",
-                    "两端收录城市之间的关系",
-                    "共享的地球与地点状态",
-                    "Preview",
-                    "预览",
-                    "through-Earth relationship",
-                    "穿过地球的两端空间关系",
+                    "I keep adding modes to it",
+                    "我会继续给它增加模式",
+                    "loaded from the live site",
+                    "replaced each time Mundus is deployed",
+                    "从线上版本读取",
+                    "每次部署后都会更新",
                 },
                 "evidence": {
-                    "Parchment Atlas",
-                    "bilateral city relations",
-                    "Natural Earth vector globe",
+                    "node scripts/capture-portfolio-previews.mjs dist",
+                    "--require-previews",
+                    "previews/manifest.json",
+                    "follows the tier in `modeRegistry.ts`",
                 },
             },
             "mundus-shared-experience": {
                 "claims": {
-                    "same globe and location context",
-                    "Reviewed data snapshots and hashes",
-                    "static delivery",
-                    "public build reproducible",
-                    "共用同一颗地球和地点上下文",
-                    "经过审核的数据快照和哈希",
-                    "静态交付",
-                    "线上构建可以复现",
-                    "three public views",
-                    "三种公开视角",
+                    "static site with no backend or database",
+                    "pinned by SHA-256 hashes",
+                    "only change after I review a new version",
+                    "public build can be reproduced",
+                    "没有后端和数据库的静态网站",
+                    "SHA-256 哈希固定",
+                    "审核过新版本后才会更换",
+                    "线上构建可以从仓库复现",
+                    "Opens Mundus in a new tab",
+                    "在新标签页打开 Mundus",
                 },
                 "evidence": {
-                    "static, one-Canvas architecture",
-                    "SHA-256",
-                    "selected point while switching modes",
-                    "build/artifact verification",
-                    "literal subpath gate is closed",
+                    "static browser application with one shared 3D globe and no backend or database",
+                    "pin upstream URLs and SHA-256 hashes",
+                    "fail-closed",
                 },
             },
         }
@@ -467,6 +466,33 @@ const mode = { category: "spatial" };
                 }
                 self.assertEqual(claim_values, coverage["claims"])
                 self.assertEqual(evidence_values, coverage["evidence"])
+
+    def test_case_copy_must_not_name_a_registered_mode(self) -> None:
+        registry = """
+export const MODE_DEFINITIONS = {
+  antipodes: {
+    title: { zh: '地球另一端', en: 'Other Side' },
+  },
+  newmode: {
+    title: { zh: '新观察', en: 'New Lens' },
+  },
+};
+"""
+        titles = facts.mode_titles(registry)
+        self.assertEqual(titles, ["地球另一端", "Other Side", "新观察", "New Lens"])
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for source in facts.MODE_AGNOSTIC_SOURCES:
+                (root / source).parent.mkdir(parents=True, exist_ok=True)
+                (root / source).write_text("A shared globe.", encoding="utf-8")
+            self.assertEqual(facts.find_mode_titles(root, titles), [])
+
+            case = root / facts.MODE_AGNOSTIC_SOURCES[0]
+            case.write_text("summary: Try New Lens today.", encoding="utf-8")
+            errors = facts.find_mode_titles(root, titles)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("'New Lens'", errors[0])
 
     def test_fact_catalog_rejects_missing_story_claim(self) -> None:
         catalog = {
