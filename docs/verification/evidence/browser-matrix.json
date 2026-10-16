@@ -15,11 +15,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "focusableCount": 23,
-      "visibleTextLength": 2556,
+      "focusableCount": 22,
+      "visibleTextLength": 2544,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
         "Perch",
@@ -35,7 +40,15 @@
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "home-en-light-1024",
@@ -51,11 +64,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "focusableCount": 23,
-      "visibleTextLength": 2556,
+      "focusableCount": 22,
+      "visibleTextLength": 2544,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
         "Perch",
@@ -71,7 +89,15 @@
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "home-zh-dark-768",
@@ -87,11 +113,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "focusableCount": 23,
-      "visibleTextLength": 1182,
+      "focusableCount": 22,
+      "visibleTextLength": 1180,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
         "Perch",
@@ -107,7 +138,15 @@
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "home-zh-dark-390",
@@ -123,11 +162,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 4,
       "totalImageCount": 4,
-      "focusableCount": 23,
-      "visibleTextLength": 1179,
+      "focusableCount": 22,
+      "visibleTextLength": 1173,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "featured": [
         "DialogTree",
         "Perch",
@@ -143,7 +187,15 @@
         "dsh-handoff",
         "RSZ Namelist"
       ],
-      "mediaCount": 0
+      "mediaCount": 0,
+      "sectionRailActive": [
+        "work",
+        "experience",
+        "more",
+        "contact"
+      ],
+      "sectionRailConsistent": true,
+      "sectionRailLayout": "compact"
     },
     {
       "scenario": "about-en-light-1440",
@@ -159,11 +211,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 0,
       "totalImageCount": 0,
-      "focusableCount": 14,
-      "visibleTextLength": 1133,
+      "focusableCount": 12,
+      "visibleTextLength": 1121,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "emailAddressCount": 2,
       "emailCopyButtonCount": 2,
       "educationEntryCount": 2,
@@ -184,11 +241,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 0,
       "totalImageCount": 0,
-      "focusableCount": 14,
-      "visibleTextLength": 452,
+      "focusableCount": 12,
+      "visibleTextLength": 446,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "emailAddressCount": 2,
       "emailCopyButtonCount": 2,
       "educationEntryCount": 2,
@@ -209,11 +271,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "focusableCount": 13,
-      "visibleTextLength": 2749,
+      "focusableCount": 11,
+      "visibleTextLength": 2737,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -246,11 +313,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "focusableCount": 13,
-      "visibleTextLength": 1105,
+      "focusableCount": 11,
+      "visibleTextLength": 1103,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -283,11 +355,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "focusableCount": 13,
-      "visibleTextLength": 2744,
+      "focusableCount": 11,
+      "visibleTextLength": 2728,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -320,11 +397,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "focusableCount": 13,
-      "visibleTextLength": 1102,
+      "focusableCount": 11,
+      "visibleTextLength": 1096,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "productVisualCount": 1,
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
@@ -357,11 +439,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 0,
       "totalImageCount": 0,
-      "focusableCount": 9,
-      "visibleTextLength": 3536,
+      "focusableCount": 7,
+      "visibleTextLength": 3524,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "responsibilityModuleCount": 3,
       "comparisonCellCount": 4,
       "sharedQcGroupCount": 1,
@@ -381,11 +468,16 @@
       "brokenImageCount": 0,
       "decodedImageCount": 0,
       "totalImageCount": 0,
-      "focusableCount": 9,
-      "visibleTextLength": 1114,
+      "focusableCount": 7,
+      "visibleTextLength": 1108,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
+      "primaryNav": [
+        "Home",
+        "About"
+      ],
+      "resumeDownload": true,
       "responsibilityModuleCount": 3,
       "comparisonCellCount": 4,
       "sharedQcGroupCount": 1,
