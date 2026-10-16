@@ -49,20 +49,6 @@ const storyCaptures = [
     png: '/tmp/mundus-other-side-detail.png',
     target: 'other-side-detail.webp',
   },
-  {
-    mode: 'development',
-    role: 'story-development',
-    url: `${liveUrl}?mode=development&indicator=hdi&year=2023&v=1`,
-    png: '/tmp/mundus-development.png',
-    target: 'development.webp',
-  },
-  {
-    mode: 'sunline',
-    role: 'story-sunline',
-    url: `${liveUrl}?mode=sunline&v=1`,
-    png: '/tmp/mundus-sunline.png',
-    target: 'sunline.webp',
-  },
 ];
 
 function webpDimensions(data) {

@@ -18,8 +18,8 @@ export const site = {
   links: {
     dialogTreeDemo: 'https://chat.golir.top/',
     dialogTreePaper: 'https://doi.org/10.1145/3772363.3798792',
-    mundusWebsite: 'https://0mn1si2i5.github.io/Mundus/',
-    mundusGithub: 'https://github.com/0mn1si2i5/Mundus',
+    mundusWebsite: 'https://0mn1si2i5.github.io/mundus/',
+    mundusGithub: 'https://github.com/0mn1si2i5/mundus',
     nbtiWebsite: 'https://0mn1si2i5.github.io/NBTI/',
     nbtiGithub: 'https://github.com/0mn1si2i5/NBTI',
     perchGithub: 'https://github.com/0mn1si2i5/perch',
