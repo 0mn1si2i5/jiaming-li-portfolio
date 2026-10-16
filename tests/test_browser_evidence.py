@@ -47,6 +47,8 @@ def _build_scenario(name: str) -> dict[str, object]:
         "visibleTextLength": 100,
         "reducedMotion": reduced,
         "pagesBaseCorrect": True,
+        "primaryNav": ["Home", "About"],
+        "resumeDownload": True,
     }
     if name.startswith("home-"):
         scenario["totalImageCount"] = 4
@@ -59,6 +61,9 @@ def _build_scenario(name: str) -> dict[str, object]:
         ]
         scenario["other"] = ["NBTI", "dsh-handoff", "RSZ Namelist"]
         scenario["mediaCount"] = 0
+        scenario["sectionRailActive"] = ["work", "experience", "more", "contact"]
+        scenario["sectionRailConsistent"] = True
+        scenario["sectionRailLayout"] = "compact"
     elif name.startswith("about-"):
         scenario["emailAddressCount"] = 2
         scenario["emailCopyButtonCount"] = 2
@@ -604,6 +609,11 @@ class TestBrowserEvidence(unittest.TestCase):
             ("home-en-light-1440", "experience", []),
             ("home-en-light-1440", "other", ["NBTI"]),
             ("home-en-light-1440", "mediaCount", 1),
+            ("home-en-light-1440", "sectionRailActive", ["work", "contact"]),
+            ("home-en-light-1440", "sectionRailConsistent", False),
+            ("home-en-light-1440", "sectionRailLayout", "side"),
+            ("about-en-light-1440", "primaryNav", ["Home", "Work", "About"]),
+            ("bytedance-zh-dark-390", "resumeDownload", False),
             ("about-en-light-1440", "emailAddressCount", 1),
             ("about-en-light-1440", "emailCopyButtonCount", 1),
             ("about-en-light-1440", "emailCopySuccessVisible", False),

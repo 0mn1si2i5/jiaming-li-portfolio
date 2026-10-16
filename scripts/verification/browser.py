@@ -112,6 +112,9 @@ EXPERIENCE_ORDER = [
     "AI4SG Lab, National University of Singapore",
 ]
 OTHER_ORDER = ["NBTI", "dsh-handoff", "RSZ Namelist"]
+PRIMARY_NAV = ["Home", "About"]
+HOME_SECTIONS = ["work", "experience", "more", "contact"]
+SECTION_RAIL_SIDE_MIN_WIDTH = 1520
 
 
 def is_finite_number(value: object) -> bool:
@@ -167,7 +170,7 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             "route", "locale", "theme", "viewport", "overflow",
             "brokenImageCount", "decodedImageCount", "totalImageCount",
             "focusableCount", "focusVisible", "reducedMotion",
-            "pagesBaseCorrect",
+            "pagesBaseCorrect", "primaryNav", "resumeDownload",
         )
         for field in required:
             if field not in item:
@@ -183,6 +186,10 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
             errors.append(f"{name}: keyboard focus is not visible")
         if item.get("pagesBaseCorrect") is not True:
             errors.append(f"{name}: pagesBaseCorrect is not true")
+        if item.get("primaryNav") != PRIMARY_NAV:
+            errors.append(f"{name}: primary navigation is not Home and About")
+        if item.get("resumeDownload") is not True:
+            errors.append(f"{name}: résumé is not a download action")
         if not isinstance(item.get("focusableCount"), int) or item["focusableCount"] <= 0:
             errors.append(f"{name}: focusableCount is not positive")
         if name in REDUCED_SCENARIOS:
@@ -203,6 +210,19 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
                 errors.append(f"{name}: other project order is invalid")
             if item.get("mediaCount") != 0:
                 errors.append(f"{name}: experience media count is not zero")
+            if item.get("sectionRailActive") != HOME_SECTIONS:
+                errors.append(f"{name}: section rail does not follow sections")
+            if item.get("sectionRailConsistent") is not True:
+                errors.append(f"{name}: section rail state is inconsistent")
+            viewport = item.get("viewport")
+            width = viewport.get("width") if isinstance(viewport, dict) else None
+            expected_rail = (
+                "side"
+                if is_finite_number(width) and width >= SECTION_RAIL_SIDE_MIN_WIDTH
+                else "compact"
+            )
+            if item.get("sectionRailLayout") != expected_rail:
+                errors.append(f"{name}: sectionRailLayout is invalid")
         if name.startswith("about-"):
             if item.get("emailAddressCount") != 2:
                 errors.append(f"{name}: emailAddressCount is not two")
