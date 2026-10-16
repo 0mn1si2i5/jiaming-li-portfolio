@@ -16,7 +16,7 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "focusableCount": 22,
-      "visibleTextLength": 2544,
+      "visibleTextLength": 2575,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -65,7 +65,7 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "focusableCount": 22,
-      "visibleTextLength": 2544,
+      "visibleTextLength": 2575,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -114,7 +114,7 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "focusableCount": 22,
-      "visibleTextLength": 1180,
+      "visibleTextLength": 1185,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -163,7 +163,7 @@
       "decodedImageCount": 4,
       "totalImageCount": 4,
       "focusableCount": 22,
-      "visibleTextLength": 1173,
+      "visibleTextLength": 1178,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -271,8 +271,8 @@
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "focusableCount": 11,
-      "visibleTextLength": 2737,
+      "focusableCount": 10,
+      "visibleTextLength": 2662,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -282,21 +282,27 @@
       ],
       "resumeDownload": true,
       "productVisualCount": 1,
+      "previewSource": "live-manifest",
+      "previewManifestModes": [
+        "antipodes",
+        "surnames",
+        "isolation"
+      ],
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewKeyboardModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewLinkTargetsCorrect": true,
       "previewSelectionSynchronized": true,
       "previewLayout": "columns",
-      "previewMinTargetHeight": 132.203125,
+      "previewMinTargetHeight": 128.015625,
       "previewTransitionDurationMs": 160
     },
     {
@@ -313,8 +319,8 @@
       "brokenImageCount": 0,
       "decodedImageCount": 2,
       "totalImageCount": 2,
-      "focusableCount": 11,
-      "visibleTextLength": 1103,
+      "focusableCount": 10,
+      "visibleTextLength": 1056,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -324,21 +330,27 @@
       ],
       "resumeDownload": true,
       "productVisualCount": 1,
+      "previewSource": "live-manifest",
+      "previewManifestModes": [
+        "antipodes",
+        "surnames",
+        "isolation"
+      ],
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewKeyboardModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewLinkTargetsCorrect": true,
       "previewSelectionSynchronized": true,
       "previewLayout": "columns",
-      "previewMinTargetHeight": 94.640625,
+      "previewMinTargetHeight": 111.328125,
       "previewTransitionDurationMs": 0.01
     },
     {
@@ -356,7 +368,7 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "focusableCount": 11,
-      "visibleTextLength": 2728,
+      "visibleTextLength": 2867,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -366,16 +378,22 @@
       ],
       "resumeDownload": true,
       "productVisualCount": 1,
+      "previewSource": "live-manifest",
+      "previewManifestModes": [
+        "antipodes",
+        "surnames",
+        "isolation"
+      ],
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewKeyboardModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewLinkTargetsCorrect": true,
       "previewSelectionSynchronized": true,
@@ -398,7 +416,7 @@
       "decodedImageCount": 2,
       "totalImageCount": 2,
       "focusableCount": 11,
-      "visibleTextLength": 1096,
+      "visibleTextLength": 1131,
       "pagesBaseCorrect": true,
       "activeAnimationCount": 0,
       "focusVisible": true,
@@ -408,16 +426,22 @@
       ],
       "resumeDownload": true,
       "productVisualCount": 1,
+      "previewSource": "live-manifest",
+      "previewManifestModes": [
+        "antipodes",
+        "surnames",
+        "isolation"
+      ],
       "previewDefaultMode": "antipodes",
       "previewPointerModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewKeyboardModes": [
         "antipodes",
-        "development",
-        "sunline"
+        "surnames",
+        "isolation"
       ],
       "previewLinkTargetsCorrect": true,
       "previewSelectionSynchronized": true,
