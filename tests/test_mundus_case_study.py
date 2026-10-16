@@ -44,8 +44,8 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             headings_by_locale["en"],
             [
                 "An evolving personal globe",
-                "Three released modes",
-                "The shared spatial base",
+                "What every mode shares",
+                "How it is built and published",
                 "Chronorbis",
             ],
         )
@@ -53,8 +53,8 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             headings_by_locale["zh"],
             [
                 "一颗持续扩展的个人数字地球",
-                "三种已上线模式",
-                "共用的空间基座",
+                "所有模式共用的部分",
+                "构建与发布",
                 "Chronorbis",
             ],
         )
@@ -186,101 +186,72 @@ class TestProductCaseStudyFocus(unittest.TestCase):
                     ):
                         self.assertNotIn(token, visible.casefold())
 
-    def test_mundus_story_defines_three_accessible_linked_previews(self) -> None:
+    def test_mundus_copy_names_no_mode_and_no_mode_count(self) -> None:
+        case = (
+            self.project / "src/content/projects/mundus.mdx"
+        ).read_text(encoding="utf-8")
+        story = (
+            self.project / "src/components/MundusStory.astro"
+        ).read_text(encoding="utf-8")
+        copy = f"{case}\n{story}"
+
+        # Released and retired mode names. `npm run verify` also rejects every
+        # title in the Mundus mode registry at the pinned revision.
+        for name in (
+            "Other Side",
+            "Surname Atlas",
+            "Urban Proximity",
+            "Sunline",
+            "Development, Unpacked",
+            "地球另一端",
+            "姓氏观察",
+            "城市邻近性",
+            "日照线",
+            "发展的不同侧面",
+        ):
+            with self.subTest(name=name):
+                self.assertNotIn(name, copy)
+        self.assertNotRegex(
+            copy.casefold(),
+            r"\b(?:two|three|four|five|six)\s+(?:public\s+|released\s+)?"
+            r"(?:modes|views|observations)\b",
+        )
+        self.assertNotRegex(copy, r"[二两三四五六][个种]\S{0,4}(?:模式|视角|观察)")
+
+    def test_mundus_story_reads_previews_from_the_live_manifest(self) -> None:
         story = (
             self.project / "src/components/MundusStory.astro"
         ).read_text(encoding="utf-8")
 
-        modes_start = story.find("const modes = [")
-        self.assertNotEqual(modes_start, -1)
-        modes_end = story.find("] as const", modes_start)
-        self.assertNotEqual(modes_end, -1)
-        modes_source = story[modes_start:modes_end]
-        mode_matches = list(
-            re.finditer(r"\bid:\s*'([^']+)'", modes_source)
-        )
-        mode_ids = [match.group(1) for match in mode_matches]
-        self.assertEqual(
-            mode_ids,
-            ["antipodes", "development", "sunline"],
-        )
-        self.assertEqual(len(mode_ids), len(mode_matches))
-        mode_blocks = {
-            mode_id: modes_source[
-                match.start() : (
-                    mode_matches[index + 1].start()
-                    if index + 1 < len(mode_matches)
-                    else len(modes_source)
-                )
-            ]
-            for index, (mode_id, match) in enumerate(
-                zip(mode_ids, mode_matches)
-            )
-        }
-        expected_modes = {
-            "antipodes": (
-                "title: { en: 'Other Side', zh: '地球另一端' }",
-                "description: { en: 'Spherical relationships', "
-                "zh: '球面空间关系' }",
-                "image: '/media/mundus/other-side-detail.webp'",
-                "The Mundus Other Side mode showing the through-Earth "
-                "relationship between two endpoints.",
-                "Mundus“地球另一端”模式，展示穿过地球的两端空间关系。",
-                "https://0mn1si2i5.github.io/Mundus/?mode=antipodes&v=1",
-            ),
-            "development": (
-                "title: { en: 'Development, Unpacked', zh: '发展的不同侧面' }",
-                "description: { en: 'Development structure over time', "
-                "zh: '发展结构与时间变化' }",
-                "image: '/media/mundus/development.webp'",
-                "The Mundus Development mode comparing published development "
-                "indicators on the globe.",
-                "Mundus“发展的不同侧面”模式，在地球上比较已发布的发展指标。",
-                "https://0mn1si2i5.github.io/Mundus/?mode=development"
-                "&indicator=hdi&year=2023&v=1",
-            ),
-            "sunline": (
-                "title: { en: 'Sunline', zh: '日照线' }",
-                "description: { en: 'Time and sunlight', zh: '时间与日照变化' }",
-                "image: '/media/mundus/sunline.webp'",
-                "The Mundus Sunline mode showing sunlight and the day-night "
-                "boundary on the globe.",
-                "Mundus“日照线”模式，展示地球上的日照与昼夜边界。",
-                "https://0mn1si2i5.github.io/Mundus/?mode=sunline&v=1",
-            ),
-        }
-        for mode_id, block in mode_blocks.items():
-            for token in expected_modes[mode_id]:
-                with self.subTest(mode=mode_id, token=token):
-                    self.assertIn(token, block)
-
+        self.assertNotIn("const modes = [", story)
         self.assertEqual(story.count("<img"), 1)
         for token in (
-            "const defaultMode = modes[0]",
-            "href={defaultMode.href}",
-            "src={asset(defaultMode.image)}",
-            "alt={defaultMode.alt.en}",
-            'aria-labelledby="mundus-preview-antipodes '
-            'mundus-preview-new-tab-label"',
+            "new URL('previews/manifest.json', site.links.mundusWebsite)",
+            "data-manifest-url={manifestUrl}",
+            "href={site.links.mundusWebsite}",
+            "src={asset(fallback.image)}",
+            "alt={fallback.alt.en}",
             'role="tablist"',
-            'role="tab"',
-            'aria-controls="mundus-preview-panel"',
-            'aria-selected={index === 0 ? "true" : "false"}',
-            "tabindex={index === 0 ? 0 : -1}",
-            "data-src={asset(mode.image)}",
-            "data-href={mode.href}",
-            "data-alt-en={mode.alt.en}",
-            "data-alt-zh={mode.alt.zh}",
+            "data-preview-tabs hidden",
             'target="_blank"',
             'rel="noopener noreferrer"',
-            "const panel = preview.querySelector<HTMLElement>("
-            "'#mundus-preview-panel')",
+            "manifest?.schemaVersion !== 1",
+            "new URL(url).origin === origin",
+            "if (![href, images.en, images.zh].every(sameSite)) return [];",
+            "tab.setAttribute('role', 'tab');",
+            "tab.setAttribute('aria-controls', 'mundus-preview-panel');",
+            "tab.dataset.modeId = mode.id;",
+            "tab.dataset.href = mode.href;",
+            "span.textContent = text[key];",
             "const candidate = new Image()",
             "candidate.onload = () => {",
             "candidate.onerror = () => {",
-            "const syncLocale = (tab: HTMLButtonElement) => {",
-            "new MutationObserver",
-            "syncLocale(tabs[0]);",
+            "panel.setAttribute('role', 'tabpanel');",
+            "panel.setAttribute('aria-labelledby', tab.id);",
+            "tablist.hidden = false;",
+            "new IntersectionObserver(",
+            "controller.abort()",
+            "attributeFilter: ['data-locale']",
             "ArrowLeft",
             "ArrowRight",
             "ArrowUp",
@@ -288,84 +259,13 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             "Home",
             "End",
         ):
-            self.assertIn(token, story)
+            with self.subTest(token=token):
+                self.assertIn(token, story)
 
-        panel_match = re.search(
-            r'<div\b(?=[^>]*\bid="mundus-preview-panel")'
-            r'(?=[^>]*\brole="tabpanel")'
-            r'(?=[^>]*\baria-labelledby="mundus-preview-antipodes")'
-            r"[^>]*>(?P<body>.*?)</div>",
-            story,
-            flags=re.DOTALL,
-        )
-        self.assertIsNotNone(panel_match)
-        self.assertRegex(
-            panel_match.group("body"),
-            r'(?s)<a\b(?=[^>]*\bdata-preview-link\b)'
-            r'(?=[^>]*\baria-labelledby="mundus-preview-antipodes '
-            r'mundus-preview-new-tab-label")[^>]*>.*?<img\b',
-        )
-        self.assertNotRegex(
-            panel_match.group("body"),
-            r"<a\b[^>]*\brole=",
-        )
+        # Manifest text is inserted as text, never as markup.
+        self.assertNotIn("innerHTML", story)
+        self.assertNotIn("insertAdjacentHTML", story)
 
-        onload_match = re.search(
-            r"candidate\.onload = \(\) => \{(?P<body>.*?)"
-            r"^\s*\};",
-            story,
-            flags=re.DOTALL | re.MULTILINE,
-        )
-        self.assertIsNotNone(onload_match)
-        src_assignment = story.find(
-            "candidate.src = src;",
-            onload_match.end(),
-        )
-        self.assertNotEqual(src_assignment, -1)
-        self.assertLess(onload_match.start(), src_assignment)
-        onload = onload_match.group("body")
-        update_tokens = (
-            "image.src = src;",
-            "link.href = href;",
-            "item.setAttribute('aria-selected', String(selected));",
-            "item.tabIndex = selected ? 0 : -1;",
-            "panel.setAttribute('aria-labelledby', tab.id);",
-            "`${tab.id} mundus-preview-new-tab-label`,",
-            "syncLocale(tab);",
-        )
-        for token in update_tokens:
-            self.assertIn(token, onload)
-        self.assertRegex(
-            onload,
-            r"(?s)panel\.setAttribute\('aria-labelledby', tab\.id\);.*?"
-            r"link\.setAttribute\(\s*'aria-labelledby',\s*"
-            r"`\$\{tab\.id\} mundus-preview-new-tab-label`,\s*\);.*?"
-            r"syncLocale\(tab\);",
-        )
-        self.assertNotIn("moveFocus", story)
-        onerror_match = re.search(
-            r"candidate\.onerror = \(\) => \{(?P<body>.*?)"
-            r"^\s*\};",
-            story,
-            flags=re.DOTALL | re.MULTILINE,
-        )
-        self.assertIsNotNone(onerror_match)
-        onerror = onerror_match.group("body")
-        self.assertRegex(
-            onerror,
-            r"(?s)if \(\s*currentRequest !== requestId\s*\|\|\s*"
-            r"document\.activeElement !== tab\s*\) return;.*?"
-            r"const selected = tabs\.find\(.*?"
-            r"item\.getAttribute\('aria-selected'\) === 'true'.*?"
-            r"if \(selected\) selected\.focus\(\);",
-        )
-        for mutation in (
-            "image.src",
-            "link.href",
-            "setAttribute",
-            "tabIndex",
-        ):
-            self.assertNotIn(mutation, onerror)
         keydown_match = re.search(
             r"tab\.addEventListener\('keydown', \(event\) => \{"
             r"(?P<body>.*?)^\s*\}\);",
@@ -374,52 +274,26 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         )
         self.assertIsNotNone(keydown_match)
         keydown = keydown_match.group("body")
-        prevent_default = keydown.find("event.preventDefault();")
-        focus_next = keydown.find("tabs[next].focus();")
-        activate_next = keydown.find("activate(tabs[next]);")
-        self.assertNotEqual(prevent_default, -1)
-        self.assertNotEqual(focus_next, -1)
-        self.assertNotEqual(activate_next, -1)
-        self.assertLess(prevent_default, focus_next)
-        self.assertLess(focus_next, activate_next)
-        observer_match = re.search(
-            r"new MutationObserver\(\(\) => \{(?P<callback>.*?)"
-            r"\}\)\.observe\((?P<options>.*?)\);",
+        self.assertLess(
+            keydown.find("event.preventDefault();"),
+            keydown.find("tabs[next].focus();"),
+        )
+        self.assertLess(
+            keydown.find("tabs[next].focus();"),
+            keydown.find("activate(tabs[next]);"),
+        )
+        onerror_match = re.search(
+            r"candidate\.onerror = \(\) => \{(?P<body>.*?)^\s*\};",
             story,
-            flags=re.DOTALL,
+            flags=re.DOTALL | re.MULTILINE,
         )
-        self.assertIsNotNone(observer_match)
-        self.assertRegex(
-            observer_match.group("callback"),
-            r"(?s)tab\.getAttribute\('aria-selected'\) === 'true'.*?"
-            r"if \(selected\) syncLocale\(selected\);",
-        )
-        self.assertRegex(
-            observer_match.group("options"),
-            r"attributeFilter: \['data-locale'\]",
-        )
-        self.assertIn("syncLocale(tabs[0]);", story)
+        self.assertIsNotNone(onerror_match)
+        for mutation in ("image.src", "link.href", "setAttribute", "tabIndex"):
+            self.assertNotIn(mutation, onerror_match.group("body"))
         self.assertRegex(
             story,
             r"(?s)@media \(prefers-reduced-motion: reduce\) \{.*?"
             r"\.preview-link img\s*\{\s*transition: none;",
-        )
-
-        expected = {
-            "https://0mn1si2i5.github.io/Mundus/?mode=antipodes&v=1",
-            "https://0mn1si2i5.github.io/Mundus/"
-            "?mode=development&indicator=hdi&year=2023&v=1",
-            "https://0mn1si2i5.github.io/Mundus/?mode=sunline&v=1",
-        }
-        self.assertEqual(
-            {
-                value.replace("&amp;", "&")
-                for value in re.findall(
-                    r"https://0mn1si2i5\.github\.io/Mundus/[^\"']+",
-                    story,
-                )
-            },
-            expected,
         )
 
     def test_mundus_media_has_three_distinct_roles(self) -> None:
@@ -439,12 +313,13 @@ class TestProductCaseStudyFocus(unittest.TestCase):
             case,
         )
         self.assertIn("previewAlt:", case)
+        self.assertIn("/media/mundus/other-side-detail.webp", story)
         for path in (
-            "/media/mundus/other-side-detail.webp",
             "/media/mundus/development.webp",
             "/media/mundus/sunline.webp",
         ):
-            self.assertIn(path, story)
+            self.assertNotIn(path, story)
+            self.assertFalse((self.project / "public" / path.lstrip("/")).exists())
         self.assertNotIn(
             "/media/mundus/modes-overview.webp",
             story,
@@ -472,8 +347,6 @@ class TestProductCaseStudyFocus(unittest.TestCase):
                 "homepage-globe",
                 "project-full-interface",
                 "story-other-side",
-                "story-development",
-                "story-sunline",
             ],
         )
         self.assertEqual(
@@ -492,7 +365,7 @@ class TestProductCaseStudyFocus(unittest.TestCase):
         self.assertGreaterEqual(manifest["images"][1]["width"], 1920)
         self.assertEqual(
             len({item["sha256"] for item in manifest["images"]}),
-            5,
+            3,
         )
 
         for item in manifest["images"]:

@@ -10,6 +10,10 @@ from pathlib import Path
 from scripts.verification import browser
 
 
+# Any mode list works: the evidence only has to agree with the live manifest.
+PREVIEW_MODES = ("antipodes", "surnames", "isolation")
+
+
 _SCENARIO_META = {
     "home-en-light-1440": ("/", "en", "light", 1440, 900, False),
     "home-en-light-1024": ("/", "en", "light", 1024, 768, False),
@@ -74,9 +78,11 @@ def _build_scenario(name: str) -> dict[str, object]:
         scenario["totalImageCount"] = 2
         scenario["decodedImageCount"] = 2
         scenario["productVisualCount"] = 1
-        scenario["previewDefaultMode"] = "antipodes"
-        scenario["previewPointerModes"] = ["antipodes", "development", "sunline"]
-        scenario["previewKeyboardModes"] = ["antipodes", "development", "sunline"]
+        scenario["previewSource"] = "live-manifest"
+        scenario["previewManifestModes"] = list(PREVIEW_MODES)
+        scenario["previewDefaultMode"] = PREVIEW_MODES[0]
+        scenario["previewPointerModes"] = list(PREVIEW_MODES)
+        scenario["previewKeyboardModes"] = list(PREVIEW_MODES)
         scenario["previewLinkTargetsCorrect"] = True
         scenario["previewSelectionSynchronized"] = True
         scenario["previewLayout"] = "vertical" if width <= 760 else "columns"
@@ -114,17 +120,11 @@ class TestBrowserEvidence(unittest.TestCase):
                 continue
             item.update(
                 {
-                    "previewDefaultMode": "antipodes",
-                    "previewPointerModes": [
-                        "antipodes",
-                        "development",
-                        "sunline",
-                    ],
-                    "previewKeyboardModes": [
-                        "antipodes",
-                        "development",
-                        "sunline",
-                    ],
+                    "previewSource": "live-manifest",
+                    "previewManifestModes": list(PREVIEW_MODES),
+                    "previewDefaultMode": PREVIEW_MODES[0],
+                    "previewPointerModes": list(PREVIEW_MODES),
+                    "previewKeyboardModes": list(PREVIEW_MODES),
                     "previewLinkTargetsCorrect": True,
                     "previewSelectionSynchronized": True,
                     "previewLayout": (
@@ -210,6 +210,8 @@ class TestBrowserEvidence(unittest.TestCase):
             ).read_text(encoding="utf-8")
         )
         preview_fields = (
+            "previewSource",
+            "previewManifestModes",
             "previewDefaultMode",
             "previewPointerModes",
             "previewKeyboardModes",
@@ -224,17 +226,11 @@ class TestBrowserEvidence(unittest.TestCase):
                 continue
             item.update(
                 {
-                    "previewDefaultMode": "antipodes",
-                    "previewPointerModes": [
-                        "antipodes",
-                        "development",
-                        "sunline",
-                    ],
-                    "previewKeyboardModes": [
-                        "antipodes",
-                        "development",
-                        "sunline",
-                    ],
+                    "previewSource": "live-manifest",
+                    "previewManifestModes": list(PREVIEW_MODES),
+                    "previewDefaultMode": PREVIEW_MODES[0],
+                    "previewPointerModes": list(PREVIEW_MODES),
+                    "previewKeyboardModes": list(PREVIEW_MODES),
                     "previewLinkTargetsCorrect": True,
                     "previewSelectionSynchronized": True,
                     "previewLayout": (
@@ -282,12 +278,16 @@ class TestBrowserEvidence(unittest.TestCase):
                     self.assertIn(field, errors)
 
         mutations = (
-            (desktop_index, "previewDefaultMode", "development"),
-            (desktop_index, "previewPointerModes", ["antipodes"]),
+            (desktop_index, "previewSource", "fallback"),
+            (desktop_index, "previewManifestModes", []),
+            (desktop_index, "previewManifestModes", ["Other Side"]),
+            (desktop_index, "previewManifestModes", ["surnames", "surnames"]),
+            (desktop_index, "previewDefaultMode", PREVIEW_MODES[1]),
+            (desktop_index, "previewPointerModes", PREVIEW_MODES[:1]),
             (
                 desktop_index,
                 "previewKeyboardModes",
-                ["antipodes", "development"],
+                list(reversed(PREVIEW_MODES)),
             ),
             (desktop_index, "previewLinkTargetsCorrect", False),
             (desktop_index, "previewSelectionSynchronized", False),

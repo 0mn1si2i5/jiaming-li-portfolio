@@ -16,8 +16,33 @@ from .claim_semantics import (
 
 
 EXPECTED_REVISIONS = {
-    "Mundus": "378fe528ca1c8f83f0280f83383b5e785e851285",
+    "Mundus": "67fdcf8f69fd34bf06f314b3b6d6f3f92f99b77d",
 }
+
+# The Mundus case describes what every mode shares, so its copy must not name
+# any mode registered at the pinned revision. New modes need no copy change.
+MODE_REGISTRY = ("Mundus", "src/features/modes/modeRegistry.ts")
+MODE_AGNOSTIC_SOURCES = (
+    "src/content/projects/mundus.mdx",
+    "src/components/MundusStory.astro",
+)
+MODE_TITLE = re.compile(
+    r"title:\s*\{\s*zh:\s*'([^']+)',\s*en:\s*'([^']+)'\s*\}"
+)
+
+
+def mode_titles(registry: str) -> list[str]:
+    return [title for pair in MODE_TITLE.findall(registry) for title in pair]
+
+
+def find_mode_titles(portfolio: Path, titles: list[str]) -> list[str]:
+    errors: list[str] = []
+    for source in MODE_AGNOSTIC_SOURCES:
+        text = (portfolio / source).read_text(encoding="utf-8")
+        for title in titles:
+            if title in text:
+                errors.append(f"{source}: names the Mundus mode {title!r}")
+    return errors
 
 
 def extract_source_semantics(text: str) -> str:
@@ -123,6 +148,18 @@ def verify(
 
     if errors:
         return errors
+
+    registry_name, registry_source = MODE_REGISTRY
+    titles = mode_titles(
+        read_at_revision(
+            repositories[registry_name],
+            EXPECTED_REVISIONS[registry_name],
+            registry_source,
+        )
+    )
+    if not titles:
+        errors.append("Mundus: no mode titles found in the mode registry")
+    errors.extend(find_mode_titles(portfolio, titles))
 
     for assertion in load_rules(catalog):
         assertion_id = str(assertion["id"])

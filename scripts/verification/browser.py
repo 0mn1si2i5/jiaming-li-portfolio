@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -236,6 +237,8 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
                 errors.append(f"{name}: educationEntryCount is not two")
         if name.startswith("mundus-"):
             preview_required = (
+                "previewSource",
+                "previewManifestModes",
                 "previewDefaultMode",
                 "previewPointerModes",
                 "previewKeyboardModes",
@@ -252,15 +255,37 @@ def validate_matrix(value: dict[str, object]) -> list[str]:
                 errors.append(f"{name}: Mundus image count is not two")
             if item.get("productVisualCount") != 1:
                 errors.append(f"{name}: productVisualCount is not one")
-            if item.get("previewDefaultMode") != "antipodes":
+            # The mode list comes from the live Mundus manifest, so the
+            # evidence must agree with itself, not with a fixed list.
+            if item.get("previewSource") != "live-manifest":
+                errors.append(f"{name}: previewSource is not live-manifest")
+            manifest_modes = item.get("previewManifestModes")
+            if not (
+                isinstance(manifest_modes, list)
+                and manifest_modes
+                and all(
+                    isinstance(mode, str)
+                    and re.fullmatch(r"[a-z0-9-]+", mode)
+                    for mode in manifest_modes
+                )
+                and len(set(manifest_modes)) == len(manifest_modes)
+            ):
+                errors.append(f"{name}: previewManifestModes is invalid")
+                manifest_modes = None
+            if (
+                manifest_modes is None
+                or item.get("previewDefaultMode") != manifest_modes[0]
+            ):
                 errors.append(f"{name}: previewDefaultMode is invalid")
-            if item.get("previewPointerModes") != [
-                "antipodes", "development", "sunline"
-            ]:
+            if (
+                manifest_modes is None
+                or item.get("previewPointerModes") != manifest_modes
+            ):
                 errors.append(f"{name}: previewPointerModes is invalid")
-            if item.get("previewKeyboardModes") != [
-                "antipodes", "development", "sunline"
-            ]:
+            if (
+                manifest_modes is None
+                or item.get("previewKeyboardModes") != manifest_modes
+            ):
                 errors.append(f"{name}: previewKeyboardModes is invalid")
             if item.get("previewLinkTargetsCorrect") is not True:
                 errors.append(
